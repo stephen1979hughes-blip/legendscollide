@@ -1,0 +1,474 @@
+{
+  "teams": [
+    {
+      "id": "man-utd-1968",
+      "name": "Manchester United",
+      "year": 1968,
+      "playerIds": [
+        "mu-1",
+        "mu-2",
+        "mu-3",
+        "mu-4",
+        "mu-5",
+        "mu-6",
+        "mu-7",
+        "mu-8",
+        "mu-9",
+        "mu-10",
+        "mu-11"
+      ]
+    },
+    {
+      "id": "liverpool-1984",
+      "name": "Liverpool",
+      "year": 1984,
+      "playerIds": [
+        "lfc-1",
+        "lfc-2",
+        "lfc-3",
+        "lfc-4",
+        "lfc-5",
+        "lfc-6",
+        "lfc-7",
+        "lfc-8",
+        "lfc-9",
+        "lfc-10",
+        "lfc-11"
+      ]
+    },
+    {
+      "id": "brazil-1970",
+      "name": "Brazil",
+      "year": 1970,
+      "playerIds": [
+        "bra-1",
+        "bra-2",
+        "bra-3",
+        "bra-4",
+        "bra-5",
+        "bra-6",
+        "bra-7",
+        "bra-8",
+        "bra-9",
+        "bra-10",
+        "bra-11"
+      ]
+    },
+    {
+      "id": "barcelona-2011",
+      "name": "Barcelona",
+      "year": 2011,
+      "playerIds": [
+        "fcb-1",
+        "fcb-2",
+        "fcb-3",
+        "fcb-4",
+        "fcb-5",
+        "fcb-6",
+        "fcb-7",
+        "fcb-8",
+        "fcb-9",
+        "fcb-10",
+        "fcb-11"
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "mu-1",
+      "name": "Alex Stepney",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 25,
+      "defenceRating": 85,
+      "stamina": 90
+    },
+    {
+      "id": "mu-2",
+      "name": "Tony Dunne",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 88
+    },
+    {
+      "id": "mu-3",
+      "name": "Bill Foulkes",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 30,
+      "defenceRating": 82,
+      "stamina": 85
+    },
+    {
+      "id": "mu-4",
+      "name": "Bobby Charlton",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 85,
+      "defenceRating": 60,
+      "stamina": 82
+    },
+    {
+      "id": "mu-5",
+      "name": "Nobby Stiles",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 35,
+      "defenceRating": 88,
+      "stamina": 90
+    },
+    {
+      "id": "mu-6",
+      "name": "Denis Law",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 35,
+      "stamina": 80
+    },
+    {
+      "id": "mu-7",
+      "name": "George Best",
+      "position": "FW",
+      "overallRating": 92,
+      "attackRating": 90,
+      "defenceRating": 40,
+      "stamina": 85
+    },
+    {
+      "id": "mu-8",
+      "name": "Bobby Moncur",
+      "position": "DF",
+      "overallRating": 78,
+      "attackRating": 30,
+      "defenceRating": 80,
+      "stamina": 85
+    },
+    {
+      "id": "mu-9",
+      "name": "Shay Brennan",
+      "position": "DF",
+      "overallRating": 77,
+      "attackRating": 25,
+      "defenceRating": 78,
+      "stamina": 84
+    },
+    {
+      "id": "mu-10",
+      "name": "John Aston",
+      "position": "MF",
+      "overallRating": 80,
+      "attackRating": 70,
+      "defenceRating": 65,
+      "stamina": 88
+    },
+    {
+      "id": "mu-11",
+      "name": "Brian Kidd",
+      "position": "FW",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 30,
+      "stamina": 85
+    },
+    {
+      "id": "lfc-1",
+      "name": "Ray Clemence",
+      "position": "GK",
+      "overallRating": 90,
+      "attackRating": 25,
+      "defenceRating": 92,
+      "stamina": 92
+    },
+    {
+      "id": "lfc-2",
+      "name": "Phil Neal",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 40,
+      "defenceRating": 88,
+      "stamina": 90
+    },
+    {
+      "id": "lfc-3",
+      "name": "Mark Lawrenson",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 89,
+      "stamina": 88
+    },
+    {
+      "id": "lfc-4",
+      "name": "Alan Hansen",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 40,
+      "defenceRating": 88,
+      "stamina": 85
+    },
+    {
+      "id": "lfc-5",
+      "name": "Graeme Souness",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 78,
+      "defenceRating": 82,
+      "stamina": 90
+    },
+    {
+      "id": "lfc-6",
+      "name": "Ray Kennedy",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 75,
+      "defenceRating": 70,
+      "stamina": 88
+    },
+    {
+      "id": "lfc-7",
+      "name": "Kenny Dalglish",
+      "position": "FW",
+      "overallRating": 93,
+      "attackRating": 91,
+      "defenceRating": 50,
+      "stamina": 88
+    },
+    {
+      "id": "lfc-8",
+      "name": "Ian Callaghan",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 72,
+      "defenceRating": 65,
+      "stamina": 90
+    },
+    {
+      "id": "lfc-9",
+      "name": "John Wark",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 89
+    },
+    {
+      "id": "lfc-10",
+      "name": "Steve Heighway",
+      "position": "FW",
+      "overallRating": 83,
+      "attackRating": 82,
+      "defenceRating": 45,
+      "stamina": 87
+    },
+    {
+      "id": "lfc-11",
+      "name": "John Toshack",
+      "position": "FW",
+      "overallRating": 81,
+      "attackRating": 80,
+      "defenceRating": 40,
+      "stamina": 85
+    },
+    {
+      "id": "bra-1",
+      "name": "Felix",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 20,
+      "defenceRating": 90,
+      "stamina": 90
+    },
+    {
+      "id": "bra-2",
+      "name": "Carlos Alberto",
+      "position": "DF",
+      "overallRating": 90,
+      "attackRating": 65,
+      "defenceRating": 87,
+      "stamina": 88
+    },
+    {
+      "id": "bra-3",
+      "name": "Everaldo",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 30,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "bra-4",
+      "name": "Brito",
+      "position": "DF",
+      "overallRating": 84,
+      "attackRating": 25,
+      "defenceRating": 86,
+      "stamina": 85
+    },
+    {
+      "id": "bra-5",
+      "name": "Marcio",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 35,
+      "defenceRating": 84,
+      "stamina": 86
+    },
+    {
+      "id": "bra-6",
+      "name": "Clodoaldo",
+      "position": "MF",
+      "overallRating": 86,
+      "attackRating": 70,
+      "defenceRating": 75,
+      "stamina": 88
+    },
+    {
+      "id": "bra-7",
+      "name": "Gerson",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 85
+    },
+    {
+      "id": "bra-8",
+      "name": "Tostao",
+      "position": "FW",
+      "overallRating": 89,
+      "attackRating": 90,
+      "defenceRating": 45,
+      "stamina": 82
+    },
+    {
+      "id": "bra-9",
+      "name": "Pele",
+      "position": "FW",
+      "overallRating": 95,
+      "attackRating": 94,
+      "defenceRating": 50,
+      "stamina": 85
+    },
+    {
+      "id": "bra-10",
+      "name": "Rivellino",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 88,
+      "defenceRating": 45,
+      "stamina": 84
+    },
+    {
+      "id": "bra-11",
+      "name": "Jairzinho",
+      "position": "FW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 40,
+      "stamina": 85
+    },
+    {
+      "id": "fcb-1",
+      "name": "Victor Valdes",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 20,
+      "defenceRating": 92,
+      "stamina": 90
+    },
+    {
+      "id": "fcb-2",
+      "name": "Eric Abidal",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 88,
+      "stamina": 88
+    },
+    {
+      "id": "fcb-3",
+      "name": "Carles Puyol",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 87
+    },
+    {
+      "id": "fcb-4",
+      "name": "Gerard Pique",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 50,
+      "defenceRating": 89,
+      "stamina": 86
+    },
+    {
+      "id": "fcb-5",
+      "name": "Dani Alves",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 70,
+      "defenceRating": 85,
+      "stamina": 92
+    },
+    {
+      "id": "fcb-6",
+      "name": "Sergio Busquets",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 88,
+      "stamina": 88
+    },
+    {
+      "id": "fcb-7",
+      "name": "Xavi",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 86
+    },
+    {
+      "id": "fcb-8",
+      "name": "Andres Iniesta",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 88
+    },
+    {
+      "id": "fcb-9",
+      "name": "David Villa",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 91,
+      "defenceRating": 45,
+      "stamina": 87
+    },
+    {
+      "id": "fcb-10",
+      "name": "Lionel Messi",
+      "position": "FW",
+      "overallRating": 94,
+      "attackRating": 93,
+      "defenceRating": 55,
+      "stamina": 85
+    },
+    {
+      "id": "fcb-11",
+      "name": "Pedro",
+      "position": "FW",
+      "overallRating": 86,
+      "attackRating": 85,
+      "defenceRating": 50,
+      "stamina": 87
+    }
+  ]
+}
