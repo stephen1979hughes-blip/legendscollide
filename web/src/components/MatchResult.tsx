@@ -12,6 +12,10 @@ export const MatchResultComponent: React.FC<MatchResultProps> = ({
   teamAName,
   teamBName
 }) => {
+  if (!result || !result.stats) {
+    return <div>Loading match result...</div>;
+  }
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>{result.stadiumName}, {result.kickOffTime}</h2>

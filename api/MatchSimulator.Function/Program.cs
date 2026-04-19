@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using MatchSimulator.Function.Services;
 
 var host = new HostBuilder()

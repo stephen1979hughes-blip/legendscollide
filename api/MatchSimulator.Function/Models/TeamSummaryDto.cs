@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace MatchSimulator.Function.Models;
 
-public class Team
+public class TeamSummaryDto
 {
     [JsonPropertyName("id")]
     public string Id { get; set; } = string.Empty;
@@ -13,6 +13,6 @@ public class Team
     [JsonPropertyName("year")]
     public int Year { get; set; }
 
-    [JsonPropertyName("players")]
-    public List<Player> Players { get; set; } = new();
+    [JsonPropertyName("playerCount")]
+    public int PlayerCount { get; set; }
 }

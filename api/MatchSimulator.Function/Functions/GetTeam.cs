@@ -15,7 +15,7 @@ public class GetTeam
     }
 
     [Function("GetTeam")]
-    public HttpResponseData Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "teams/{id}")] HttpRequestData req,
         string id)
     {
@@ -24,15 +24,18 @@ public class GetTeam
         if (team == null)
         {
             var errorResponse = req.CreateResponse(HttpStatusCode.NotFound);
-            errorResponse.Headers.Add("Content-Type", "application/json; charset=utf-8");
-            errorResponse.WriteString("{\"error\":\"Team not found\"}");
+            errorResponse.Headers.TryAddWithoutValidation("Access-Control-Allow-Origin", "*");
+            errorResponse.Headers.TryAddWithoutValidation("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            errorResponse.Headers.TryAddWithoutValidation("Access-Control-Allow-Headers", "Content-Type");
+            await errorResponse.WriteAsJsonAsync(new { error = "Team not found" });
             return errorResponse;
         }
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        response.Headers.Add("Content-Type", "application/json; charset=utf-8");
-        response.WriteAsJsonAsync(team);
-
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Origin", "*");
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Headers", "Content-Type");
+        await response.WriteAsJsonAsync(team);
         return response;
     }
 }

@@ -2,7 +2,21 @@
   "permissions": {
     "allow": [
       "Bash(git add *)",
-      "Bash(git commit -m 'Initial commit: Football Match Simulator MVP *)"
+      "Bash(git commit -m 'Initial commit: Football Match Simulator MVP *)",
+      "Bash(func start *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173/)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(curl -s http://localhost:7071/api/teams)",
+      "Bash(pkill -f \"func start\")",
+      "Bash(pkill -f \"npm run dev\")",
+      "Bash(identify -verbose banner.png)",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('/c/Users/pinto/projects/fm/web/public/images/banner.png'\\); print\\(f'Width: {img.width}px, Height: {img.height}px'\\)\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(node -e ' *)",
+      "Read(//tmp/**)",
+      "Bash(node test-api.js)",
+      "Bash(cd \"C:\\\\\\\\Users\\\\\\\\pinto\\\\\\\\projects\\\\\\\\fm\\\\\\\\web\")"
     ]
   }
 }

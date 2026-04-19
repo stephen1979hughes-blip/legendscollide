@@ -1,0 +1,1974 @@
+{
+  "clubs": [
+    {
+      "id": "man-utd",
+      "name": "Manchester United",
+      "shortName": "Man Utd",
+      "description": "English Premier League club"
+    },
+    {
+      "id": "brazil",
+      "name": "Brazil National Team",
+      "shortName": "Brazil",
+      "description": "Brazilian national football team"
+    },
+    {
+      "id": "argentina",
+      "name": "Argentina National Team",
+      "shortName": "Argentina",
+      "description": "Argentine national football team"
+    },
+    {
+      "id": "england",
+      "name": "England National Team",
+      "shortName": "England",
+      "description": "English national football team"
+    },
+    {
+      "id": "france",
+      "name": "France National Team",
+      "shortName": "France",
+      "description": "French national football team"
+    },
+    {
+      "id": "italy",
+      "name": "Italy National Team",
+      "shortName": "Italy",
+      "description": "Italian national football team"
+    },
+    {
+      "id": "germany",
+      "name": "Germany National Team",
+      "shortName": "Germany",
+      "description": "German national football team"
+    },
+    {
+      "id": "spain",
+      "name": "Spain National Team",
+      "shortName": "Spain",
+      "description": "Spanish national football team"
+    }
+  ],
+  "teams": [
+    {
+      "id": "man-utd-1968",
+      "clubId": "man-utd",
+      "name": "Manchester United 1968",
+      "year": 1968,
+      "season": "1967-68",
+      "description": "European Cup Winners",
+      "players": [
+        {
+          "id": "alex-stepney",
+          "name": "Alex Stepney",
+          "position": "GK",
+          "overallRating": 87,
+          "attackRating": 45,
+          "defenceRating": 88,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "tony-dunne",
+          "name": "Tony Dunne",
+          "position": "LB",
+          "overallRating": 84,
+          "attackRating": 65,
+          "defenceRating": 86,
+          "stamina": 88,
+          "nationality": "Irish"
+        },
+        {
+          "id": "bill-foulkes",
+          "name": "Bill Foulkes",
+          "position": "CB",
+          "overallRating": 83,
+          "attackRating": 55,
+          "defenceRating": 85,
+          "stamina": 82,
+          "nationality": "English"
+        },
+        {
+          "id": "bobby-charlton-1968",
+          "name": "Bobby Charlton",
+          "position": "CM",
+          "overallRating": 89,
+          "attackRating": 87,
+          "defenceRating": 75,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "george-best-1968",
+          "name": "George Best",
+          "position": "RW",
+          "overallRating": 90,
+          "attackRating": 92,
+          "defenceRating": 68,
+          "stamina": 88,
+          "nationality": "Northern Irish"
+        },
+        {
+          "id": "denis-law-1968",
+          "name": "Denis Law",
+          "position": "ST",
+          "overallRating": 88,
+          "attackRating": 90,
+          "defenceRating": 65,
+          "stamina": 85,
+          "nationality": "Scottish"
+        },
+        {
+          "id": "john-aston",
+          "name": "John Aston",
+          "position": "LW",
+          "overallRating": 82,
+          "attackRating": 84,
+          "defenceRating": 70,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "shay-brennan",
+          "name": "Shay Brennan",
+          "position": "RB",
+          "overallRating": 81,
+          "attackRating": 60,
+          "defenceRating": 83,
+          "stamina": 84,
+          "nationality": "Irish"
+        },
+        {
+          "id": "nobby-stiles",
+          "name": "Nobby Stiles",
+          "position": "CM",
+          "overallRating": 80,
+          "attackRating": 65,
+          "defenceRating": 82,
+          "stamina": 87,
+          "nationality": "English"
+        },
+        {
+          "id": "pat-crerand",
+          "name": "Pat Crerand",
+          "position": "CM",
+          "overallRating": 81,
+          "attackRating": 72,
+          "defenceRating": 78,
+          "stamina": 80,
+          "nationality": "Scottish"
+        },
+        {
+          "id": "brian-kidd",
+          "name": "Brian Kidd",
+          "position": "ST",
+          "overallRating": 76,
+          "attackRating": 78,
+          "defenceRating": 60,
+          "stamina": 82,
+          "nationality": "English"
+        }
+      ]
+    },
+    {
+      "id": "man-utd-1994",
+      "clubId": "man-utd",
+      "name": "Manchester United 1994",
+      "year": 1994,
+      "season": "1993-94",
+      "description": "Ferguson's First Premier League Title",
+      "players": [
+        {
+          "id": "peter-schmeichel",
+          "name": "Peter Schmeichel",
+          "position": "GK",
+          "overallRating": 89,
+          "attackRating": 45,
+          "defenceRating": 91,
+          "stamina": 87,
+          "nationality": "Danish"
+        },
+        {
+          "id": "gary-neville",
+          "name": "Gary Neville",
+          "position": "RB",
+          "overallRating": 86,
+          "attackRating": 72,
+          "defenceRating": 88,
+          "stamina": 89,
+          "nationality": "English"
+        },
+        {
+          "id": "steve-bruce",
+          "name": "Steve Bruce",
+          "position": "CB",
+          "overallRating": 85,
+          "attackRating": 65,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "gary-pallister",
+          "name": "Gary Pallister",
+          "position": "CB",
+          "overallRating": 84,
+          "attackRating": 60,
+          "defenceRating": 86,
+          "stamina": 84,
+          "nationality": "English"
+        },
+        {
+          "id": "denis-irwin",
+          "name": "Denis Irwin",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 70,
+          "defenceRating": 87,
+          "stamina": 88,
+          "nationality": "Irish"
+        },
+        {
+          "id": "roy-keane",
+          "name": "Roy Keane",
+          "position": "CM",
+          "overallRating": 87,
+          "attackRating": 75,
+          "defenceRating": 88,
+          "stamina": 89,
+          "nationality": "Irish"
+        },
+        {
+          "id": "paul-scholes",
+          "name": "Paul Scholes",
+          "position": "CM",
+          "overallRating": 85,
+          "attackRating": 84,
+          "defenceRating": 80,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "david-beckham-1994",
+          "name": "David Beckham",
+          "position": "RM",
+          "overallRating": 78,
+          "attackRating": 80,
+          "defenceRating": 72,
+          "stamina": 87,
+          "nationality": "English"
+        },
+        {
+          "id": "ryan-giggs-1994",
+          "name": "Ryan Giggs",
+          "position": "LW",
+          "overallRating": 86,
+          "attackRating": 88,
+          "defenceRating": 75,
+          "stamina": 89,
+          "nationality": "Welsh"
+        },
+        {
+          "id": "eric-cantona",
+          "name": "Eric Cantona",
+          "position": "ST",
+          "overallRating": 88,
+          "attackRating": 89,
+          "defenceRating": 68,
+          "stamina": 84,
+          "nationality": "French"
+        },
+        {
+          "id": "mark-hughes",
+          "name": "Mark Hughes",
+          "position": "ST",
+          "overallRating": 84,
+          "attackRating": 85,
+          "defenceRating": 70,
+          "stamina": 83,
+          "nationality": "Welsh"
+        }
+      ]
+    },
+    {
+      "id": "man-utd-2008",
+      "clubId": "man-utd",
+      "name": "Manchester United 2008",
+      "year": 2008,
+      "season": "2007-08",
+      "description": "Champions League & Premier League Winners",
+      "players": [
+        {
+          "id": "edwin-van-der-sar",
+          "name": "Edwin van der Sar",
+          "position": "GK",
+          "overallRating": 89,
+          "attackRating": 45,
+          "defenceRating": 90,
+          "stamina": 86,
+          "nationality": "Dutch"
+        },
+        {
+          "id": "gary-neville-2008",
+          "name": "Gary Neville",
+          "position": "RB",
+          "overallRating": 87,
+          "attackRating": 72,
+          "defenceRating": 89,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "rio-ferdinand",
+          "name": "Rio Ferdinand",
+          "position": "CB",
+          "overallRating": 89,
+          "attackRating": 65,
+          "defenceRating": 90,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "nemanja-vidic",
+          "name": "Nemanja Vidic",
+          "position": "CB",
+          "overallRating": 88,
+          "attackRating": 70,
+          "defenceRating": 89,
+          "stamina": 87,
+          "nationality": "Serbian"
+        },
+        {
+          "id": "patrice-evra",
+          "name": "Patrice Evra",
+          "position": "LB",
+          "overallRating": 87,
+          "attackRating": 75,
+          "defenceRating": 86,
+          "stamina": 88,
+          "nationality": "French"
+        },
+        {
+          "id": "roy-keane-2008",
+          "name": "Roy Keane",
+          "position": "CM",
+          "overallRating": 86,
+          "attackRating": 75,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "Irish"
+        },
+        {
+          "id": "paul-scholes-2008",
+          "name": "Paul Scholes",
+          "position": "CM",
+          "overallRating": 87,
+          "attackRating": 85,
+          "defenceRating": 81,
+          "stamina": 83,
+          "nationality": "English"
+        },
+        {
+          "id": "cristiano-ronaldo-2008",
+          "name": "Cristiano Ronaldo",
+          "position": "RW",
+          "overallRating": 92,
+          "attackRating": 94,
+          "defenceRating": 72,
+          "stamina": 90,
+          "nationality": "Portuguese"
+        },
+        {
+          "id": "ryan-giggs-2008",
+          "name": "Ryan Giggs",
+          "position": "LW",
+          "overallRating": 85,
+          "attackRating": 85,
+          "defenceRating": 74,
+          "stamina": 86,
+          "nationality": "Welsh"
+        },
+        {
+          "id": "carlos-tevez",
+          "name": "Carlos Tevez",
+          "position": "ST",
+          "overallRating": 85,
+          "attackRating": 86,
+          "defenceRating": 70,
+          "stamina": 88,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "wayne-rooney",
+          "name": "Wayne Rooney",
+          "position": "ST",
+          "overallRating": 86,
+          "attackRating": 87,
+          "defenceRating": 72,
+          "stamina": 87,
+          "nationality": "English"
+        }
+      ]
+    },
+    {
+      "id": "brazil-1970",
+      "clubId": "brazil",
+      "name": "Brazil 1970",
+      "year": 1970,
+      "season": "1970 World Cup",
+      "description": "1970 World Cup Champions - Greatest Team Ever",
+      "players": [
+        {
+          "id": "felix-brazil-1970",
+          "name": "Félix",
+          "position": "GK",
+          "overallRating": 85,
+          "attackRating": 45,
+          "defenceRating": 87,
+          "stamina": 84,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "carlos-alberto",
+          "name": "Carlos Alberto",
+          "position": "RB",
+          "overallRating": 89,
+          "attackRating": 78,
+          "defenceRating": 88,
+          "stamina": 87,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "brito-brazil",
+          "name": "Brito",
+          "position": "CB",
+          "overallRating": 84,
+          "attackRating": 60,
+          "defenceRating": 86,
+          "stamina": 83,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "luis-carlos",
+          "name": "Luís Carlos",
+          "position": "CB",
+          "overallRating": 83,
+          "attackRating": 55,
+          "defenceRating": 85,
+          "stamina": 82,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "everaldo-brazil",
+          "name": "Everaldo",
+          "position": "LB",
+          "overallRating": 82,
+          "attackRating": 65,
+          "defenceRating": 83,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "pele",
+          "name": "Pelé",
+          "position": "ST",
+          "overallRating": 94,
+          "attackRating": 95,
+          "defenceRating": 70,
+          "stamina": 88,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "gerson",
+          "name": "Gerson",
+          "position": "CM",
+          "overallRating": 86,
+          "attackRating": 82,
+          "defenceRating": 78,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "tostao",
+          "name": "Tostão",
+          "position": "ST",
+          "overallRating": 87,
+          "attackRating": 88,
+          "defenceRating": 72,
+          "stamina": 84,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "jairzinho",
+          "name": "Jairzinho",
+          "position": "RW",
+          "overallRating": 87,
+          "attackRating": 89,
+          "defenceRating": 73,
+          "stamina": 87,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "rivelino",
+          "name": "Rivellino",
+          "position": "LW",
+          "overallRating": 85,
+          "attackRating": 86,
+          "defenceRating": 72,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "clodoaldo",
+          "name": "Clodoaldo",
+          "position": "CM",
+          "overallRating": 82,
+          "attackRating": 70,
+          "defenceRating": 81,
+          "stamina": 86,
+          "nationality": "Brazilian"
+        }
+      ]
+    },
+    {
+      "id": "brazil-2002",
+      "clubId": "brazil",
+      "name": "Brazil 2002",
+      "year": 2002,
+      "season": "2002 World Cup",
+      "description": "2002 World Cup Champions",
+      "players": [
+        {
+          "id": "marcos-brazil-2002",
+          "name": "Marcos",
+          "position": "GK",
+          "overallRating": 86,
+          "attackRating": 45,
+          "defenceRating": 88,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "cafu",
+          "name": "Cafú",
+          "position": "RB",
+          "overallRating": 88,
+          "attackRating": 76,
+          "defenceRating": 87,
+          "stamina": 89,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "roque-junior",
+          "name": "Roque Júnior",
+          "position": "CB",
+          "overallRating": 84,
+          "attackRating": 60,
+          "defenceRating": 86,
+          "stamina": 84,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "lucio",
+          "name": "Lúcio",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 65,
+          "defenceRating": 88,
+          "stamina": 86,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "roberto-carlos-2002",
+          "name": "Roberto Carlos",
+          "position": "LB",
+          "overallRating": 87,
+          "attackRating": 79,
+          "defenceRating": 85,
+          "stamina": 88,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "ronaldinho",
+          "name": "Ronaldinho",
+          "position": "LW",
+          "overallRating": 89,
+          "attackRating": 91,
+          "defenceRating": 76,
+          "stamina": 87,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "gilberto-silva",
+          "name": "Gilberto Silva",
+          "position": "CM",
+          "overallRating": 84,
+          "attackRating": 72,
+          "defenceRating": 85,
+          "stamina": 87,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "kleberson",
+          "name": "Kleberson",
+          "position": "CM",
+          "overallRating": 82,
+          "attackRating": 75,
+          "defenceRating": 81,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "rivaldo",
+          "name": "Rivaldo",
+          "position": "RW",
+          "overallRating": 88,
+          "attackRating": 89,
+          "defenceRating": 74,
+          "stamina": 85,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "ronaldo-2002",
+          "name": "Ronaldo",
+          "position": "ST",
+          "overallRating": 90,
+          "attackRating": 92,
+          "defenceRating": 68,
+          "stamina": 82,
+          "nationality": "Brazilian"
+        },
+        {
+          "id": "rivellino-2002",
+          "name": "Rivellino",
+          "position": "CAM",
+          "overallRating": 80,
+          "attackRating": 82,
+          "defenceRating": 70,
+          "stamina": 80,
+          "nationality": "Brazilian"
+        }
+      ]
+    },
+    {
+      "id": "argentina-1978",
+      "clubId": "argentina",
+      "name": "Argentina 1978",
+      "year": 1978,
+      "season": "1978 World Cup",
+      "description": "1978 World Cup Champions",
+      "players": [
+        {
+          "id": "ubaldo-fillol",
+          "name": "Ubaldo Fillol",
+          "position": "GK",
+          "overallRating": 87,
+          "attackRating": 45,
+          "defenceRating": 89,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "daniel-passarella",
+          "name": "Daniel Passarella",
+          "position": "CB",
+          "overallRating": 89,
+          "attackRating": 70,
+          "defenceRating": 90,
+          "stamina": 87,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "alberto-tarantini",
+          "name": "Alberto Tarantini",
+          "position": "RB",
+          "overallRating": 85,
+          "attackRating": 68,
+          "defenceRating": 86,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "luis-galvan",
+          "name": "Luis Galván",
+          "position": "CB",
+          "overallRating": 84,
+          "attackRating": 60,
+          "defenceRating": 85,
+          "stamina": 84,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "jorge-carrascosa",
+          "name": "Jorge Carrascosa",
+          "position": "LB",
+          "overallRating": 82,
+          "attackRating": 62,
+          "defenceRating": 83,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "diego-maradona-1978",
+          "name": "Diego Maradona",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 89,
+          "defenceRating": 75,
+          "stamina": 87,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "osvaldo-ardiles",
+          "name": "Osvaldo Ardiles",
+          "position": "CM",
+          "overallRating": 85,
+          "attackRating": 82,
+          "defenceRating": 77,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "daniel-bertoni",
+          "name": "Daniel Bertoni",
+          "position": "RW",
+          "overallRating": 84,
+          "attackRating": 85,
+          "defenceRating": 72,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "mario-kempes",
+          "name": "Mario Kempes",
+          "position": "ST",
+          "overallRating": 88,
+          "attackRating": 90,
+          "defenceRating": 68,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "leopoldo-luque",
+          "name": "Leopoldo Luque",
+          "position": "ST",
+          "overallRating": 83,
+          "attackRating": 84,
+          "defenceRating": 65,
+          "stamina": 84,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "miguel-onega",
+          "name": "Miguel Onega",
+          "position": "LW",
+          "overallRating": 81,
+          "attackRating": 83,
+          "defenceRating": 70,
+          "stamina": 83,
+          "nationality": "Argentine"
+        }
+      ]
+    },
+    {
+      "id": "argentina-1986",
+      "clubId": "argentina",
+      "name": "Argentina 1986",
+      "year": 1986,
+      "season": "1986 World Cup",
+      "description": "1986 World Cup Champions",
+      "players": [
+        {
+          "id": "nery-pumpido",
+          "name": "Nery Pumpido",
+          "position": "GK",
+          "overallRating": 86,
+          "attackRating": 45,
+          "defenceRating": 88,
+          "stamina": 84,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "oscar-ruggeri",
+          "name": "Oscar Ruggeri",
+          "position": "CB",
+          "overallRating": 87,
+          "attackRating": 68,
+          "defenceRating": 88,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "jose-luis-brown",
+          "name": "José Luis Brown",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 65,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "diego-maradona-1986",
+          "name": "Diego Maradona",
+          "position": "CAM",
+          "overallRating": 93,
+          "attackRating": 94,
+          "defenceRating": 76,
+          "stamina": 88,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "jorge-valdano",
+          "name": "Jorge Valdano",
+          "position": "ST",
+          "overallRating": 86,
+          "attackRating": 87,
+          "defenceRating": 70,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "jorge-burruchaga",
+          "name": "Jorge Burruchaga",
+          "position": "CM",
+          "overallRating": 84,
+          "attackRating": 83,
+          "defenceRating": 75,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "carlos-olarticoechea",
+          "name": "Carlos Olarticoechea",
+          "position": "LB",
+          "overallRating": 83,
+          "attackRating": 65,
+          "defenceRating": 84,
+          "stamina": 86,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "jose-luis-cuciuffo",
+          "name": "José Luis Cuciuffo",
+          "position": "RB",
+          "overallRating": 82,
+          "attackRating": 62,
+          "defenceRating": 83,
+          "stamina": 85,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "sergio-batista",
+          "name": "Sergio Batista",
+          "position": "CM",
+          "overallRating": 82,
+          "attackRating": 72,
+          "defenceRating": 81,
+          "stamina": 87,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "carlos-tapia",
+          "name": "Carlos Tapia",
+          "position": "RW",
+          "overallRating": 80,
+          "attackRating": 81,
+          "defenceRating": 69,
+          "stamina": 84,
+          "nationality": "Argentine"
+        },
+        {
+          "id": "gabriel-batistuta",
+          "name": "Gabriel Batistuta",
+          "position": "ST",
+          "overallRating": 82,
+          "attackRating": 84,
+          "defenceRating": 65,
+          "stamina": 85,
+          "nationality": "Argentine"
+        }
+      ]
+    },
+    {
+      "id": "england-1966",
+      "clubId": "england",
+      "name": "England 1966",
+      "year": 1966,
+      "season": "1966 World Cup",
+      "description": "1966 World Cup Champions",
+      "players": [
+        {
+          "id": "gordon-banks",
+          "name": "Gordon Banks",
+          "position": "GK",
+          "overallRating": 88,
+          "attackRating": 45,
+          "defenceRating": 90,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "bobby-moore",
+          "name": "Bobby Moore",
+          "position": "CB",
+          "overallRating": 89,
+          "attackRating": 68,
+          "defenceRating": 90,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "ray-wilson",
+          "name": "Ray Wilson",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 62,
+          "defenceRating": 86,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "george-cohen",
+          "name": "George Cohen",
+          "position": "RB",
+          "overallRating": 84,
+          "attackRating": 65,
+          "defenceRating": 85,
+          "stamina": 85,
+          "nationality": "English"
+        },
+        {
+          "id": "jack-charlton",
+          "name": "Jack Charlton",
+          "position": "CB",
+          "overallRating": 84,
+          "attackRating": 60,
+          "defenceRating": 85,
+          "stamina": 84,
+          "nationality": "English"
+        },
+        {
+          "id": "bobby-charlton-1966",
+          "name": "Bobby Charlton",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 87,
+          "defenceRating": 75,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "nobby-stiles-1966",
+          "name": "Nobby Stiles",
+          "position": "CM",
+          "overallRating": 81,
+          "attackRating": 66,
+          "defenceRating": 83,
+          "stamina": 88,
+          "nationality": "English"
+        },
+        {
+          "id": "roger-hunt",
+          "name": "Roger Hunt",
+          "position": "ST",
+          "overallRating": 82,
+          "attackRating": 84,
+          "defenceRating": 65,
+          "stamina": 84,
+          "nationality": "English"
+        },
+        {
+          "id": "geoff-hurst",
+          "name": "Geoff Hurst",
+          "position": "ST",
+          "overallRating": 83,
+          "attackRating": 85,
+          "defenceRating": 68,
+          "stamina": 86,
+          "nationality": "English"
+        },
+        {
+          "id": "john-connelly",
+          "name": "John Connelly",
+          "position": "RW",
+          "overallRating": 80,
+          "attackRating": 82,
+          "defenceRating": 70,
+          "stamina": 84,
+          "nationality": "English"
+        },
+        {
+          "id": "ian-callaghan",
+          "name": "Ian Callaghan",
+          "position": "LW",
+          "overallRating": 79,
+          "attackRating": 80,
+          "defenceRating": 69,
+          "stamina": 85,
+          "nationality": "English"
+        }
+      ]
+    },
+    {
+      "id": "france-1998",
+      "clubId": "france",
+      "name": "France 1998",
+      "year": 1998,
+      "season": "1998 World Cup",
+      "description": "1998 World Cup Champions",
+      "players": [
+        {
+          "id": "fabien-barthez",
+          "name": "Fabian Barthez",
+          "position": "GK",
+          "overallRating": 87,
+          "attackRating": 45,
+          "defenceRating": 89,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "basel-boli",
+          "name": "Basile Boli",
+          "position": "CB",
+          "overallRating": 85,
+          "attackRating": 65,
+          "defenceRating": 86,
+          "stamina": 84,
+          "nationality": "French"
+        },
+        {
+          "id": "frank-leboeuf",
+          "name": "Frank Leboeuf",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 68,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "French"
+        },
+        {
+          "id": "lilian-thuram",
+          "name": "Lilian Thuram",
+          "position": "RB",
+          "overallRating": 87,
+          "attackRating": 72,
+          "defenceRating": 88,
+          "stamina": 88,
+          "nationality": "French"
+        },
+        {
+          "id": "bixente-lizarazu",
+          "name": "Bixente Lizarazu",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 70,
+          "defenceRating": 85,
+          "stamina": 87,
+          "nationality": "French"
+        },
+        {
+          "id": "zinedine-zidane-1998",
+          "name": "Zinedine Zidane",
+          "position": "CM",
+          "overallRating": 90,
+          "attackRating": 88,
+          "defenceRating": 78,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "didier-drogba-1998",
+          "name": "Didier Drogba",
+          "position": "CM",
+          "overallRating": 82,
+          "attackRating": 80,
+          "defenceRating": 75,
+          "stamina": 85,
+          "nationality": "French"
+        },
+        {
+          "id": "emmanuel-petit",
+          "name": "Emmanuel Petit",
+          "position": "CM",
+          "overallRating": 84,
+          "attackRating": 75,
+          "defenceRating": 82,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "stephane-guivarc-h",
+          "name": "Stéphane Guivarc'h",
+          "position": "ST",
+          "overallRating": 80,
+          "attackRating": 81,
+          "defenceRating": 65,
+          "stamina": 83,
+          "nationality": "French"
+        },
+        {
+          "id": "thierry-henry-1998",
+          "name": "Thierry Henry",
+          "position": "RW",
+          "overallRating": 84,
+          "attackRating": 86,
+          "defenceRating": 72,
+          "stamina": 87,
+          "nationality": "French"
+        },
+        {
+          "id": "david-trezeguet",
+          "name": "David Trezeguet",
+          "position": "ST",
+          "overallRating": 81,
+          "attackRating": 82,
+          "defenceRating": 68,
+          "stamina": 84,
+          "nationality": "French"
+        }
+      ]
+    },
+    {
+      "id": "france-2006",
+      "clubId": "france",
+      "name": "France 2006",
+      "year": 2006,
+      "season": "2006 World Cup",
+      "description": "2006 World Cup Runners-Up",
+      "players": [
+        {
+          "id": "gregory-coupet",
+          "name": "Gregory Coupet",
+          "position": "GK",
+          "overallRating": 85,
+          "attackRating": 45,
+          "defenceRating": 87,
+          "stamina": 84,
+          "nationality": "French"
+        },
+        {
+          "id": "william-gallas",
+          "name": "William Gallas",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 70,
+          "defenceRating": 87,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "claude-makele",
+          "name": "Claude Makele",
+          "position": "CM",
+          "overallRating": 87,
+          "attackRating": 72,
+          "defenceRating": 88,
+          "stamina": 87,
+          "nationality": "French"
+        },
+        {
+          "id": "eric-abidal",
+          "name": "Eric Abidal",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 68,
+          "defenceRating": 85,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "patrick-evra",
+          "name": "Patrick Evra",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 70,
+          "defenceRating": 85,
+          "stamina": 87,
+          "nationality": "French"
+        },
+        {
+          "id": "zinedine-zidane-2006",
+          "name": "Zinedine Zidane",
+          "position": "CAM",
+          "overallRating": 91,
+          "attackRating": 89,
+          "defenceRating": 79,
+          "stamina": 85,
+          "nationality": "French"
+        },
+        {
+          "id": "patrick-vieira",
+          "name": "Patrick Vieira",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 78,
+          "defenceRating": 87,
+          "stamina": 87,
+          "nationality": "French"
+        },
+        {
+          "id": "franck-ribery",
+          "name": "Franck Ribery",
+          "position": "LW",
+          "overallRating": 85,
+          "attackRating": 86,
+          "defenceRating": 74,
+          "stamina": 86,
+          "nationality": "French"
+        },
+        {
+          "id": "thierry-henry-2006",
+          "name": "Thierry Henry",
+          "position": "ST",
+          "overallRating": 90,
+          "attackRating": 92,
+          "defenceRating": 73,
+          "stamina": 88,
+          "nationality": "French"
+        },
+        {
+          "id": "florent-malouda",
+          "name": "Florent Malouda",
+          "position": "RW",
+          "overallRating": 83,
+          "attackRating": 84,
+          "defenceRating": 73,
+          "stamina": 85,
+          "nationality": "French"
+        },
+        {
+          "id": "sylvain-wiltord",
+          "name": "Sylvain Wiltord",
+          "position": "ST",
+          "overallRating": 81,
+          "attackRating": 82,
+          "defenceRating": 70,
+          "stamina": 84,
+          "nationality": "French"
+        }
+      ]
+    },
+    {
+      "id": "italy-1982",
+      "clubId": "italy",
+      "name": "Italy 1982",
+      "year": 1982,
+      "season": "1982 World Cup",
+      "description": "1982 World Cup Champions",
+      "players": [
+        {
+          "id": "dino-zoff",
+          "name": "Dino Zoff",
+          "position": "GK",
+          "overallRating": 88,
+          "attackRating": 45,
+          "defenceRating": 90,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "antonio-cabrini",
+          "name": "Antonio Cabrini",
+          "position": "LB",
+          "overallRating": 84,
+          "attackRating": 70,
+          "defenceRating": 85,
+          "stamina": 86,
+          "nationality": "Italian"
+        },
+        {
+          "id": "claudio-gentile",
+          "name": "Claudio Gentile",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 65,
+          "defenceRating": 87,
+          "stamina": 86,
+          "nationality": "Italian"
+        },
+        {
+          "id": "fulvio-collovati",
+          "name": "Fulvio Collovati",
+          "position": "CB",
+          "overallRating": 85,
+          "attackRating": 60,
+          "defenceRating": 86,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "giuseppe-bergomi",
+          "name": "Giuseppe Bergomi",
+          "position": "RB",
+          "overallRating": 83,
+          "attackRating": 62,
+          "defenceRating": 84,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "giancarlo-antognoni",
+          "name": "Giancarlo Antognoni",
+          "position": "CM",
+          "overallRating": 87,
+          "attackRating": 84,
+          "defenceRating": 78,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "marco-tardelli",
+          "name": "Marco Tardelli",
+          "position": "CM",
+          "overallRating": 86,
+          "attackRating": 79,
+          "defenceRating": 83,
+          "stamina": 87,
+          "nationality": "Italian"
+        },
+        {
+          "id": "paolo-rossi",
+          "name": "Paolo Rossi",
+          "position": "ST",
+          "overallRating": 88,
+          "attackRating": 89,
+          "defenceRating": 70,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "angelo-juliano",
+          "name": "Angelo Juliano",
+          "position": "RW",
+          "overallRating": 79,
+          "attackRating": 80,
+          "defenceRating": 68,
+          "stamina": 83,
+          "nationality": "Italian"
+        },
+        {
+          "id": "graziano-gabanini",
+          "name": "Graziano Gabanini",
+          "position": "LW",
+          "overallRating": 78,
+          "attackRating": 79,
+          "defenceRating": 67,
+          "stamina": 82,
+          "nationality": "Italian"
+        },
+        {
+          "id": "antonio-altobelli",
+          "name": "Antonio Altobelli",
+          "position": "ST",
+          "overallRating": 81,
+          "attackRating": 82,
+          "defenceRating": 68,
+          "stamina": 84,
+          "nationality": "Italian"
+        }
+      ]
+    },
+    {
+      "id": "italy-2006",
+      "clubId": "italy",
+      "name": "Italy 2006",
+      "year": 2006,
+      "season": "2006 World Cup",
+      "description": "2006 World Cup Champions",
+      "players": [
+        {
+          "id": "gianluigi-buffon",
+          "name": "Gianluigi Buffon",
+          "position": "GK",
+          "overallRating": 90,
+          "attackRating": 45,
+          "defenceRating": 91,
+          "stamina": 87,
+          "nationality": "Italian"
+        },
+        {
+          "id": "fabio-cannavaro",
+          "name": "Fabio Cannavaro",
+          "position": "CB",
+          "overallRating": 89,
+          "attackRating": 70,
+          "defenceRating": 90,
+          "stamina": 86,
+          "nationality": "Italian"
+        },
+        {
+          "id": "alessandro-nesta",
+          "name": "Alessandro Nesta",
+          "position": "CB",
+          "overallRating": 88,
+          "attackRating": 68,
+          "defenceRating": 89,
+          "stamina": 85,
+          "nationality": "Italian"
+        },
+        {
+          "id": "gianluca-zambrotta",
+          "name": "Gianluca Zambrotta",
+          "position": "RB",
+          "overallRating": 87,
+          "attackRating": 75,
+          "defenceRating": 87,
+          "stamina": 87,
+          "nationality": "Italian"
+        },
+        {
+          "id": "mauro-camoranesi",
+          "name": "Mauro Camoranesi",
+          "position": "LB",
+          "overallRating": 83,
+          "attackRating": 70,
+          "defenceRating": 82,
+          "stamina": 86,
+          "nationality": "Italian"
+        },
+        {
+          "id": "andrea-pirlo",
+          "name": "Andrea Pirlo",
+          "position": "CM",
+          "overallRating": 89,
+          "attackRating": 82,
+          "defenceRating": 85,
+          "stamina": 84,
+          "nationality": "Italian"
+        },
+        {
+          "id": "gennaro-gattuso",
+          "name": "Gennaro Gattuso",
+          "position": "CM",
+          "overallRating": 86,
+          "attackRating": 75,
+          "defenceRating": 87,
+          "stamina": 88,
+          "nationality": "Italian"
+        },
+        {
+          "id": "daniele-de-rossi",
+          "name": "Daniele De Rossi",
+          "position": "CM",
+          "overallRating": 85,
+          "attackRating": 76,
+          "defenceRating": 85,
+          "stamina": 86,
+          "nationality": "Italian"
+        },
+        {
+          "id": "luca-toni",
+          "name": "Luca Toni",
+          "position": "ST",
+          "overallRating": 82,
+          "attackRating": 83,
+          "defenceRating": 68,
+          "stamina": 84,
+          "nationality": "Italian"
+        },
+        {
+          "id": "filippo-inzaghi",
+          "name": "Filippo Inzaghi",
+          "position": "ST",
+          "overallRating": 83,
+          "attackRating": 84,
+          "defenceRating": 70,
+          "stamina": 83,
+          "nationality": "Italian"
+        },
+        {
+          "id": "gianluca-giuli",
+          "name": "Gianluca Giuli",
+          "position": "RW",
+          "overallRating": 78,
+          "attackRating": 79,
+          "defenceRating": 68,
+          "stamina": 82,
+          "nationality": "Italian"
+        }
+      ]
+    },
+    {
+      "id": "germany-1990",
+      "clubId": "germany",
+      "name": "Germany 1990",
+      "year": 1990,
+      "season": "1990 World Cup",
+      "description": "1990 World Cup Champions",
+      "players": [
+        {
+          "id": "sepp-maier",
+          "name": "Sepp Maier",
+          "position": "GK",
+          "overallRating": 87,
+          "attackRating": 45,
+          "defenceRating": 89,
+          "stamina": 85,
+          "nationality": "German"
+        },
+        {
+          "id": "thomas-hassler",
+          "name": "Thomas Häßler",
+          "position": "CM",
+          "overallRating": 86,
+          "attackRating": 82,
+          "defenceRating": 80,
+          "stamina": 88,
+          "nationality": "German"
+        },
+        {
+          "id": "klaus-augenthaler",
+          "name": "Klaus Augenthaler",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 65,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "German"
+        },
+        {
+          "id": "hans-pflüger",
+          "name": "Hans Pflüger",
+          "position": "CB",
+          "overallRating": 85,
+          "attackRating": 60,
+          "defenceRating": 86,
+          "stamina": 84,
+          "nationality": "German"
+        },
+        {
+          "id": "lothar-matthaus-1990",
+          "name": "Lothar Matthäus",
+          "position": "CM",
+          "overallRating": 89,
+          "attackRating": 80,
+          "defenceRating": 87,
+          "stamina": 87,
+          "nationality": "German"
+        },
+        {
+          "id": "pierre-littbarski",
+          "name": "Pierre Littbarski",
+          "position": "RW",
+          "overallRating": 85,
+          "attackRating": 86,
+          "defenceRating": 74,
+          "stamina": 86,
+          "nationality": "German"
+        },
+        {
+          "id": "bertrand-effenberg",
+          "name": "Stefan Effenberg",
+          "position": "CM",
+          "overallRating": 84,
+          "attackRating": 76,
+          "defenceRating": 83,
+          "stamina": 86,
+          "nationality": "German"
+        },
+        {
+          "id": "gunnar-simmerer",
+          "name": "Gunnar Simmerer",
+          "position": "ST",
+          "overallRating": 80,
+          "attackRating": 81,
+          "defenceRating": 65,
+          "stamina": 83,
+          "nationality": "German"
+        },
+        {
+          "id": "jurgen-klinsmann",
+          "name": "Jurgen Klinsmann",
+          "position": "ST",
+          "overallRating": 84,
+          "attackRating": 85,
+          "defenceRating": 70,
+          "stamina": 85,
+          "nationality": "German"
+        },
+        {
+          "id": "guido-buchwald",
+          "name": "Guido Buchwald",
+          "position": "RB",
+          "overallRating": 82,
+          "attackRating": 60,
+          "defenceRating": 83,
+          "stamina": 84,
+          "nationality": "German"
+        },
+        {
+          "id": "berthold-bernd",
+          "name": "Bernd Berthold",
+          "position": "LB",
+          "overallRating": 81,
+          "attackRating": 62,
+          "defenceRating": 82,
+          "stamina": 84,
+          "nationality": "German"
+        }
+      ]
+    },
+    {
+      "id": "germany-2014",
+      "clubId": "germany",
+      "name": "Germany 2014",
+      "year": 2014,
+      "season": "2014 World Cup",
+      "description": "2014 World Cup Champions",
+      "players": [
+        {
+          "id": "manuel-neuer",
+          "name": "Manuel Neuer",
+          "position": "GK",
+          "overallRating": 90,
+          "attackRating": 45,
+          "defenceRating": 91,
+          "stamina": 87,
+          "nationality": "German"
+        },
+        {
+          "id": "philipp-lahm",
+          "name": "Philipp Lahm",
+          "position": "RB",
+          "overallRating": 89,
+          "attackRating": 75,
+          "defenceRating": 89,
+          "stamina": 88,
+          "nationality": "German"
+        },
+        {
+          "id": "jerome-boateng",
+          "name": "Jerome Boateng",
+          "position": "CB",
+          "overallRating": 87,
+          "attackRating": 68,
+          "defenceRating": 88,
+          "stamina": 86,
+          "nationality": "German"
+        },
+        {
+          "id": "mats-hummels",
+          "name": "Mats Hummels",
+          "position": "CB",
+          "overallRating": 87,
+          "attackRating": 70,
+          "defenceRating": 88,
+          "stamina": 85,
+          "nationality": "German"
+        },
+        {
+          "id": "david-alaba",
+          "name": "David Alaba",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 72,
+          "defenceRating": 85,
+          "stamina": 86,
+          "nationality": "German"
+        },
+        {
+          "id": "bastian-schweinsteiger",
+          "name": "Bastian Schweinsteiger",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 80,
+          "defenceRating": 86,
+          "stamina": 87,
+          "nationality": "German"
+        },
+        {
+          "id": "toni-kroos",
+          "name": "Toni Kroos",
+          "position": "CM",
+          "overallRating": 87,
+          "attackRating": 84,
+          "defenceRating": 82,
+          "stamina": 86,
+          "nationality": "German"
+        },
+        {
+          "id": "mesut-ozil",
+          "name": "Mesut Ozil",
+          "position": "CAM",
+          "overallRating": 87,
+          "attackRating": 88,
+          "defenceRating": 76,
+          "stamina": 84,
+          "nationality": "German"
+        },
+        {
+          "id": "mario-gotze",
+          "name": "Mario Götze",
+          "position": "RW",
+          "overallRating": 84,
+          "attackRating": 85,
+          "defenceRating": 74,
+          "stamina": 85,
+          "nationality": "German"
+        },
+        {
+          "id": "thomas-muller-2014",
+          "name": "Thomas Müller",
+          "position": "RW",
+          "overallRating": 86,
+          "attackRating": 87,
+          "defenceRating": 76,
+          "stamina": 87,
+          "nationality": "German"
+        },
+        {
+          "id": "mario-gomez",
+          "name": "Mario Gomez",
+          "position": "ST",
+          "overallRating": 83,
+          "attackRating": 84,
+          "defenceRating": 68,
+          "stamina": 84,
+          "nationality": "German"
+        }
+      ]
+    },
+    {
+      "id": "spain-2008",
+      "clubId": "spain",
+      "name": "Spain 2008",
+      "year": 2008,
+      "season": "Euro 2008",
+      "description": "Euro 2008 Champions",
+      "players": [
+        {
+          "id": "iker-casillas-2008",
+          "name": "Iker Casillas",
+          "position": "GK",
+          "overallRating": 88,
+          "attackRating": 45,
+          "defenceRating": 90,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "carles-puyol",
+          "name": "Carles Puyol",
+          "position": "CB",
+          "overallRating": 88,
+          "attackRating": 70,
+          "defenceRating": 89,
+          "stamina": 87,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "gerard-pique",
+          "name": "Gerard Piqué",
+          "position": "CB",
+          "overallRating": 86,
+          "attackRating": 68,
+          "defenceRating": 87,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "joan-capdevila",
+          "name": "Joan Capdevila",
+          "position": "LB",
+          "overallRating": 84,
+          "attackRating": 68,
+          "defenceRating": 84,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "sergio-ramos-2008",
+          "name": "Sergio Ramos",
+          "position": "RB",
+          "overallRating": 85,
+          "attackRating": 72,
+          "defenceRating": 85,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "andres-iniesta",
+          "name": "Andrés Iniesta",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 86,
+          "defenceRating": 78,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "xavi-hernandez",
+          "name": "Xavi Hernández",
+          "position": "CM",
+          "overallRating": 89,
+          "attackRating": 85,
+          "defenceRating": 80,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "sergio-busquets",
+          "name": "Sergio Busquets",
+          "position": "CM",
+          "overallRating": 85,
+          "attackRating": 72,
+          "defenceRating": 83,
+          "stamina": 84,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "david-silva",
+          "name": "David Silva",
+          "position": "LW",
+          "overallRating": 86,
+          "attackRating": 87,
+          "defenceRating": 75,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "david-villa-2008",
+          "name": "David Villa",
+          "position": "ST",
+          "overallRating": 88,
+          "attackRating": 89,
+          "defenceRating": 70,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "fernando-torres-2008",
+          "name": "Fernando Torres",
+          "position": "ST",
+          "overallRating": 85,
+          "attackRating": 86,
+          "defenceRating": 72,
+          "stamina": 85,
+          "nationality": "Spanish"
+        }
+      ]
+    },
+    {
+      "id": "spain-2012",
+      "clubId": "spain",
+      "name": "Spain 2012",
+      "year": 2012,
+      "season": "Euro 2012",
+      "description": "Euro 2012 Champions",
+      "players": [
+        {
+          "id": "iker-casillas-2012",
+          "name": "Iker Casillas",
+          "position": "GK",
+          "overallRating": 88,
+          "attackRating": 45,
+          "defenceRating": 90,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "carles-puyol-2012",
+          "name": "Carles Puyol",
+          "position": "CB",
+          "overallRating": 87,
+          "attackRating": 70,
+          "defenceRating": 88,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "gerard-pique-2012",
+          "name": "Gerard Piqué",
+          "position": "CB",
+          "overallRating": 87,
+          "attackRating": 70,
+          "defenceRating": 88,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "sergio-ramos-2012",
+          "name": "Sergio Ramos",
+          "position": "RB",
+          "overallRating": 86,
+          "attackRating": 73,
+          "defenceRating": 86,
+          "stamina": 86,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "jordi-alba",
+          "name": "Jordi Alba",
+          "position": "LB",
+          "overallRating": 85,
+          "attackRating": 76,
+          "defenceRating": 84,
+          "stamina": 87,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "xavi-hernandez-2012",
+          "name": "Xavi Hernández",
+          "position": "CM",
+          "overallRating": 88,
+          "attackRating": 84,
+          "defenceRating": 79,
+          "stamina": 84,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "andres-iniesta-2012",
+          "name": "Andrés Iniesta",
+          "position": "CM",
+          "overallRating": 89,
+          "attackRating": 87,
+          "defenceRating": 79,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "sergio-busquets-2012",
+          "name": "Sergio Busquets",
+          "position": "CM",
+          "overallRating": 85,
+          "attackRating": 72,
+          "defenceRating": 83,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "david-silva-2012",
+          "name": "David Silva",
+          "position": "LW",
+          "overallRating": 87,
+          "attackRating": 88,
+          "defenceRating": 76,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "david-villa-2012",
+          "name": "David Villa",
+          "position": "ST",
+          "overallRating": 87,
+          "attackRating": 88,
+          "defenceRating": 70,
+          "stamina": 85,
+          "nationality": "Spanish"
+        },
+        {
+          "id": "cesc-fabregas",
+          "name": "Cesc Fàbregas",
+          "position": "CM",
+          "overallRating": 84,
+          "attackRating": 83,
+          "defenceRating": 77,
+          "stamina": 84,
+          "nationality": "Spanish"
+        }
+      ]
+    }
+  ]
+}

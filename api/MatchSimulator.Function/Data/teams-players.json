@@ -71,6 +71,204 @@
         "fcb-10",
         "fcb-11"
       ]
+    },
+    {
+      "id": "napoli-1990",
+      "name": "Napoli",
+      "year": 1990,
+      "playerIds": [
+        "nap-1",
+        "nap-2",
+        "nap-3",
+        "nap-4",
+        "nap-5",
+        "nap-6",
+        "nap-7",
+        "nap-8",
+        "nap-9",
+        "nap-10",
+        "nap-11"
+      ]
+    },
+    {
+      "id": "ac-milan-1994",
+      "name": "AC Milan",
+      "year": 1994,
+      "playerIds": [
+        "acm-1",
+        "acm-2",
+        "acm-3",
+        "acm-4",
+        "acm-5",
+        "acm-6",
+        "acm-7",
+        "acm-8",
+        "acm-9",
+        "acm-10",
+        "acm-11"
+      ]
+    },
+    {
+      "id": "real-madrid-2014",
+      "name": "Real Madrid",
+      "year": 2014,
+      "playerIds": [
+        "rm-1",
+        "rm-2",
+        "rm-3",
+        "rm-4",
+        "rm-5",
+        "rm-6",
+        "rm-7",
+        "rm-8",
+        "rm-9",
+        "rm-10",
+        "rm-11"
+      ]
+    },
+    {
+      "id": "red-star-belgrade-1991",
+      "name": "Red Star Belgrade",
+      "year": 1991,
+      "playerIds": [
+        "rsb-1",
+        "rsb-2",
+        "rsb-3",
+        "rsb-4",
+        "rsb-5",
+        "rsb-6",
+        "rsb-7",
+        "rsb-8",
+        "rsb-9",
+        "rsb-10",
+        "rsb-11"
+      ]
+    },
+    {
+      "id": "ajax-1974",
+      "name": "Ajax",
+      "year": 1974,
+      "playerIds": [
+        "ajax-1",
+        "ajax-2",
+        "ajax-3",
+        "ajax-4",
+        "ajax-5",
+        "ajax-6",
+        "ajax-7",
+        "ajax-8",
+        "ajax-9",
+        "ajax-10",
+        "ajax-11"
+      ]
+    },
+    {
+      "id": "arsenal-2004",
+      "name": "Arsenal",
+      "year": 2004,
+      "playerIds": [
+        "ars-1",
+        "ars-2",
+        "ars-3",
+        "ars-4",
+        "ars-5",
+        "ars-6",
+        "ars-7",
+        "ars-8",
+        "ars-9",
+        "ars-10",
+        "ars-11"
+      ]
+    },
+    {
+      "id": "france-1998",
+      "name": "France",
+      "year": 1998,
+      "playerIds": [
+        "fra-1",
+        "fra-2",
+        "fra-3",
+        "fra-4",
+        "fra-5",
+        "fra-6",
+        "fra-7",
+        "fra-8",
+        "fra-9",
+        "fra-10",
+        "fra-11"
+      ]
+    },
+    {
+      "id": "argentina-1986",
+      "name": "Argentina",
+      "year": 1986,
+      "playerIds": [
+        "arg-1",
+        "arg-2",
+        "arg-3",
+        "arg-4",
+        "arg-5",
+        "arg-6",
+        "arg-7",
+        "arg-8",
+        "arg-9",
+        "arg-10",
+        "arg-11"
+      ]
+    },
+    {
+      "id": "germany-1990",
+      "name": "Germany",
+      "year": 1990,
+      "playerIds": [
+        "ger-1",
+        "ger-2",
+        "ger-3",
+        "ger-4",
+        "ger-5",
+        "ger-6",
+        "ger-7",
+        "ger-8",
+        "ger-9",
+        "ger-10",
+        "ger-11"
+      ]
+    },
+    {
+      "id": "spain-2010",
+      "name": "Spain",
+      "year": 2010,
+      "playerIds": [
+        "esp-1",
+        "esp-2",
+        "esp-3",
+        "esp-4",
+        "esp-5",
+        "esp-6",
+        "esp-7",
+        "esp-8",
+        "esp-9",
+        "esp-10",
+        "esp-11"
+      ]
+    },
+    {
+      "id": "hungary-1954",
+      "name": "Hungary",
+      "year": 1954,
+      "playerIds": [
+        "hun-1",
+        "hun-2",
+        "hun-3",
+        "hun-4",
+        "hun-5",
+        "hun-6",
+        "hun-7",
+        "hun-8",
+        "hun-9",
+        "hun-10",
+        "hun-11"
+      ]
     }
   ],
   "players": [
@@ -469,6 +667,1095 @@
       "attackRating": 85,
       "defenceRating": 50,
       "stamina": 87
+    },
+    {
+      "id": "nap-1",
+      "name": "Alessandro Reuta",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 20,
+      "defenceRating": 90,
+      "stamina": 88
+    },
+    {
+      "id": "nap-2",
+      "name": "Ciro Ferrara",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 40,
+      "defenceRating": 90,
+      "stamina": 89
+    },
+    {
+      "id": "nap-3",
+      "name": "Jorge da Silva",
+      "position": "DF",
+      "overallRating": 84,
+      "attackRating": 30,
+      "defenceRating": 86,
+      "stamina": 87
+    },
+    {
+      "id": "nap-4",
+      "name": "Fernando De Napoli",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 86
+    },
+    {
+      "id": "nap-5",
+      "name": "Ivo Udal",
+      "position": "DF",
+      "overallRating": 81,
+      "attackRating": 25,
+      "defenceRating": 83,
+      "stamina": 85
+    },
+    {
+      "id": "nap-6",
+      "name": "Salvatore Bagni",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 72,
+      "defenceRating": 75,
+      "stamina": 89
+    },
+    {
+      "id": "nap-7",
+      "name": "Gianfranco Zola",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 85,
+      "defenceRating": 65,
+      "stamina": 87
+    },
+    {
+      "id": "nap-8",
+      "name": "Antonio Giordano",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 75,
+      "defenceRating": 70,
+      "stamina": 88
+    },
+    {
+      "id": "nap-9",
+      "name": "Diego Maradona",
+      "position": "FW",
+      "overallRating": 97,
+      "attackRating": 96,
+      "defenceRating": 50,
+      "stamina": 85
+    },
+    {
+      "id": "nap-10",
+      "name": "Careca",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 35,
+      "stamina": 86
+    },
+    {
+      "id": "nap-11",
+      "name": "Gianluca Vialli",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 40,
+      "stamina": 86
+    },
+    {
+      "id": "acm-1",
+      "name": "Sebastiano Rossi",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 20,
+      "defenceRating": 88,
+      "stamina": 86
+    },
+    {
+      "id": "acm-2",
+      "name": "Paolo Maldini",
+      "position": "DF",
+      "overallRating": 91,
+      "attackRating": 50,
+      "defenceRating": 92,
+      "stamina": 90
+    },
+    {
+      "id": "acm-3",
+      "name": "Franco Baresi",
+      "position": "DF",
+      "overallRating": 90,
+      "attackRating": 45,
+      "defenceRating": 91,
+      "stamina": 88
+    },
+    {
+      "id": "acm-4",
+      "name": "Alessandro Costacurta",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 40,
+      "defenceRating": 89,
+      "stamina": 87
+    },
+    {
+      "id": "acm-5",
+      "name": "Mauro Tassotti",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 35,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "acm-6",
+      "name": "Zvonimir Boban",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 72,
+      "stamina": 86
+    },
+    {
+      "id": "acm-7",
+      "name": "Demetrio Albertini",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 70,
+      "defenceRating": 75,
+      "stamina": 87
+    },
+    {
+      "id": "acm-8",
+      "name": "Roberto Donadoni",
+      "position": "MF",
+      "overallRating": 86,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 86
+    },
+    {
+      "id": "acm-9",
+      "name": "Marco Van Basten",
+      "position": "FW",
+      "overallRating": 92,
+      "attackRating": 91,
+      "defenceRating": 40,
+      "stamina": 80
+    },
+    {
+      "id": "acm-10",
+      "name": "Daniele Massaro",
+      "position": "FW",
+      "overallRating": 84,
+      "attackRating": 82,
+      "defenceRating": 50,
+      "stamina": 85
+    },
+    {
+      "id": "acm-11",
+      "name": "Filippo Inzaghi",
+      "position": "FW",
+      "overallRating": 83,
+      "attackRating": 85,
+      "defenceRating": 35,
+      "stamina": 82
+    },
+    {
+      "id": "rm-1",
+      "name": "Iker Casillas",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 20,
+      "defenceRating": 91,
+      "stamina": 88
+    },
+    {
+      "id": "rm-2",
+      "name": "Sergio Ramos",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 60,
+      "defenceRating": 90,
+      "stamina": 89
+    },
+    {
+      "id": "rm-3",
+      "name": "Pepe",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 87
+    },
+    {
+      "id": "rm-4",
+      "name": "Marcelo",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 65,
+      "defenceRating": 87,
+      "stamina": 90
+    },
+    {
+      "id": "rm-5",
+      "name": "Álvaro Arbeloa",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 84,
+      "stamina": 85
+    },
+    {
+      "id": "rm-6",
+      "name": "Xabi Alonso",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 75,
+      "defenceRating": 80,
+      "stamina": 87
+    },
+    {
+      "id": "rm-7",
+      "name": "Toni Kroos",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 78,
+      "defenceRating": 75,
+      "stamina": 88
+    },
+    {
+      "id": "rm-8",
+      "name": "Luka Modric",
+      "position": "MF",
+      "overallRating": 90,
+      "attackRating": 82,
+      "defenceRating": 76,
+      "stamina": 88
+    },
+    {
+      "id": "rm-9",
+      "name": "Cristiano Ronaldo",
+      "position": "FW",
+      "overallRating": 95,
+      "attackRating": 94,
+      "defenceRating": 55,
+      "stamina": 89
+    },
+    {
+      "id": "rm-10",
+      "name": "Karim Benzema",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 45,
+      "stamina": 86
+    },
+    {
+      "id": "rm-11",
+      "name": "Gareth Bale",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 88,
+      "defenceRating": 50,
+      "stamina": 87
+    },
+    {
+      "id": "rsb-1",
+      "name": "Dragoslav Jevrić",
+      "position": "GK",
+      "overallRating": 83,
+      "attackRating": 20,
+      "defenceRating": 85,
+      "stamina": 84
+    },
+    {
+      "id": "rsb-2",
+      "name": "Savo Milošević",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 82,
+      "stamina": 85
+    },
+    {
+      "id": "rsb-3",
+      "name": "Sinisa Mihajlovic",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 55,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "rsb-4",
+      "name": "Miodrag Belodedici",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 85
+    },
+    {
+      "id": "rsb-5",
+      "name": "Slavisa Jokanovic",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 45,
+      "defenceRating": 84,
+      "stamina": 84
+    },
+    {
+      "id": "rsb-6",
+      "name": "Robert Prosinečski",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 85
+    },
+    {
+      "id": "rsb-7",
+      "name": "Darko Micanović",
+      "position": "MF",
+      "overallRating": 81,
+      "attackRating": 72,
+      "defenceRating": 65,
+      "stamina": 84
+    },
+    {
+      "id": "rsb-8",
+      "name": "Vladimir Matić",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 70,
+      "defenceRating": 70,
+      "stamina": 85
+    },
+    {
+      "id": "rsb-9",
+      "name": "Dejan Savičević",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 87,
+      "defenceRating": 50,
+      "stamina": 83
+    },
+    {
+      "id": "rsb-10",
+      "name": "Vinije Komatinović",
+      "position": "FW",
+      "overallRating": 80,
+      "attackRating": 81,
+      "defenceRating": 35,
+      "stamina": 80
+    },
+    {
+      "id": "rsb-11",
+      "name": "Branko Crvenkovic",
+      "position": "FW",
+      "overallRating": 79,
+      "attackRating": 80,
+      "defenceRating": 30,
+      "stamina": 79
+    },
+    {
+      "id": "ajax-1",
+      "name": "Piet Schrijvers",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 20,
+      "defenceRating": 87,
+      "stamina": 85
+    },
+    {
+      "id": "ajax-2",
+      "name": "Ruud Krol",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 55,
+      "defenceRating": 88,
+      "stamina": 87
+    },
+    {
+      "id": "ajax-3",
+      "name": "Danny Blind",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 45,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "ajax-4",
+      "name": "Barry Hulshoff",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 84
+    },
+    {
+      "id": "ajax-5",
+      "name": "Wim Jansen",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 86,
+      "stamina": 85
+    },
+    {
+      "id": "ajax-6",
+      "name": "Johan Neeskens",
+      "position": "MF",
+      "overallRating": 90,
+      "attackRating": 85,
+      "defenceRating": 75,
+      "stamina": 87
+    },
+    {
+      "id": "ajax-7",
+      "name": "Arie Haan",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 86
+    },
+    {
+      "id": "ajax-8",
+      "name": "Sjaak Swart",
+      "position": "FW",
+      "overallRating": 83,
+      "attackRating": 82,
+      "defenceRating": 45,
+      "stamina": 84
+    },
+    {
+      "id": "ajax-9",
+      "name": "Johan Cruyff",
+      "position": "FW",
+      "overallRating": 96,
+      "attackRating": 94,
+      "defenceRating": 60,
+      "stamina": 85
+    },
+    {
+      "id": "ajax-10",
+      "name": "Johnny Rep",
+      "position": "FW",
+      "overallRating": 84,
+      "attackRating": 84,
+      "defenceRating": 40,
+      "stamina": 82
+    },
+    {
+      "id": "ajax-11",
+      "name": "Heinz Stuy",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 30,
+      "defenceRating": 82,
+      "stamina": 83
+    },
+    {
+      "id": "ars-1",
+      "name": "Jens Lehmann",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 20,
+      "defenceRating": 89,
+      "stamina": 87
+    },
+    {
+      "id": "ars-2",
+      "name": "Ashley Cole",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 55,
+      "defenceRating": 89,
+      "stamina": 89
+    },
+    {
+      "id": "ars-3",
+      "name": "Sol Campbell",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 50,
+      "defenceRating": 90,
+      "stamina": 88
+    },
+    {
+      "id": "ars-4",
+      "name": "William Gallas",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 88,
+      "stamina": 87
+    },
+    {
+      "id": "ars-5",
+      "name": "Bacary Sagna",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 50,
+      "defenceRating": 86,
+      "stamina": 87
+    },
+    {
+      "id": "ars-6",
+      "name": "Gilberto Silva",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 70,
+      "defenceRating": 82,
+      "stamina": 88
+    },
+    {
+      "id": "ars-7",
+      "name": "Patrick Vieira",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 78,
+      "defenceRating": 85,
+      "stamina": 89
+    },
+    {
+      "id": "ars-8",
+      "name": "Robert Pires",
+      "position": "FW",
+      "overallRating": 86,
+      "attackRating": 85,
+      "defenceRating": 50,
+      "stamina": 87
+    },
+    {
+      "id": "ars-9",
+      "name": "Dennis Bergkamp",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 89,
+      "defenceRating": 50,
+      "stamina": 84
+    },
+    {
+      "id": "ars-10",
+      "name": "Thierry Henry",
+      "position": "FW",
+      "overallRating": 93,
+      "attackRating": 94,
+      "defenceRating": 50,
+      "stamina": 89
+    },
+    {
+      "id": "ars-11",
+      "name": "Fredrik Ljungberg",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 88
+    },
+    {
+      "id": "fra-1",
+      "name": "Fabien Barthez",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 20,
+      "defenceRating": 88,
+      "stamina": 86
+    },
+    {
+      "id": "fra-2",
+      "name": "Laurent Blanc",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 45,
+      "defenceRating": 89,
+      "stamina": 87
+    },
+    {
+      "id": "fra-3",
+      "name": "Lilian Thuram",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 50,
+      "defenceRating": 90,
+      "stamina": 89
+    },
+    {
+      "id": "fra-4",
+      "name": "Bixente Lizarazu",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 55,
+      "defenceRating": 85,
+      "stamina": 88
+    },
+    {
+      "id": "fra-5",
+      "name": "Frank Desmedt",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 35,
+      "defenceRating": 82,
+      "stamina": 84
+    },
+    {
+      "id": "fra-6",
+      "name": "Patrick Vieira",
+      "position": "MF",
+      "overallRating": 88,
+      "attackRating": 75,
+      "defenceRating": 84,
+      "stamina": 89
+    },
+    {
+      "id": "fra-7",
+      "name": "Claude Makélélé",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 82,
+      "stamina": 88
+    },
+    {
+      "id": "fra-8",
+      "name": "Youri Djorkaeff",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 80,
+      "defenceRating": 65,
+      "stamina": 85
+    },
+    {
+      "id": "fra-9",
+      "name": "Zinedine Zidane",
+      "position": "FW",
+      "overallRating": 93,
+      "attackRating": 91,
+      "defenceRating": 60,
+      "stamina": 86
+    },
+    {
+      "id": "fra-10",
+      "name": "Thierry Henry",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 50,
+      "stamina": 88
+    },
+    {
+      "id": "fra-11",
+      "name": "David Trezeguet",
+      "position": "FW",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 40,
+      "stamina": 84
+    },
+    {
+      "id": "arg-1",
+      "name": "Nery Pumpido",
+      "position": "GK",
+      "overallRating": 83,
+      "attackRating": 20,
+      "defenceRating": 85,
+      "stamina": 84
+    },
+    {
+      "id": "arg-2",
+      "name": "Oscar Ruggeri",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "arg-3",
+      "name": "José Luis Brown",
+      "position": "DF",
+      "overallRating": 84,
+      "attackRating": 35,
+      "defenceRating": 86,
+      "stamina": 85
+    },
+    {
+      "id": "arg-4",
+      "name": "Nestor Clausen",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 30,
+      "defenceRating": 84,
+      "stamina": 84
+    },
+    {
+      "id": "arg-5",
+      "name": "Óscar Garré",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 25,
+      "defenceRating": 82,
+      "stamina": 82
+    },
+    {
+      "id": "arg-6",
+      "name": "Hector Enrique",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 70,
+      "defenceRating": 70,
+      "stamina": 84
+    },
+    {
+      "id": "arg-7",
+      "name": "Jorge Valdano",
+      "position": "FW",
+      "overallRating": 86,
+      "attackRating": 84,
+      "defenceRating": 55,
+      "stamina": 82
+    },
+    {
+      "id": "arg-8",
+      "name": "Julio Olarticoechea",
+      "position": "MF",
+      "overallRating": 81,
+      "attackRating": 60,
+      "defenceRating": 72,
+      "stamina": 83
+    },
+    {
+      "id": "arg-9",
+      "name": "Diego Maradona",
+      "position": "FW",
+      "overallRating": 96,
+      "attackRating": 95,
+      "defenceRating": 50,
+      "stamina": 84
+    },
+    {
+      "id": "arg-10",
+      "name": "Carlos Tapia",
+      "position": "FW",
+      "overallRating": 79,
+      "attackRating": 80,
+      "defenceRating": 30,
+      "stamina": 79
+    },
+    {
+      "id": "arg-11",
+      "name": "Jorge Burruchaga",
+      "position": "FW",
+      "overallRating": 81,
+      "attackRating": 82,
+      "defenceRating": 35,
+      "stamina": 80
+    },
+    {
+      "id": "ger-1",
+      "name": "Bodo Illgner",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 20,
+      "defenceRating": 87,
+      "stamina": 85
+    },
+    {
+      "id": "ger-2",
+      "name": "Karl-Heinz Förster",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 86
+    },
+    {
+      "id": "ger-3",
+      "name": "Guido Buchwald",
+      "position": "DF",
+      "overallRating": 84,
+      "attackRating": 35,
+      "defenceRating": 86,
+      "stamina": 85
+    },
+    {
+      "id": "ger-4",
+      "name": "Stefan Reuter",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 84
+    },
+    {
+      "id": "ger-5",
+      "name": "Andy Brehme",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 50,
+      "defenceRating": 86,
+      "stamina": 87
+    },
+    {
+      "id": "ger-6",
+      "name": "Lothar Matthäus",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 78,
+      "defenceRating": 80,
+      "stamina": 88
+    },
+    {
+      "id": "ger-7",
+      "name": "Pierre Littbarski",
+      "position": "MF",
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 86
+    },
+    {
+      "id": "ger-8",
+      "name": "Thomas Häßler",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 75,
+      "defenceRating": 72,
+      "stamina": 87
+    },
+    {
+      "id": "ger-9",
+      "name": "Jürgen Klinsmann",
+      "position": "FW",
+      "overallRating": 87,
+      "attackRating": 87,
+      "defenceRating": 50,
+      "stamina": 86
+    },
+    {
+      "id": "ger-10",
+      "name": "Rudi Völler",
+      "position": "FW",
+      "overallRating": 85,
+      "attackRating": 85,
+      "defenceRating": 45,
+      "stamina": 84
+    },
+    {
+      "id": "ger-11",
+      "name": "Bernd Schulz",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 30,
+      "defenceRating": 84,
+      "stamina": 83
+    },
+    {
+      "id": "esp-1",
+      "name": "Iker Casillas",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 20,
+      "defenceRating": 91,
+      "stamina": 88
+    },
+    {
+      "id": "esp-2",
+      "name": "Carles Puyol",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 87
+    },
+    {
+      "id": "esp-3",
+      "name": "Gerard Pique",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 45,
+      "defenceRating": 89,
+      "stamina": 86
+    },
+    {
+      "id": "esp-4",
+      "name": "Sergio Ramos",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 55,
+      "defenceRating": 89,
+      "stamina": 88
+    },
+    {
+      "id": "esp-5",
+      "name": "Álvaro Arbeloa",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 84,
+      "stamina": 85
+    },
+    {
+      "id": "esp-6",
+      "name": "Sergio Busquets",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 86,
+      "stamina": 87
+    },
+    {
+      "id": "esp-7",
+      "name": "Xavi",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 86
+    },
+    {
+      "id": "esp-8",
+      "name": "Andrés Iniesta",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 88
+    },
+    {
+      "id": "esp-9",
+      "name": "David Villa",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 90,
+      "defenceRating": 45,
+      "stamina": 87
+    },
+    {
+      "id": "esp-10",
+      "name": "Fernando Torres",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 45,
+      "stamina": 86
+    },
+    {
+      "id": "esp-11",
+      "name": "Xabi Alonso",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 75,
+      "defenceRating": 80,
+      "stamina": 87
+    },
+    {
+      "id": "hun-1",
+      "name": "Gyula Grosics",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 20,
+      "defenceRating": 87,
+      "stamina": 85
+    },
+    {
+      "id": "hun-2",
+      "name": "Jenő Buzánszky",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 40,
+      "defenceRating": 85,
+      "stamina": 84
+    },
+    {
+      "id": "hun-3",
+      "name": "Lajos Kordics",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 35,
+      "defenceRating": 84,
+      "stamina": 83
+    },
+    {
+      "id": "hun-4",
+      "name": "Béla Giczi",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 30,
+      "defenceRating": 82,
+      "stamina": 82
+    },
+    {
+      "id": "hun-5",
+      "name": "Pál Szide",
+      "position": "DF",
+      "overallRating": 79,
+      "attackRating": 25,
+      "defenceRating": 81,
+      "stamina": 81
+    },
+    {
+      "id": "hun-6",
+      "name": "Nándor Hidegkuti",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 84
+    },
+    {
+      "id": "hun-7",
+      "name": "József Bozsik",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 75,
+      "stamina": 85
+    },
+    {
+      "id": "hun-8",
+      "name": "Bojan Joksimovic",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 70,
+      "defenceRating": 72,
+      "stamina": 83
+    },
+    {
+      "id": "hun-9",
+      "name": "Ferenc Puskás",
+      "position": "FW",
+      "overallRating": 92,
+      "attackRating": 93,
+      "defenceRating": 45,
+      "stamina": 82
+    },
+    {
+      "id": "hun-10",
+      "name": "Sándor Kocsis",
+      "position": "FW",
+      "overallRating": 87,
+      "attackRating": 88,
+      "defenceRating": 40,
+      "stamina": 81
+    },
+    {
+      "id": "hun-11",
+      "name": "Péter Palotás",
+      "position": "FW",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 35,
+      "stamina": 80
     }
   ]
 }

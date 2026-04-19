@@ -6,18 +6,32 @@ export interface Player {
   attackRating: number;
   defenceRating: number;
   stamina: number;
+  nationality?: string;
+  eraAppearances?: number[];  // Years player appeared
+}
+
+export interface Club {
+  id: string;
+  name: string;
+  shortName: string;
+  description?: string;
+  allTimePlayers?: Player[];  // Aggregated players across all eras
 }
 
 export interface Team {
   id: string;
   name: string;
+  clubId: string;
   year: number;
+  season?: string;
+  description?: string;
   players: Player[];
 }
 
 export interface TeamSummary {
   id: string;
   name: string;
+  clubId: string;
   year: number;
   playerCount: number;
 }
@@ -26,6 +40,8 @@ export interface Goal {
   minute: number;
   playerName: string;
   teamId: string;
+  assist?: string;  // Assisting player name
+  isPenalty?: boolean;  // Whether goal was from a penalty
 }
 
 export interface MatchStats {
@@ -35,6 +51,15 @@ export interface MatchStats {
   shotsOnTargetB: number;
   possessionA: number;
   possessionB: number;
+}
+
+export interface MatchEvent {
+  minute: number;
+  type: 'goal' | 'normal' | 'highlight';
+  text: string;
+  scoreA: number;
+  scoreB: number;
+  goalScorerName?: string;
 }
 
 export interface MatchResult {
@@ -48,4 +73,5 @@ export interface MatchResult {
   kickOffTime: string;
   manOfTheMatch: string;
   eraFlavour?: string;
+  events: MatchEvent[];
 }

@@ -59,6 +59,9 @@ public class SimulationEngine
         else if (teamA.Year > 2008 && teamB.Year > 2008)
             result.EraFlavour = "High tempo, pressing from both sides.";
 
+        // Generate match events with timestamps for broadcast
+        result.Events = GenerateMatchEvents(result, teamA, teamB);
+
         return result;
     }
 
@@ -183,5 +186,103 @@ public class SimulationEngine
             .MaxBy(p => p.OverallRating);
 
         return topPlayer?.Name ?? "Unknown";
+    }
+
+    private List<MatchEvent> GenerateMatchEvents(MatchResult result, Team teamA, Team teamB)
+    {
+        var events = new List<MatchEvent>();
+
+        // Combine all goals with their scores
+        var allGoals = new List<(int minute, string playerName, string teamId)>();
+        allGoals.AddRange(result.GoalsA.Select(g => (g.Minute, g.PlayerName, g.TeamId)));
+        allGoals.AddRange(result.GoalsB.Select(g => (g.Minute, g.PlayerName, g.TeamId)));
+        allGoals = allGoals.OrderBy(g => g.minute).ToList();
+
+        // Build a lookup of goals by minute for quick access
+        var goalsAtMinute = new Dictionary<int, List<(string playerName, string teamId)>>();
+        foreach (var goal in allGoals)
+        {
+            if (!goalsAtMinute.ContainsKey(goal.minute))
+                goalsAtMinute[goal.minute] = new List<(string, string)>();
+            goalsAtMinute[goal.minute].Add((goal.playerName, goal.teamId));
+        }
+
+        int currentScoreA = 0;
+        int currentScoreB = 0;
+
+        // Generate events for every 5 minute interval from 5 to 90
+        for (int minute = 5; minute <= 90; minute += 5)
+        {
+            // Check if there are goals at this minute
+            if (goalsAtMinute.ContainsKey(minute))
+            {
+                foreach (var (playerName, teamId) in goalsAtMinute[minute])
+                {
+                    if (teamId == teamA.Id)
+                        currentScoreA++;
+                    else
+                        currentScoreB++;
+
+                    var teamName = teamId == teamA.Id ? teamA.Name : teamB.Name;
+                    events.Add(new MatchEvent
+                    {
+                        Minute = minute,
+                        Type = "goal",
+                        Text = $"GOAL! {playerName} scores for {teamName}!",
+                        GoalScorerName = playerName,
+                        ScoreA = currentScoreA,
+                        ScoreB = currentScoreB
+                    });
+                }
+            }
+            else
+            {
+                // Add regular commentary if no goal at this minute
+                var commentary = GetCommentaryForMinute(minute, result, teamA, teamB, currentScoreA, currentScoreB);
+                if (!string.IsNullOrEmpty(commentary))
+                {
+                    events.Add(new MatchEvent
+                    {
+                        Minute = minute,
+                        Type = minute % 20 == 0 ? "highlight" : "normal",
+                        Text = commentary,
+                        ScoreA = currentScoreA,
+                        ScoreB = currentScoreB
+                    });
+                }
+            }
+        }
+
+        return events;
+    }
+
+    private string GetCommentaryForMinute(int minute, MatchResult result, Team teamA, Team teamB, int scoreA, int scoreB)
+    {
+        var commentaries = new[]
+        {
+            $"{teamA.Name} pushing forward.",
+            $"{teamB.Name} looking for an opening.",
+            "Great passing move from the midfield.",
+            "Solid defending so far.",
+            "Both teams looking sharp.",
+            $"{teamA.Name} dominating possession.",
+            $"{teamB.Name} with a quick counter-attack.",
+            "Intense battle in midfield.",
+            "The crowd is really getting behind their team.",
+            "End-to-end action here.",
+            "Dangerous free kick opportunity.",
+            "That was a close one!",
+            "Excellent save from the keeper.",
+            "Both teams showing great energy.",
+            "The momentum is shifting.",
+        };
+
+        if (minute == 45)
+            return $"HALF TIME: {teamA.Name} {scoreA} - {scoreB} {teamB.Name}";
+
+        if (minute == 90)
+            return $"FULL TIME: {teamA.Name} {scoreA} - {scoreB} {teamB.Name}";
+
+        return commentaries[_random.Next(commentaries.Length)];
     }
 }

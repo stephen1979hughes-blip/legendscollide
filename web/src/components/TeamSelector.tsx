@@ -32,7 +32,7 @@ export const TeamSelector: React.FC<TeamSelectorProps> = ({
             onChange={(e) => onTeamAChange(e.target.value)}
             style={{ marginLeft: '10px', padding: '5px' }}
           >
-            <option value="">Select a team</option>
+            <option key="__select__" value="">Select a team</option>
             {teams.map((team) => (
               <option key={team.id} value={team.id}>
                 {team.name} ({team.year})
@@ -50,7 +50,7 @@ export const TeamSelector: React.FC<TeamSelectorProps> = ({
             onChange={(e) => onTeamBChange(e.target.value)}
             style={{ marginLeft: '10px', padding: '5px' }}
           >
-            <option value="">Select a team</option>
+            <option key="__select__" value="">Select a team</option>
             {teams.map((team) => (
               <option key={team.id} value={team.id}>
                 {team.name} ({team.year})

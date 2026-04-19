@@ -17,23 +17,24 @@ public class GetTeams
     }
 
     [Function("GetTeams")]
-    public HttpResponseData Run(
+    public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "teams")] HttpRequestData req)
     {
         var teams = _dataLoader.GetTeams();
 
-        var teamSummaries = teams.Select(t => new
+        var teamSummaries = teams.Select(t => new TeamSummaryDto
         {
-            t.Id,
-            t.Name,
-            t.Year,
+            Id = t.Id,
+            Name = t.Name,
+            Year = t.Year,
             PlayerCount = t.Players.Count
         }).ToList();
 
         var response = req.CreateResponse(HttpStatusCode.OK);
-        response.Headers.Add("Content-Type", "application/json; charset=utf-8");
-        response.WriteAsJsonAsync(teamSummaries);
-
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Origin", "*");
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        response.Headers.TryAddWithoutValidation("Access-Control-Allow-Headers", "Content-Type");
+        await response.WriteAsJsonAsync(teamSummaries);
         return response;
     }
 }
