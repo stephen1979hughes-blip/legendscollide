@@ -95,7 +95,7 @@ export const Pitch: React.FC<PitchProps> = ({
 
           const gapClass = 'gap-4';
           const rowAboveWidth = rowIndex > 0 ? formation.rows[rowIndex - 1].positionIndices.length : 0;
-          const shouldAddSpacers = (row.positionIndices.length === 2 && rowAboveWidth >= 4) ||
+          const shouldAddSpacers = (row.positionIndices.length === 2 && rowAboveWidth >= 3) ||
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
