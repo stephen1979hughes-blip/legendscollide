@@ -1,115 +1,145 @@
 import { Club, Team, Player } from '../types';
 
-interface RawTeam {
+interface NormalizedCountry {
   id: string;
-  clubId: string;
   name: string;
+  code: string;
+}
+
+interface NormalizedPlayer {
+  id: string;
+  name: string;
+  countryId: string;
+  position: string;
+  overallRating: number;
+  attackRating: number;
+  defenceRating: number;
+  stamina: number;
+}
+
+interface NormalizedClassicTeam {
+  id: string;
+  name: string;
+  countryId: string;
   year: number;
   season?: string;
   description?: string;
-  players: Player[];
+  players: Array<{
+    playerId: string;
+    position: string;
+    number?: number;
+  }>;
 }
 
-interface RawClub {
+interface NormalizedClub {
   id: string;
   name: string;
   shortName: string;
-  description?: string;
+  countryId?: string;
+  founded?: number;
+  city?: string;
 }
 
-interface RawData {
-  clubs: RawClub[];
-  teams: RawTeam[];
-}
-
-/**
- * Deduplicates players across multiple teams/eras
- * Returns unique players with best ratings and era appearances
- */
-function deduplicateAndAggregatePlayers(teams: RawTeam[]): Player[] {
-  const playerMap = new Map<string, Player & { appearances: Set<number> }>();
-
-  teams.forEach(team => {
-    team.players.forEach(player => {
-      // Create a key from name and position (as deduplication criteria)
-      const key = `${player.name.toLowerCase()}|${player.position}`;
-
-      if (playerMap.has(key)) {
-        const existing = playerMap.get(key)!;
-        // Keep the player with higher rating
-        if (player.overallRating > existing.overallRating) {
-          existing.overallRating = player.overallRating;
-          existing.attackRating = Math.max(existing.attackRating, player.attackRating);
-          existing.defenceRating = Math.max(existing.defenceRating, player.defenceRating);
-          existing.stamina = Math.max(existing.stamina, player.stamina);
-        }
-        existing.appearances.add(team.year);
-      } else {
-        playerMap.set(key, {
-          ...player,
-          appearances: new Set([team.year]),
-          eraAppearances: [] // Will fill below
-        });
-      }
-    });
-  });
-
-  // Convert back to array with eraAppearances filled and era info added to name
-  return Array.from(playerMap.values()).map(p => {
-    const sortedYears = Array.from(p.appearances).sort();
-    const eraInfo = sortedYears.length > 1
-      ? sortedYears.join('/')
-      : sortedYears[0].toString();
-
-    return {
-      ...p,
-      name: `${p.name} (${eraInfo})`,
-      eraAppearances: sortedYears
-    };
-  });
+interface NormalizedData {
+  metadata?: any;
+  countries: NormalizedCountry[];
+  clubs: NormalizedClub[];
+  nationalTeams?: any[];
+  players: NormalizedPlayer[];
+  classicTeams: NormalizedClassicTeam[];
 }
 
 /**
- * Processes raw data and creates Club objects with aggregated all-time players
+ * Processes normalized relational data
+ * Creates Club objects per country with all unique players (no year suffixes)
+ * Creates Team objects for each classic team
  */
-export function processTeamsData(rawData: RawData): { clubs: Club[], teams: Team[] } {
-  const teamsMap = new Map<string, RawTeam[]>();
+export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[] } {
+  // Create a map of players by ID for quick lookup
+  const playersById = new Map<string, NormalizedPlayer>();
+  rawData.players.forEach(p => {
+    playersById.set(p.id, p);
+  });
 
-  // Group teams by club
-  rawData.teams.forEach(team => {
-    if (!teamsMap.has(team.clubId)) {
-      teamsMap.set(team.clubId, []);
+  // Group players by country
+  const playersByCountry = new Map<string, NormalizedPlayer[]>();
+  rawData.players.forEach(player => {
+    if (!playersByCountry.has(player.countryId)) {
+      playersByCountry.set(player.countryId, []);
     }
-    teamsMap.get(team.clubId)!.push(team);
+    playersByCountry.get(player.countryId)!.push(player);
   });
 
-  // Create Club objects with all-time players
-  const clubs = rawData.clubs.map(rawClub => {
-    const clubTeams = teamsMap.get(rawClub.id) || [];
-    const allTimePlayers = deduplicateAndAggregatePlayers(clubTeams);
+  // Create Club objects for each country with all-time players
+  const countries = rawData.countries || [];
+  const clubs: Club[] = countries
+    .map(country => {
+      const countryPlayers = playersByCountry.get(country.id) || [];
+      const allTimePlayers: Player[] = countryPlayers
+        .map(p => ({
+          id: p.id,
+          name: p.name, // No year suffix - these are unique player names!
+          countryId: p.countryId,
+          position: p.position,
+          overallRating: p.overallRating,
+          attackRating: p.attackRating,
+          defenceRating: p.defenceRating,
+          stamina: p.stamina,
+          eraAppearances: []
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      return {
+        id: country.id,
+        name: country.name,
+        shortName: country.code,
+        description: `All ${country.name} players`,
+        allTimePlayers
+      } as Club;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  // Create Team objects from classic teams
+  const teams: Team[] = rawData.classicTeams.map(classicTeam => {
+    const teamPlayers = classicTeam.players.map(tp => {
+      const player = playersById.get(tp.playerId);
+      return {
+        id: tp.playerId,
+        name: player?.name || 'Unknown',
+        countryId: player?.countryId || '',
+        position: tp.position || player?.position || '',
+        overallRating: player?.overallRating || 0,
+        attackRating: player?.attackRating || 0,
+        defenceRating: player?.defenceRating || 0,
+        stamina: player?.stamina || 0,
+        eraAppearances: []
+      } as Player;
+    });
 
     return {
-      id: rawClub.id,
-      name: rawClub.name,
-      shortName: rawClub.shortName,
-      description: rawClub.description,
-      allTimePlayers
-    } as Club;
+      id: classicTeam.id,
+      name: classicTeam.name,
+      clubId: classicTeam.countryId,
+      year: classicTeam.year,
+      season: classicTeam.season,
+      description: classicTeam.description,
+      players: teamPlayers
+    } as Team;
   });
 
-  return {
-    clubs,
-    teams: rawData.teams
-  };
+  return { clubs, teams };
 }
 
 /**
- * Mock data fetcher - in production this would call the API
+ * Loads teams data from normalized JSON file (no year suffixes in player names)
  */
 export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[] }> {
   try {
-    const response = await fetch('/teams-data.json');
-    const rawData: RawData = await response.json();
+    const response = await fetch('/teams-data-normalized.json');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const rawData: NormalizedData = await response.json();
     return processTeamsData(rawData);
   } catch (error) {
     console.error('Failed to load teams data:', error);

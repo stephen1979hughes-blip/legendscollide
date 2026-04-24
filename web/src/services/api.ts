@@ -9,15 +9,41 @@ async function loadTeamsDataFromFile(): Promise<{ clubs: any[]; teams: Team[] }>
     return cachedTeamsData;
   }
 
-  console.log('Loading teams data from JSON file...');
+  console.log('Loading teams data from normalized JSON file...');
   try {
-    const response = await fetch('/teams-data.json');
+    const response = await fetch('/teams-data-normalized.json');
     if (!response.ok) {
       throw new Error(`Failed to load teams data: ${response.status} ${response.statusText}`);
     }
-    const data = await response.json();
-    console.log('Teams data loaded successfully:', data);
-    cachedTeamsData = data;
+    const rawData = await response.json();
+    console.log('Teams data loaded successfully');
+
+    // Parse normalized structure
+    const clubs = rawData.countries || [];
+    const teams = rawData.classicTeams?.map((ct: any) => ({
+      id: ct.id,
+      name: ct.name,
+      clubId: ct.countryId,
+      year: ct.year,
+      season: ct.season,
+      description: ct.description,
+      players: ct.players.map((tp: any) => {
+        const player = rawData.players.find((p: any) => p.id === tp.playerId);
+        return {
+          id: tp.playerId,
+          name: player?.name || 'Unknown',
+          countryId: player?.countryId || '',
+          position: tp.position || player?.position || '',
+          overallRating: player?.overallRating || 0,
+          attackRating: player?.attackRating || 0,
+          defenceRating: player?.defenceRating || 0,
+          stamina: player?.stamina || 0,
+          eraAppearances: []
+        };
+      })
+    })) || [];
+
+    cachedTeamsData = { clubs, teams };
     return cachedTeamsData as { clubs: any[]; teams: Team[] };
   } catch (error) {
     console.error('Error loading teams data:', error);

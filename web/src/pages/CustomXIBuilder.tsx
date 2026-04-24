@@ -7,7 +7,7 @@ import { api } from '../services/api';
 import { CustomXI, CustomXIPlayer, FORMATIONS, FormationConfig } from '../types/customXI';
 import { customXIStorage } from '../utils/customXIStorage';
 import { TeamSummary, Team, Club, Player } from '../types';
-import { processTeamsData } from '../utils/dataProcessor';
+import { loadTeamsData } from '../utils/dataProcessor';
 
 
 export const CustomXIBuilder: React.FC = () => {
@@ -27,12 +27,7 @@ export const CustomXIBuilder: React.FC = () => {
   useEffect(() => {
     const loadClubsData = async () => {
       try {
-        const response = await fetch('/teams-data.json');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const rawData = await response.json();
-        const { clubs: loadedClubs, teams } = processTeamsData(rawData);
+        const { clubs: loadedClubs, teams } = await loadTeamsData();
 
         if (loadedClubs && loadedClubs.length > 0) {
           setClubs(loadedClubs);
