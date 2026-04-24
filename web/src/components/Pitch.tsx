@@ -95,50 +95,26 @@ export const Pitch: React.FC<PitchProps> = ({
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
-            // Add spacers on both sides to center players narrower than row above
-            if (row.positionIndices.length === 3 && rowAboveWidth === 5) {
-              // For 3 players below 5, add single spacer on each side
-              return (
-                <div key={rowIndex} className={`flex justify-between items-center px-4 ${gapClass}`}>
-                  <div className="w-16 h-16 invisible" />
-                  {row.positionIndices.map((slotIndex) => (
-                    <PositionSlot
-                      key={`slot-${slotIndex}`}
-                      slotIndex={slotIndex}
-                      position={formation.positions[slotIndex]}
-                      player={getPlayerAtSlot(slotIndex)}
-                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
-                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
-                      onRemove={() => onPlayerRemove(slotIndex)}
-                      isOpen={openDropdownSlot === slotIndex}
-                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
-                    />
-                  ))}
-                  <div className="w-16 h-16 invisible" />
-                </div>
-              );
-            } else {
-              // For 2 players below 4 or 5, add spacers
-              return (
-                <div key={rowIndex} className={`flex justify-between items-center px-4 ${gapClass}`}>
-                  <div className="w-16 h-16 invisible" />
-                  {row.positionIndices.map((slotIndex) => (
-                    <PositionSlot
-                      key={`slot-${slotIndex}`}
-                      slotIndex={slotIndex}
-                      position={formation.positions[slotIndex]}
-                      player={getPlayerAtSlot(slotIndex)}
-                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
-                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
-                      onRemove={() => onPlayerRemove(slotIndex)}
-                      isOpen={openDropdownSlot === slotIndex}
-                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
-                    />
-                  ))}
-                  <div className="w-16 h-16 invisible" />
-                </div>
-              );
-            }
+            // Use flex-grow spacers to center players narrower than row above
+            return (
+              <div key={rowIndex} className={`flex items-center px-4 ${gapClass}`}>
+                <div className="flex-1" />
+                {row.positionIndices.map((slotIndex) => (
+                  <PositionSlot
+                    key={`slot-${slotIndex}`}
+                    slotIndex={slotIndex}
+                    position={formation.positions[slotIndex]}
+                    player={getPlayerAtSlot(slotIndex)}
+                    compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                    onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                    onRemove={() => onPlayerRemove(slotIndex)}
+                    isOpen={openDropdownSlot === slotIndex}
+                    onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
+                  />
+                ))}
+                <div className="flex-1" />
+              </div>
+            );
           }
 
           return (
