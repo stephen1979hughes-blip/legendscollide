@@ -58,7 +58,7 @@ export const Pitch: React.FC<PitchProps> = ({
       </h3>
 
       {/* Pitch visualization */}
-      <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-6 aspect-video flex flex-col justify-between border-4 border-white">
+      <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-8 flex flex-col justify-between border-4 border-white min-h-96">
         {formation.rows.map((row, rowIndex) => {
           // Determine spacing based on row type and number of players
           let justifyClass = 'justify-between';
@@ -152,7 +152,7 @@ export const Pitch: React.FC<PitchProps> = ({
 
       {/* Formation info */}
       <div className="mt-6 text-center text-sm text-muted">
-        <p>Click on a position to select a player</p>
+        <p>Click on any position card to select or change a player</p>
         <p className="mt-2 font-semibold text-primary">
           {players.length}/{formation.positions.length} players selected
         </p>
@@ -185,14 +185,17 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="rounded-full border-2 border-white bg-green-500 hover:bg-green-400 text-white transition-all duration-100 w-20 h-20 flex flex-col items-center justify-center cursor-pointer"
+          className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-32 p-2 text-left"
         >
-          <div className="text-xs font-bold truncate w-16 px-1">{player.playerName.replace(/\s*\(\d+\)$/, '').split(' ').pop()}</div>
-          <div className="text-xs opacity-75">⭐ {player.overallRating}</div>
+          <div className="text-sm font-bold text-primary truncate" title={player.playerName.replace(/\s*\(\d+\)$/, '')}>
+            {player.playerName.replace(/\s*\(\d+\)$/, '')}
+          </div>
+          <div className="text-xs text-muted">{player.playerPosition}</div>
+          <div className="text-xs font-semibold text-primary mt-1">⭐ {player.overallRating}</div>
         </button>
         <button
           onClick={onRemove}
-          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-600"
+          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-600 shadow"
           title="Remove player"
         >
           ×
@@ -200,7 +203,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-48">
+          <div className="absolute top-32 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-56">
             {compatiblePlayers.length > 0 ? (
               <div className="py-2">
                 {compatiblePlayers.map((p) => (
@@ -233,15 +236,15 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="rounded-full border-2 border-white border-dashed bg-green-600 hover:bg-green-500 text-white transition-all duration-100 w-20 h-20 flex flex-col items-center justify-center cursor-pointer opacity-70"
+        className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer w-32 p-2 text-center text-gray-500"
       >
         <div className="text-sm font-bold">{position}</div>
-        <div className="text-xs opacity-75">+</div>
+        <div className="text-xs opacity-75">+ Add Player</div>
       </button>
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-48">
+        <div className="absolute top-28 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-56">
           {compatiblePlayers.length > 0 ? (
             <div className="py-2">
               {compatiblePlayers.map((p) => (
