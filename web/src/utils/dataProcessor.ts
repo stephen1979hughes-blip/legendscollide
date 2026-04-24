@@ -51,7 +51,7 @@ interface NormalizedData {
 
 /**
  * Processes normalized relational data
- * Creates Club objects per country with all unique players (no year suffixes)
+ * Creates Club objects for actual clubs and each country with all unique players (no year suffixes)
  * Creates Team objects for each classic team
  */
 export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[] } {
@@ -70,34 +70,64 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
     playersByCountry.get(player.countryId)!.push(player);
   });
 
+  const clubs: Club[] = [];
+
+  // Create Club objects for actual clubs (e.g., Manchester United)
+  const actualClubs = rawData.clubs || [];
+  actualClubs.forEach(club => {
+    const clubPlayers = club.countryId ? playersByCountry.get(club.countryId) || [] : [];
+    const allTimePlayers: Player[] = clubPlayers
+      .map(p => ({
+        id: p.id,
+        name: p.name,
+        countryId: p.countryId,
+        position: p.position,
+        overallRating: p.overallRating,
+        attackRating: p.attackRating,
+        defenceRating: p.defenceRating,
+        stamina: p.stamina,
+        eraAppearances: []
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    clubs.push({
+      id: club.id,
+      name: club.name,
+      shortName: club.shortName,
+      description: `${club.name} players`,
+      allTimePlayers
+    } as Club);
+  });
+
   // Create Club objects for each country with all-time players
   const countries = rawData.countries || [];
-  const clubs: Club[] = countries
-    .map(country => {
-      const countryPlayers = playersByCountry.get(country.id) || [];
-      const allTimePlayers: Player[] = countryPlayers
-        .map(p => ({
-          id: p.id,
-          name: p.name, // No year suffix - these are unique player names!
-          countryId: p.countryId,
-          position: p.position,
-          overallRating: p.overallRating,
-          attackRating: p.attackRating,
-          defenceRating: p.defenceRating,
-          stamina: p.stamina,
-          eraAppearances: []
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
+  countries.forEach(country => {
+    const countryPlayers = playersByCountry.get(country.id) || [];
+    const allTimePlayers: Player[] = countryPlayers
+      .map(p => ({
+        id: p.id,
+        name: p.name, // No year suffix - these are unique player names!
+        countryId: p.countryId,
+        position: p.position,
+        overallRating: p.overallRating,
+        attackRating: p.attackRating,
+        defenceRating: p.defenceRating,
+        stamina: p.stamina,
+        eraAppearances: []
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
 
-      return {
-        id: country.id,
-        name: country.name,
-        shortName: country.code,
-        description: `All ${country.name} players`,
-        allTimePlayers
-      } as Club;
-    })
-    .sort((a, b) => a.name.localeCompare(b.name));
+    clubs.push({
+      id: country.id,
+      name: country.name,
+      shortName: country.code,
+      description: `All ${country.name} players`,
+      allTimePlayers
+    } as Club);
+  });
+
+  // Sort all clubs alphabetically
+  clubs.sort((a, b) => a.name.localeCompare(b.name));
 
   // Create Team objects from classic teams
   const teams: Team[] = rawData.classicTeams.map(classicTeam => {
