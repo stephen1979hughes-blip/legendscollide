@@ -19,7 +19,8 @@
       "Bash(cd \"C:\\\\\\\\Users\\\\\\\\pinto\\\\\\\\projects\\\\\\\\fm\\\\\\\\web\")",
       "Bash(node scripts/normalize-teams-data.js)",
       "Bash(node scripts/normalize-teams-data.mjs)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git commit *)"
     ]
   }
 }

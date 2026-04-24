@@ -95,10 +95,9 @@ export const Pitch: React.FC<PitchProps> = ({
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
-            // Use flex-grow spacers to center players narrower than row above
+            // Center narrower rows with equal flex spacers on both sides
             return (
-              <div key={rowIndex} className={`flex items-center ${gapClass}`}>
-                <div className="flex-1" />
+              <div key={rowIndex} className={`flex items-center justify-center ${gapClass}`}>
                 {row.positionIndices.map((slotIndex) => (
                   <PositionSlot
                     key={`slot-${slotIndex}`}
@@ -112,7 +111,6 @@ export const Pitch: React.FC<PitchProps> = ({
                     onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                   />
                 ))}
-                <div className="flex-1" />
               </div>
             );
           }
