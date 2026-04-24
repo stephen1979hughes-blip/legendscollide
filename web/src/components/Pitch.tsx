@@ -99,7 +99,30 @@ export const Pitch: React.FC<PitchProps> = ({
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
-            // Center narrower rows with equal flex spacers on both sides
+            // Handle 3-player rows with 5-player rows above (align with middle 3)
+            if (row.positionIndices.length === 3 && rowAboveWidth === 5) {
+              return (
+                <div key={rowIndex} className={`flex items-center ${gapClass}`}>
+                  <div style={{ flex: 0.5 }} /> {/* Half spacer for left alignment with middle 3 */}
+                  {row.positionIndices.map((slotIndex) => (
+                    <PositionSlot
+                      key={`slot-${slotIndex}`}
+                      slotIndex={slotIndex}
+                      position={formation.positions[slotIndex]}
+                      player={getPlayerAtSlot(slotIndex)}
+                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                      onRemove={() => onPlayerRemove(slotIndex)}
+                      isOpen={openDropdownSlot === slotIndex}
+                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
+                    />
+                  ))}
+                  <div className="flex-1" /> {/* Right spacer */}
+                </div>
+              );
+            }
+
+            // Center other narrower rows (2-player rows)
             return (
               <div key={rowIndex} className={`flex items-center justify-center ${gapClass}`}>
                 {row.positionIndices.map((slotIndex) => (
@@ -180,7 +203,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
       <div className="relative">
         <button
           onClick={() => onOpenChange(!isOpen)}
-          className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-32 p-2 text-left"
+          className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-28 p-2 text-left"
           title={fullName}
         >
           <div className="text-sm font-bold text-primary truncate">
@@ -232,7 +255,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
     <div className="relative">
       <button
         onClick={() => onOpenChange(!isOpen)}
-        className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer w-32 p-2 text-center text-gray-500"
+        className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer w-28 p-2 text-center text-gray-500"
       >
         <div className="text-sm font-bold">{position}</div>
         <div className="text-xs opacity-75">+ Add Player</div>
