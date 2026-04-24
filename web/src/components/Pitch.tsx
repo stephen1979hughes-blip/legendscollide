@@ -99,6 +99,29 @@ export const Pitch: React.FC<PitchProps> = ({
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
+            // Handle 2-player rows with 4-player rows above (align with center 2)
+            if (row.positionIndices.length === 2 && rowAboveWidth === 4) {
+              return (
+                <div key={rowIndex} className={`flex items-center ${gapClass}`}>
+                  <div style={{ flex: 1 }} /> {/* Spacer to skip left winger */}
+                  {row.positionIndices.map((slotIndex) => (
+                    <PositionSlot
+                      key={`slot-${slotIndex}`}
+                      slotIndex={slotIndex}
+                      position={formation.positions[slotIndex]}
+                      player={getPlayerAtSlot(slotIndex)}
+                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                      onRemove={() => onPlayerRemove(slotIndex)}
+                      isOpen={openDropdownSlot === slotIndex}
+                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
+                    />
+                  ))}
+                  <div style={{ flex: 1 }} /> {/* Right spacer to skip right winger */}
+                </div>
+              );
+            }
+
             // Handle 3-player rows with 5-player rows above (align with middle 3)
             if (row.positionIndices.length === 3 && rowAboveWidth === 5) {
               return (
