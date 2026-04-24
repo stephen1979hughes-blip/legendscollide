@@ -103,7 +103,7 @@ export const Pitch: React.FC<PitchProps> = ({
             if (row.positionIndices.length === 2 && rowAboveWidth === 4) {
               return (
                 <div key={rowIndex} className={`flex items-center ${gapClass}`}>
-                  <div style={{ flex: 1 }} /> {/* Spacer to skip left winger */}
+                  <div style={{ flex: 1.5 }} /> {/* Spacer to align with center CMs */}
                   {row.positionIndices.map((slotIndex) => (
                     <PositionSlot
                       key={`slot-${slotIndex}`}
@@ -117,7 +117,7 @@ export const Pitch: React.FC<PitchProps> = ({
                       onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                     />
                   ))}
-                  <div style={{ flex: 1 }} /> {/* Right spacer to skip right winger */}
+                  <div style={{ flex: 1.5 }} /> {/* Right spacer to align with center CMs */}
                 </div>
               );
             }
