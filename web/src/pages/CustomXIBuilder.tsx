@@ -9,34 +9,6 @@ import { customXIStorage } from '../utils/customXIStorage';
 import { TeamSummary, Team, Club, Player } from '../types';
 import { processTeamsData } from '../utils/dataProcessor';
 
-// Define position display order
-const POSITION_ORDER: { [key: string]: number } = {
-  'GK': 0,
-  'RB': 1,
-  'CB': 2,
-  'LB': 3,
-  'RM': 4,
-  'CM': 5,
-  'LM': 6,
-  'ST': 7,
-  'CF': 8,
-  'CAM': 9,
-  'LW': 10,
-  'RW': 11,
-  'DF': 12,
-  'MF': 13,
-  'FW': 14,
-};
-
-const sortPlayersByPosition = (players: Player[]): Player[] => {
-  return [...players].sort((a, b) => {
-    const orderA = POSITION_ORDER[a.position] ?? 999;
-    const orderB = POSITION_ORDER[b.position] ?? 999;
-    if (orderA !== orderB) return orderA - orderB;
-    // If same position, sort alphabetically by name
-    return a.name.localeCompare(b.name);
-  });
-};
 
 export const CustomXIBuilder: React.FC = () => {
   const navigate = useNavigate();
@@ -52,9 +24,6 @@ export const CustomXIBuilder: React.FC = () => {
   const [savedXIs, setSavedXIs] = useState<CustomXI[]>([]);
   const [availableTeams, setAvailableTeams] = useState<TeamSummary[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const dragStateRef = React.useRef({ isDragging: false, mouseY: 0 });
-  const animationIdRef = React.useRef<number | null>(null);
-
   useEffect(() => {
     const loadClubsData = async () => {
       try {
@@ -114,80 +83,6 @@ export const CustomXIBuilder: React.FC = () => {
     loadClubsData();
   }, []);
 
-  // Smart drag auto-scroll that helps users scroll to the pitch when dragging from players list
-  useEffect(() => {
-    const scrollZone = 150;
-    let scrollIntervalRef: ReturnType<typeof setInterval> | null = null;
-
-    const performScroll = () => {
-      if (!dragStateRef.current.isDragging) {
-        if (scrollIntervalRef) {
-          clearInterval(scrollIntervalRef);
-          scrollIntervalRef = null;
-        }
-        return;
-      }
-
-      const clientY = dragStateRef.current.mouseY;
-      const windowHeight = window.innerHeight;
-
-      let speed = 0;
-
-      // Only scroll if near top or bottom edges
-      if (clientY < scrollZone) {
-        // Scroll up faster the closer to the top
-        speed = -Math.max(10, (scrollZone - clientY) * 1.2);
-      } else if (clientY > windowHeight - scrollZone) {
-        // Scroll down faster the closer to the bottom
-        speed = Math.max(10, (clientY - (windowHeight - scrollZone)) * 1.2);
-      }
-
-      if (speed !== 0) {
-        window.scrollBy(0, speed);
-      }
-    };
-
-    const handleDragStart = (e: DragEvent) => {
-      dragStateRef.current.isDragging = true;
-      dragStateRef.current.mouseY = e.clientY;
-      console.log('Global dragstart event at clientY:', e.clientY);
-
-      // Start continuous scrolling
-      if (scrollIntervalRef) clearInterval(scrollIntervalRef);
-      scrollIntervalRef = setInterval(performScroll, 16); // ~60fps
-    };
-
-    const handleDragOver = (e: DragEvent) => {
-      dragStateRef.current.mouseY = e.clientY;
-    };
-
-    const handleDragEnd = () => {
-      console.log('Global dragend event');
-      dragStateRef.current.isDragging = false;
-      if (scrollIntervalRef) {
-        clearInterval(scrollIntervalRef);
-        scrollIntervalRef = null;
-      }
-    };
-
-    // Use capture phase to catch events before React
-    document.addEventListener('dragstart', handleDragStart, true);
-    document.addEventListener('dragover', handleDragOver, true);
-    document.addEventListener('dragend', handleDragEnd, true);
-    document.addEventListener('dragleave', handleDragEnd, true);
-    document.addEventListener('drop', handleDragEnd, true);
-
-    return () => {
-      document.removeEventListener('dragstart', handleDragStart, true);
-      document.removeEventListener('dragover', handleDragOver, true);
-      document.removeEventListener('dragend', handleDragEnd, true);
-      document.removeEventListener('dragleave', handleDragEnd, true);
-      document.removeEventListener('drop', handleDragEnd, true);
-      if (scrollIntervalRef) {
-        clearInterval(scrollIntervalRef);
-      }
-    };
-  }, []);
 
   const handleClubSelect = (clubId: string) => {
     const club = clubs.find(c => c.id === clubId);
@@ -205,20 +100,11 @@ export const CustomXIBuilder: React.FC = () => {
     setPlayers([]);
   };
 
-  const handlePlayerDrop = (playerId: string, slotIndex: number) => {
-    console.log('handlePlayerDrop called with:', { playerId, slotIndex, selectedClubId: selectedClub?.id });
-
-    if (!selectedClub || !selectedClub.allTimePlayers) {
-      console.warn('No club selected or no players available');
-      return;
-    }
+  const handlePlayerSelect = (playerId: string, slotIndex: number) => {
+    if (!selectedClub || !selectedClub.allTimePlayers) return;
 
     const player = selectedClub.allTimePlayers.find((p) => p.id === playerId);
-    console.log('Found player:', player);
-    if (!player) {
-      console.warn('Player not found:', playerId);
-      return;
-    }
+    if (!player) return;
 
     // Remove if already assigned to a different slot
     const updated = players.filter((p) => p.playerId !== playerId);
@@ -227,16 +113,13 @@ export const CustomXIBuilder: React.FC = () => {
     const atSlot = updated.filter((p) => p.slotIndex !== slotIndex);
 
     // Add the new player
-    const newPlayer = {
+    atSlot.push({
       slotIndex,
       playerId,
       playerName: player.name,
       playerPosition: player.position,
       overallRating: player.overallRating
-    };
-
-    atSlot.push(newPlayer);
-    console.log('Updated players:', atSlot);
+    });
 
     setPlayers(atSlot);
   };
@@ -633,58 +516,16 @@ export const CustomXIBuilder: React.FC = () => {
             )}
           </div>
 
-          {/* Right: Pitch and Player Selection */}
+          {/* Right: Pitch */}
           {selectedClub && (
-            <div className="lg:col-span-2 space-y-6">
-              {/* Pitch */}
+            <div className="lg:col-span-2">
               <Pitch
                 formation={selectedFormation}
                 players={players}
-                onPlayerDrop={handlePlayerDrop}
+                onPlayerSelect={handlePlayerSelect}
                 onPlayerRemove={handlePlayerRemove}
                 availablePlayers={selectedClub.allTimePlayers || []}
               />
-
-              {/* Available Players */}
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-bold text-primary mb-4">
-                  Available Players (All-Time Roster - {selectedClub.allTimePlayers?.length || 0} players)
-                </h3>
-                {selectedClub.allTimePlayers && selectedClub.allTimePlayers.length > 0 ? (
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                    {sortPlayersByPosition(selectedClub.allTimePlayers).map((player) => {
-                      const isSelected = players.some((p) => p.playerId === player.id);
-                      return (
-                        <button
-                          key={player.id}
-                          draggable
-                          onDragStart={(e) => {
-                            e.dataTransfer.effectAllowed = 'move';
-                            e.dataTransfer.setData('playerId', player.id);
-                            // Ensure the drag starts by setting a drag image
-                            const dragImage = new Image();
-                            e.dataTransfer.setDragImage(dragImage, 0, 0);
-                          }}
-                          onDragEnd={(e) => {
-                            // Event will be handled by global dragend listener
-                          }}
-                          className={`p-3 rounded-lg border-2 transition text-left ${
-                            isSelected
-                              ? 'border-primary bg-blue-50'
-                              : 'border-gray-200 hover:border-primary hover:bg-gray-50'
-                          } cursor-move`}
-                        >
-                          <p className="font-semibold text-sm text-primary">{player.name}</p>
-                          <p className="text-xs text-muted">{player.position}</p>
-                          <p className="text-xs font-bold text-primary mt-1">⭐ {player.overallRating}</p>
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="text-center text-muted py-8">No players found for this club</div>
-                )}
-              </div>
             </div>
           )}
         </div>

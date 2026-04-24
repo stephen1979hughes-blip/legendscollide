@@ -4,105 +4,51 @@ import { CustomXIPlayer, FormationConfig } from '../types/customXI';
 interface PitchProps {
   formation: FormationConfig;
   players: CustomXIPlayer[];
-  onPlayerDrop: (playerId: string, slotIndex: number) => void;
+  onPlayerSelect: (playerId: string, slotIndex: number) => void;
   onPlayerRemove: (slotIndex: number) => void;
   availablePlayers: any[];
 }
 
+// Position compatibility mapping - which positions can play where
+const POSITION_COMPATIBILITY: { [key: string]: string[] } = {
+  'GK': ['GK'],
+  'RB': ['RB', 'DF'],
+  'CB': ['CB', 'DF'],
+  'LB': ['LB', 'DF'],
+  'RM': ['RM', 'RW', 'MF'],
+  'CM': ['CM', 'MF'],
+  'LM': ['LM', 'LW', 'MF'],
+  'CAM': ['CAM', 'MF', 'ST'],
+  'RW': ['RW', 'RM', 'FW'],
+  'LW': ['LW', 'LM', 'FW'],
+  'CF': ['CF', 'ST', 'FW'],
+  'ST': ['ST', 'CF', 'FW']
+};
+
 export const Pitch: React.FC<PitchProps> = ({
   formation,
   players,
-  onPlayerDrop,
+  onPlayerSelect,
   onPlayerRemove,
   availablePlayers
 }) => {
-  const scrollIntervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
-  const scrollSpeedRef = React.useRef<number>(0);
+  const getCompatiblePlayers = (slotIndex: number) => {
+    const position = formation.positions[slotIndex];
+    const compatiblePositions = POSITION_COMPATIBILITY[position] || [position];
 
-  const startAutoScroll = (clientY: number) => {
-    const scrollZone = 150;
-    const windowHeight = window.innerHeight;
+    // Get players whose position is compatible and not already selected (or are the current player)
+    const currentPlayer = players.find(p => p.slotIndex === slotIndex);
 
-    let speed = 0;
-    if (clientY < scrollZone) {
-      speed = -Math.max(10, (scrollZone - clientY) * 1.2);
-    } else if (clientY > windowHeight - scrollZone) {
-      speed = Math.max(10, (clientY - (windowHeight - scrollZone)) * 1.2);
-    }
-
-    scrollSpeedRef.current = speed;
-
-    if (speed !== 0 && !scrollIntervalRef.current) {
-      scrollIntervalRef.current = setInterval(() => {
-        if (scrollSpeedRef.current !== 0) {
-          window.scrollBy(0, scrollSpeedRef.current);
-        }
-      }, 16); // ~60fps
-    } else if (speed === 0 && scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-      scrollIntervalRef.current = null;
-    }
-  };
-
-  const stopAutoScroll = () => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-      scrollIntervalRef.current = null;
-    }
-    scrollSpeedRef.current = 0;
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.currentTarget.classList.add('bg-blue-50');
-    startAutoScroll(e.clientY);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    // Only remove highlight if leaving the entire pitch container
-    if (e.currentTarget === e.target) {
-      e.currentTarget.classList.remove('bg-blue-50');
-      stopAutoScroll();
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent, slotIndex: number) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Remove highlight from pitch container
-    const pitchContainer = e.currentTarget;
-    if (pitchContainer.classList.contains('bg-blue-50')) {
-      pitchContainer.classList.remove('bg-blue-50');
-    }
-
-    stopAutoScroll();
-    const playerId = e.dataTransfer.getData('playerId');
-    console.log('Drop event on slot', slotIndex, 'with playerId:', playerId);
-    if (playerId) {
-      onPlayerDrop(playerId, slotIndex);
-    } else {
-      console.warn('No playerId found in drag data');
-    }
+    return availablePlayers
+      .filter(p =>
+        compatiblePositions.includes(p.position) &&
+        (!players.some(existingP => existingP.playerId === p.id) || currentPlayer?.playerId === p.id)
+      )
+      .sort((a, b) => b.overallRating - a.overallRating); // Sort by rating descending
   };
 
   const getPlayerAtSlot = (slotIndex: number): CustomXIPlayer | undefined => {
     return players.find((p) => p.slotIndex === slotIndex);
-  };
-
-  const positionLabels: { [key: string]: string } = {
-    GK: 'GK',
-    LB: 'LB',
-    CB: 'CB',
-    RB: 'RB',
-    LM: 'LM',
-    CM: 'CM',
-    RM: 'RM',
-    CAM: 'CAM',
-    LW: 'LW',
-    RW: 'RW',
-    ST: 'ST',
-    CF: 'CF'
   };
 
   return (
@@ -122,84 +68,64 @@ export const Pitch: React.FC<PitchProps> = ({
           } else if (row.positionIndices.length === 1) {
             justifyClass = 'justify-center'; // Single player centered
           } else if (row.positionIndices.length === 2) {
-            // 2 players: for strikers under wider midfield, position at inner 2 slots
-            // Check row above for context
             const rowAbove = rowIndex > 0 ? formation.rows[rowIndex - 1] : null;
             const numAbove = rowAbove ? rowAbove.positionIndices.length : 0;
 
             if (numAbove === 4 || numAbove === 5) {
-              // Align with inner midfielder positions using invisible spacers
               justifyClass = 'justify-between';
             } else {
               justifyClass = 'justify-center';
             }
           } else if (row.positionIndices.length === 3) {
-            justifyClass = 'justify-around'; // 3 players align with row above
+            justifyClass = 'justify-around';
           }
-          // 4+ players use justify-between (spread wide)
 
           const gapClass = 'gap-4';
-
-          // For 2-player rows with wider rows above, add invisible spacers for alignment
           const rowAboveWidth = rowIndex > 0 ? formation.rows[rowIndex - 1].positionIndices.length : 0;
           const shouldAddSpacers = row.positionIndices.length === 2 && (rowAboveWidth === 4 || rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
-            // For 4-player rows (4-4-2, 3-4-3): spacers on both sides = [spacer] ST ST [spacer]
-            // For 5-player rows (3-5-2): spacers between and around = [spacer] ST [spacer] ST [spacer]
             const is5PlayerAbove = rowAboveWidth === 5;
 
             if (is5PlayerAbove) {
               return (
-                <div
-                  key={rowIndex}
-                  className={`flex ${justifyClass} items-center px-4 ${gapClass}`}
-                >
+                <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
                   <div className="w-16 h-16 invisible" />
                   <PositionSlot
-                    key={`slot-${row.positionIndices[0]}`}
+                    slotIndex={row.positionIndices[0]}
                     position={formation.positions[row.positionIndices[0]]}
                     player={getPlayerAtSlot(row.positionIndices[0])}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={(e) => handleDrop(e, row.positionIndices[0])}
+                    compatiblePlayers={getCompatiblePlayers(row.positionIndices[0])}
+                    onSelect={(playerId) => onPlayerSelect(playerId, row.positionIndices[0])}
                     onRemove={() => onPlayerRemove(row.positionIndices[0])}
                   />
                   <div className="w-16 h-16 invisible" />
                   <PositionSlot
-                    key={`slot-${row.positionIndices[1]}`}
+                    slotIndex={row.positionIndices[1]}
                     position={formation.positions[row.positionIndices[1]]}
                     player={getPlayerAtSlot(row.positionIndices[1])}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={(e) => handleDrop(e, row.positionIndices[1])}
+                    compatiblePlayers={getCompatiblePlayers(row.positionIndices[1])}
+                    onSelect={(playerId) => onPlayerSelect(playerId, row.positionIndices[1])}
                     onRemove={() => onPlayerRemove(row.positionIndices[1])}
                   />
                   <div className="w-16 h-16 invisible" />
                 </div>
               );
             } else {
-              // 4-player row above
               return (
-                <div
-                  key={rowIndex}
-                  className={`flex ${justifyClass} items-center px-4 ${gapClass}`}
-                >
+                <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
                   <div className="w-16 h-16 invisible" />
-                  {row.positionIndices.map((slotIndex) => {
-                    const pos = formation.positions[slotIndex];
-                    return (
-                      <PositionSlot
-                        key={`slot-${slotIndex}`}
-                        position={pos}
-                        player={getPlayerAtSlot(slotIndex)}
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={(e) => handleDrop(e, slotIndex)}
-                        onRemove={() => onPlayerRemove(slotIndex)}
-                      />
-                    );
-                  })}
+                  {row.positionIndices.map((slotIndex) => (
+                    <PositionSlot
+                      key={`slot-${slotIndex}`}
+                      slotIndex={slotIndex}
+                      position={formation.positions[slotIndex]}
+                      player={getPlayerAtSlot(slotIndex)}
+                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                      onRemove={() => onPlayerRemove(slotIndex)}
+                    />
+                  ))}
                   <div className="w-16 h-16 invisible" />
                 </div>
               );
@@ -207,24 +133,18 @@ export const Pitch: React.FC<PitchProps> = ({
           }
 
           return (
-            <div
-              key={rowIndex}
-              className={`flex ${justifyClass} items-center px-4 ${gapClass}`}
-            >
-              {row.positionIndices.map((slotIndex) => {
-                const pos = formation.positions[slotIndex];
-                return (
-                  <PositionSlot
-                    key={`slot-${slotIndex}`}
-                    position={pos}
-                    player={getPlayerAtSlot(slotIndex)}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={(e) => handleDrop(e, slotIndex)}
-                    onRemove={() => onPlayerRemove(slotIndex)}
-                  />
-                );
-              })}
+            <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
+              {row.positionIndices.map((slotIndex) => (
+                <PositionSlot
+                  key={`slot-${slotIndex}`}
+                  slotIndex={slotIndex}
+                  position={formation.positions[slotIndex]}
+                  player={getPlayerAtSlot(slotIndex)}
+                  compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                  onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                  onRemove={() => onPlayerRemove(slotIndex)}
+                />
+              ))}
             </div>
           );
         })}
@@ -232,7 +152,7 @@ export const Pitch: React.FC<PitchProps> = ({
 
       {/* Formation info */}
       <div className="mt-6 text-center text-sm text-muted">
-        <p>Drag players from the list below to assign them to positions</p>
+        <p>Click on a position to select a player</p>
         <p className="mt-2 font-semibold text-primary">
           {players.length}/{formation.positions.length} players selected
         </p>
@@ -242,90 +162,105 @@ export const Pitch: React.FC<PitchProps> = ({
 };
 
 interface PositionSlotProps {
+  slotIndex: number;
   position: string;
   player?: CustomXIPlayer;
-  onDragOver: (e: React.DragEvent) => void;
-  onDragLeave: (e: React.DragEvent) => void;
-  onDrop: (e: React.DragEvent) => void;
+  compatiblePlayers: any[];
+  onSelect: (playerId: string) => void;
   onRemove: () => void;
 }
 
 const PositionSlot: React.FC<PositionSlotProps> = ({
+  slotIndex,
   position,
   player,
-  onDragOver,
-  onDragLeave,
-  onDrop,
+  compatiblePlayers,
+  onSelect,
   onRemove
 }) => {
-  const [isDragOver, setIsDragOver] = React.useState(false);
-  const dragLeaveTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleDragOverLocal = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Clear any pending drag leave timeout
-    if (dragLeaveTimeoutRef.current) {
-      clearTimeout(dragLeaveTimeoutRef.current);
-      dragLeaveTimeoutRef.current = null;
-    }
-
-    setIsDragOver(true);
-    onDragOver(e);
-  };
-
-  const handleDragLeaveLocal = (e: React.DragEvent) => {
-    // Use a small delay to prevent flickering from child elements
-    dragLeaveTimeoutRef.current = setTimeout(() => {
-      setIsDragOver(false);
-      onDragLeave(e);
-    }, 50);
-  };
-
-  const handleDropLocal = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // Clear any pending timeout
-    if (dragLeaveTimeoutRef.current) {
-      clearTimeout(dragLeaveTimeoutRef.current);
-      dragLeaveTimeoutRef.current = null;
-    }
-
-    setIsDragOver(false);
-    onDrop(e);
-  };
-
-  return (
-    <div
-      onDragOver={handleDragOverLocal}
-      onDragLeave={handleDragLeaveLocal}
-      onDrop={handleDropLocal}
-      className={`rounded-full border-2 border-white bg-green-500 cursor-pointer flex items-center justify-center text-white transition-all duration-100 ${
-        isDragOver
-          ? 'w-28 h-28 bg-blue-400 shadow-xl ring-4 ring-blue-300'
-          : 'w-20 h-20 hover:bg-green-400'
-      }`}
-    >
-      {player ? (
-        <div className="text-center">
+  if (player) {
+    return (
+      <div className="relative">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="rounded-full border-2 border-white bg-green-500 hover:bg-green-400 text-white transition-all duration-100 w-20 h-20 flex flex-col items-center justify-center cursor-pointer"
+        >
           <div className="text-xs font-bold truncate w-16 px-1">{player.playerName.replace(/\s*\(\d+\)$/, '').split(' ').pop()}</div>
           <div className="text-xs opacity-75">⭐ {player.overallRating}</div>
-          {player && (
-            <button
-              onClick={onRemove}
-              className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold hover:bg-red-600"
-              title="Remove player"
-            >
-              ×
-            </button>
+        </button>
+        <button
+          onClick={onRemove}
+          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-600"
+          title="Remove player"
+        >
+          ×
+        </button>
+
+        {/* Dropdown Menu */}
+        {isOpen && (
+          <div className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-48">
+            {compatiblePlayers.length > 0 ? (
+              <div className="py-2">
+                {compatiblePlayers.map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      onSelect(p.id);
+                      setIsOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0 ${
+                      player?.playerId === p.id ? 'bg-blue-100 font-semibold' : ''
+                    }`}
+                  >
+                    <div className="font-semibold text-primary">{p.name}</div>
+                    <div className="text-xs text-muted">⭐ {p.overallRating} • {p.position}</div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="px-4 py-2 text-sm text-muted">No compatible players</div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Empty slot
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="rounded-full border-2 border-white border-dashed bg-green-600 hover:bg-green-500 text-white transition-all duration-100 w-20 h-20 flex flex-col items-center justify-center cursor-pointer opacity-70"
+      >
+        <div className="text-sm font-bold">{position}</div>
+        <div className="text-xs opacity-75">+</div>
+      </button>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div className="absolute top-24 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-48">
+          {compatiblePlayers.length > 0 ? (
+            <div className="py-2">
+              {compatiblePlayers.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => {
+                    onSelect(p.id);
+                    setIsOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0"
+                >
+                  <div className="font-semibold text-primary">{p.name}</div>
+                  <div className="text-xs text-muted">⭐ {p.overallRating} • {p.position}</div>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="px-4 py-2 text-sm text-muted">No compatible players</div>
           )}
-        </div>
-      ) : (
-        <div className="text-center">
-          <div className="text-sm font-bold">{position}</div>
-          <div className="text-xs opacity-75">+</div>
         </div>
       )}
     </div>
