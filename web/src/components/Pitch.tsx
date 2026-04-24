@@ -103,7 +103,7 @@ export const Pitch: React.FC<PitchProps> = ({
             if (row.positionIndices.length === 3 && rowAboveWidth === 5) {
               return (
                 <div key={rowIndex} className={`flex items-center ${gapClass}`}>
-                  <div style={{ flex: 0.5 }} /> {/* Half spacer for left alignment with middle 3 */}
+                  <div style={{ flex: 1 }} /> {/* Spacer to align with middle 3 of 5 players */}
                   {row.positionIndices.map((slotIndex) => (
                     <PositionSlot
                       key={`slot-${slotIndex}`}
@@ -117,7 +117,7 @@ export const Pitch: React.FC<PitchProps> = ({
                       onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                     />
                   ))}
-                  <div className="flex-1" /> {/* Right spacer */}
+                  <div style={{ flex: 1 }} /> {/* Right spacer */}
                 </div>
               );
             }
