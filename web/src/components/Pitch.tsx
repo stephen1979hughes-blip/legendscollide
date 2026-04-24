@@ -74,52 +74,49 @@ export const Pitch: React.FC<PitchProps> = ({
           } else if (row.positionIndices.length === 1) {
             justifyClass = 'justify-center'; // Single player centered
           } else if (row.positionIndices.length === 2) {
+            justifyClass = 'justify-between'; // 2 players spread apart
+          } else if (row.positionIndices.length === 3) {
             const rowAbove = rowIndex > 0 ? formation.rows[rowIndex - 1] : null;
             const numAbove = rowAbove ? rowAbove.positionIndices.length : 0;
 
-            if (numAbove === 4 || numAbove === 5) {
-              justifyClass = 'justify-between';
-            } else {
+            // If 5 above, need better centering
+            if (numAbove === 5) {
               justifyClass = 'justify-center';
+            } else {
+              justifyClass = 'justify-around';
             }
-          } else if (row.positionIndices.length === 3) {
-            justifyClass = 'justify-around';
           }
 
           const gapClass = 'gap-4';
           const rowAboveWidth = rowIndex > 0 ? formation.rows[rowIndex - 1].positionIndices.length : 0;
-          const shouldAddSpacers = row.positionIndices.length === 2 && (rowAboveWidth === 4 || rowAboveWidth === 5);
+          const shouldAddSpacers = (row.positionIndices.length === 2 && rowAboveWidth >= 4) ||
+                                   (row.positionIndices.length === 3 && rowAboveWidth === 5);
 
           if (shouldAddSpacers) {
-            const is5PlayerAbove = rowAboveWidth === 5;
-
-            if (is5PlayerAbove) {
+            // Add spacers on both sides to center players narrower than row above
+            if (row.positionIndices.length === 3 && rowAboveWidth === 5) {
+              // For 3 players below 5, add single spacer on each side
               return (
-                <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
+                <div key={rowIndex} className={`flex justify-between items-center px-4 ${gapClass}`}>
                   <div className="w-16 h-16 invisible" />
-                  <PositionSlot
-                    slotIndex={row.positionIndices[0]}
-                    position={formation.positions[row.positionIndices[0]]}
-                    player={getPlayerAtSlot(row.positionIndices[0])}
-                    compatiblePlayers={getCompatiblePlayers(row.positionIndices[0])}
-                    onSelect={(playerId) => onPlayerSelect(playerId, row.positionIndices[0])}
-                    onRemove={() => onPlayerRemove(row.positionIndices[0])}
-                  />
-                  <div className="w-16 h-16 invisible" />
-                  <PositionSlot
-                    slotIndex={row.positionIndices[1]}
-                    position={formation.positions[row.positionIndices[1]]}
-                    player={getPlayerAtSlot(row.positionIndices[1])}
-                    compatiblePlayers={getCompatiblePlayers(row.positionIndices[1])}
-                    onSelect={(playerId) => onPlayerSelect(playerId, row.positionIndices[1])}
-                    onRemove={() => onPlayerRemove(row.positionIndices[1])}
-                  />
+                  {row.positionIndices.map((slotIndex) => (
+                    <PositionSlot
+                      key={`slot-${slotIndex}`}
+                      slotIndex={slotIndex}
+                      position={formation.positions[slotIndex]}
+                      player={getPlayerAtSlot(slotIndex)}
+                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                      onRemove={() => onPlayerRemove(slotIndex)}
+                    />
+                  ))}
                   <div className="w-16 h-16 invisible" />
                 </div>
               );
             } else {
+              // For 2 players below 4 or 5, add spacers
               return (
-                <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
+                <div key={rowIndex} className={`flex justify-between items-center px-4 ${gapClass}`}>
                   <div className="w-16 h-16 invisible" />
                   {row.positionIndices.map((slotIndex) => (
                     <PositionSlot
