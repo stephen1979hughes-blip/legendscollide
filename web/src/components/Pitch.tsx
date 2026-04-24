@@ -25,6 +25,12 @@ const POSITION_COMPATIBILITY: { [key: string]: string[] } = {
   'ST': ['ST', 'CF', 'FW']
 };
 
+// Helper function to extract surname (last name) from full name
+const getSurname = (fullName: string): string => {
+  const parts = fullName.trim().split(/\s+/);
+  return parts.length > 0 ? parts[parts.length - 1] : fullName;
+};
+
 export const Pitch: React.FC<PitchProps> = ({
   formation,
   players,
@@ -181,14 +187,18 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
   const [isOpen, setIsOpen] = React.useState(false);
 
   if (player) {
+    const fullName = player.playerName.replace(/\s*\(\d+\)$/, '');
+    const surname = getSurname(fullName);
+
     return (
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-32 p-2 text-left"
+          title={fullName}
         >
-          <div className="text-sm font-bold text-primary truncate" title={player.playerName.replace(/\s*\(\d+\)$/, '')}>
-            {player.playerName.replace(/\s*\(\d+\)$/, '')}
+          <div className="text-sm font-bold text-primary truncate">
+            {surname}
           </div>
           <div className="text-xs text-muted">{player.playerPosition}</div>
           <div className="text-xs font-semibold text-primary mt-1">⭐ {player.overallRating}</div>
