@@ -54,15 +54,30 @@ export const api = {
   async simulateMatch(
     teamAId: string,
     teamBId: string,
-    normaliseEra: boolean = false
+    normaliseEra: boolean = false,
+    customTeamA?: Team,
+    customTeamB?: Team
   ): Promise<MatchResult> {
-    console.log('simulateMatch() called with teams:', { teamAId, teamBId });
-    const data = await loadTeamsDataFromFile();
-    const teamA = data.teams.find(t => t.id === teamAId);
-    const teamB = data.teams.find(t => t.id === teamBId);
-    if (!teamA || !teamB) {
-      throw new Error('One or both teams not found');
+    console.log('simulateMatch() called with teams:', { teamAId, teamBId, hasCustomTeamA: !!customTeamA, hasCustomTeamB: !!customTeamB });
+
+    let teamA: Team;
+    let teamB: Team;
+
+    // If custom teams are provided, use them; otherwise load from data
+    if (customTeamA && customTeamB) {
+      teamA = customTeamA;
+      teamB = customTeamB;
+    } else {
+      const data = await loadTeamsDataFromFile();
+      const foundTeamA = data.teams.find(t => t.id === teamAId);
+      const foundTeamB = data.teams.find(t => t.id === teamBId);
+      if (!foundTeamA || !foundTeamB) {
+        throw new Error('One or both teams not found');
+      }
+      teamA = foundTeamA;
+      teamB = foundTeamB;
     }
+
     return generateMockMatchResult(teamAId, teamBId, teamA, teamB);
   }
 };

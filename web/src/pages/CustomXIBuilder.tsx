@@ -160,14 +160,11 @@ export const CustomXIBuilder: React.FC = () => {
 
         const opponentTeam = await api.getTeam(opponentId);
 
-        // For custom XI simulation, use a dummy team ID to generate the match result
-        const matchResult = await api.simulateMatch(opponentId, opponentId, false);
-
         // Create a Team object for the custom XI with the saved players
         const customXITeam: Team = {
-          id: 'custom-xi-' + selectedClub.id,
-          name: selectedClub.name + ' (Custom XI)',
-          clubId: selectedClub.id,
+          id: 'custom-xi-' + selectedClub?.id,
+          name: selectedClub?.name + ' (Custom XI)',
+          clubId: selectedClub?.id || '',
           year: new Date().getFullYear(),
           description: 'Custom All-Time XI',
           players: savedXI?.players.map(p => ({
@@ -180,6 +177,9 @@ export const CustomXIBuilder: React.FC = () => {
             stamina: 85
           })) || []
         };
+
+        // Generate match result, passing custom XI team object
+        const matchResult = await api.simulateMatch(customXITeam.id, opponentId, false, customXITeam, opponentTeam);
 
         navigate('/broadcast', {
           state: {
@@ -203,14 +203,11 @@ export const CustomXIBuilder: React.FC = () => {
           return;
         }
 
-        // Generate match result between the two custom XIs
-        const matchResult = await api.simulateMatch('custom-xi-a', 'custom-xi-b', false);
-
         // Create Team objects for both custom XIs
         const customXITeamA: Team = {
-          id: 'custom-xi-' + selectedClub.id,
-          name: selectedClub.name + ' (Custom XI)',
-          clubId: selectedClub.id,
+          id: 'custom-xi-' + selectedClub?.id,
+          name: selectedClub?.name + ' (Custom XI)',
+          clubId: selectedClub?.id || '',
           year: new Date().getFullYear(),
           description: 'Custom All-Time XI',
           players: savedXI?.players.map(p => ({
@@ -240,6 +237,9 @@ export const CustomXIBuilder: React.FC = () => {
             stamina: 85
           }))
         };
+
+        // Generate match result between the two custom XIs, passing Team objects
+        const matchResult = await api.simulateMatch(customXITeamA.id, customXITeamB.id, false, customXITeamA, customXITeamB);
 
         navigate('/broadcast', {
           state: {
