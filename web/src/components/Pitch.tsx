@@ -66,7 +66,7 @@ export const Pitch: React.FC<PitchProps> = ({
       </h3>
 
       {/* Pitch visualization */}
-      <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-8 flex flex-col justify-between border-4 border-white min-h-96 overflow-hidden">
+      <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-8 flex flex-col justify-between border-4 border-white min-h-96">
         {formation.rows.map((row, rowIndex) => {
           // Determine spacing based on row type and number of players
           let justifyClass = 'justify-start'; // Default: left-align
