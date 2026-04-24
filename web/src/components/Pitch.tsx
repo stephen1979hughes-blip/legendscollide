@@ -69,7 +69,7 @@ export const Pitch: React.FC<PitchProps> = ({
       <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-8 flex flex-col justify-between border-4 border-white min-h-96 overflow-hidden">
         {formation.rows.map((row, rowIndex) => {
           // Determine spacing based on row type and number of players
-          let justifyClass = 'justify-between';
+          let justifyClass = 'justify-start'; // Default: left-align
 
           if (rowIndex === 0) {
             justifyClass = 'justify-center'; // GK always centered
@@ -87,6 +87,10 @@ export const Pitch: React.FC<PitchProps> = ({
             } else {
               justifyClass = 'justify-around';
             }
+          } else if (row.positionIndices.length === 4) {
+            justifyClass = 'justify-around'; // 4 players spread with spacing
+          } else if (row.positionIndices.length === 5) {
+            justifyClass = 'justify-start'; // 5 players left-aligned
           }
 
           const gapClass = 'gap-4';
