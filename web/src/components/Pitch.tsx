@@ -97,7 +97,7 @@ export const Pitch: React.FC<PitchProps> = ({
           if (shouldAddSpacers) {
             // Use flex-grow spacers to center players narrower than row above
             return (
-              <div key={rowIndex} className={`flex items-center px-4 ${gapClass}`}>
+              <div key={rowIndex} className={`flex items-center ${gapClass}`}>
                 <div className="flex-1" />
                 {row.positionIndices.map((slotIndex) => (
                   <PositionSlot
