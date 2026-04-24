@@ -142,32 +142,34 @@ export const Broadcast: React.FC = () => {
   const scoreA = lastGoalEvent?.scoreA ?? 0;
   const scoreB = lastGoalEvent?.scoreB ?? 0;
 
-  // Extract visible goal scorers from visible events (to match commentary exactly)
-  const visibleGoalsA = visibleEvents
-    .filter(e => e.type === 'goal' && e.text.includes(teamA.name))
-    .map(e => {
-      // Extract player name from the event text (e.g., "⚽ GOAL! George Best scores for Manchester United 1968!")
-      const match = e.text.match(/GOAL! (.+?) scores for/);
-      return {
-        playerName: match ? match[1] : (e.goalScorer || 'Unknown'),
-        assist: e.assist,
-        isPenalty: e.isPenalty,
-        minute: e.minute
-      };
-    });
+  // Extract visible goal scorers from visible events
+  // Track score progression to determine which team scored each goal
+  const visibleGoalsA: any[] = [];
+  const visibleGoalsB: any[] = [];
+  let lastScoreA = 0;
+  let lastScoreB = 0;
 
-  const visibleGoalsB = visibleEvents
-    .filter(e => e.type === 'goal' && e.text.includes(teamB.name))
-    .map(e => {
-      // Extract player name from the event text
+  visibleEvents.forEach(e => {
+    if (e.type === 'goal') {
       const match = e.text.match(/GOAL! (.+?) scores for/);
-      return {
-        playerName: match ? match[1] : (e.goalScorer || 'Unknown'),
+      const playerName = match ? match[1] : (e.goalScorer || e.goalScorerName || 'Unknown');
+      const goal = {
+        playerName,
         assist: e.assist,
         isPenalty: e.isPenalty,
         minute: e.minute
       };
-    });
+
+      // Determine which team scored by comparing score changes
+      if (e.scoreA !== undefined && e.scoreA > lastScoreA) {
+        visibleGoalsA.push(goal);
+        lastScoreA = e.scoreA;
+      } else if (e.scoreB !== undefined && e.scoreB > lastScoreB) {
+        visibleGoalsB.push(goal);
+        lastScoreB = e.scoreB;
+      }
+    }
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
