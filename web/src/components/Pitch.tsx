@@ -38,6 +38,8 @@ export const Pitch: React.FC<PitchProps> = ({
   onPlayerRemove,
   availablePlayers
 }) => {
+  const [openDropdownSlot, setOpenDropdownSlot] = React.useState<number | null>(null);
+
   const getCompatiblePlayers = (slotIndex: number) => {
     const position = formation.positions[slotIndex];
     const compatiblePositions = POSITION_COMPATIBILITY[position] || [position];
@@ -108,6 +110,8 @@ export const Pitch: React.FC<PitchProps> = ({
                       compatiblePlayers={getCompatiblePlayers(slotIndex)}
                       onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
                       onRemove={() => onPlayerRemove(slotIndex)}
+                      isOpen={openDropdownSlot === slotIndex}
+                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                     />
                   ))}
                   <div className="w-16 h-16 invisible" />
@@ -127,6 +131,8 @@ export const Pitch: React.FC<PitchProps> = ({
                       compatiblePlayers={getCompatiblePlayers(slotIndex)}
                       onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
                       onRemove={() => onPlayerRemove(slotIndex)}
+                      isOpen={openDropdownSlot === slotIndex}
+                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                     />
                   ))}
                   <div className="w-16 h-16 invisible" />
@@ -146,6 +152,8 @@ export const Pitch: React.FC<PitchProps> = ({
                   compatiblePlayers={getCompatiblePlayers(slotIndex)}
                   onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
                   onRemove={() => onPlayerRemove(slotIndex)}
+                  isOpen={openDropdownSlot === slotIndex}
+                  onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
                 />
               ))}
             </div>
@@ -171,6 +179,8 @@ interface PositionSlotProps {
   compatiblePlayers: any[];
   onSelect: (playerId: string) => void;
   onRemove: () => void;
+  isOpen: boolean;
+  onOpenChange: (isOpen: boolean) => void;
 }
 
 const PositionSlot: React.FC<PositionSlotProps> = ({
@@ -179,9 +189,10 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
   player,
   compatiblePlayers,
   onSelect,
-  onRemove
+  onRemove,
+  isOpen,
+  onOpenChange
 }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
 
   if (player) {
     const fullName = player.playerName.replace(/\s*\(\d+\)$/, '');
@@ -190,7 +201,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
     return (
       <div className="relative">
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => onOpenChange(!isOpen)}
           className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-32 p-2 text-left"
           title={fullName}
         >
@@ -218,7 +229,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
                     key={p.id}
                     onClick={() => {
                       onSelect(p.id);
-                      setIsOpen(false);
+                      onOpenChange(false);
                     }}
                     className={`w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0 ${
                       player?.playerId === p.id ? 'bg-blue-100 font-semibold' : ''
@@ -242,7 +253,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
   return (
     <div className="relative">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => onOpenChange(!isOpen)}
         className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer w-32 p-2 text-center text-gray-500"
       >
         <div className="text-sm font-bold">{position}</div>
@@ -259,7 +270,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
                   key={p.id}
                   onClick={() => {
                     onSelect(p.id);
-                    setIsOpen(false);
+                    onOpenChange(false);
                   }}
                   className="w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0"
                 >
