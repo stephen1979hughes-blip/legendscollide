@@ -139,6 +139,7 @@ public class ClassicTeamsLoader
                         // Player exists, link to team if not already linked
                         if (!team.Players.Any(p => p.Id == existingPlayer.Id))
                         {
+                            existingPlayer.TeamId = team.Id;
                             team.Players.Add(existingPlayer);
                             linkedPlayers++;
                         }
