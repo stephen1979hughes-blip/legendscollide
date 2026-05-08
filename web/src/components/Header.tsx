@@ -46,12 +46,13 @@ export const Header: React.FC<HeaderProps> = ({ showBack, rightButton }) => {
             <button
               onClick={() => navigate(-1)}
               className="text-secondary hover:text-white transition font-bold font-heading text-sm uppercase tracking-wide"
+              style={{textShadow: '0 0 3px white, 0 0 6px white, -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white'}}
             >
               ← Back
             </button>
           )}
 
-          <Link to="/" className="text-secondary hover:text-white transition font-bold font-heading text-sm uppercase tracking-wide">
+          <Link to="/" className="text-secondary hover:text-white transition font-bold font-heading text-sm uppercase tracking-wide" style={{textShadow: '0 0 3px white, 0 0 6px white, -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white'}}>
             Home
           </Link>
 
@@ -59,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({ showBack, rightButton }) => {
             <button
               onClick={() => setShowDropdown(!showDropdown)}
               className="text-secondary hover:text-white transition font-bold font-heading text-sm uppercase tracking-wide flex items-center gap-2"
+              style={{textShadow: '0 0 3px white, 0 0 6px white, -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white'}}
             >
               Teams
               <span
@@ -90,6 +92,7 @@ export const Header: React.FC<HeaderProps> = ({ showBack, rightButton }) => {
             <button
               onClick={rightButton.onClick}
               className="text-secondary hover:text-white transition font-bold font-heading text-sm uppercase tracking-wide"
+              style={{textShadow: '0 0 3px white, 0 0 6px white, -1px -1px 1px white, 1px -1px 1px white, -1px 1px 1px white, 1px 1px 1px white'}}
             >
               {rightButton.label}
             </button>
