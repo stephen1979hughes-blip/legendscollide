@@ -30,8 +30,10 @@ export const api = {
     const team: Team = {
       id: data.id,
       name: data.name,
-      clubId: '',
+      clubId: data.clubId || '',
       year: data.year,
+      season: data.season,
+      description: data.description,
       players: (data.players ?? []).map((p: any) => ({
         id: p.id,
         name: p.name,
@@ -40,6 +42,9 @@ export const api = {
         attackRating: p.attackRating,
         defenceRating: p.defenceRating,
         stamina: p.stamina,
+        bio: p.bio,
+        nationality: p.nationality,
+        eraAppearances: p.eraAppearances
       }))
     };
 
