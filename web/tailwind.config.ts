@@ -8,15 +8,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#0B3D2E',
-        secondary: '#D4AF37',
-        background: '#F5F5F5',
-        text: '#222222',
-        muted: '#888888',
+        primary: '#003D82',
+        secondary: '#C8102E',
+        background: '#F8F8F8',
+        text: '#1a1a1a',
+        muted: '#666666',
+        cream: '#F5EFE7',
+        gold: '#D4A574',
       },
       fontFamily: {
-        heading: ['Montserrat', 'Inter', 'sans-serif'],
-        body: ['Roboto', 'Open Sans', 'sans-serif'],
+        heading: ['Playfair Display', 'Georgia', 'serif'],
+        body: ['Courier New', 'Courier', 'monospace'],
       },
     },
   },

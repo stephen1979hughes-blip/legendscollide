@@ -18,6 +18,8 @@ export interface Club {
   allTimePlayers?: Player[];  // Aggregated players across all eras
 }
 
+export type TeamSide = 'home' | 'away';
+
 export interface Team {
   id: string;
   name: string;
@@ -26,6 +28,7 @@ export interface Team {
   season?: string;
   description?: string;
   players: Player[];
+  side?: TeamSide; // Optional: used in match engine
 }
 
 export interface TeamSummary {
@@ -55,11 +58,27 @@ export interface MatchStats {
 
 export interface MatchEvent {
   minute: number;
-  type: 'goal' | 'normal' | 'highlight';
+  type: 'goal' | 'normal' | 'highlight' | 'card' | 'skill';
   text: string;
   scoreA: number;
   scoreB: number;
   goalScorerName?: string;
+  playerName?: string;
+  playerTeam?: 'A' | 'B';
+  cardType?: 'yellow' | 'red';
+  skillType?: 'tackle' | 'block' | 'clearance' | 'dribble' | 'pass' | 'save' | 'punch';
+}
+
+export interface PlayerStats {
+  tackles: number;
+  clearances: number;
+  dribbles: number;
+  passes: number;
+  saves: number;
+  punches: number;
+  shotsOnTarget: number;
+  yellowCards: number;
+  redCards: number;
 }
 
 export interface MatchResult {
@@ -74,4 +93,6 @@ export interface MatchResult {
   manOfTheMatch: string;
   eraFlavour?: string;
   events: MatchEvent[];
+  playerStatsA?: { [playerName: string]: PlayerStats };
+  playerStatsB?: { [playerName: string]: PlayerStats };
 }

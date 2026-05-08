@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Team, MatchResult } from '../types';
@@ -19,12 +19,6 @@ export const Broadcast: React.FC = () => {
   const [speed, setSpeed] = useState(1);
   const [visibleEventsCount, setVisibleEventsCount] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-
-  console.log('Broadcast: received state:', state);
-  console.log('Broadcast: teamA:', state?.teamA);
-  console.log('Broadcast: teamA.players:', state?.teamA?.players);
-  console.log('Broadcast: teamB:', state?.teamB);
-  console.log('Broadcast: teamB.players:', state?.teamB?.players);
 
   if (
     !state ||
@@ -75,12 +69,12 @@ export const Broadcast: React.FC = () => {
     }));
 
     // Goals already have real player names from API
-    const goalsA = matchResult.goalsA.map((goal: any) => ({
+    const goalsA = (matchResult.goalsA || []).map((goal: any) => ({
       ...goal,
       assist: goal.isPenalty ? undefined : goal.assist
     }));
 
-    const goalsB = matchResult.goalsB.map((goal: any) => ({
+    const goalsB = (matchResult.goalsB || []).map((goal: any) => ({
       ...goal,
       assist: goal.isPenalty ? undefined : goal.assist
     }));
@@ -146,12 +140,18 @@ export const Broadcast: React.FC = () => {
   // Track score progression to determine which team scored each goal
   const visibleGoalsA: any[] = [];
   const visibleGoalsB: any[] = [];
+  const visibleCardsA: any[] = [];
+  const visibleCardsB: any[] = [];
   let lastScoreA = 0;
   let lastScoreB = 0;
 
   visibleEvents.forEach(e => {
     if (e.type === 'goal') {
-      const match = e.text.match(/GOAL! (.+?) scores for/);
+      // Try new format first, then fall back to old format
+      let match = e.text.match(/GOAL! (.+?) scores!/);
+      if (!match) {
+        match = e.text.match(/GOAL! (.+?) scores for/);
+      }
       const playerName = match ? match[1] : (e.goalScorer || e.goalScorerName || 'Unknown');
       const goal = {
         playerName,
@@ -168,6 +168,18 @@ export const Broadcast: React.FC = () => {
         visibleGoalsB.push(goal);
         lastScoreB = e.scoreB;
       }
+    } else if (e.type === 'card') {
+      const card = {
+        playerName: e.playerName || 'Unknown',
+        cardType: e.cardType || 'yellow',
+        minute: e.minute
+      };
+
+      if (e.playerTeam === 'A') {
+        visibleCardsA.push(card);
+      } else if (e.playerTeam === 'B') {
+        visibleCardsB.push(card);
+      }
     }
   });
 
@@ -181,21 +193,24 @@ export const Broadcast: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left: Team A Lineup */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-bold text-primary mb-2">{teamA.name}</h3>
+              <Link to={`/team/${teamA.id}`} className="hover:opacity-80 transition">
+                <h3 className="text-lg font-bold text-primary mb-2 hover:text-secondary transition">{teamA.name}</h3>
+              </Link>
               <p className="text-sm text-muted mb-4">{teamA.year}</p>
 
               <div className="space-y-2">
                 {teamA.players.slice(0, 11).map((player) => (
-                  <div
+                  <Link
                     key={player.id}
-                    className="flex items-center justify-between p-2 rounded bg-gray-50 hover:bg-gray-100 text-sm"
+                    to={`/player/${player.id}`}
+                    className="flex items-center justify-between p-2 rounded bg-gray-50 hover:bg-gray-100 text-sm transition"
                   >
                     <div className="flex-1">
                       <p className="font-semibold text-primary">{player.name}</p>
                       <p className="text-xs text-muted">{player.position}</p>
                     </div>
                     <p className="text-xs text-muted ml-2">{player.overallRating}</p>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -221,12 +236,13 @@ export const Broadcast: React.FC = () => {
                 </div>
               </div>
 
-              {/* Goal Scorers - Left and Right */}
-              {(visibleGoalsA.length > 0 || visibleGoalsB.length > 0) && (
+              {/* Goal Scorers & Cards - Left and Right */}
+              {(visibleGoalsA.length > 0 || visibleGoalsB.length > 0 || visibleCardsA.length > 0 || visibleCardsB.length > 0) && (
                 <div className="flex justify-between gap-4 mb-6">
-                  {/* Team A Goals - Left */}
-                  {visibleGoalsA.length > 0 && (
-                    <div className="flex-1">
+                  {/* Team A - Left */}
+                  <div className="flex-1 space-y-2">
+                    {/* Goals */}
+                    {visibleGoalsA.length > 0 && (
                       <div className="bg-yellow-50 rounded p-3 border-l-4 border-secondary">
                         <div className="space-y-1 text-xs">
                           {visibleGoalsA.map((goal, idx) => (
@@ -237,10 +253,27 @@ export const Broadcast: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                    </div>
-                  )}
-                  {visibleGoalsB.length > 0 && (
-                    <div className="flex-1">
+                    )}
+                    {/* Cards */}
+                    {visibleCardsA.length > 0 && (
+                      <div className="space-y-1">
+                        {visibleCardsA.map((card, idx) => (
+                          <div key={idx} className={`rounded p-2 text-xs font-semibold ${
+                            card.cardType === 'red'
+                              ? 'bg-red-100 border-l-4 border-red-500 text-red-700'
+                              : 'bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700'
+                          }`}>
+                            {card.cardType === 'red' ? '🟥' : '🟨'} {card.playerName}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Team B - Right */}
+                  <div className="flex-1 space-y-2">
+                    {/* Goals */}
+                    {visibleGoalsB.length > 0 && (
                       <div className="bg-yellow-50 rounded p-3 border-r-4 border-secondary">
                         <div className="space-y-1 text-xs text-right">
                           {visibleGoalsB.map((goal, idx) => (
@@ -251,8 +284,22 @@ export const Broadcast: React.FC = () => {
                           ))}
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                    {/* Cards */}
+                    {visibleCardsB.length > 0 && (
+                      <div className="space-y-1">
+                        {visibleCardsB.map((card, idx) => (
+                          <div key={idx} className={`rounded p-2 text-xs font-semibold text-right ${
+                            card.cardType === 'red'
+                              ? 'bg-red-100 border-r-4 border-red-500 text-red-700'
+                              : 'bg-yellow-100 border-r-4 border-yellow-500 text-yellow-700'
+                          }`}>
+                            {card.playerName} {card.cardType === 'red' ? '🔴' : '🟡'}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -269,21 +316,41 @@ export const Broadcast: React.FC = () => {
                         .replace(/Team B/g, teamB.name);
                     }
 
+                    const getEventIcon = (type: string) => {
+                      switch(type) {
+                        case 'goal': return '⚽';
+                        case 'card':
+                          return event.cardType === 'red' ? '🔴' : '🟡';
+                        case 'skill':
+                          switch(event.skillType) {
+                            case 'save': return '🧤';
+                            case 'tackle': return '🥊';
+                            case 'dribble': return '🏃';
+                            case 'pass': return '➡️';
+                            default: return '⚪';
+                          }
+                        default: return '';
+                      }
+                    };
+
+                    const getBgColor = (type: string) => {
+                      switch(type) {
+                        case 'goal': return 'border-secondary bg-yellow-50';
+                        case 'card': return event.cardType === 'red' ? 'border-red-500 bg-red-50' : 'border-yellow-500 bg-yellow-50';
+                        case 'skill': return 'border-blue-300 bg-blue-50';
+                        case 'highlight': return 'border-primary bg-green-50';
+                        default: return 'border-gray-300 bg-gray-50';
+                      }
+                    };
+
                     return (
                       <div
                         key={idx}
-                        className={`p-2 rounded text-sm border-l-3 ${
-                          event.type === 'goal'
-                            ? 'border-secondary bg-yellow-50'
-                            : event.type === 'highlight'
-                            ? 'border-primary bg-green-50'
-                            : 'border-gray-300 bg-gray-50'
-                        }`}
+                        className={`p-2 rounded text-sm border-l-3 ${getBgColor(event.type)}`}
                       >
                         <span className="font-semibold text-gray-500 text-xs mr-2">{event.minute}'</span>
                         <span className={event.type === 'goal' ? 'font-semibold' : ''}>
-                          {event.type === 'goal' && '⚽ '}
-                          {displayText}
+                          {getEventIcon(event.type)} {displayText}
                         </span>
                       </div>
                     );
@@ -293,11 +360,35 @@ export const Broadcast: React.FC = () => {
 
               {/* Controls */}
               <div className="space-y-3 pt-4 border-t border-gray-200">
+                {/* Full Time CTA */}
+                {currentMatchTime >= 90 && (
+                  <div className="text-center mb-3">
+                    <p className="text-xs font-bold text-muted uppercase tracking-wide mb-2">Match Over</p>
+                    <button
+                      onClick={() => navigate('/result', {
+                        state: {
+                          result: matchResult,
+                          teamAId: teamA.id,
+                          teamBId: teamB.id,
+                          teamA,
+                          teamB
+                        }
+                      })}
+                      className="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:opacity-90 transition"
+                    >
+                      📋 View Match Report
+                    </button>
+                  </div>
+                )}
+
                 <div className="flex gap-2 justify-center">
                   <button
                     onClick={handlePlayPause}
+                    disabled={currentMatchTime >= 90}
                     className={`px-4 py-2 rounded font-semibold text-sm transition ${
-                      isPlaying
+                      currentMatchTime >= 90
+                        ? 'opacity-40 cursor-not-allowed bg-gray-100 text-gray-400'
+                        : isPlaying
                         ? 'bg-primary text-white'
                         : 'bg-gray-100 text-primary border border-primary'
                     }`}
@@ -339,21 +430,24 @@ export const Broadcast: React.FC = () => {
 
             {/* Right: Team B Lineup */}
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-bold text-primary mb-2">{teamB.name}</h3>
+              <Link to={`/team/${teamB.id}`} className="hover:opacity-80 transition">
+                <h3 className="text-lg font-bold text-primary mb-2 hover:text-secondary transition">{teamB.name}</h3>
+              </Link>
               <p className="text-sm text-muted mb-4">{teamB.year}</p>
 
               <div className="space-y-2">
                 {teamB.players.slice(0, 11).map((player) => (
-                  <div
+                  <Link
                     key={player.id}
-                    className="flex items-center justify-between p-2 rounded bg-gray-50 hover:bg-gray-100 text-sm"
+                    to={`/player/${player.id}`}
+                    className="flex items-center justify-between p-2 rounded bg-gray-50 hover:bg-gray-100 text-sm transition"
                   >
                     <div className="flex-1">
                       <p className="font-semibold text-primary">{player.name}</p>
                       <p className="text-xs text-muted">{player.position}</p>
                     </div>
                     <p className="text-xs text-muted ml-2">{player.overallRating}</p>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

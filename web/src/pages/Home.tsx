@@ -14,12 +14,12 @@ export const Home: React.FC = () => {
   const [teamA, setTeamA] = useState<Team | null>(null);
   const [teamB, setTeamB] = useState<Team | null>(null);
   const [loading, setLoading] = useState(false);
+  const [useAI, setUseAI] = useState(false);
 
   useEffect(() => {
     const loadTeams = async () => {
       try {
         const teamsData = await api.getTeams();
-        console.log('Teams loaded:', teamsData);
         setTeams(teamsData);
       } catch (error) {
         console.error('Failed to load teams:', error);
@@ -30,11 +30,9 @@ export const Home: React.FC = () => {
   }, []);
 
   const handleTeamASelect = async (team: TeamSummary) => {
-    console.log('handleTeamASelect called with team:', team);
     try {
       setTeamAId(team.id);
       const fullTeam = await api.getTeam(team.id);
-      console.log('Team A loaded:', fullTeam);
       setTeamA(fullTeam);
     } catch (error) {
       console.error('Failed to load Team A:', error);
@@ -43,11 +41,9 @@ export const Home: React.FC = () => {
   };
 
   const handleTeamBSelect = async (team: TeamSummary) => {
-    console.log('handleTeamBSelect called with team:', team);
     try {
       setTeamBId(team.id);
       const fullTeam = await api.getTeam(team.id);
-      console.log('Team B loaded:', fullTeam);
       setTeamB(fullTeam);
     } catch (error) {
       console.error('Failed to load Team B:', error);
@@ -55,45 +51,29 @@ export const Home: React.FC = () => {
     }
   };
 
-  const handleSimulate = async () => {
-    if (!teamAId || !teamBId || !teamA || !teamB) {
-      console.warn('Teams not fully selected or loaded', { teamAId, teamBId, teamA: !!teamA, teamB: !!teamB });
-      return;
-    }
+  const handleSimulate = () => {
+    if (!teamAId || !teamBId || !teamA || !teamB) return;
     setLoading(true);
-    try {
-      console.log('Starting simulation with teams:', { teamAId, teamBId, teamA, teamB });
-      console.log('Team A structure:', teamA);
-      console.log('Team B structure:', teamB);
-      const matchResult = await api.simulateMatch(teamAId, teamBId, false);
-      console.log('Match result received:', matchResult);
-
-      // Ensure teams have proper structure before navigation
-      if (!teamA.players || !teamB.players) {
-        console.error('Team objects missing players array!');
-        throw new Error('Team data incomplete - players array missing');
+    const modeParam = useAI ? '?mode=ai' : '';
+    navigate(`/simulate${modeParam}`, {
+      state: {
+        teamAId,
+        teamBId
       }
-
-      navigate('/broadcast', {
-        state: {
-          matchResult,
-          teamA,
-          teamB
-        }
-      });
-    } catch (error) {
-      console.error('Simulation failed:', error);
-      alert(`Simulation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      setLoading(false);
-    }
+    });
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      <main className="flex-1 max-w-5xl mx-auto px-6 pt-16 pb-12 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <main className="flex-1 max-w-5xl mx-auto px-6 pt-12 pb-12 w-full">
+        <div className="text-center mb-12">
+          <h2 className="text-primary text-4xl font-black tracking-widest mb-2">SELECT YOUR TEAMS</h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <TeamSelectCard
             label="Team A"
             teams={teams}
@@ -109,31 +89,44 @@ export const Home: React.FC = () => {
         </div>
 
         <div className="text-center space-y-4">
+          {/* AI Mode Toggle */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={useAI}
+                onChange={(e) => setUseAI(e.target.checked)}
+                className="w-4 h-4"
+              />
+              <span className="text-sm font-medium text-text">Use AI-Powered Engine (Claude)</span>
+            </label>
+          </div>
+
           <div className="flex items-center justify-center gap-6">
-            {!teamAId && <p className="text-red-500 text-sm min-w-[140px] text-left">Please select Team A</p>}
+            {!teamAId && <p className="text-secondary font-bold text-sm min-w-[140px] text-left uppercase tracking-wide">Select Team A</p>}
             {teamAId && <div className="min-w-[140px]"></div>}
 
             <button
               onClick={handleSimulate}
               disabled={!teamAId || !teamBId || loading}
-              className={`btn-primary text-lg py-3 px-8 font-bold rounded-lg transition ${
+              className={`btn-primary text-lg py-3 px-12 font-black transition uppercase tracking-wider ${
                 !teamAId || !teamBId
-                  ? 'opacity-50 cursor-not-allowed bg-gray-400 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  ? 'opacity-50 cursor-not-allowed'
+                  : ''
               }`}
             >
-              {loading ? '⏳ Starting Simulation...' : '▶️ Simulate Match'}
+              {loading ? '⏳ Starting...' : `▶️ SIMULATE MATCH${useAI ? ' (AI)' : ''}`}
             </button>
 
-            {!teamBId && <p className="text-red-500 text-sm min-w-[140px] text-right">Please select Team B</p>}
+            {!teamBId && <p className="text-secondary font-bold text-sm min-w-[140px] text-right uppercase tracking-wide">Select Team B</p>}
             {teamBId && <div className="min-w-[140px]"></div>}
           </div>
 
-          <div className="pt-4 border-t border-gray-300">
-            <p className="text-muted text-sm mb-3">Or build your own legend</p>
+          <div className="pt-8 border-t-4 border-primary mt-8">
+            <p className="text-muted text-sm mb-4 uppercase tracking-widest font-bold">Or build your own legend</p>
             <button
               onClick={() => navigate('/custom-xi')}
-              className="bg-secondary text-white font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition"
+              className="btn-secondary text-lg py-3 px-12 font-black uppercase tracking-wider"
             >
               Build Your All-Time XI
             </button>

@@ -1,0 +1,26 @@
+{
+  "name": "football-simulator-admin-api",
+  "version": "1.0.0",
+  "description": "Admin API for managing football simulator data",
+  "main": "server.js",
+  "scripts": {
+    "start": "tsx server.js",
+    "dev": "tsx watch server.js"
+  },
+  "keywords": [
+    "admin",
+    "api",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

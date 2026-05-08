@@ -22,21 +22,23 @@ export const TeamSelectCard: React.FC<TeamSelectCardProps> = ({
   );
 
   return (
-    <div className="card w-full max-w-sm">
-      <h3 className="text-lg font-bold text-primary mb-4">{label}</h3>
+    <div className="card w-full">
+      <h3 className="text-2xl font-black text-primary mb-1 tracking-wider">{label}</h3>
+      <div className="h-1 w-12 bg-secondary mb-4"></div>
 
       <input
         type="text"
         placeholder="Search teams or years..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full px-3 py-2 border border-muted rounded mb-4 text-sm"
+        className="w-full px-3 py-2 border-2 border-primary rounded mb-4 text-sm font-body"
+        style={{boxShadow: '2px 2px 0px rgba(0, 0, 0, 0.1)'}}
       />
 
       {selectedTeam && (
-        <div className="mb-4 p-3 bg-primary text-white rounded">
-          <p className="font-bold">{selectedTeam.name}</p>
-          <p className="text-sm text-secondary">{selectedTeam.year}</p>
+        <div className="mb-4 p-3 bg-primary text-white border-3 border-secondary" style={{boxShadow: '3px 3px 0px rgba(0, 0, 0, 0.2)'}}>
+          <p className="font-black tracking-wide">{selectedTeam.name}</p>
+          <p className="text-sm text-secondary font-bold">{selectedTeam.year}</p>
         </div>
       )}
 
@@ -45,14 +47,14 @@ export const TeamSelectCard: React.FC<TeamSelectCardProps> = ({
           <button
             key={team.id}
             onClick={() => onSelect(team)}
-            className={`w-full text-left px-3 py-2 rounded transition ${
+            className={`w-full text-left px-3 py-2 border-2 transition font-body ${
               selectedTeam?.id === team.id
-                ? 'bg-primary text-white'
-                : 'bg-background hover:bg-gray-200'
+                ? 'bg-primary text-white border-secondary'
+                : 'bg-white border-primary hover:bg-gray-100'
             }`}
           >
-            <p className="font-semibold">{team.name}</p>
-            <p className="text-xs text-muted">{team.year}</p>
+            <p className="font-bold">{team.name}</p>
+            <p className="text-xs">{team.year}</p>
           </button>
         ))}
       </div>

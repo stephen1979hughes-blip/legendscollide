@@ -7,8 +7,8 @@ var host = new HostBuilder()
     .ConfigureServices(services =>
     {
         services.AddSingleton<TeamDataLoader>();
-        services.AddSingleton<SimulationEngine>();
         services.AddSingleton<CommentaryGenerator>();
+        services.AddSingleton<ClaudeAgentService>();
     })
     .Build();
 

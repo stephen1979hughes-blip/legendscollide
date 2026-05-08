@@ -7,6 +7,7 @@ import { Broadcast } from './pages/Broadcast';
 import { CustomXIBuilder } from './pages/CustomXIBuilder';
 import { TeamDetail } from './pages/TeamDetail';
 import { PlayerBio } from './pages/PlayerBio';
+import { Admin } from './pages/Admin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/custom-xi" element={<CustomXIBuilder />} />
         <Route path="/team/:teamId" element={<TeamDetail />} />
         <Route path="/player/:playerId" element={<PlayerBio />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

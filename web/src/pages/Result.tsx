@@ -12,15 +12,18 @@ import { useState, useEffect } from 'react';
 export const Result: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { result, teamAId, teamBId } = location.state || {};
-  const [teamA, setTeamA] = useState<Team | null>(null);
-  const [teamB, setTeamB] = useState<Team | null>(null);
+  const { result, teamAId, teamBId, teamA: preloadedTeamA, teamB: preloadedTeamB } = location.state || {};
+  const [teamA, setTeamA] = useState<Team | null>(preloadedTeamA || null);
+  const [teamB, setTeamB] = useState<Team | null>(preloadedTeamB || null);
 
   useEffect(() => {
     if (!result || !teamAId || !teamBId) {
       navigate('/');
       return;
     }
+
+    // If teams were pre-loaded (e.g. from Broadcast), skip the API calls
+    if (preloadedTeamA && preloadedTeamB) return;
 
     const loadTeams = async () => {
       const a = await api.getTeam(teamAId);
@@ -30,7 +33,7 @@ export const Result: React.FC = () => {
     };
 
     loadTeams();
-  }, [result, teamAId, teamBId, navigate]);
+  }, [result, teamAId, teamBId, navigate, preloadedTeamA, preloadedTeamB]);
 
   if (!result || !teamA || !teamB) {
     return (
@@ -75,20 +78,20 @@ export const Result: React.FC = () => {
         </div>
 
         {/* Goals */}
-        {(result.goalsA.length > 0 || result.goalsB.length > 0) && (
+        {((result.goalsA || []).length > 0 || (result.goalsB || []).length > 0) && (
           <div className="card mb-8">
             <h3 className="text-lg font-bold text-primary mb-4">Goals</h3>
             <div className="space-y-2">
-              {result.goalsA.map((goal: any, idx: number) => (
+              {(result.goalsA || []).map((goal: any, idx: number) => (
                 <div key={idx} className="flex justify-between">
-                  <span className="font-semibold">{goal.minute}' {goal.playerName}</span>
+                  <span className="font-semibold">⚽ {goal.minute}' {goal.playerName}</span>
                   <span className="text-primary font-bold">{teamA.name}</span>
                 </div>
               ))}
-              {result.goalsB.map((goal: any, idx: number) => (
+              {(result.goalsB || []).map((goal: any, idx: number) => (
                 <div key={idx} className="flex justify-between">
-                  <span className="font-semibold">{goal.minute}' {goal.playerName}</span>
                   <span className="text-primary font-bold">{teamB.name}</span>
+                  <span className="font-semibold">{goal.playerName} {goal.minute}' ⚽</span>
                 </div>
               ))}
             </div>
@@ -137,9 +140,22 @@ export const Result: React.FC = () => {
         {/* Buttons */}
         <div className="flex gap-4 justify-center">
           <button onClick={() => navigate('/')} className="btn-primary">
-            Rematch
+            ▶ New Match
           </button>
-          <button className="btn-secondary">Share Result</button>
+          <button
+            onClick={() => {
+              const text = `${teamA.name} ${result.scoreA} – ${result.scoreB} ${teamB.name} | Man of the Match: ${result.manOfTheMatch} | Legends Collide`;
+              if (navigator.share) {
+                navigator.share({ title: 'Legends Collide Result', text });
+              } else {
+                navigator.clipboard.writeText(text);
+                alert('Result copied to clipboard!');
+              }
+            }}
+            className="btn-secondary"
+          >
+            📤 Share Result
+          </button>
         </div>
       </main>
 

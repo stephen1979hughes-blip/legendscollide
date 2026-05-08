@@ -1,27 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-background text-text font-body;
+    @apply text-text font-body;
+    background-color: #F5EFE7;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 61, 130, 0.03) 2px,
+        rgba(0, 61, 130, 0.03) 4px
+      );
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold;
+    @apply font-heading font-bold tracking-wide;
+    text-shadow: 2px 2px 0px rgba(200, 16, 46, 0.1);
   }
+
+  h1 { @apply text-4xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-primary text-secondary rounded font-heading font-bold hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply px-6 py-3 bg-primary text-white font-heading font-bold transition;
+    border: 3px solid #C8102E;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary:hover {
+    @apply bg-secondary text-white;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-primary border-2 border-primary rounded font-heading font-bold hover:bg-primary hover:text-secondary transition;
+    @apply px-6 py-3 bg-white text-primary font-heading font-bold transition;
+    border: 3px solid #003D82;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-secondary:hover {
+    @apply bg-primary text-white;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
   }
 
   .card {
-    @apply bg-white rounded-[10px] shadow-md p-5;
+    @apply bg-white p-5;
+    border: 3px solid #003D82;
+    box-shadow: 5px 5px 0px rgba(0, 61, 130, 0.2);
+    position: relative;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #003D82 0%, #C8102E 50%, #003D82 100%);
+  }
+
+  /* Retro decorative line */
+  .retro-divider {
+    @apply my-6;
+    border-top: 3px solid #003D82;
+    border-bottom: 1px dashed #C8102E;
+    padding-top: 0.5rem;
+  }
+
+  .retro-badge {
+    @apply inline-block px-4 py-2 bg-primary text-white font-heading font-bold;
+    border: 2px solid #C8102E;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
+    transform: rotate(-2deg);
+  }
+
+  .retro-header-text {
+    @apply font-heading tracking-widest;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    color: #003D82;
   }
 }

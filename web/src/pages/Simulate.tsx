@@ -12,11 +12,21 @@ export const Simulate: React.FC = () => {
   const [result, setResult] = useState<MatchResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const steps = [
-    'Generating chances...',
-    'Calculating possession...',
-    'Resolving key events...',
-  ];
+  // Check if AI mode is requested via query param
+  const searchParams = new URLSearchParams(location.search);
+  const useAI = searchParams.get('mode') === 'ai';
+
+  const steps = useAI
+    ? [
+        'Initializing match state...',
+        'Orchestrating with Claude AI...',
+        'Processing events...',
+      ]
+    : [
+        'Generating chances...',
+        'Calculating possession...',
+        'Resolving key events...',
+      ];
 
   useEffect(() => {
     if (!teamAId || !teamBId) {
@@ -31,8 +41,10 @@ export const Simulate: React.FC = () => {
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
 
-        const matchResult = await api.simulateMatch(teamAId, teamBId, false);
-        console.log('Match result:', matchResult);
+        // Use AI simulation if mode=ai, otherwise use legacy
+        const matchResult = useAI
+          ? await api.simulateMatchWithAI(teamAId, teamBId)
+          : await api.simulateMatch(teamAId, teamBId, false);
 
         // Fetch full team data for broadcast
         const teamA = await api.getTeam(teamAId);
@@ -55,7 +67,7 @@ export const Simulate: React.FC = () => {
     };
 
     runSimulation();
-  }, [teamAId, teamBId, navigate]);
+  }, [teamAId, teamBId, navigate, useAI]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">

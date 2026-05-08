@@ -2,7 +2,7 @@
   "metadata": {
     "version": "2.0",
     "description": "Normalized football data with relationships",
-    "lastUpdated": "2026-04-24T19:53:55.111Z"
+    "lastUpdated": "2026-04-24T21:26:25.435Z"
   },
   "countries": [
     {
@@ -79,6 +79,121 @@
       "id": "wales",
       "name": "Wales",
       "code": "WA"
+    },
+    {
+      "id": "czech-republic",
+      "name": "Czech Republic",
+      "code": "CZ"
+    },
+    {
+      "id": "belgium",
+      "name": "Belgium",
+      "code": "BE"
+    },
+    {
+      "id": "uruguay",
+      "name": "Uruguay",
+      "code": "UR"
+    },
+    {
+      "id": "austria",
+      "name": "Austria",
+      "code": "AT"
+    },
+    {
+      "id": "slovenia",
+      "name": "Slovenia",
+      "code": "SL"
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "code": "CA"
+    },
+    {
+      "id": "croatia",
+      "name": "Croatia",
+      "code": "CR"
+    },
+    {
+      "id": "chile",
+      "name": "Chile",
+      "code": "CH"
+    },
+    {
+      "id": "egypt",
+      "name": "Egypt",
+      "code": "EG"
+    },
+    {
+      "id": "senegal",
+      "name": "Senegal",
+      "code": "SE"
+    },
+    {
+      "id": "ivory-coast",
+      "name": "Ivory Coast",
+      "code": "IC"
+    },
+    {
+      "id": "norway",
+      "name": "Norway",
+      "code": "NO"
+    },
+    {
+      "id": "finland",
+      "name": "Finland",
+      "code": "FI"
+    },
+    {
+      "id": "romania",
+      "name": "Romania",
+      "code": "RO"
+    },
+    {
+      "id": "bulgaria",
+      "name": "Bulgaria",
+      "code": "BG"
+    },
+    {
+      "id": "turkey",
+      "name": "Turkey",
+      "code": "TR"
+    },
+    {
+      "id": "costa-rica",
+      "name": "Costa Rica",
+      "code": "CR"
+    },
+    {
+      "id": "poland",
+      "name": "Poland",
+      "code": "PL"
+    },
+    {
+      "id": "south-korea",
+      "name": "South Korea",
+      "code": "SK"
+    },
+    {
+      "id": "liberia",
+      "name": "Liberia",
+      "code": "LR"
+    },
+    {
+      "id": "cameroon",
+      "name": "Cameroon",
+      "code": "CM"
+    },
+    {
+      "id": "greece",
+      "name": "Greece",
+      "code": "GR"
+    },
+    {
+      "id": "congo",
+      "name": "Congo",
+      "code": "CG"
     }
   ],
   "clubs": [
@@ -88,7 +203,225 @@
       "shortName": "Man Utd",
       "countryId": "england",
       "founded": 1878,
-      "city": "Manchester"
+      "city": "Manchester",
+      "roster": [
+        "peter-schmeichel",
+        "edwin-van-der-sar",
+        "gary-neville",
+        "gary-pallister",
+        "rio-ferdinand",
+        "nemanja-vidic",
+        "denis-irwin",
+        "patrice-evra",
+        "paul-scholes",
+        "roy-keane",
+        "eric-cantona",
+        "david-beckham",
+        "george-best",
+        "ryan-giggs",
+        "david-silva",
+        "cristiano-ronaldo",
+        "wayne-rooney",
+        "mark-hughes",
+        "bill-foulkes",
+        "alex-stepney",
+        "fabien-barthez",
+        "john-aston",
+        "steve-bruce",
+        "tony-dunne",
+        "shay-brennan",
+        "patrick-evra",
+        "pat-crerand",
+        "nobby-stiles",
+        "denis-law",
+        "brian-kidd",
+        "bobby-charlton"
+      ]
+    },
+    {
+      "id": "barcelona",
+      "name": "Barcelona",
+      "shortName": "Barcelona",
+      "countryId": "spain",
+      "founded": 1899,
+      "city": "Barcelona",
+      "roster": [
+        "ronaldinho",
+        "rivaldo",
+        "david-villa",
+        "fernando-torres",
+        "gerard-pique",
+        "carles-puyol",
+        "sergio-ramos",
+        "jordi-alba",
+        "joan-capdevila",
+        "sergio-busquets",
+        "andres-iniesta",
+        "cesc-fabregas",
+        "xavi-hernandez",
+        "thierry-henry",
+        "joão-cancelo",
+        "gheorghe-hagi",
+        "johan-cruyff",
+        "neymar",
+        "luis-suarez",
+        "romario",
+        "samuel-eto'o",
+        "yaya-toure",
+        "javier-mascherano",
+        "diego-maradona",
+        "ronaldo",
+        "dragan-stojković",
+        "logging-test"
+      ]
+    },
+    {
+      "id": "real-madrid",
+      "name": "Real Madrid",
+      "shortName": "Real Madrid",
+      "countryId": "spain",
+      "founded": 1902,
+      "city": "Madrid",
+      "roster": [
+        "iker-casillas",
+        "sergio-ramos",
+        "carles-puyol",
+        "gerard-pique",
+        "david-alaba",
+        "david-beckham",
+        "david-silva",
+        "mesut-ozil",
+        "toni-kroos",
+        "cristiano-ronaldo",
+        "fernando-torres",
+        "mario-gomez"
+      ]
+    },
+    {
+      "id": "bayern-munich",
+      "name": "Bayern Munich",
+      "shortName": "Bayern",
+      "countryId": "germany",
+      "founded": 1900,
+      "city": "Munich",
+      "roster": [
+        "manuel-neuer",
+        "sepp-maier",
+        "mats-hummels",
+        "jerome-boateng",
+        "david-alaba",
+        "philipp-lahm",
+        "patrick-vieira",
+        "bastian-schweinsteiger",
+        "mesut-ozil",
+        "thomas-muller",
+        "mario-gomez",
+        "mario-gotze",
+        "franck-ribery"
+      ]
+    },
+    {
+      "id": "ac-milan",
+      "name": "AC Milan",
+      "shortName": "AC Milan",
+      "countryId": "italy",
+      "founded": 1899,
+      "city": "Milan",
+      "roster": [
+        "gianluigi-buffon",
+        "gianluca-zambrotta",
+        "fabio-cannavaro",
+        "claudio-gentile",
+        "antonio-cabrini",
+        "gennaro-gattuso",
+        "andrea-pirlo",
+        "giancarlo-antognoni",
+        "ronaldinho",
+        "filippo-inzaghi",
+        "david-trezeguet"
+      ]
+    },
+    {
+      "id": "juventus",
+      "name": "Juventus",
+      "shortName": "Juve",
+      "countryId": "italy",
+      "founded": 1897,
+      "city": "Turin",
+      "roster": [
+        "gianluigi-buffon",
+        "dino-zoff",
+        "fabio-cannavaro",
+        "gianluca-zambrotta",
+        "claudio-gentile",
+        "fulvio-collovati",
+        "andrea-pirlo",
+        "giancarlo-antognoni",
+        "marco-tardelli",
+        "daniele-de-rossi",
+        "david-trezeguet",
+        "paolo-rossi",
+        "filippo-inzaghi",
+        "gabriel-batistuta"
+      ]
+    },
+    {
+      "id": "inter-milan",
+      "name": "Inter Milan",
+      "shortName": "Inter",
+      "countryId": "italy",
+      "founded": 1908,
+      "city": "Milan",
+      "roster": [
+        "gianluigi-buffon",
+        "gianluca-zambrotta",
+        "fabio-cannavaro",
+        "giuseppe-bergomi",
+        "luca-toni",
+        "gennaro-gattuso",
+        "daniele-de-rossi",
+        "giancarlo-antognoni",
+        "david-trezeguet",
+        "filippo-inzaghi",
+        "rivaldo",
+        "ronaldo"
+      ]
+    },
+    {
+      "id": "ajax",
+      "name": "Ajax",
+      "shortName": "Ajax",
+      "countryId": "netherlands",
+      "founded": 1900,
+      "city": "Amsterdam",
+      "roster": [
+        "patrick-vieira",
+        "claude-makele",
+        "thierry-henry",
+        "emmanuel-petit",
+        "franck-ribery",
+        "david-silva"
+      ]
+    },
+    {
+      "id": "liverpool",
+      "name": "Liverpool",
+      "shortName": "Liverpool",
+      "countryId": "england",
+      "founded": 1892,
+      "city": "Liverpool",
+      "roster": [
+        "gordon-banks",
+        "ian-callaghan",
+        "roger-hunt",
+        "ray-wilson",
+        "george-cohen",
+        "patrick-vieira",
+        "thierry-henry",
+        "david-silva",
+        "didier-drogba",
+        "fernando-torres"
+      ]
     }
   ],
   "nationalTeams": [
@@ -411,7 +744,7 @@
       "name": "Cristiano Ronaldo",
       "countryId": "portugal",
       "position": "RW",
-      "overallRating": 92,
+      "overallRating": 95,
       "attackRating": 94,
       "defenceRating": 72,
       "stamina": 90
@@ -531,8 +864,8 @@
       "name": "Diego Maradona",
       "countryId": "argentina",
       "position": "CM",
-      "overallRating": 88,
-      "attackRating": 89,
+      "overallRating": 95,
+      "attackRating": 95,
       "defenceRating": 75,
       "stamina": 87
     },
@@ -1705,6 +2038,1900 @@
       "attackRating": 88,
       "defenceRating": 78,
       "stamina": 86
+    },
+    {
+      "id": "oliver-kahn",
+      "name": "Oliver Kahn",
+      "position": "GK",
+      "overallRating": 90,
+      "attackRating": 38,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "petr-čech",
+      "name": "Petr Čech",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 35,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "victor-valdes",
+      "name": "Víctor Valdés",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 32,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "ederson",
+      "name": "Ederson",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 45,
+      "defenceRating": 84,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "alisson",
+      "name": "Alisson",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "hugo-lloris",
+      "name": "Hugo Lloris",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 38,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "france"
+    },
+    {
+      "id": "gigi-donnarumma",
+      "name": "Gigi Donnarumma",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "italy"
+    },
+    {
+      "id": "samir-handanović",
+      "name": "Samir Handanović",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 33,
+      "defenceRating": 84,
+      "stamina": 81,
+      "countryId": "slovenia"
+    },
+    {
+      "id": "thibaut-courtois",
+      "name": "Thibaut Courtois",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 36,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "belgium"
+    },
+    {
+      "id": "jan-oblak",
+      "name": "Jan Oblak",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 37,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "slovenia"
+    },
+    {
+      "id": "david-de-gea",
+      "name": "David de Gea",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "keylor-navas",
+      "name": "Keylor Navas",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 34,
+      "defenceRating": 84,
+      "stamina": 81,
+      "countryId": "costa-rica"
+    },
+    {
+      "id": "kasper-schmeichel",
+      "name": "Kasper Schmeichel",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 32,
+      "defenceRating": 83,
+      "stamina": 80,
+      "countryId": "denmark"
+    },
+    {
+      "id": "john-terry",
+      "name": "John Terry",
+      "position": "CB",
+      "overallRating": 89,
+      "attackRating": 42,
+      "defenceRating": 91,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "vincent-kompany",
+      "name": "Vincent Kompany",
+      "position": "CB",
+      "overallRating": 90,
+      "attackRating": 38,
+      "defenceRating": 92,
+      "stamina": 86,
+      "countryId": "belgium"
+    },
+    {
+      "id": "thiago-silva",
+      "name": "Thiago Silva",
+      "position": "CB",
+      "overallRating": 90,
+      "attackRating": 40,
+      "defenceRating": 91,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "jose-gimenez",
+      "name": "José Giménez",
+      "position": "CB",
+      "overallRating": 87,
+      "attackRating": 38,
+      "defenceRating": 89,
+      "stamina": 84,
+      "countryId": "uruguay"
+    },
+    {
+      "id": "virgil-van-dijk",
+      "name": "Virgil van Dijk",
+      "position": "CB",
+      "overallRating": 91,
+      "attackRating": 45,
+      "defenceRating": 92,
+      "stamina": 86,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "raphaël-varane",
+      "name": "Raphaël Varane",
+      "position": "CB",
+      "overallRating": 89,
+      "attackRating": 40,
+      "defenceRating": 91,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "kyle-walker",
+      "name": "Kyle Walker",
+      "position": "RB",
+      "overallRating": 87,
+      "attackRating": 48,
+      "defenceRating": 88,
+      "stamina": 87,
+      "countryId": "england"
+    },
+    {
+      "id": "trent-alexander-arnold",
+      "name": "Trent Alexander-Arnold",
+      "position": "RB",
+      "overallRating": 87,
+      "attackRating": 52,
+      "defenceRating": 86,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "joão-cancelo",
+      "name": "João Cancelo",
+      "position": "RB",
+      "overallRating": 88,
+      "attackRating": 54,
+      "defenceRating": 87,
+      "stamina": 86,
+      "countryId": "portugal"
+    },
+    {
+      "id": "andrew-robertson",
+      "name": "Andrew Robertson",
+      "position": "LB",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 88,
+      "stamina": 86,
+      "countryId": "scotland"
+    },
+    {
+      "id": "alphonso-davies",
+      "name": "Alphonso Davies",
+      "position": "LB",
+      "overallRating": 86,
+      "attackRating": 52,
+      "defenceRating": 87,
+      "stamina": 88,
+      "countryId": "canada"
+    },
+    {
+      "id": "lucas-hernandez",
+      "name": "Lucas Hernández",
+      "position": "LB",
+      "overallRating": 86,
+      "attackRating": 48,
+      "defenceRating": 87,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "ashley-cole",
+      "name": "Ashley Cole",
+      "position": "LB",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "michel-salgado",
+      "name": "Michel Salgado",
+      "position": "RB",
+      "overallRating": 85,
+      "attackRating": 48,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "spain"
+    },
+    {
+      "id": "franz-beckenbauer",
+      "name": "Franz Beckenbauer",
+      "position": "CB",
+      "overallRating": 92,
+      "attackRating": 58,
+      "defenceRating": 91,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "jaap-stam",
+      "name": "Jaap Stam",
+      "position": "CB",
+      "overallRating": 88,
+      "attackRating": 46,
+      "defenceRating": 90,
+      "stamina": 84,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "tony-adams",
+      "name": "Tony Adams",
+      "position": "CB",
+      "overallRating": 87,
+      "attackRating": 48,
+      "defenceRating": 89,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "walter-samuel",
+      "name": "Walter Samuel",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 45,
+      "defenceRating": 87,
+      "stamina": 83,
+      "countryId": "argentina"
+    },
+    {
+      "id": "wes-brown",
+      "name": "Wes Brown",
+      "position": "CB",
+      "overallRating": 84,
+      "attackRating": 42,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "england"
+    },
+    {
+      "id": "sami-hyypiä",
+      "name": "Sami Hyypiä",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 43,
+      "defenceRating": 86,
+      "stamina": 82,
+      "countryId": "finland"
+    },
+    {
+      "id": "steven-gerrard",
+      "name": "Steven Gerrard",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 80,
+      "defenceRating": 78,
+      "stamina": 86,
+      "countryId": "england"
+    },
+    {
+      "id": "clarence-seedorf",
+      "name": "Clarence Seedorf",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 82,
+      "defenceRating": 74,
+      "stamina": 84,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "luka-modrić",
+      "name": "Luka Modrić",
+      "position": "CM",
+      "overallRating": 90,
+      "attackRating": 78,
+      "defenceRating": 76,
+      "stamina": 86,
+      "countryId": "croatia"
+    },
+    {
+      "id": "arturo-vidal",
+      "name": "Arturo Vidal",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 80,
+      "defenceRating": 80,
+      "stamina": 87,
+      "countryId": "chile"
+    },
+    {
+      "id": "n'golo-kante",
+      "name": "N'Golo Kanté",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 68,
+      "defenceRating": 84,
+      "stamina": 88,
+      "countryId": "france"
+    },
+    {
+      "id": "bruno-fernandes",
+      "name": "Bruno Fernandes",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 85,
+      "countryId": "portugal"
+    },
+    {
+      "id": "rodri",
+      "name": "Rodri",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 74,
+      "defenceRating": 82,
+      "stamina": 86,
+      "countryId": "spain"
+    },
+    {
+      "id": "paul-pogba",
+      "name": "Paul Pogba",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 76,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "nemanja-matić",
+      "name": "Nemanja Matić",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 82,
+      "stamina": 83,
+      "countryId": "serbia"
+    },
+    {
+      "id": "claude-makelele",
+      "name": "Claude Makélélé",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 58,
+      "defenceRating": 85,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "lothar-matthäus",
+      "name": "Lothar Matthäus",
+      "position": "CM",
+      "overallRating": 90,
+      "attackRating": 76,
+      "defenceRating": 82,
+      "stamina": 86,
+      "countryId": "germany"
+    },
+    {
+      "id": "gunter-netzer",
+      "name": "Günter Netzer",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 83,
+      "countryId": "germany"
+    },
+    {
+      "id": "gascoigne",
+      "name": "Gascoigne",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "youri-djorkaeff",
+      "name": "Youri Djorkaeff",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "france"
+    },
+    {
+      "id": "jaap-robben",
+      "name": "Jaap Robben",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 78,
+      "defenceRating": 74,
+      "stamina": 83,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "dragan-stojković",
+      "name": "Dragan Stojković",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 84,
+      "countryId": "serbia"
+    },
+    {
+      "id": "gheorghe-hagi",
+      "name": "Gheorghe Hagi",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 84,
+      "defenceRating": 70,
+      "stamina": 84,
+      "countryId": "romania"
+    },
+    {
+      "id": "diego-simeone",
+      "name": "Diego Simeone",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 75,
+      "defenceRating": 84,
+      "stamina": 86,
+      "countryId": "argentina"
+    },
+    {
+      "id": "johan-cruyff",
+      "name": "Johan Cruyff",
+      "position": "LW",
+      "overallRating": 93,
+      "attackRating": 92,
+      "defenceRating": 64,
+      "stamina": 85,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "robert-pires",
+      "name": "Robert Pires",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "eden-hazard",
+      "name": "Eden Hazard",
+      "position": "LW",
+      "overallRating": 89,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "belgium"
+    },
+    {
+      "id": "sadio-mane",
+      "name": "Sadio Mané",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 64,
+      "stamina": 86,
+      "countryId": "senegal"
+    },
+    {
+      "id": "luis-suarez",
+      "name": "Luis Suárez",
+      "position": "LW",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 65,
+      "stamina": 86,
+      "countryId": "uruguay"
+    },
+    {
+      "id": "gareth-bale",
+      "name": "Gareth Bale",
+      "position": "RW",
+      "overallRating": 89,
+      "attackRating": 90,
+      "defenceRating": 63,
+      "stamina": 86,
+      "countryId": "wales"
+    },
+    {
+      "id": "neymar",
+      "name": "Neymar",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 91,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "wilfried-zaha",
+      "name": "Wilfried Zaha",
+      "position": "LW",
+      "overallRating": 84,
+      "attackRating": 85,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "ivory-coast"
+    },
+    {
+      "id": "mohamed-salah",
+      "name": "Mohamed Salah",
+      "position": "RW",
+      "overallRating": 89,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 86,
+      "countryId": "egypt"
+    },
+    {
+      "id": "raheem-sterling",
+      "name": "Raheem Sterling",
+      "position": "RW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 59,
+      "stamina": 86,
+      "countryId": "england"
+    },
+    {
+      "id": "bukayo-saka",
+      "name": "Bukayo Saka",
+      "position": "LW",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "jadon-sancho",
+      "name": "Jadon Sancho",
+      "position": "RW",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "vinicius-junior",
+      "name": "Vinicius Junior",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 88,
+      "defenceRating": 59,
+      "stamina": 86,
+      "countryId": "brazil"
+    },
+    {
+      "id": "phil-foden",
+      "name": "Phil Foden",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "leroy-sane",
+      "name": "Leroy Sané",
+      "position": "LW",
+      "overallRating": 85,
+      "attackRating": 87,
+      "defenceRating": 58,
+      "stamina": 85,
+      "countryId": "germany"
+    },
+    {
+      "id": "gerd-muller",
+      "name": "Gerd Müller",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 94,
+      "defenceRating": 55,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "kenny-dalglish",
+      "name": "Kenny Dalglish",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 91,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "scotland"
+    },
+    {
+      "id": "sergio-aguero",
+      "name": "Sergio Agüero",
+      "position": "ST",
+      "overallRating": 89,
+      "attackRating": 91,
+      "defenceRating": 64,
+      "stamina": 86,
+      "countryId": "argentina"
+    },
+    {
+      "id": "erling-haaland",
+      "name": "Erling Haaland",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "norway"
+    },
+    {
+      "id": "harry-kane",
+      "name": "Harry Kane",
+      "position": "ST",
+      "overallRating": 89,
+      "attackRating": 91,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "karim-benzema",
+      "name": "Karim Benzema",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "marco-van-basten",
+      "name": "Marco van Basten",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 62,
+      "stamina": 83,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "davor-suker",
+      "name": "Davor Šuker",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 88,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "croatia"
+    },
+    {
+      "id": "hristo-stoichkov",
+      "name": "Hristo Stoichkov",
+      "position": "ST",
+      "overallRating": 87,
+      "attackRating": 89,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "bulgaria"
+    },
+    {
+      "id": "hakan-şukur",
+      "name": "Hakan Şükür",
+      "position": "ST",
+      "overallRating": 83,
+      "attackRating": 86,
+      "defenceRating": 55,
+      "stamina": 81,
+      "countryId": "turkey"
+    },
+    {
+      "id": "eusebio",
+      "name": "Eusebio",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "portugal"
+    },
+    {
+      "id": "romario",
+      "name": "Romário",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "bebeto",
+      "name": "Bebeto",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "bebeto-da-silva",
+      "name": "Bebeto da Silva",
+      "position": "ST",
+      "overallRating": 82,
+      "attackRating": 84,
+      "defenceRating": 56,
+      "stamina": 81,
+      "countryId": "brazil"
+    },
+    {
+      "id": "dunga",
+      "name": "Dunga",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 80,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "taffarel",
+      "name": "Taffarel",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 36,
+      "defenceRating": 84,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "leonardo-nascimento",
+      "name": "Leonardo Nascimento",
+      "position": "LB",
+      "overallRating": 84,
+      "attackRating": 48,
+      "defenceRating": 85,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "rogerio-ceni",
+      "name": "Rogério Ceni",
+      "position": "GK",
+      "overallRating": 81,
+      "attackRating": 55,
+      "defenceRating": 79,
+      "stamina": 80,
+      "countryId": "brazil"
+    },
+    {
+      "id": "lisandro-martinez",
+      "name": "Lisandro Martínez",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 42,
+      "defenceRating": 86,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
+      "id": "alejandro-garnacho",
+      "name": "Alejandro Garnacho",
+      "position": "LW",
+      "overallRating": 82,
+      "attackRating": 83,
+      "defenceRating": 55,
+      "stamina": 83,
+      "countryId": "argentina"
+    },
+    {
+      "id": "alejandro-balde",
+      "name": "Alejandro Balde",
+      "position": "LB",
+      "overallRating": 81,
+      "attackRating": 46,
+      "defenceRating": 82,
+      "stamina": 85,
+      "countryId": "spain"
+    },
+    {
+      "id": "julian-alvarez",
+      "name": "Julián Álvarez",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
+      "id": "gavi",
+      "name": "Gavi",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 76,
+      "defenceRating": 72,
+      "stamina": 83,
+      "countryId": "spain"
+    },
+    {
+      "id": "pedri",
+      "name": "Pedri",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "robert-lewandowski",
+      "name": "Robert Lewandowski",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 58,
+      "stamina": 85,
+      "countryId": "poland"
+    },
+    {
+      "id": "kylian-mbappe",
+      "name": "Kylian Mbappé",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 60,
+      "stamina": 88,
+      "countryId": "france"
+    },
+    {
+      "id": "jude-bellingham",
+      "name": "Jude Bellingham",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 76,
+      "defenceRating": 74,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "mason-mount",
+      "name": "Mason Mount",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 78,
+      "defenceRating": 68,
+      "stamina": 83,
+      "countryId": "england"
+    },
+    {
+      "id": "messi",
+      "name": "Messi",
+      "position": "LW",
+      "overallRating": 93,
+      "attackRating": 94,
+      "defenceRating": 65,
+      "stamina": 85,
+      "countryId": "argentina"
+    },
+    {
+      "id": "naldo",
+      "name": "Naldo",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "brazil"
+    },
+    {
+      "id": "carlos-puyol",
+      "name": "Carlos Puyol",
+      "position": "CB",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 85,
+      "countryId": "spain"
+    },
+    {
+      "id": "rodrygo-goes",
+      "name": "Rodrygo Goes",
+      "position": "RW",
+      "overallRating": 83,
+      "attackRating": 85,
+      "defenceRating": 57,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "antony",
+      "name": "Antony",
+      "position": "RW",
+      "overallRating": 82,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "goncalo-ramos",
+      "name": "Gonçalo Ramos",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 82,
+      "defenceRating": 56,
+      "stamina": 82,
+      "countryId": "portugal"
+    },
+    {
+      "id": "ousmane-dembele",
+      "name": "Ousmane Dembélé",
+      "position": "RW",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 56,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "griezmann",
+      "name": "Griezmann",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "nacho-fernandez",
+      "name": "Nacho Fernández",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "spain"
+    },
+    {
+      "id": "james-rodriguez",
+      "name": "James Rodríguez",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 82,
+      "defenceRating": 68,
+      "stamina": 83,
+      "countryId": "colombia"
+    },
+    {
+      "id": "radamel-falcao",
+      "name": "Radamel Falcao",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 87,
+      "defenceRating": 60,
+      "stamina": 82,
+      "countryId": "colombia"
+    },
+    {
+      "id": "carlos-valderrama",
+      "name": "Carlos Valderrama",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 78,
+      "defenceRating": 65,
+      "stamina": 80,
+      "countryId": "colombia"
+    },
+    {
+      "id": "juan-fernando-quintero",
+      "name": "Juan Fernando Quintero",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 79,
+      "defenceRating": 64,
+      "stamina": 81,
+      "countryId": "colombia"
+    },
+    {
+      "id": "george-weah",
+      "name": "George Weah",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "liberia"
+    },
+    {
+      "id": "samuel-eto'o",
+      "name": "Samuel Eto'o",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "cameroon"
+    },
+    {
+      "id": "yaya-toure",
+      "name": "Yaya Touré",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 76,
+      "defenceRating": 78,
+      "stamina": 84,
+      "countryId": "ivory-coast"
+    },
+    {
+      "id": "pierre-kalulu",
+      "name": "Pierre Kalulu",
+      "position": "CB",
+      "overallRating": 81,
+      "attackRating": 38,
+      "defenceRating": 82,
+      "stamina": 81,
+      "countryId": "cameroon"
+    },
+    {
+      "id": "son-heung-min",
+      "name": "Son Heung-min",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "south-korea"
+    },
+    {
+      "id": "ki-sung-yueng",
+      "name": "Ki Sung-yueng",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 72,
+      "defenceRating": 74,
+      "stamina": 82,
+      "countryId": "south-korea"
+    },
+    {
+      "id": "javier-mascherano",
+      "name": "Javier Mascherano",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 84,
+      "stamina": 85,
+      "countryId": "argentina"
+    },
+    {
+      "id": "javier-zanetti",
+      "name": "Javier Zanetti",
+      "position": "RB",
+      "overallRating": 86,
+      "attackRating": 48,
+      "defenceRating": 85,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
+      "id": "declan-rice",
+      "name": "Declan Rice",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 68,
+      "defenceRating": 80,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "kalvin-phillips",
+      "name": "Kalvin Phillips",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 65,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "england"
+    },
+    {
+      "id": "fred",
+      "name": "Fred",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 70,
+      "defenceRating": 76,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "fabinho",
+      "name": "Fabinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 68,
+      "defenceRating": 81,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "thiago-alcântara",
+      "name": "Thiago Alcântara",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 76,
+      "defenceRating": 74,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "coutinho",
+      "name": "Coutinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "igor-akinfeev",
+      "name": "Igor Akinfeev",
+      "position": "CM",
+      "overallRating": 82,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 82,
+      "countryId": "russia"
+    },
+    {
+      "id": "alan-dzagoev",
+      "name": "Alan Dzagoev",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 77,
+      "defenceRating": 68,
+      "stamina": 81,
+      "countryId": "russia"
+    },
+    {
+      "id": "raul-gonzalez",
+      "name": "Raúl González",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "spain"
+    },
+    {
+      "id": "olivier-giroud",
+      "name": "Olivier Giroud",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 85,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "france"
+    },
+    {
+      "id": "pepe",
+      "name": "Pepe",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 46,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "portugal"
+    },
+    {
+      "id": "jerôme-boateng",
+      "name": "Jérôme Boateng",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 44,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "sami-khedira",
+      "name": "Sami Khedira",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 76,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "arjen-robben",
+      "name": "Arjen Robben",
+      "position": "RW",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "wesley-sneijder",
+      "name": "Wesley Sneijder",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 83,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "ronaldinho-gaucho",
+      "name": "Ronaldinho Gaúcho",
+      "position": "LW",
+      "overallRating": 91,
+      "attackRating": 88,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "ronaldo-fenômeno",
+      "name": "Ronaldo Fenômeno",
+      "position": "ST",
+      "overallRating": 92,
+      "attackRating": 94,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "zinedin-zidane",
+      "name": "Zinedin Zidane",
+      "position": "CM",
+      "overallRating": 92,
+      "attackRating": 85,
+      "defenceRating": 75,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "arkadiusz-milik",
+      "name": "Arkadiusz Milik",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 82,
+      "countryId": "poland"
+    },
+    {
+      "id": "aymeric-laporte",
+      "name": "Aymeric Laporte",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "garrincha",
+      "name": "Garrincha",
+      "position": "RW",
+      "overallRating": 90,
+      "attackRating": 91,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "leônidas-da-silva",
+      "name": "Leônidas da Silva",
+      "position": "ST",
+      "overallRating": 87,
+      "attackRating": 88,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "de-bruyne",
+      "name": "De Bruyne",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 84,
+      "defenceRating": 72,
+      "stamina": 86,
+      "countryId": "belgium"
+    },
+    {
+      "id": "juan-mata",
+      "name": "Juan Mata",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 66,
+      "stamina": 81,
+      "countryId": "spain"
+    },
+    {
+      "id": "isco",
+      "name": "Isco",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 79,
+      "defenceRating": 67,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "niklas-sule",
+      "name": "Niklas Süle",
+      "position": "CB",
+      "overallRating": 83,
+      "attackRating": 40,
+      "defenceRating": 84,
+      "stamina": 82,
+      "countryId": "germany"
+    },
+    {
+      "id": "joel-matip",
+      "name": "Joël Matip",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 38,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "cameroon"
+    },
+    {
+      "id": "suarez",
+      "name": "Suárez",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 65,
+      "stamina": 86,
+      "countryId": "uruguay"
+    },
+    {
+      "id": "cavani",
+      "name": "Cavani",
+      "position": "ST",
+      "overallRating": 86,
+      "attackRating": 88,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "uruguay"
+    },
+    {
+      "id": "alexis-sanchez",
+      "name": "Alexis Sánchez",
+      "position": "LW",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "chile"
+    },
+    {
+      "id": "diogo-jota",
+      "name": "Diogo Jota",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "portugal"
+    },
+    {
+      "id": "ruben-neves",
+      "name": "Ruben Neves",
+      "position": "CM",
+      "overallRating": 82,
+      "attackRating": 72,
+      "defenceRating": 76,
+      "stamina": 83,
+      "countryId": "portugal"
+    },
+    {
+      "id": "jose-sa",
+      "name": "José Sá",
+      "position": "GK",
+      "overallRating": 81,
+      "attackRating": 32,
+      "defenceRating": 80,
+      "stamina": 80,
+      "countryId": "portugal"
+    },
+    {
+      "id": "ruben-semedo",
+      "name": "Rúben Semedo",
+      "position": "CB",
+      "overallRating": 80,
+      "attackRating": 35,
+      "defenceRating": 81,
+      "stamina": 79,
+      "countryId": "portugal"
+    },
+    {
+      "id": "giorgos-kyriakidis",
+      "name": "Giorgos Kyriakidis",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 68,
+      "defenceRating": 70,
+      "stamina": 78,
+      "countryId": "greece"
+    },
+    {
+      "id": "kostas-mitroglou",
+      "name": "Kostas Mitroglou",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 52,
+      "stamina": 77,
+      "countryId": "greece"
+    },
+    {
+      "id": "panagiotis-kone",
+      "name": "Panagiotis Kone",
+      "position": "CM",
+      "overallRating": 75,
+      "attackRating": 66,
+      "defenceRating": 68,
+      "stamina": 76,
+      "countryId": "greece"
+    },
+    {
+      "id": "christian-poulsen",
+      "name": "Christian Poulsen",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 68,
+      "defenceRating": 78,
+      "stamina": 81,
+      "countryId": "denmark"
+    },
+    {
+      "id": "thomas-gravesen",
+      "name": "Thomas Gravesen",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 72,
+      "defenceRating": 76,
+      "stamina": 82,
+      "countryId": "denmark"
+    },
+    {
+      "id": "soren-larsen",
+      "name": "Soren Larsen",
+      "position": "ST",
+      "overallRating": 77,
+      "attackRating": 78,
+      "defenceRating": 52,
+      "stamina": 76,
+      "countryId": "denmark"
+    },
+    {
+      "id": "magnus-wolff-eikeng",
+      "name": "Magnus Wolff Eikeng",
+      "position": "ST",
+      "overallRating": 74,
+      "attackRating": 75,
+      "defenceRating": 50,
+      "stamina": 74,
+      "countryId": "norway"
+    },
+    {
+      "id": "andreas-cornelius",
+      "name": "Andreas Cornelius",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 54,
+      "stamina": 77,
+      "countryId": "denmark"
+    },
+    {
+      "id": "patrik-berger",
+      "name": "Patrik Berger",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 76,
+      "defenceRating": 72,
+      "stamina": 80,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "tomas-rosický",
+      "name": "Tomáš Rosický",
+      "position": "CM",
+      "overallRating": 82,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 81,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "pavel-nedved",
+      "name": "Pavel Nedved",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 80,
+      "defenceRating": 72,
+      "stamina": 83,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "toby-alderweireld",
+      "name": "Toby Alderweireld",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "belgium"
+    },
+    {
+      "id": "jan-vertonghen",
+      "name": "Jan Vertonghen",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "belgium"
+    },
+    {
+      "id": "axel-witsel",
+      "name": "Axel Witsel",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 70,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "belgium"
+    },
+    {
+      "id": "marouane-fellaini",
+      "name": "Marouane Fellaini",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 74,
+      "defenceRating": 74,
+      "stamina": 82,
+      "countryId": "belgium"
+    },
+    {
+      "id": "demba-ba",
+      "name": "Demba Ba",
+      "position": "ST",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 54,
+      "stamina": 79,
+      "countryId": "senegal"
+    },
+    {
+      "id": "papa-bouba-diop",
+      "name": "Papa Bouba Diop",
+      "position": "CM",
+      "overallRating": 77,
+      "attackRating": 68,
+      "defenceRating": 72,
+      "stamina": 78,
+      "countryId": "senegal"
+    },
+    {
+      "id": "el-hadji-diouf",
+      "name": "El Hadji Diouf",
+      "position": "LW",
+      "overallRating": 79,
+      "attackRating": 80,
+      "defenceRating": 56,
+      "stamina": 78,
+      "countryId": "senegal"
+    },
+    {
+      "id": "alou-diarra",
+      "name": "Alou Diarra",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 65,
+      "defenceRating": 70,
+      "stamina": 76,
+      "countryId": "senegal"
+    },
+    {
+      "id": "papiss-cisse",
+      "name": "Papiss Cissé",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 52,
+      "stamina": 77,
+      "countryId": "senegal"
+    },
+    {
+      "id": "fabrice-muamba",
+      "name": "Fabrice Muamba",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 65,
+      "defenceRating": 72,
+      "stamina": 77,
+      "countryId": "congo"
+    },
+    {
+      "id": "michu",
+      "name": "Michu",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 80,
+      "countryId": "spain"
+    },
+    {
+      "id": "alvaro-arbeloa",
+      "name": "Álvaro Arbeloa",
+      "position": "RB",
+      "overallRating": 82,
+      "attackRating": 44,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "spain"
+    },
+    {
+      "id": "xabi-alonso",
+      "name": "Xabi Alonso",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 74,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "spain"
+    },
+    {
+      "id": "savio",
+      "name": "Sávio",
+      "position": "ST",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 54,
+      "stamina": 79,
+      "countryId": "brazil"
+    },
+    {
+      "id": "neymar-junior",
+      "name": "Neymar Junior",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 91,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "luiz-gustavo",
+      "name": "Luiz Gustavo",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 68,
+      "defenceRating": 76,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "hulk",
+      "name": "Hulk",
+      "position": "RW",
+      "overallRating": 81,
+      "attackRating": 84,
+      "defenceRating": 56,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "philippe-coutinho",
+      "name": "Philippe Coutinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "gerson-martins",
+      "name": "Gerson Martins",
+      "position": "CM",
+      "overallRating": 75,
+      "attackRating": 70,
+      "defenceRating": 68,
+      "stamina": 76,
+      "countryId": "brazil"
+    },
+    {
+      "id": "jorge",
+      "name": "Jorge",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 67,
+      "defenceRating": 71,
+      "stamina": 76,
+      "countryId": "brazil"
+    },
+    {
+      "id": "douglas-costa",
+      "name": "Douglas Costa",
+      "position": "RW",
+      "overallRating": 82,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "oscar",
+      "name": "Oscar",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 81,
+      "countryId": "brazil"
+    },
+    {
+      "id": "willian-borges-da-silva",
+      "name": "Willian Borges da Silva",
+      "position": "RW",
+      "overallRating": 81,
+      "attackRating": 82,
+      "defenceRating": 58,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "lukas-podolski",
+      "name": "Lukas Podolski",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 85,
+      "defenceRating": 58,
+      "stamina": 83,
+      "countryId": "germany"
+    },
+    {
+      "id": "samir-nasri",
+      "name": "Samir Nasri",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "france"
+    },
+    {
+      "id": "mathieu-valbuena",
+      "name": "Mathieu Valbuena",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 78,
+      "defenceRating": 64,
+      "stamina": 80,
+      "countryId": "france"
+    },
+    {
+      "id": "nemanja-vidić",
+      "name": "Nemanja Vidić",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "serbia"
+    },
+    {
+      "id": "debug-test",
+      "name": "Debug Test",
+      "position": "MF",
+      "overallRating": 75,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 85,
+      "countryId": ""
+    },
+    {
+      "id": "logging-test",
+      "name": "Logging Test",
+      "position": "MF",
+      "overallRating": 75,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 85,
+      "countryId": "",
+      "clubs": [
+        "barcelona"
+      ],
+      "classicTeams": []
     }
   ],
   "classicTeams": [

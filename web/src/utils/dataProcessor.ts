@@ -72,23 +72,46 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
 
   const clubs: Club[] = [];
 
-  // Create Club objects for actual clubs (e.g., Manchester United)
+  // Create Club objects for actual clubs (with explicit rosters)
   const actualClubs = rawData.clubs || [];
   actualClubs.forEach(club => {
-    const clubPlayers = club.countryId ? playersByCountry.get(club.countryId) || [] : [];
-    const allTimePlayers: Player[] = clubPlayers
-      .map(p => ({
-        id: p.id,
-        name: p.name,
-        countryId: p.countryId,
-        position: p.position,
-        overallRating: p.overallRating,
-        attackRating: p.attackRating,
-        defenceRating: p.defenceRating,
-        stamina: p.stamina,
-        eraAppearances: []
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
+    let allTimePlayers: Player[] = [];
+
+    // If club has a roster, use that; otherwise use all players from country
+    if ((club as any).roster && Array.isArray((club as any).roster)) {
+      allTimePlayers = (club as any).roster
+        .map((playerId: string) => {
+          const player = playersById.get(playerId);
+          return player ? {
+            id: player.id,
+            name: player.name,
+            countryId: player.countryId,
+            position: player.position as 'GK' | 'DF' | 'MF' | 'FW',
+            overallRating: player.overallRating,
+            attackRating: player.attackRating,
+            defenceRating: player.defenceRating,
+            stamina: player.stamina,
+            eraAppearances: []
+          } : null;
+        })
+        .filter((p: any): p is Player => p !== null)
+        .sort((a: Player, b: Player) => a.name.localeCompare(b.name));
+    } else {
+      const clubPlayers = club.countryId ? playersByCountry.get(club.countryId) || [] : [];
+      allTimePlayers = clubPlayers
+        .map(p => ({
+          id: p.id,
+          name: p.name,
+          countryId: p.countryId,
+          position: p.position as 'GK' | 'DF' | 'MF' | 'FW',
+          overallRating: p.overallRating,
+          attackRating: p.attackRating,
+          defenceRating: p.defenceRating,
+          stamina: p.stamina,
+          eraAppearances: []
+        }))
+        .sort((a: Player, b: Player) => a.name.localeCompare(b.name));
+    }
 
     clubs.push({
       id: club.id,
@@ -108,14 +131,14 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
         id: p.id,
         name: p.name, // No year suffix - these are unique player names!
         countryId: p.countryId,
-        position: p.position,
+        position: p.position as 'GK' | 'DF' | 'MF' | 'FW',
         overallRating: p.overallRating,
         attackRating: p.attackRating,
         defenceRating: p.defenceRating,
         stamina: p.stamina,
         eraAppearances: []
       }))
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .sort((a: Player, b: Player) => a.name.localeCompare(b.name));
 
     clubs.push({
       id: country.id,
@@ -137,7 +160,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
         id: tp.playerId,
         name: player?.name || 'Unknown',
         countryId: player?.countryId || '',
-        position: tp.position || player?.position || '',
+        position: (tp.position || player?.position || 'MF') as 'GK' | 'DF' | 'MF' | 'FW',
         overallRating: player?.overallRating || 0,
         attackRating: player?.attackRating || 0,
         defenceRating: player?.defenceRating || 0,
