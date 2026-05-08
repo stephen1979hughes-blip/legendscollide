@@ -8,6 +8,7 @@ export interface Player {
   stamina: number;
   nationality?: string;
   eraAppearances?: number[];  // Years player appeared
+  bio?: string;
 }
 
 export interface Club {
