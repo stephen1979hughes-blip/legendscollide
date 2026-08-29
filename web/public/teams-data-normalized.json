@@ -2,7 +2,7 @@
   "metadata": {
     "version": "3.0",
     "description": "Normalized football data with relationships (single source of truth)",
-    "lastUpdated": "2026-08-29T21:50:54.626Z"
+    "lastUpdated": "2026-08-29T22:14:50.557Z"
   },
   "countries": [
     {
@@ -131,6 +131,11 @@
       "code": "LR"
     },
     {
+      "id": "montenegro",
+      "name": "Montenegro",
+      "code": "ME"
+    },
+    {
       "id": "netherlands",
       "name": "Netherlands",
       "code": "NE"
@@ -194,6 +199,11 @@
       "id": "spain",
       "name": "Spain",
       "code": "SP"
+    },
+    {
+      "id": "sweden",
+      "name": "Sweden",
+      "code": "SE"
     },
     {
       "id": "turkey",
@@ -325,7 +335,6 @@
         "diego-maradona",
         "ronaldo",
         "dragan-stojković",
-        "logging-test",
         "victor-valdes",
         "eric-abidal",
         "dani-alves",
@@ -610,7 +619,7 @@
     {
       "id": "alan-hansen",
       "name": "Alan Hansen",
-      "countryId": "",
+      "countryId": "scotland",
       "position": "DF",
       "overallRating": 86,
       "attackRating": 40,
@@ -651,7 +660,7 @@
     {
       "id": "alessandro-costacurta",
       "name": "Alessandro Costacurta",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 87,
       "attackRating": 40,
@@ -672,7 +681,7 @@
     {
       "id": "alessandro-reuta",
       "name": "Alessandro Reuta",
-      "countryId": "",
+      "countryId": "italy",
       "position": "GK",
       "overallRating": 87,
       "attackRating": 20,
@@ -816,7 +825,7 @@
     {
       "id": "antonio-giordano",
       "name": "Antonio Giordano",
-      "countryId": "",
+      "countryId": "italy",
       "position": "MF",
       "overallRating": 84,
       "attackRating": 75,
@@ -837,7 +846,7 @@
     {
       "id": "arie-haan",
       "name": "Arie Haan",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "MF",
       "overallRating": 87,
       "attackRating": 82,
@@ -909,7 +918,7 @@
     {
       "id": "bacary-sagna",
       "name": "Bacary Sagna",
-      "countryId": "",
+      "countryId": "france",
       "position": "DF",
       "overallRating": 85,
       "attackRating": 50,
@@ -920,7 +929,7 @@
     {
       "id": "barry-hulshoff",
       "name": "Barry Hulshoff",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "DF",
       "overallRating": 83,
       "attackRating": 35,
@@ -1056,7 +1065,7 @@
     {
       "id": "branko-crvenkovic",
       "name": "Branko Crvenkovic",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "FW",
       "overallRating": 79,
       "attackRating": 80,
@@ -1119,7 +1128,7 @@
     {
       "id": "careca",
       "name": "Careca",
-      "countryId": "",
+      "countryId": "brazil",
       "position": "FW",
       "overallRating": 90,
       "attackRating": 92,
@@ -1233,7 +1242,7 @@
     {
       "id": "ciro-ferrara",
       "name": "Ciro Ferrara",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 88,
       "attackRating": 40,
@@ -1317,7 +1326,7 @@
     {
       "id": "dani-alves",
       "name": "Dani Alves",
-      "countryId": "",
+      "countryId": "brazil",
       "position": "DF",
       "overallRating": 89,
       "attackRating": 70,
@@ -1358,7 +1367,7 @@
     {
       "id": "daniele-massaro",
       "name": "Daniele Massaro",
-      "countryId": "",
+      "countryId": "italy",
       "position": "FW",
       "overallRating": 84,
       "attackRating": 82,
@@ -1369,7 +1378,7 @@
     {
       "id": "danny-blind",
       "name": "Danny Blind",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "DF",
       "overallRating": 86,
       "attackRating": 45,
@@ -1380,7 +1389,7 @@
     {
       "id": "darko-micanovic",
       "name": "Darko Micanović",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "MF",
       "overallRating": 81,
       "attackRating": 72,
@@ -1471,16 +1480,6 @@
       "countryId": "belgium"
     },
     {
-      "id": "debug-test",
-      "name": "Debug Test",
-      "position": "MF",
-      "overallRating": 75,
-      "attackRating": 75,
-      "defenceRating": 75,
-      "stamina": 85,
-      "countryId": ""
-    },
-    {
       "id": "declan-rice",
       "name": "Declan Rice",
       "position": "CM",
@@ -1493,7 +1492,7 @@
     {
       "id": "dejan-savicevic",
       "name": "Dejan Savičević",
-      "countryId": "",
+      "countryId": "montenegro",
       "position": "FW",
       "overallRating": 88,
       "attackRating": 87,
@@ -1514,7 +1513,7 @@
     {
       "id": "demetrio-albertini",
       "name": "Demetrio Albertini",
-      "countryId": "",
+      "countryId": "italy",
       "position": "MF",
       "overallRating": 84,
       "attackRating": 70,
@@ -1546,7 +1545,7 @@
     {
       "id": "dennis-bergkamp",
       "name": "Dennis Bergkamp",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "FW",
       "overallRating": 90,
       "attackRating": 89,
@@ -1628,7 +1627,7 @@
     {
       "id": "dragoslav-jevric",
       "name": "Dragoslav Jevrić",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "GK",
       "overallRating": 83,
       "attackRating": 20,
@@ -1813,7 +1812,7 @@
     {
       "id": "fernando-de-napoli",
       "name": "Fernando De Napoli",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 83,
       "attackRating": 35,
@@ -1866,7 +1865,7 @@
     {
       "id": "franco-baresi",
       "name": "Franco Baresi",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 90,
       "attackRating": 45,
@@ -1907,7 +1906,7 @@
     {
       "id": "fredrik-ljungberg",
       "name": "Fredrik Ljungberg",
-      "countryId": "",
+      "countryId": "sweden",
       "position": "MF",
       "overallRating": 85,
       "attackRating": 80,
@@ -2112,7 +2111,7 @@
     {
       "id": "gianfranco-zola",
       "name": "Gianfranco Zola",
-      "countryId": "",
+      "countryId": "italy",
       "position": "MF",
       "overallRating": 87,
       "attackRating": 85,
@@ -2133,7 +2132,7 @@
     {
       "id": "gianluca-vialli",
       "name": "Gianluca Vialli",
-      "countryId": "",
+      "countryId": "italy",
       "position": "FW",
       "overallRating": 88,
       "attackRating": 89,
@@ -2225,7 +2224,7 @@
     {
       "id": "graeme-souness",
       "name": "Graeme Souness",
-      "countryId": "",
+      "countryId": "scotland",
       "position": "MF",
       "overallRating": 89,
       "attackRating": 78,
@@ -2338,7 +2337,7 @@
     {
       "id": "heinz-stuy",
       "name": "Heinz Stuy",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "DF",
       "overallRating": 80,
       "attackRating": 30,
@@ -2421,7 +2420,7 @@
     {
       "id": "ivo-udal",
       "name": "Ivo Udal",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 81,
       "attackRating": 25,
@@ -2544,7 +2543,7 @@
     {
       "id": "jens-lehmann",
       "name": "Jens Lehmann",
-      "countryId": "",
+      "countryId": "germany",
       "position": "GK",
       "overallRating": 87,
       "attackRating": 20,
@@ -2616,7 +2615,7 @@
     {
       "id": "johan-neeskens",
       "name": "Johan Neeskens",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "MF",
       "overallRating": 90,
       "attackRating": 85,
@@ -2658,7 +2657,7 @@
     {
       "id": "john-toshack",
       "name": "John Toshack",
-      "countryId": "",
+      "countryId": "wales",
       "position": "FW",
       "overallRating": 81,
       "attackRating": 80,
@@ -2669,7 +2668,7 @@
     {
       "id": "john-wark",
       "name": "John Wark",
-      "countryId": "",
+      "countryId": "scotland",
       "position": "MF",
       "overallRating": 84,
       "attackRating": 75,
@@ -2680,7 +2679,7 @@
     {
       "id": "johnny-rep",
       "name": "Johnny Rep",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "FW",
       "overallRating": 84,
       "attackRating": 84,
@@ -2732,7 +2731,7 @@
     {
       "id": "jorge-da-silva",
       "name": "Jorge da Silva",
-      "countryId": "",
+      "countryId": "uruguay",
       "position": "DF",
       "overallRating": 84,
       "attackRating": 30,
@@ -3031,7 +3030,7 @@
     {
       "id": "lionel-messi",
       "name": "Lionel Messi",
-      "countryId": "",
+      "countryId": "argentina",
       "position": "FW",
       "overallRating": 94,
       "attackRating": 93,
@@ -3048,20 +3047,6 @@
       "defenceRating": 86,
       "stamina": 84,
       "countryId": "argentina"
-    },
-    {
-      "id": "logging-test",
-      "name": "Logging Test",
-      "position": "MF",
-      "overallRating": 75,
-      "attackRating": 75,
-      "defenceRating": 75,
-      "stamina": 85,
-      "countryId": "",
-      "clubs": [
-        "barcelona"
-      ],
-      "classicTeams": []
     },
     {
       "id": "lothar-matthaus",
@@ -3198,7 +3183,7 @@
     {
       "id": "marcelo",
       "name": "Marcelo",
-      "countryId": "",
+      "countryId": "brazil",
       "position": "DF",
       "overallRating": 89,
       "attackRating": 65,
@@ -3280,7 +3265,7 @@
     {
       "id": "mark-lawrenson",
       "name": "Mark Lawrenson",
-      "countryId": "",
+      "countryId": "ireland",
       "position": "DF",
       "overallRating": 88,
       "attackRating": 45,
@@ -3341,7 +3326,7 @@
     {
       "id": "mauro-tassotti",
       "name": "Mauro Tassotti",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 85,
       "attackRating": 35,
@@ -3402,7 +3387,7 @@
     {
       "id": "miodrag-belodedici",
       "name": "Miodrag Belodedici",
-      "countryId": "",
+      "countryId": "romania",
       "position": "DF",
       "overallRating": 85,
       "attackRating": 40,
@@ -3628,7 +3613,7 @@
     {
       "id": "paolo-maldini",
       "name": "Paolo Maldini",
-      "countryId": "",
+      "countryId": "italy",
       "position": "DF",
       "overallRating": 91,
       "attackRating": 50,
@@ -3760,7 +3745,7 @@
     {
       "id": "pedro",
       "name": "Pedro",
-      "countryId": "",
+      "countryId": "spain",
       "position": "FW",
       "overallRating": 86,
       "attackRating": 85,
@@ -3834,7 +3819,7 @@
     {
       "id": "phil-neal",
       "name": "Phil Neal",
-      "countryId": "",
+      "countryId": "england",
       "position": "DF",
       "overallRating": 87,
       "attackRating": 40,
@@ -3886,7 +3871,7 @@
     {
       "id": "piet-schrijvers",
       "name": "Piet Schrijvers",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "GK",
       "overallRating": 85,
       "attackRating": 20,
@@ -3937,7 +3922,7 @@
     {
       "id": "ray-clemence",
       "name": "Ray Clemence",
-      "countryId": "",
+      "countryId": "england",
       "position": "GK",
       "overallRating": 90,
       "attackRating": 25,
@@ -3948,7 +3933,7 @@
     {
       "id": "ray-kennedy",
       "name": "Ray Kennedy",
-      "countryId": "",
+      "countryId": "england",
       "position": "MF",
       "overallRating": 85,
       "attackRating": 75,
@@ -4021,7 +4006,7 @@
     {
       "id": "robert-prosinecski",
       "name": "Robert Prosinečski",
-      "countryId": "",
+      "countryId": "croatia",
       "position": "MF",
       "overallRating": 87,
       "attackRating": 80,
@@ -4042,7 +4027,7 @@
     {
       "id": "roberto-donadoni",
       "name": "Roberto Donadoni",
-      "countryId": "",
+      "countryId": "italy",
       "position": "MF",
       "overallRating": 86,
       "attackRating": 78,
@@ -4183,7 +4168,7 @@
     {
       "id": "ruud-krol",
       "name": "Ruud Krol",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "DF",
       "overallRating": 88,
       "attackRating": 55,
@@ -4214,7 +4199,7 @@
     {
       "id": "salvatore-bagni",
       "name": "Salvatore Bagni",
-      "countryId": "",
+      "countryId": "italy",
       "position": "MF",
       "overallRating": 85,
       "attackRating": 72,
@@ -4296,7 +4281,7 @@
     {
       "id": "savo-milosevic",
       "name": "Savo Milošević",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "DF",
       "overallRating": 85,
       "attackRating": 65,
@@ -4307,7 +4292,7 @@
     {
       "id": "sebastiano-rossi",
       "name": "Sebastiano Rossi",
-      "countryId": "",
+      "countryId": "italy",
       "position": "GK",
       "overallRating": 86,
       "attackRating": 20,
@@ -4381,7 +4366,7 @@
     {
       "id": "sinisa-mihajlovic",
       "name": "Sinisa Mihajlovic",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "DF",
       "overallRating": 86,
       "attackRating": 55,
@@ -4392,7 +4377,7 @@
     {
       "id": "sjaak-swart",
       "name": "Sjaak Swart",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "FW",
       "overallRating": 83,
       "attackRating": 82,
@@ -4403,7 +4388,7 @@
     {
       "id": "slavisa-jokanovic",
       "name": "Slavisa Jokanovic",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "DF",
       "overallRating": 82,
       "attackRating": 45,
@@ -4414,7 +4399,7 @@
     {
       "id": "sol-campbell",
       "name": "Sol Campbell",
-      "countryId": "",
+      "countryId": "england",
       "position": "DF",
       "overallRating": 89,
       "attackRating": 50,
@@ -4465,7 +4450,7 @@
     {
       "id": "steve-heighway",
       "name": "Steve Heighway",
-      "countryId": "",
+      "countryId": "ireland",
       "position": "FW",
       "overallRating": 83,
       "attackRating": 82,
@@ -4702,7 +4687,7 @@
     {
       "id": "vinije-komatinovic",
       "name": "Vinije Komatinović",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "FW",
       "overallRating": 80,
       "attackRating": 81,
@@ -4723,7 +4708,7 @@
     {
       "id": "vladimir-matic",
       "name": "Vladimir Matić",
-      "countryId": "",
+      "countryId": "serbia",
       "position": "MF",
       "overallRating": 82,
       "attackRating": 70,
@@ -4805,7 +4790,7 @@
     {
       "id": "wim-jansen",
       "name": "Wim Jansen",
-      "countryId": "",
+      "countryId": "netherlands",
       "position": "DF",
       "overallRating": 85,
       "attackRating": 40,
@@ -4827,7 +4812,7 @@
     {
       "id": "xavi",
       "name": "Xavi",
-      "countryId": "",
+      "countryId": "spain",
       "position": "MF",
       "overallRating": 91,
       "attackRating": 80,
@@ -4890,7 +4875,7 @@
     {
       "id": "zvonimir-boban",
       "name": "Zvonimir Boban",
-      "countryId": "",
+      "countryId": "croatia",
       "position": "MF",
       "overallRating": 87,
       "attackRating": 80,
