@@ -10,6 +10,34 @@ interface BroadcastState {
   teamB: Team;
 }
 
+const getPositionOrder = (position: string): number => {
+  const order: { [key: string]: number } = {
+    'GK': 0,
+    'DF': 1,
+    'CB': 1,
+    'LB': 1,
+    'RB': 1,
+    'MF': 2,
+    'CM': 2,
+    'CAM': 2,
+    'LM': 2,
+    'RM': 2,
+    'FW': 3,
+    'ST': 3,
+    'LW': 3,
+    'RW': 3
+  };
+  return order[position] ?? 4;
+};
+
+const sortPlayersByPosition = (players: any[]): any[] => {
+  return [...players].sort((a, b) => {
+    const orderA = getPositionOrder(a.position);
+    const orderB = getPositionOrder(b.position);
+    return orderA - orderB;
+  });
+};
+
 export const Broadcast: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,7 +57,7 @@ export const Broadcast: React.FC = () => {
     !state.teamB.players
   ) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
         <Header showBack />
         <main className="flex-1 flex items-center justify-center px-6">
           <div className="text-center">
@@ -184,7 +212,7 @@ export const Broadcast: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
       <Header showBack />
 
       <main className="flex-1 px-6 py-8">
@@ -192,14 +220,14 @@ export const Broadcast: React.FC = () => {
           {/* Three column layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Left: Team A Lineup */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow p-6 order-3 lg:order-1">
               <Link to={`/team/${teamA.id}`} className="hover:opacity-80 transition">
                 <h3 className="text-lg font-bold text-primary mb-2 hover:text-secondary transition">{teamA.name}</h3>
               </Link>
               <p className="text-sm text-muted mb-4">{teamA.year}</p>
 
               <div className="space-y-2">
-                {teamA.players.slice(0, 11).map((player) => (
+                {sortPlayersByPosition(teamA.players).slice(0, 11).map((player) => (
                   <Link
                     key={player.id}
                     to={`/player/${player.id}`}
@@ -216,23 +244,23 @@ export const Broadcast: React.FC = () => {
             </div>
 
             {/* Center: Broadcast */}
-            <div className="bg-white rounded-lg shadow p-6 lg:col-span-1">
+            <div className="bg-white/10 border border-white/20 backdrop-blur rounded-lg shadow p-6 lg:col-span-1 order-1 lg:order-2">
               {/* Match Time */}
-              <div className="text-center mb-6 pb-6 border-b border-gray-200">
-                <div className="text-5xl font-bold text-primary mb-2">{currentMatchTime}'</div>
-                <div className="text-sm text-muted font-semibold uppercase">{matchStatus}</div>
+              <div className="text-center mb-6 pb-6 border-b border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">{currentMatchTime}'</div>
+                <div className="text-sm text-white/70 font-semibold uppercase">{matchStatus}</div>
               </div>
 
               {/* Score */}
-              <div className="flex items-center justify-around mb-6 p-4 bg-gray-50 rounded">
+              <div className="flex items-center justify-around mb-6 p-4 bg-white/10 rounded">
                 <div className="text-center">
-                  <p className="text-xs text-muted mb-1">{teamA.name}</p>
-                  <p className="text-4xl font-bold text-primary">{scoreA}</p>
+                  <p className="text-xs text-white/70 mb-1">{teamA.name}</p>
+                  <p className="text-4xl font-bold text-white">{scoreA}</p>
                 </div>
-                <div className="text-gray-300">—</div>
+                <div className="text-white/30">—</div>
                 <div className="text-center">
-                  <p className="text-xs text-muted mb-1">{teamB.name}</p>
-                  <p className="text-4xl font-bold text-primary">{scoreB}</p>
+                  <p className="text-xs text-white/70 mb-1">{teamB.name}</p>
+                  <p className="text-4xl font-bold text-white">{scoreB}</p>
                 </div>
               </div>
 
@@ -305,7 +333,7 @@ export const Broadcast: React.FC = () => {
 
               {/* Commentary */}
               <div className="max-h-64 overflow-y-auto mb-6">
-                <h4 className="text-xs font-semibold text-muted uppercase mb-3">Live Commentary</h4>
+                <h4 className="text-xs font-semibold text-white/70 uppercase mb-3">Live Commentary</h4>
                 <div className="space-y-2">
                   {visibleEvents.map((event, idx) => {
                     // Replace Team A/B with actual team names
@@ -335,11 +363,11 @@ export const Broadcast: React.FC = () => {
 
                     const getBgColor = (type: string) => {
                       switch(type) {
-                        case 'goal': return 'border-secondary bg-yellow-50';
-                        case 'card': return event.cardType === 'red' ? 'border-red-500 bg-red-50' : 'border-yellow-500 bg-yellow-50';
-                        case 'skill': return 'border-blue-300 bg-blue-50';
-                        case 'highlight': return 'border-primary bg-green-50';
-                        default: return 'border-gray-300 bg-gray-50';
+                        case 'goal': return 'border-secondary bg-yellow-500/20';
+                        case 'card': return event.cardType === 'red' ? 'border-red-500 bg-red-500/20' : 'border-yellow-500 bg-yellow-500/20';
+                        case 'skill': return 'border-blue-300 bg-blue-500/20';
+                        case 'highlight': return 'border-primary bg-green-500/20';
+                        default: return 'border-white/20 bg-white/10';
                       }
                     };
 
@@ -348,8 +376,8 @@ export const Broadcast: React.FC = () => {
                         key={idx}
                         className={`p-2 rounded text-sm border-l-3 ${getBgColor(event.type)}`}
                       >
-                        <span className="font-semibold text-gray-500 text-xs mr-2">{event.minute}'</span>
-                        <span className={event.type === 'goal' ? 'font-semibold' : ''}>
+                        <span className="font-semibold text-white/60 text-xs mr-2">{event.minute}'</span>
+                        <span className={`${event.type === 'goal' ? 'font-semibold' : ''} text-white/90`}>
                           {getEventIcon(event.type)} {displayText}
                         </span>
                       </div>
@@ -359,11 +387,11 @@ export const Broadcast: React.FC = () => {
               </div>
 
               {/* Controls */}
-              <div className="space-y-3 pt-4 border-t border-gray-200">
+              <div className="space-y-3 pt-4 border-t border-white/20">
                 {/* Full Time CTA */}
                 {currentMatchTime >= 90 && (
                   <div className="text-center mb-3">
-                    <p className="text-xs font-bold text-muted uppercase tracking-wide mb-2">Match Over</p>
+                    <p className="text-xs font-bold text-white/70 uppercase tracking-wide mb-2">Match Over</p>
                     <button
                       onClick={() => navigate('/result', {
                         state: {
@@ -422,21 +450,21 @@ export const Broadcast: React.FC = () => {
                     Reset
                   </button>
                 </div>
-                <p className="text-xs text-muted text-center">
+                <p className="text-xs text-white/60 text-center">
                   {visibleEventsCount} of {events.length} events shown
                 </p>
               </div>
             </div>
 
             {/* Right: Team B Lineup */}
-            <div className="bg-white rounded-lg shadow p-6">
+            <div className="bg-white rounded-lg shadow p-6 order-2 lg:order-3">
               <Link to={`/team/${teamB.id}`} className="hover:opacity-80 transition">
                 <h3 className="text-lg font-bold text-primary mb-2 hover:text-secondary transition">{teamB.name}</h3>
               </Link>
               <p className="text-sm text-muted mb-4">{teamB.year}</p>
 
               <div className="space-y-2">
-                {teamB.players.slice(0, 11).map((player) => (
+                {sortPlayersByPosition(teamB.players).slice(0, 11).map((player) => (
                   <Link
                     key={player.id}
                     to={`/player/${player.id}`}

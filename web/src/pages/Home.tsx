@@ -14,7 +14,6 @@ export const Home: React.FC = () => {
   const [teamA, setTeamA] = useState<Team | null>(null);
   const [teamB, setTeamB] = useState<Team | null>(null);
   const [loading, setLoading] = useState(false);
-  const [useAI, setUseAI] = useState(false);
 
   useEffect(() => {
     const loadTeams = async () => {
@@ -54,8 +53,7 @@ export const Home: React.FC = () => {
   const handleSimulate = () => {
     if (!teamAId || !teamBId || !teamA || !teamB) return;
     setLoading(true);
-    const modeParam = useAI ? '?mode=ai' : '';
-    navigate(`/simulate${modeParam}`, {
+    navigate('/simulate', {
       state: {
         teamAId,
         teamBId
@@ -64,16 +62,23 @@ export const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
       <Header />
 
-      <main className="flex-1 max-w-5xl mx-auto px-6 pt-12 pb-12 w-full">
-        <div className="text-center mb-12">
-          <h2 className="text-primary text-4xl font-black tracking-widest mb-2">SELECT YOUR TEAMS</h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+      <main className="flex-1 max-w-screen-lg mx-auto px-4 py-12 w-full space-y-12">
+        {/* Section: Team Selection */}
+        <div className="text-center space-y-4">
+          <h2 className="text-white text-4xl md:text-5xl font-black tracking-tight">Select Your Teams</h2>
+          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto">
+            Choose two legendary squads to do battle. Will it be the invincible 1970 Brazil vs the tactical genius of 2014 Germany? The choice is yours!
+          </p>
+          <div className="flex justify-center">
+            <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        {/* Team Selector Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <TeamSelectCard
             label="Team A"
             teams={teams}
@@ -88,47 +93,43 @@ export const Home: React.FC = () => {
           />
         </div>
 
-        <div className="text-center space-y-4">
-          {/* AI Mode Toggle */}
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={useAI}
-                onChange={(e) => setUseAI(e.target.checked)}
-                className="w-4 h-4"
-              />
-              <span className="text-sm font-medium text-text">Use AI-Powered Engine (Claude)</span>
-            </label>
-          </div>
+        {/* Primary CTA: Simulate Match */}
+        <div className="flex flex-col items-center gap-4">
+          <button
+            onClick={handleSimulate}
+            disabled={!teamAId || !teamBId || loading}
+            className={`w-full md:w-auto px-8 md:px-16 py-4 rounded-xl font-semibold text-lg tracking-wide transition-all duration-200 flex items-center justify-center gap-2 ${
+              !teamAId || !teamBId
+                ? 'bg-white/10 text-white/40 cursor-not-allowed'
+                : 'bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5'
+            }`}
+          >
+            <span className="text-xl">⚽</span>
+            {loading ? '⏳ Starting...' : 'Simulate Match'}
+          </button>
+          <p className="text-white/50 text-sm text-center max-w-xs">
+            {!teamAId || !teamBId
+              ? 'Select both teams to begin'
+              : 'Watch the match unfold with real-time commentary'}
+          </p>
+        </div>
 
-          <div className="flex items-center justify-center gap-6">
-            {!teamAId && <p className="text-secondary font-bold text-sm min-w-[140px] text-left uppercase tracking-wide">Select Team A</p>}
-            {teamAId && <div className="min-w-[140px]"></div>}
-
-            <button
-              onClick={handleSimulate}
-              disabled={!teamAId || !teamBId || loading}
-              className={`btn-primary text-lg py-3 px-12 font-black transition uppercase tracking-wider ${
-                !teamAId || !teamBId
-                  ? 'opacity-50 cursor-not-allowed'
-                  : ''
-              }`}
-            >
-              {loading ? '⏳ Starting...' : `▶️ SIMULATE MATCH${useAI ? ' (AI)' : ''}`}
-            </button>
-
-            {!teamBId && <p className="text-secondary font-bold text-sm min-w-[140px] text-right uppercase tracking-wide">Select Team B</p>}
-            {teamBId && <div className="min-w-[140px]"></div>}
-          </div>
-
-          <div className="pt-8 border-t-4 border-primary mt-8">
-            <p className="text-muted text-sm mb-4 uppercase tracking-widest font-bold">Or build your own legend</p>
+        {/* Secondary CTA: Build Custom XI */}
+        <div className="border-t border-white/10 pt-12">
+          <div className="rounded-xl bg-white/5 border border-white/10 backdrop-blur p-8 md:p-12 text-center space-y-6">
+            <div className="space-y-2">
+              <p className="text-white/60 text-sm uppercase tracking-widest font-semibold">Create your fantasy</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-white">Build Your All-Time XI</h3>
+              <p className="text-white/60 text-base max-w-lg mx-auto">
+                Hand-pick players from across history to create your perfect squad and test their mettle
+              </p>
+            </div>
             <button
               onClick={() => navigate('/custom-xi')}
-              className="btn-secondary text-lg py-3 px-12 font-black uppercase tracking-wider"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-secondary hover:bg-secondary/90 text-white font-semibold transition-all duration-200 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
             >
-              Build Your All-Time XI
+              <span>✨</span>
+              Build Custom XI
             </button>
           </div>
         </div>

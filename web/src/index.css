@@ -6,94 +6,69 @@
 
 @layer base {
   body {
-    @apply text-text font-body;
-    background-color: #F5EFE7;
-    background-image:
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 61, 130, 0.03) 2px,
-        rgba(0, 61, 130, 0.03) 4px
-      );
+    @apply text-text font-body bg-black text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-wide;
-    text-shadow: 2px 2px 0px rgba(200, 16, 46, 0.1);
+    @apply font-heading font-bold tracking-tight;
   }
 
-  h1 { @apply text-4xl; }
-  h2 { @apply text-3xl; }
-  h3 { @apply text-2xl; }
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus states */
+  button, input, select, textarea {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:ring-primary;
+  }
 }
 
 @layer components {
+  /* Premium button - primary */
   .btn-primary {
-    @apply px-6 py-3 bg-primary text-white font-heading font-bold transition;
-    border: 3px solid #C8102E;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
-  }
-
-  .btn-primary:hover {
-    @apply bg-secondary text-white;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+    @apply px-6 py-3 bg-primary hover:bg-primary/90 text-white font-heading font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
   }
 
   .btn-primary:disabled {
-    @apply opacity-50 cursor-not-allowed;
+    @apply opacity-50 cursor-not-allowed hover:bg-primary hover:shadow-lg hover:translate-y-0;
   }
 
+  /* Premium button - secondary */
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-primary font-heading font-bold transition;
-    border: 3px solid #003D82;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15);
+    @apply px-6 py-3 bg-secondary hover:bg-secondary/90 text-white font-heading font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
   }
 
-  .btn-secondary:hover {
-    @apply bg-primary text-white;
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  .btn-secondary:disabled {
+    @apply opacity-50 cursor-not-allowed hover:bg-secondary hover:shadow-lg hover:translate-y-0;
   }
 
+  /* Legacy card support */
   .card {
-    @apply bg-white p-5;
-    border: 3px solid #003D82;
-    box-shadow: 5px 5px 0px rgba(0, 61, 130, 0.2);
-    position: relative;
+    @apply rounded-xl bg-white/5 border border-white/10 backdrop-blur p-6 shadow-md hover:shadow-lg transition-shadow duration-200;
   }
 
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #003D82 0%, #C8102E 50%, #003D82 100%);
+  /* Modern premium card */
+  .premium-card {
+    @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md hover:shadow-lg transition-all duration-200;
   }
 
-  /* Retro decorative line */
-  .retro-divider {
-    @apply my-6;
-    border-top: 3px solid #003D82;
-    border-bottom: 1px dashed #C8102E;
-    padding-top: 0.5rem;
+  /* Decorative divider */
+  .divider {
+    @apply border-t border-white/10;
   }
 
-  .retro-badge {
-    @apply inline-block px-4 py-2 bg-primary text-white font-heading font-bold;
-    border: 2px solid #C8102E;
-    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.1);
-    transform: rotate(-2deg);
+  /* Modern badge */
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-white border border-white/20;
   }
 
-  .retro-header-text {
-    @apply font-heading tracking-widest;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-size: 1.25rem;
-    color: #003D82;
+  /* Section heading */
+  .section-heading {
+    @apply text-white font-heading font-bold tracking-wide;
   }
 }

@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "version": "2.0",
-    "description": "Normalized football data with relationships",
-    "lastUpdated": "2026-04-24T21:26:25.435Z"
+    "version": "3.0",
+    "description": "Normalized football data with relationships (single source of truth)",
+    "lastUpdated": "2026-08-29T21:50:54.626Z"
   },
   "countries": [
     {
@@ -11,9 +11,64 @@
       "code": "AR"
     },
     {
+      "id": "austria",
+      "name": "Austria",
+      "code": "AT"
+    },
+    {
+      "id": "belgium",
+      "name": "Belgium",
+      "code": "BE"
+    },
+    {
       "id": "brazil",
       "name": "Brazil",
       "code": "BR"
+    },
+    {
+      "id": "bulgaria",
+      "name": "Bulgaria",
+      "code": "BG"
+    },
+    {
+      "id": "cameroon",
+      "name": "Cameroon",
+      "code": "CM"
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "code": "CA"
+    },
+    {
+      "id": "chile",
+      "name": "Chile",
+      "code": "CH"
+    },
+    {
+      "id": "colombia",
+      "name": "Colombia",
+      "code": "CO"
+    },
+    {
+      "id": "congo",
+      "name": "Congo",
+      "code": "CG"
+    },
+    {
+      "id": "costa-rica",
+      "name": "Costa Rica",
+      "code": "CR"
+    },
+    {
+      "id": "croatia",
+      "name": "Croatia",
+      "code": "CR"
+    },
+    {
+      "id": "czech-republic",
+      "name": "Czech Republic",
+      "code": "CZ"
     },
     {
       "id": "denmark",
@@ -21,9 +76,19 @@
       "code": "DE"
     },
     {
+      "id": "egypt",
+      "name": "Egypt",
+      "code": "EG"
+    },
+    {
       "id": "england",
       "name": "England",
       "code": "EN"
+    },
+    {
+      "id": "finland",
+      "name": "Finland",
+      "code": "FI"
     },
     {
       "id": "france",
@@ -36,6 +101,16 @@
       "code": "GE"
     },
     {
+      "id": "greece",
+      "name": "Greece",
+      "code": "GR"
+    },
+    {
+      "id": "hungary",
+      "name": "Hungary",
+      "code": "HU"
+    },
+    {
       "id": "ireland",
       "name": "Ireland",
       "code": "IR"
@@ -44,6 +119,16 @@
       "id": "italy",
       "name": "Italy",
       "code": "IT"
+    },
+    {
+      "id": "ivory-coast",
+      "name": "Ivory Coast",
+      "code": "IC"
+    },
+    {
+      "id": "liberia",
+      "name": "Liberia",
+      "code": "LR"
     },
     {
       "id": "netherlands",
@@ -56,114 +141,9 @@
       "code": "NO"
     },
     {
-      "id": "portugal",
-      "name": "Portugal",
-      "code": "PO"
-    },
-    {
-      "id": "scotland",
-      "name": "Scotland",
-      "code": "SC"
-    },
-    {
-      "id": "serbia",
-      "name": "Serbia",
-      "code": "SE"
-    },
-    {
-      "id": "spain",
-      "name": "Spain",
-      "code": "SP"
-    },
-    {
-      "id": "wales",
-      "name": "Wales",
-      "code": "WA"
-    },
-    {
-      "id": "czech-republic",
-      "name": "Czech Republic",
-      "code": "CZ"
-    },
-    {
-      "id": "belgium",
-      "name": "Belgium",
-      "code": "BE"
-    },
-    {
-      "id": "uruguay",
-      "name": "Uruguay",
-      "code": "UR"
-    },
-    {
-      "id": "austria",
-      "name": "Austria",
-      "code": "AT"
-    },
-    {
-      "id": "slovenia",
-      "name": "Slovenia",
-      "code": "SL"
-    },
-    {
-      "id": "canada",
-      "name": "Canada",
-      "code": "CA"
-    },
-    {
-      "id": "croatia",
-      "name": "Croatia",
-      "code": "CR"
-    },
-    {
-      "id": "chile",
-      "name": "Chile",
-      "code": "CH"
-    },
-    {
-      "id": "egypt",
-      "name": "Egypt",
-      "code": "EG"
-    },
-    {
-      "id": "senegal",
-      "name": "Senegal",
-      "code": "SE"
-    },
-    {
-      "id": "ivory-coast",
-      "name": "Ivory Coast",
-      "code": "IC"
-    },
-    {
       "id": "norway",
       "name": "Norway",
       "code": "NO"
-    },
-    {
-      "id": "finland",
-      "name": "Finland",
-      "code": "FI"
-    },
-    {
-      "id": "romania",
-      "name": "Romania",
-      "code": "RO"
-    },
-    {
-      "id": "bulgaria",
-      "name": "Bulgaria",
-      "code": "BG"
-    },
-    {
-      "id": "turkey",
-      "name": "Turkey",
-      "code": "TR"
-    },
-    {
-      "id": "costa-rica",
-      "name": "Costa Rica",
-      "code": "CR"
     },
     {
       "id": "poland",
@@ -171,32 +151,288 @@
       "code": "PL"
     },
     {
+      "id": "portugal",
+      "name": "Portugal",
+      "code": "PO"
+    },
+    {
+      "id": "romania",
+      "name": "Romania",
+      "code": "RO"
+    },
+    {
+      "id": "russia",
+      "name": "Russia",
+      "code": "RU"
+    },
+    {
+      "id": "scotland",
+      "name": "Scotland",
+      "code": "SC"
+    },
+    {
+      "id": "senegal",
+      "name": "Senegal",
+      "code": "SE"
+    },
+    {
+      "id": "serbia",
+      "name": "Serbia",
+      "code": "SE"
+    },
+    {
+      "id": "slovenia",
+      "name": "Slovenia",
+      "code": "SL"
+    },
+    {
       "id": "south-korea",
       "name": "South Korea",
       "code": "SK"
     },
     {
-      "id": "liberia",
-      "name": "Liberia",
-      "code": "LR"
+      "id": "spain",
+      "name": "Spain",
+      "code": "SP"
     },
     {
-      "id": "cameroon",
-      "name": "Cameroon",
-      "code": "CM"
+      "id": "turkey",
+      "name": "Turkey",
+      "code": "TR"
     },
     {
-      "id": "greece",
-      "name": "Greece",
-      "code": "GR"
+      "id": "uruguay",
+      "name": "Uruguay",
+      "code": "UR"
     },
     {
-      "id": "congo",
-      "name": "Congo",
-      "code": "CG"
+      "id": "wales",
+      "name": "Wales",
+      "code": "WA"
     }
   ],
   "clubs": [
+    {
+      "id": "ac-milan",
+      "name": "AC Milan",
+      "shortName": "AC Milan",
+      "countryId": "italy",
+      "founded": 1899,
+      "city": "Milan",
+      "roster": [
+        "gianluigi-buffon",
+        "gianluca-zambrotta",
+        "fabio-cannavaro",
+        "claudio-gentile",
+        "antonio-cabrini",
+        "gennaro-gattuso",
+        "andrea-pirlo",
+        "giancarlo-antognoni",
+        "ronaldinho",
+        "filippo-inzaghi",
+        "david-trezeguet",
+        "sebastiano-rossi",
+        "paolo-maldini",
+        "franco-baresi",
+        "alessandro-costacurta",
+        "mauro-tassotti",
+        "zvonimir-boban",
+        "demetrio-albertini",
+        "roberto-donadoni",
+        "marco-van-basten",
+        "daniele-massaro"
+      ]
+    },
+    {
+      "id": "ajax",
+      "name": "Ajax",
+      "shortName": "Ajax",
+      "countryId": "netherlands",
+      "founded": 1900,
+      "city": "Amsterdam",
+      "roster": [
+        "patrick-vieira",
+        "claude-makele",
+        "thierry-henry",
+        "emmanuel-petit",
+        "franck-ribery",
+        "david-silva",
+        "piet-schrijvers",
+        "ruud-krol",
+        "danny-blind",
+        "barry-hulshoff",
+        "wim-jansen",
+        "johan-neeskens",
+        "arie-haan",
+        "sjaak-swart",
+        "johan-cruyff",
+        "johnny-rep",
+        "heinz-stuy"
+      ]
+    },
+    {
+      "id": "arsenal",
+      "name": "Arsenal",
+      "shortName": "Arsenal",
+      "countryId": "england",
+      "founded": 1886,
+      "city": "London",
+      "roster": [
+        "jens-lehmann",
+        "ashley-cole",
+        "sol-campbell",
+        "william-gallas",
+        "bacary-sagna",
+        "gilberto-silva",
+        "patrick-vieira",
+        "robert-pires",
+        "dennis-bergkamp",
+        "thierry-henry",
+        "fredrik-ljungberg"
+      ]
+    },
+    {
+      "id": "barcelona",
+      "name": "Barcelona",
+      "shortName": "Barcelona",
+      "countryId": "spain",
+      "founded": 1899,
+      "city": "Barcelona",
+      "roster": [
+        "ronaldinho",
+        "rivaldo",
+        "david-villa",
+        "fernando-torres",
+        "gerard-pique",
+        "carles-puyol",
+        "sergio-ramos",
+        "jordi-alba",
+        "joan-capdevila",
+        "sergio-busquets",
+        "andres-iniesta",
+        "cesc-fabregas",
+        "xavi-hernandez",
+        "thierry-henry",
+        "joão-cancelo",
+        "gheorghe-hagi",
+        "johan-cruyff",
+        "neymar",
+        "luis-suarez",
+        "romario",
+        "samuel-eto'o",
+        "yaya-toure",
+        "javier-mascherano",
+        "diego-maradona",
+        "ronaldo",
+        "dragan-stojković",
+        "logging-test",
+        "victor-valdes",
+        "eric-abidal",
+        "dani-alves",
+        "xavi",
+        "lionel-messi",
+        "pedro"
+      ]
+    },
+    {
+      "id": "bayern-munich",
+      "name": "Bayern Munich",
+      "shortName": "Bayern",
+      "countryId": "germany",
+      "founded": 1900,
+      "city": "Munich",
+      "roster": [
+        "manuel-neuer",
+        "sepp-maier",
+        "mats-hummels",
+        "jerome-boateng",
+        "david-alaba",
+        "philipp-lahm",
+        "patrick-vieira",
+        "bastian-schweinsteiger",
+        "mesut-ozil",
+        "thomas-muller",
+        "mario-gomez",
+        "mario-gotze",
+        "franck-ribery"
+      ]
+    },
+    {
+      "id": "inter-milan",
+      "name": "Inter Milan",
+      "shortName": "Inter",
+      "countryId": "italy",
+      "founded": 1908,
+      "city": "Milan",
+      "roster": [
+        "gianluigi-buffon",
+        "gianluca-zambrotta",
+        "fabio-cannavaro",
+        "giuseppe-bergomi",
+        "luca-toni",
+        "gennaro-gattuso",
+        "daniele-de-rossi",
+        "giancarlo-antognoni",
+        "david-trezeguet",
+        "filippo-inzaghi",
+        "rivaldo",
+        "ronaldo"
+      ]
+    },
+    {
+      "id": "juventus",
+      "name": "Juventus",
+      "shortName": "Juve",
+      "countryId": "italy",
+      "founded": 1897,
+      "city": "Turin",
+      "roster": [
+        "gianluigi-buffon",
+        "dino-zoff",
+        "fabio-cannavaro",
+        "gianluca-zambrotta",
+        "claudio-gentile",
+        "fulvio-collovati",
+        "andrea-pirlo",
+        "giancarlo-antognoni",
+        "marco-tardelli",
+        "daniele-de-rossi",
+        "david-trezeguet",
+        "paolo-rossi",
+        "filippo-inzaghi",
+        "gabriel-batistuta"
+      ]
+    },
+    {
+      "id": "liverpool",
+      "name": "Liverpool",
+      "shortName": "Liverpool",
+      "countryId": "england",
+      "founded": 1892,
+      "city": "Liverpool",
+      "roster": [
+        "gordon-banks",
+        "ian-callaghan",
+        "roger-hunt",
+        "ray-wilson",
+        "george-cohen",
+        "patrick-vieira",
+        "thierry-henry",
+        "david-silva",
+        "didier-drogba",
+        "fernando-torres",
+        "ray-clemence",
+        "phil-neal",
+        "mark-lawrenson",
+        "alan-hansen",
+        "graeme-souness",
+        "ray-kennedy",
+        "kenny-dalglish",
+        "john-wark",
+        "steve-heighway",
+        "john-toshack"
+      ]
+    },
     {
       "id": "man-utd",
       "name": "Manchester United",
@@ -239,40 +475,24 @@
       ]
     },
     {
-      "id": "barcelona",
-      "name": "Barcelona",
-      "shortName": "Barcelona",
-      "countryId": "spain",
-      "founded": 1899,
-      "city": "Barcelona",
+      "id": "napoli",
+      "name": "Napoli",
+      "shortName": "Napoli",
+      "countryId": "italy",
+      "founded": 1926,
+      "city": "Naples",
       "roster": [
-        "ronaldinho",
-        "rivaldo",
-        "david-villa",
-        "fernando-torres",
-        "gerard-pique",
-        "carles-puyol",
-        "sergio-ramos",
-        "jordi-alba",
-        "joan-capdevila",
-        "sergio-busquets",
-        "andres-iniesta",
-        "cesc-fabregas",
-        "xavi-hernandez",
-        "thierry-henry",
-        "joão-cancelo",
-        "gheorghe-hagi",
-        "johan-cruyff",
-        "neymar",
-        "luis-suarez",
-        "romario",
-        "samuel-eto'o",
-        "yaya-toure",
-        "javier-mascherano",
+        "alessandro-reuta",
+        "ciro-ferrara",
+        "jorge-da-silva",
+        "fernando-de-napoli",
+        "ivo-udal",
+        "salvatore-bagni",
+        "gianfranco-zola",
+        "antonio-giordano",
         "diego-maradona",
-        "ronaldo",
-        "dragan-stojković",
-        "logging-test"
+        "careca",
+        "gianluca-vialli"
       ]
     },
     {
@@ -294,133 +514,35 @@
         "toni-kroos",
         "cristiano-ronaldo",
         "fernando-torres",
-        "mario-gomez"
-      ]
-    },
-    {
-      "id": "bayern-munich",
-      "name": "Bayern Munich",
-      "shortName": "Bayern",
-      "countryId": "germany",
-      "founded": 1900,
-      "city": "Munich",
-      "roster": [
-        "manuel-neuer",
-        "sepp-maier",
-        "mats-hummels",
-        "jerome-boateng",
-        "david-alaba",
-        "philipp-lahm",
-        "patrick-vieira",
-        "bastian-schweinsteiger",
-        "mesut-ozil",
-        "thomas-muller",
         "mario-gomez",
-        "mario-gotze",
-        "franck-ribery"
+        "pepe",
+        "marcelo",
+        "alvaro-arbeloa",
+        "xabi-alonso",
+        "luka-modrić",
+        "karim-benzema",
+        "gareth-bale"
       ]
     },
     {
-      "id": "ac-milan",
-      "name": "AC Milan",
-      "shortName": "AC Milan",
-      "countryId": "italy",
-      "founded": 1899,
-      "city": "Milan",
+      "id": "red-star-belgrade",
+      "name": "Red Star Belgrade",
+      "shortName": "Red Star",
+      "countryId": "serbia",
+      "founded": 1945,
+      "city": "Belgrade",
       "roster": [
-        "gianluigi-buffon",
-        "gianluca-zambrotta",
-        "fabio-cannavaro",
-        "claudio-gentile",
-        "antonio-cabrini",
-        "gennaro-gattuso",
-        "andrea-pirlo",
-        "giancarlo-antognoni",
-        "ronaldinho",
-        "filippo-inzaghi",
-        "david-trezeguet"
-      ]
-    },
-    {
-      "id": "juventus",
-      "name": "Juventus",
-      "shortName": "Juve",
-      "countryId": "italy",
-      "founded": 1897,
-      "city": "Turin",
-      "roster": [
-        "gianluigi-buffon",
-        "dino-zoff",
-        "fabio-cannavaro",
-        "gianluca-zambrotta",
-        "claudio-gentile",
-        "fulvio-collovati",
-        "andrea-pirlo",
-        "giancarlo-antognoni",
-        "marco-tardelli",
-        "daniele-de-rossi",
-        "david-trezeguet",
-        "paolo-rossi",
-        "filippo-inzaghi",
-        "gabriel-batistuta"
-      ]
-    },
-    {
-      "id": "inter-milan",
-      "name": "Inter Milan",
-      "shortName": "Inter",
-      "countryId": "italy",
-      "founded": 1908,
-      "city": "Milan",
-      "roster": [
-        "gianluigi-buffon",
-        "gianluca-zambrotta",
-        "fabio-cannavaro",
-        "giuseppe-bergomi",
-        "luca-toni",
-        "gennaro-gattuso",
-        "daniele-de-rossi",
-        "giancarlo-antognoni",
-        "david-trezeguet",
-        "filippo-inzaghi",
-        "rivaldo",
-        "ronaldo"
-      ]
-    },
-    {
-      "id": "ajax",
-      "name": "Ajax",
-      "shortName": "Ajax",
-      "countryId": "netherlands",
-      "founded": 1900,
-      "city": "Amsterdam",
-      "roster": [
-        "patrick-vieira",
-        "claude-makele",
-        "thierry-henry",
-        "emmanuel-petit",
-        "franck-ribery",
-        "david-silva"
-      ]
-    },
-    {
-      "id": "liverpool",
-      "name": "Liverpool",
-      "shortName": "Liverpool",
-      "countryId": "england",
-      "founded": 1892,
-      "city": "Liverpool",
-      "roster": [
-        "gordon-banks",
-        "ian-callaghan",
-        "roger-hunt",
-        "ray-wilson",
-        "george-cohen",
-        "patrick-vieira",
-        "thierry-henry",
-        "david-silva",
-        "didier-drogba",
-        "fernando-torres"
+        "dragoslav-jevric",
+        "savo-milosevic",
+        "sinisa-mihajlovic",
+        "miodrag-belodedici",
+        "slavisa-jokanovic",
+        "robert-prosinecski",
+        "darko-micanovic",
+        "vladimir-matic",
+        "dejan-savicevic",
+        "vinije-komatinovic",
+        "branko-crvenkovic"
       ]
     }
   ],
@@ -466,9 +588,36 @@
       "name": "Spain",
       "countryId": "spain",
       "isNationalTeam": true
+    },
+    {
+      "id": "hungary",
+      "name": "Hungary",
+      "countryId": "hungary",
+      "isNationalTeam": true
     }
   ],
   "players": [
+    {
+      "id": "alan-dzagoev",
+      "name": "Alan Dzagoev",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 77,
+      "defenceRating": 68,
+      "stamina": 81,
+      "countryId": "russia"
+    },
+    {
+      "id": "alan-hansen",
+      "name": "Alan Hansen",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 40,
+      "defenceRating": 88,
+      "stamina": 85,
+      "bio": "Alan Hansen was a commanding centre-back with sophisticated passing skills, essential to Liverpool's build-up play."
+    },
     {
       "id": "alberto-tarantini",
       "name": "Alberto Tarantini",
@@ -478,6 +627,37 @@
       "attackRating": 68,
       "defenceRating": 86,
       "stamina": 86
+    },
+    {
+      "id": "alejandro-balde",
+      "name": "Alejandro Balde",
+      "position": "LB",
+      "overallRating": 81,
+      "attackRating": 46,
+      "defenceRating": 82,
+      "stamina": 85,
+      "countryId": "spain"
+    },
+    {
+      "id": "alejandro-garnacho",
+      "name": "Alejandro Garnacho",
+      "position": "LW",
+      "overallRating": 82,
+      "attackRating": 83,
+      "defenceRating": 55,
+      "stamina": 83,
+      "countryId": "argentina"
+    },
+    {
+      "id": "alessandro-costacurta",
+      "name": "Alessandro Costacurta",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 40,
+      "defenceRating": 89,
+      "stamina": 87,
+      "bio": "Alessandro Costacurta was a commanding centre-back who formed an excellent partnership with Baresi at the heart of Milan's defence."
     },
     {
       "id": "alessandro-nesta",
@@ -490,6 +670,17 @@
       "stamina": 85
     },
     {
+      "id": "alessandro-reuta",
+      "name": "Alessandro Reuta",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 20,
+      "defenceRating": 90,
+      "stamina": 88,
+      "bio": "Alessandro Reuta was Napoli's solid goalkeeper during their successful period in the late 1980s."
+    },
+    {
       "id": "alex-stepney",
       "name": "Alex Stepney",
       "countryId": "england",
@@ -497,7 +688,59 @@
       "overallRating": 87,
       "attackRating": 45,
       "defenceRating": 88,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Alex Stepney was Manchester United's reliable goalkeeper during their European Cup-winning era. Known for his composure and shot-stopping ability."
+    },
+    {
+      "id": "alexis-sanchez",
+      "name": "Alexis Sánchez",
+      "position": "LW",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "chile"
+    },
+    {
+      "id": "alisson",
+      "name": "Alisson",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "alou-diarra",
+      "name": "Alou Diarra",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 65,
+      "defenceRating": 70,
+      "stamina": 76,
+      "countryId": "senegal"
+    },
+    {
+      "id": "alphonso-davies",
+      "name": "Alphonso Davies",
+      "position": "LB",
+      "overallRating": 86,
+      "attackRating": 52,
+      "defenceRating": 87,
+      "stamina": 88,
+      "countryId": "canada"
+    },
+    {
+      "id": "alvaro-arbeloa",
+      "name": "Álvaro Arbeloa",
+      "position": "RB",
+      "overallRating": 82,
+      "attackRating": 44,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "spain",
+      "bio": "Álvaro Arbeloa was a reliable right-back who provided defensive cover and important crossing for Real Madrid."
     },
     {
       "id": "andrea-pirlo",
@@ -510,6 +753,16 @@
       "stamina": 84
     },
     {
+      "id": "andreas-cornelius",
+      "name": "Andreas Cornelius",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 54,
+      "stamina": 77,
+      "countryId": "denmark"
+    },
+    {
       "id": "andres-iniesta",
       "name": "Andrés Iniesta",
       "countryId": "spain",
@@ -517,7 +770,18 @@
       "overallRating": 88,
       "attackRating": 86,
       "defenceRating": 78,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Andrés Iniesta was an incredibly gifted midfielder with dribbling ability, vision, and the composure to perform in crucial moments."
+    },
+    {
+      "id": "andrew-robertson",
+      "name": "Andrew Robertson",
+      "position": "LB",
+      "overallRating": 87,
+      "attackRating": 50,
+      "defenceRating": 88,
+      "stamina": 86,
+      "countryId": "scotland"
     },
     {
       "id": "angelo-juliano",
@@ -550,6 +814,121 @@
       "stamina": 86
     },
     {
+      "id": "antonio-giordano",
+      "name": "Antonio Giordano",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 75,
+      "defenceRating": 70,
+      "stamina": 88,
+      "bio": "Antonio Giordano was a midfielder who provided important contributions to Napoli's midfield during their successful period."
+    },
+    {
+      "id": "antony",
+      "name": "Antony",
+      "position": "RW",
+      "overallRating": 82,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "arie-haan",
+      "name": "Arie Haan",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 86,
+      "bio": "Arie Haan was a dynamic midfielder with excellent ball control and the ability to score important goals."
+    },
+    {
+      "id": "arjen-robben",
+      "name": "Arjen Robben",
+      "position": "RW",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "arkadiusz-milik",
+      "name": "Arkadiusz Milik",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 82,
+      "countryId": "poland"
+    },
+    {
+      "id": "arturo-vidal",
+      "name": "Arturo Vidal",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 80,
+      "defenceRating": 80,
+      "stamina": 87,
+      "countryId": "chile"
+    },
+    {
+      "id": "ashley-cole",
+      "name": "Ashley Cole",
+      "position": "LB",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 84,
+      "countryId": "england",
+      "bio": "Ashley Cole was one of the best left-backs in the world during this period, combining defensive excellence with attacking prowess."
+    },
+    {
+      "id": "axel-witsel",
+      "name": "Axel Witsel",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 70,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "belgium"
+    },
+    {
+      "id": "aymeric-laporte",
+      "name": "Aymeric Laporte",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
+      "id": "bacary-sagna",
+      "name": "Bacary Sagna",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 50,
+      "defenceRating": 86,
+      "stamina": 87,
+      "bio": "Bacary Sagna was a reliable right-back who provided important defensive cover and occasional attacking support."
+    },
+    {
+      "id": "barry-hulshoff",
+      "name": "Barry Hulshoff",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 84,
+      "bio": "Barry Hulshoff was a commanding centre-back who provided defensive stability for Ajax during the 1970s."
+    },
+    {
       "id": "basel-boli",
       "name": "Basile Boli",
       "countryId": "france",
@@ -570,6 +949,37 @@
       "stamina": 87
     },
     {
+      "id": "bebeto",
+      "name": "Bebeto",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "bebeto-da-silva",
+      "name": "Bebeto da Silva",
+      "position": "ST",
+      "overallRating": 82,
+      "attackRating": 84,
+      "defenceRating": 56,
+      "stamina": 81,
+      "countryId": "brazil"
+    },
+    {
+      "id": "bela-giczi",
+      "name": "Béla Giczi",
+      "countryId": "hungary",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 30,
+      "defenceRating": 82,
+      "stamina": 82,
+      "bio": "Béla Giczi was a defender who provided important defensive cover for Hungary during the 1954 World Cup."
+    },
+    {
       "id": "berthold-bernd",
       "name": "Bernd Berthold",
       "countryId": "germany",
@@ -580,6 +990,16 @@
       "stamina": 84
     },
     {
+      "id": "bertrand-effenberg",
+      "name": "Stefan Effenberg",
+      "countryId": "germany",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 76,
+      "defenceRating": 83,
+      "stamina": 86
+    },
+    {
       "id": "bill-foulkes",
       "name": "Bill Foulkes",
       "countryId": "england",
@@ -587,7 +1007,8 @@
       "overallRating": 83,
       "attackRating": 55,
       "defenceRating": 85,
-      "stamina": 82
+      "stamina": 82,
+      "bio": "Bill Foulkes was a veteran defender and trusted member of the 1968 United squad, providing leadership at the back."
     },
     {
       "id": "bixente-lizarazu",
@@ -597,7 +1018,8 @@
       "overallRating": 85,
       "attackRating": 70,
       "defenceRating": 85,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Bixente Lizarazu was an attacking left-back with excellent pace and the ability to contribute going forward."
     },
     {
       "id": "bobby-charlton",
@@ -607,7 +1029,8 @@
       "overallRating": 89,
       "attackRating": 87,
       "defenceRating": 75,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Bobby Charlton was one of football's greatest all-rounders - a midfielder with exceptional technique, vision, and goal-scoring ability. A survivor of the Munich disaster."
     },
     {
       "id": "bobby-moore",
@@ -620,6 +1043,28 @@
       "stamina": 85
     },
     {
+      "id": "bojan-joksimovic",
+      "name": "Bojan Joksimovic",
+      "countryId": "hungary",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 70,
+      "defenceRating": 72,
+      "stamina": 83,
+      "bio": "Bojan Joksimovic was a midfielder who contributed important defensive work rate for Hungary during the tournament."
+    },
+    {
+      "id": "branko-crvenkovic",
+      "name": "Branko Crvenkovic",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 79,
+      "attackRating": 80,
+      "defenceRating": 30,
+      "stamina": 79,
+      "bio": "Branko Crvenkovic was a striker who contributed to Red Star Belgrade's attacking efforts during the early 1990s."
+    },
+    {
       "id": "brian-kidd",
       "name": "Brian Kidd",
       "countryId": "england",
@@ -627,7 +1072,8 @@
       "overallRating": 76,
       "attackRating": 78,
       "defenceRating": 60,
-      "stamina": 82
+      "stamina": 82,
+      "bio": "Brian Kidd was a young, energetic forward who scored in the 1968 European Cup final, showing great promise for his age."
     },
     {
       "id": "brito-brazil",
@@ -637,7 +1083,28 @@
       "overallRating": 84,
       "attackRating": 60,
       "defenceRating": 86,
-      "stamina": 83
+      "stamina": 83,
+      "bio": "Brito was a solid centre-back who provided defensive stability for Brazil's 1970 World Cup campaign."
+    },
+    {
+      "id": "bruno-fernandes",
+      "name": "Bruno Fernandes",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 85,
+      "countryId": "portugal"
+    },
+    {
+      "id": "bukayo-saka",
+      "name": "Bukayo Saka",
+      "position": "LW",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "england"
     },
     {
       "id": "cafu",
@@ -650,6 +1117,17 @@
       "stamina": 89
     },
     {
+      "id": "careca",
+      "name": "Careca",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 35,
+      "stamina": 86,
+      "bio": "Careca was a clinical and intelligent striker who formed a formidable partnership with Maradona at Napoli."
+    },
+    {
       "id": "carles-puyol",
       "name": "Carles Puyol",
       "countryId": "spain",
@@ -657,7 +1135,8 @@
       "overallRating": 88,
       "attackRating": 70,
       "defenceRating": 89,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Carles Puyol was a passionate and commanding centre-back, a true leader known for his commitment and ball-playing ability."
     },
     {
       "id": "carlos-alberto",
@@ -667,7 +1146,8 @@
       "overallRating": 89,
       "attackRating": 78,
       "defenceRating": 88,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Carlos Alberto was a magnificent right-back with exceptional ball skills and attacking prowess, epitomizing Brazil's attacking style."
     },
     {
       "id": "carlos-olarticoechea",
@@ -680,6 +1160,16 @@
       "stamina": 86
     },
     {
+      "id": "carlos-puyol",
+      "name": "Carlos Puyol",
+      "position": "CB",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 90,
+      "stamina": 85,
+      "countryId": "spain"
+    },
+    {
       "id": "carlos-tapia",
       "name": "Carlos Tapia",
       "countryId": "argentina",
@@ -687,7 +1177,8 @@
       "overallRating": 80,
       "attackRating": 81,
       "defenceRating": 69,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Carlos Tapia was a forward who provided important attacking contributions for Argentina during the tournament."
     },
     {
       "id": "carlos-tevez",
@@ -700,6 +1191,26 @@
       "stamina": 88
     },
     {
+      "id": "carlos-valderrama",
+      "name": "Carlos Valderrama",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 78,
+      "defenceRating": 65,
+      "stamina": 80,
+      "countryId": "colombia"
+    },
+    {
+      "id": "cavani",
+      "name": "Cavani",
+      "position": "ST",
+      "overallRating": 86,
+      "attackRating": 88,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "uruguay"
+    },
+    {
       "id": "cesc-fabregas",
       "name": "Cesc Fàbregas",
       "countryId": "spain",
@@ -710,6 +1221,37 @@
       "stamina": 84
     },
     {
+      "id": "christian-poulsen",
+      "name": "Christian Poulsen",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 68,
+      "defenceRating": 78,
+      "stamina": 81,
+      "countryId": "denmark"
+    },
+    {
+      "id": "ciro-ferrara",
+      "name": "Ciro Ferrara",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 40,
+      "defenceRating": 90,
+      "stamina": 89,
+      "bio": "Ciro Ferrara was a world-class centre-back known for his defensive excellence and leadership at Napoli."
+    },
+    {
+      "id": "clarence-seedorf",
+      "name": "Clarence Seedorf",
+      "position": "CM",
+      "overallRating": 88,
+      "attackRating": 82,
+      "defenceRating": 74,
+      "stamina": 84,
+      "countryId": "netherlands"
+    },
+    {
       "id": "claude-makele",
       "name": "Claude Makele",
       "countryId": "france",
@@ -718,6 +1260,17 @@
       "attackRating": 72,
       "defenceRating": 88,
       "stamina": 87
+    },
+    {
+      "id": "claude-makelele",
+      "name": "Claude Makélélé",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 58,
+      "defenceRating": 85,
+      "stamina": 84,
+      "countryId": "france",
+      "bio": "Claude Makélélé was a defensive midfielder who worked tirelessly to shield France's backline with excellent positioning."
     },
     {
       "id": "claudio-gentile",
@@ -737,7 +1290,18 @@
       "overallRating": 82,
       "attackRating": 70,
       "defenceRating": 81,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Clodoaldo was a versatile midfielder with excellent technical ability and ball-playing skills."
+    },
+    {
+      "id": "coutinho",
+      "name": "Coutinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
     },
     {
       "id": "cristiano-ronaldo",
@@ -747,7 +1311,19 @@
       "overallRating": 95,
       "attackRating": 94,
       "defenceRating": 72,
-      "stamina": 90
+      "stamina": 90,
+      "bio": "Cristiano Ronaldo was at the absolute peak of his powers during this period - arguably the most complete forward in the world."
+    },
+    {
+      "id": "dani-alves",
+      "name": "Dani Alves",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 70,
+      "defenceRating": 85,
+      "stamina": 92,
+      "bio": "Dani Alves was one of the best attacking full-backs in the world, providing constant width and creativity down the right flank."
     },
     {
       "id": "daniel-bertoni",
@@ -780,6 +1356,39 @@
       "stamina": 86
     },
     {
+      "id": "daniele-massaro",
+      "name": "Daniele Massaro",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 84,
+      "attackRating": 82,
+      "defenceRating": 50,
+      "stamina": 85,
+      "bio": "Daniele Massaro was a versatile winger/midfielder known for his pace, skill, and goal-scoring ability."
+    },
+    {
+      "id": "danny-blind",
+      "name": "Danny Blind",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 45,
+      "defenceRating": 87,
+      "stamina": 86,
+      "bio": "Danny Blind was a solid and intelligent defender who provided important cover during Ajax's successful period."
+    },
+    {
+      "id": "darko-micanovic",
+      "name": "Darko Micanović",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 81,
+      "attackRating": 72,
+      "defenceRating": 65,
+      "stamina": 84,
+      "bio": "Darko Micanović was a hard-working midfielder who provided energy and commitment to Red Star Belgrade's midfield."
+    },
+    {
       "id": "david-alaba",
       "name": "David Alaba",
       "countryId": "germany",
@@ -800,6 +1409,16 @@
       "stamina": 87
     },
     {
+      "id": "david-de-gea",
+      "name": "David de Gea",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
       "id": "david-silva",
       "name": "David Silva",
       "countryId": "spain",
@@ -817,7 +1436,8 @@
       "overallRating": 81,
       "attackRating": 82,
       "defenceRating": 68,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "David Trezeguet was a clinical striker who provided important goal-scoring contributions for France."
     },
     {
       "id": "david-villa",
@@ -827,7 +1447,80 @@
       "overallRating": 88,
       "attackRating": 89,
       "defenceRating": 70,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "David Villa was a mobile and intelligent striker with a keen eye for goal, perfect for Barcelona's system."
+    },
+    {
+      "id": "davor-suker",
+      "name": "Davor Šuker",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 88,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "croatia"
+    },
+    {
+      "id": "de-bruyne",
+      "name": "De Bruyne",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 84,
+      "defenceRating": 72,
+      "stamina": 86,
+      "countryId": "belgium"
+    },
+    {
+      "id": "debug-test",
+      "name": "Debug Test",
+      "position": "MF",
+      "overallRating": 75,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 85,
+      "countryId": ""
+    },
+    {
+      "id": "declan-rice",
+      "name": "Declan Rice",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 68,
+      "defenceRating": 80,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "dejan-savicevic",
+      "name": "Dejan Savičević",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 87,
+      "defenceRating": 50,
+      "stamina": 83,
+      "bio": "Dejan Savičević was a creative and skilled player who could score important goals for Red Star Belgrade."
+    },
+    {
+      "id": "demba-ba",
+      "name": "Demba Ba",
+      "position": "ST",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 54,
+      "stamina": 79,
+      "countryId": "senegal"
+    },
+    {
+      "id": "demetrio-albertini",
+      "name": "Demetrio Albertini",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 70,
+      "defenceRating": 75,
+      "stamina": 87,
+      "bio": "Demetrio Albertini was a composed midfielder who provided important ball distribution and midfield control."
     },
     {
       "id": "denis-irwin",
@@ -847,7 +1540,19 @@
       "overallRating": 88,
       "attackRating": 90,
       "defenceRating": 65,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Denis Law was a mercurial striker with a sharp eye for goal, forming part of United's formidable forward line alongside Best and Charlton."
+    },
+    {
+      "id": "dennis-bergkamp",
+      "name": "Dennis Bergkamp",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 90,
+      "attackRating": 89,
+      "defenceRating": 50,
+      "stamina": 84,
+      "bio": "Dennis Bergkamp was one of the finest strikers in football - a complete forward with sublime touch and finishing."
     },
     {
       "id": "didier-drogba",
@@ -867,7 +1572,18 @@
       "overallRating": 95,
       "attackRating": 95,
       "defenceRating": 75,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Diego Maradona was at the height of his powers during his Napoli years - a genius with the ball, capable of single-handedly winning matches."
+    },
+    {
+      "id": "diego-simeone",
+      "name": "Diego Simeone",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 75,
+      "defenceRating": 84,
+      "stamina": 86,
+      "countryId": "argentina"
     },
     {
       "id": "dino-zoff",
@@ -880,6 +1596,77 @@
       "stamina": 85
     },
     {
+      "id": "diogo-jota",
+      "name": "Diogo Jota",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "portugal"
+    },
+    {
+      "id": "douglas-costa",
+      "name": "Douglas Costa",
+      "position": "RW",
+      "overallRating": 82,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
+      "id": "dragan-stojković",
+      "name": "Dragan Stojković",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 84,
+      "countryId": "serbia"
+    },
+    {
+      "id": "dragoslav-jevric",
+      "name": "Dragoslav Jevrić",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 83,
+      "attackRating": 20,
+      "defenceRating": 85,
+      "stamina": 84,
+      "bio": "Dragoslav Jevrić was Red Star Belgrade's goalkeeper during their successful period in the early 1990s."
+    },
+    {
+      "id": "dunga",
+      "name": "Dunga",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 80,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "eden-hazard",
+      "name": "Eden Hazard",
+      "position": "LW",
+      "overallRating": 89,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "belgium"
+    },
+    {
+      "id": "ederson",
+      "name": "Ederson",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 45,
+      "defenceRating": 84,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
       "id": "edwin-van-der-sar",
       "name": "Edwin van der Sar",
       "countryId": "netherlands",
@@ -888,6 +1675,16 @@
       "attackRating": 45,
       "defenceRating": 90,
       "stamina": 86
+    },
+    {
+      "id": "el-hadji-diouf",
+      "name": "El Hadji Diouf",
+      "position": "LW",
+      "overallRating": 79,
+      "attackRating": 80,
+      "defenceRating": 56,
+      "stamina": 78,
+      "countryId": "senegal"
     },
     {
       "id": "emmanuel-petit",
@@ -907,7 +1704,8 @@
       "overallRating": 85,
       "attackRating": 68,
       "defenceRating": 85,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Eric Abidal was a reliable left-back who could contribute defensively while also supporting the attack."
     },
     {
       "id": "eric-cantona",
@@ -920,6 +1718,26 @@
       "stamina": 84
     },
     {
+      "id": "erling-haaland",
+      "name": "Erling Haaland",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "norway"
+    },
+    {
+      "id": "eusebio",
+      "name": "Eusebio",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 85,
+      "countryId": "portugal"
+    },
+    {
       "id": "everaldo-brazil",
       "name": "Everaldo",
       "countryId": "brazil",
@@ -927,7 +1745,8 @@
       "overallRating": 82,
       "attackRating": 65,
       "defenceRating": 83,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Everaldo was a dependable left-sided defender who helped Brazil's defensive structure during their World Cup triumph."
     },
     {
       "id": "fabien-barthez",
@@ -940,6 +1759,16 @@
       "stamina": 86
     },
     {
+      "id": "fabinho",
+      "name": "Fabinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 68,
+      "defenceRating": 81,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
       "id": "fabio-cannavaro",
       "name": "Fabio Cannavaro",
       "countryId": "italy",
@@ -950,6 +1779,16 @@
       "stamina": 86
     },
     {
+      "id": "fabrice-muamba",
+      "name": "Fabrice Muamba",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 65,
+      "defenceRating": 72,
+      "stamina": 77,
+      "countryId": "congo"
+    },
+    {
       "id": "felix-brazil",
       "name": "Félix",
       "countryId": "brazil",
@@ -957,7 +1796,30 @@
       "overallRating": 85,
       "attackRating": 45,
       "defenceRating": 87,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Felix was Brazil's reliable goalkeeper during the 1970 World Cup, providing solid shot-stopping and distribution."
+    },
+    {
+      "id": "ferenc-puskas",
+      "name": "Ferenc Puskás",
+      "countryId": "hungary",
+      "position": "FW",
+      "overallRating": 93,
+      "attackRating": 93,
+      "defenceRating": 45,
+      "stamina": 82,
+      "bio": "Ferenc Puskás was arguably the greatest player of the 1950s - an exceptional forward with sublime technique and finishing."
+    },
+    {
+      "id": "fernando-de-napoli",
+      "name": "Fernando De Napoli",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 86,
+      "bio": "Fernando De Napoli was a versatile defender who could play across the back line with solid defensive work."
     },
     {
       "id": "fernando-torres",
@@ -967,7 +1829,8 @@
       "overallRating": 85,
       "attackRating": 86,
       "defenceRating": 72,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Fernando Torres was a dynamic forward with pace and finishing ability, providing important attacking threat."
     },
     {
       "id": "filippo-inzaghi",
@@ -977,7 +1840,8 @@
       "overallRating": 83,
       "attackRating": 84,
       "defenceRating": 70,
-      "stamina": 83
+      "stamina": 83,
+      "bio": "Filippo Inzaghi was a poacher's striker with exceptional movement and the instinct for being in the right place at the right time."
     },
     {
       "id": "florent-malouda",
@@ -1000,6 +1864,17 @@
       "stamina": 86
     },
     {
+      "id": "franco-baresi",
+      "name": "Franco Baresi",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 90,
+      "attackRating": 45,
+      "defenceRating": 91,
+      "stamina": 88,
+      "bio": "Franco Baresi was a legendary centre-back and Milan captain, renowned for his defensive positioning and leadership."
+    },
+    {
       "id": "frank-leboeuf",
       "name": "Frank Leboeuf",
       "countryId": "france",
@@ -1008,6 +1883,37 @@
       "attackRating": 68,
       "defenceRating": 87,
       "stamina": 85
+    },
+    {
+      "id": "franz-beckenbauer",
+      "name": "Franz Beckenbauer",
+      "position": "CB",
+      "overallRating": 92,
+      "attackRating": 58,
+      "defenceRating": 91,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "fred",
+      "name": "Fred",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 70,
+      "defenceRating": 76,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "fredrik-ljungberg",
+      "name": "Fredrik Ljungberg",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 88,
+      "bio": "Fredrik Ljungberg was a dynamic midfielder with energy, commitment, and the ability to score important goals."
     },
     {
       "id": "fulvio-collovati",
@@ -1030,6 +1936,27 @@
       "stamina": 85
     },
     {
+      "id": "gareth-bale",
+      "name": "Gareth Bale",
+      "position": "RW",
+      "overallRating": 89,
+      "attackRating": 90,
+      "defenceRating": 63,
+      "stamina": 86,
+      "countryId": "wales",
+      "bio": "Gareth Bale was a phenomenally athletic winger with explosive pace and the ability to score crucial goals."
+    },
+    {
+      "id": "garrincha",
+      "name": "Garrincha",
+      "position": "RW",
+      "overallRating": 90,
+      "attackRating": 91,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
       "id": "gary-neville",
       "name": "Gary Neville",
       "countryId": "england",
@@ -1048,6 +1975,26 @@
       "attackRating": 60,
       "defenceRating": 86,
       "stamina": 84
+    },
+    {
+      "id": "gascoigne",
+      "name": "Gascoigne",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 82,
+      "defenceRating": 72,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "gavi",
+      "name": "Gavi",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 76,
+      "defenceRating": 72,
+      "stamina": 83,
+      "countryId": "spain"
     },
     {
       "id": "gennaro-gattuso",
@@ -1077,7 +2024,8 @@
       "overallRating": 90,
       "attackRating": 92,
       "defenceRating": 68,
-      "stamina": 88
+      "stamina": 88,
+      "bio": "George Best was a winger of extraordinary skill, pace, and dribbling ability. One of the greatest players of his generation."
     },
     {
       "id": "george-cohen",
@@ -1090,6 +2038,16 @@
       "stamina": 85
     },
     {
+      "id": "george-weah",
+      "name": "George Weah",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "liberia"
+    },
+    {
       "id": "gerard-pique",
       "name": "Gerard Piqué",
       "countryId": "spain",
@@ -1097,7 +2055,18 @@
       "overallRating": 86,
       "attackRating": 68,
       "defenceRating": 87,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Gerard Pique was a ball-playing centre-back who was crucial to Barcelona's defensive structure and build-up play."
+    },
+    {
+      "id": "gerd-muller",
+      "name": "Gerd Müller",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 94,
+      "defenceRating": 55,
+      "stamina": 84,
+      "countryId": "germany"
     },
     {
       "id": "gerson",
@@ -1107,7 +2076,28 @@
       "overallRating": 86,
       "attackRating": 82,
       "defenceRating": 78,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Gerson was a supremely talented midfielder with great vision and range of passing, one of Brazil's creative forces."
+    },
+    {
+      "id": "gerson-martins",
+      "name": "Gerson Martins",
+      "position": "CM",
+      "overallRating": 75,
+      "attackRating": 70,
+      "defenceRating": 68,
+      "stamina": 76,
+      "countryId": "brazil"
+    },
+    {
+      "id": "gheorghe-hagi",
+      "name": "Gheorghe Hagi",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 84,
+      "defenceRating": 70,
+      "stamina": 84,
+      "countryId": "romania"
     },
     {
       "id": "giancarlo-antognoni",
@@ -1120,6 +2110,17 @@
       "stamina": 85
     },
     {
+      "id": "gianfranco-zola",
+      "name": "Gianfranco Zola",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 85,
+      "defenceRating": 65,
+      "stamina": 87,
+      "bio": "Gianfranco Zola was a technically gifted midfielder with excellent ball skills and the ability to create goalscoring opportunities."
+    },
+    {
       "id": "gianluca-giuli",
       "name": "Gianluca Giuli",
       "countryId": "italy",
@@ -1128,6 +2129,17 @@
       "attackRating": 79,
       "defenceRating": 68,
       "stamina": 82
+    },
+    {
+      "id": "gianluca-vialli",
+      "name": "Gianluca Vialli",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 40,
+      "stamina": 86,
+      "bio": "Gianluca Vialli was a strong and intelligent striker who brought physical presence and technical ability to Napoli's attack."
     },
     {
       "id": "gianluca-zambrotta",
@@ -1150,6 +2162,16 @@
       "stamina": 87
     },
     {
+      "id": "gigi-donnarumma",
+      "name": "Gigi Donnarumma",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 35,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "italy"
+    },
+    {
       "id": "gilberto-silva",
       "name": "Gilberto Silva",
       "countryId": "brazil",
@@ -1157,7 +2179,18 @@
       "overallRating": 84,
       "attackRating": 72,
       "defenceRating": 85,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Gilberto Silva was a box-to-box midfielder with excellent work rate and the capacity to win possessions."
+    },
+    {
+      "id": "giorgos-kyriakidis",
+      "name": "Giorgos Kyriakidis",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 68,
+      "defenceRating": 70,
+      "stamina": 78,
+      "countryId": "greece"
     },
     {
       "id": "giuseppe-bergomi",
@@ -1170,6 +2203,16 @@
       "stamina": 85
     },
     {
+      "id": "goncalo-ramos",
+      "name": "Gonçalo Ramos",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 82,
+      "defenceRating": 56,
+      "stamina": 82,
+      "countryId": "portugal"
+    },
+    {
       "id": "gordon-banks",
       "name": "Gordon Banks",
       "countryId": "england",
@@ -1178,6 +2221,17 @@
       "attackRating": 45,
       "defenceRating": 90,
       "stamina": 86
+    },
+    {
+      "id": "graeme-souness",
+      "name": "Graeme Souness",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 89,
+      "attackRating": 78,
+      "defenceRating": 82,
+      "stamina": 90,
+      "bio": "Graeme Souness was a powerful midfielder with great leadership qualities, known for his box-to-box running and competitive spirit."
     },
     {
       "id": "graziano-gabanini",
@@ -1200,6 +2254,16 @@
       "stamina": 84
     },
     {
+      "id": "griezmann",
+      "name": "Griezmann",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "france"
+    },
+    {
       "id": "guido-buchwald",
       "name": "Guido Buchwald",
       "countryId": "germany",
@@ -1207,7 +2271,8 @@
       "overallRating": 82,
       "attackRating": 60,
       "defenceRating": 83,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Guido Buchwald was a solid centre-back who contributed defensive stability to Germany's backline."
     },
     {
       "id": "gunnar-simmerer",
@@ -1220,6 +2285,37 @@
       "stamina": 83
     },
     {
+      "id": "gunter-netzer",
+      "name": "Günter Netzer",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 83,
+      "countryId": "germany"
+    },
+    {
+      "id": "gyula-grosics",
+      "name": "Gyula Grosics",
+      "countryId": "hungary",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 20,
+      "defenceRating": 87,
+      "stamina": 85,
+      "bio": "Gyula Grosics was Hungary's experienced goalkeeper during the 1954 World Cup, providing important shot-stopping."
+    },
+    {
+      "id": "hakan-şukur",
+      "name": "Hakan Şükür",
+      "position": "ST",
+      "overallRating": 83,
+      "attackRating": 86,
+      "defenceRating": 55,
+      "stamina": 81,
+      "countryId": "turkey"
+    },
+    {
       "id": "hans-pflüger",
       "name": "Hans Pflüger",
       "countryId": "germany",
@@ -1230,6 +2326,57 @@
       "stamina": 84
     },
     {
+      "id": "harry-kane",
+      "name": "Harry Kane",
+      "position": "ST",
+      "overallRating": 89,
+      "attackRating": 91,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "heinz-stuy",
+      "name": "Heinz Stuy",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 80,
+      "attackRating": 30,
+      "defenceRating": 82,
+      "stamina": 83,
+      "bio": "Heinz Stuy was a defender who provided important defensive contributions during Ajax's successful period."
+    },
+    {
+      "id": "hristo-stoichkov",
+      "name": "Hristo Stoichkov",
+      "position": "ST",
+      "overallRating": 87,
+      "attackRating": 89,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "bulgaria"
+    },
+    {
+      "id": "hugo-lloris",
+      "name": "Hugo Lloris",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 38,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "france"
+    },
+    {
+      "id": "hulk",
+      "name": "Hulk",
+      "position": "RW",
+      "overallRating": 81,
+      "attackRating": 84,
+      "defenceRating": 56,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
       "id": "ian-callaghan",
       "name": "Ian Callaghan",
       "countryId": "england",
@@ -1237,7 +2384,18 @@
       "overallRating": 79,
       "attackRating": 80,
       "defenceRating": 69,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Ian Callaghan was a tireless midfielder who provided energy and creativity during Liverpool's dominant period."
+    },
+    {
+      "id": "igor-akinfeev",
+      "name": "Igor Akinfeev",
+      "position": "CM",
+      "overallRating": 82,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 82,
+      "countryId": "russia"
     },
     {
       "id": "iker-casillas",
@@ -1247,7 +2405,49 @@
       "overallRating": 88,
       "attackRating": 45,
       "defenceRating": 90,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Iker Casillas was Real Madrid's legendary goalkeeper, a true captain with excellent positioning and distribution."
+    },
+    {
+      "id": "isco",
+      "name": "Isco",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 79,
+      "defenceRating": 67,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "ivo-udal",
+      "name": "Ivo Udal",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 81,
+      "attackRating": 25,
+      "defenceRating": 83,
+      "stamina": 85,
+      "bio": "Ivo Udal was a dependable defender who contributed to Napoli's defensive stability during the late 1980s."
+    },
+    {
+      "id": "jaap-robben",
+      "name": "Jaap Robben",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 78,
+      "defenceRating": 74,
+      "stamina": 83,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "jaap-stam",
+      "name": "Jaap Stam",
+      "position": "CB",
+      "overallRating": 88,
+      "attackRating": 46,
+      "defenceRating": 90,
+      "stamina": 84,
+      "countryId": "netherlands"
     },
     {
       "id": "jack-charlton",
@@ -1260,6 +2460,16 @@
       "stamina": 84
     },
     {
+      "id": "jadon-sancho",
+      "name": "Jadon Sancho",
+      "position": "RW",
+      "overallRating": 85,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
       "id": "jairzinho",
       "name": "Jairzinho",
       "countryId": "brazil",
@@ -1267,7 +2477,80 @@
       "overallRating": 87,
       "attackRating": 89,
       "defenceRating": 73,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Jairzinho was a dynamic winger known for his pace, dribbling, and goal-scoring prowess during Brazil's World Cup campaigns."
+    },
+    {
+      "id": "james-rodriguez",
+      "name": "James Rodríguez",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 82,
+      "defenceRating": 68,
+      "stamina": 83,
+      "countryId": "colombia"
+    },
+    {
+      "id": "jan-oblak",
+      "name": "Jan Oblak",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 37,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "slovenia"
+    },
+    {
+      "id": "jan-vertonghen",
+      "name": "Jan Vertonghen",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "belgium"
+    },
+    {
+      "id": "javier-mascherano",
+      "name": "Javier Mascherano",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 84,
+      "stamina": 85,
+      "countryId": "argentina"
+    },
+    {
+      "id": "javier-zanetti",
+      "name": "Javier Zanetti",
+      "position": "RB",
+      "overallRating": 86,
+      "attackRating": 48,
+      "defenceRating": 85,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
+      "id": "jeno-buzanszky",
+      "name": "Jenő Buzánszky",
+      "countryId": "hungary",
+      "position": "DF",
+      "overallRating": 83,
+      "attackRating": 40,
+      "defenceRating": 85,
+      "stamina": 84,
+      "bio": "Jenő Buzánszky was a solid defender who provided important defensive stability for Hungary during the tournament."
+    },
+    {
+      "id": "jens-lehmann",
+      "name": "Jens Lehmann",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 20,
+      "defenceRating": 89,
+      "stamina": 87,
+      "bio": "Jens Lehmann was Arsenal's commanding goalkeeper during the Invincibles era, known for his shot-stopping ability."
     },
     {
       "id": "jerome-boateng",
@@ -1280,6 +2563,16 @@
       "stamina": 86
     },
     {
+      "id": "jerôme-boateng",
+      "name": "Jérôme Boateng",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 44,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
       "id": "joan-capdevila",
       "name": "Joan Capdevila",
       "countryId": "spain",
@@ -1290,6 +2583,48 @@
       "stamina": 86
     },
     {
+      "id": "joão-cancelo",
+      "name": "João Cancelo",
+      "position": "RB",
+      "overallRating": 88,
+      "attackRating": 54,
+      "defenceRating": 87,
+      "stamina": 86,
+      "countryId": "portugal"
+    },
+    {
+      "id": "joel-matip",
+      "name": "Joël Matip",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 38,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "cameroon"
+    },
+    {
+      "id": "johan-cruyff",
+      "name": "Johan Cruyff",
+      "position": "LW",
+      "overallRating": 93,
+      "attackRating": 92,
+      "defenceRating": 64,
+      "stamina": 85,
+      "countryId": "netherlands",
+      "bio": "Johan Cruyff was perhaps the greatest player of his era - a genius with the ball capable of playing any position."
+    },
+    {
+      "id": "johan-neeskens",
+      "name": "Johan Neeskens",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 90,
+      "attackRating": 85,
+      "defenceRating": 75,
+      "stamina": 87,
+      "bio": "Johan Neeskens was a versatile midfielder/defender with exceptional technical ability and tireless work rate."
+    },
+    {
       "id": "john-aston",
       "name": "John Aston",
       "countryId": "england",
@@ -1297,7 +2632,8 @@
       "overallRating": 82,
       "attackRating": 84,
       "defenceRating": 70,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "John Aston Jr. was a winger who played a crucial role in the 1968 European Cup final, showcasing his technical ability."
     },
     {
       "id": "john-connelly",
@@ -1310,6 +2646,49 @@
       "stamina": 84
     },
     {
+      "id": "john-terry",
+      "name": "John Terry",
+      "position": "CB",
+      "overallRating": 89,
+      "attackRating": 42,
+      "defenceRating": 91,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "john-toshack",
+      "name": "John Toshack",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 81,
+      "attackRating": 80,
+      "defenceRating": 40,
+      "stamina": 85,
+      "bio": "John Toshack was a dominant target man and physical presence up front, key to Liverpool's offensive approach."
+    },
+    {
+      "id": "john-wark",
+      "name": "John Wark",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 89,
+      "bio": "John Wark was a combative midfielder who contributed significantly to Liverpool's successes in the 1980s."
+    },
+    {
+      "id": "johnny-rep",
+      "name": "Johnny Rep",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 84,
+      "attackRating": 84,
+      "defenceRating": 40,
+      "stamina": 82,
+      "bio": "Johnny Rep was a tricky winger with excellent dribbling ability and the talent to score spectacular goals."
+    },
+    {
       "id": "jordi-alba",
       "name": "Jordi Alba",
       "countryId": "spain",
@@ -1320,6 +2699,16 @@
       "stamina": 87
     },
     {
+      "id": "jorge",
+      "name": "Jorge",
+      "position": "CM",
+      "overallRating": 76,
+      "attackRating": 67,
+      "defenceRating": 71,
+      "stamina": 76,
+      "countryId": "brazil"
+    },
+    {
       "id": "jorge-burruchaga",
       "name": "Jorge Burruchaga",
       "countryId": "argentina",
@@ -1327,7 +2716,8 @@
       "overallRating": 84,
       "attackRating": 83,
       "defenceRating": 75,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Jorge Burruchaga was a midfielder who provided important work rate and scored crucial goals for Argentina."
     },
     {
       "id": "jorge-carrascosa",
@@ -1340,6 +2730,17 @@
       "stamina": 85
     },
     {
+      "id": "jorge-da-silva",
+      "name": "Jorge da Silva",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 84,
+      "attackRating": 30,
+      "defenceRating": 86,
+      "stamina": 87,
+      "bio": "Jorge da Silva was a reliable defender who provided important cover for Napoli's backline during their golden era."
+    },
+    {
       "id": "jorge-valdano",
       "name": "Jorge Valdano",
       "countryId": "argentina",
@@ -1347,7 +2748,18 @@
       "overallRating": 86,
       "attackRating": 87,
       "defenceRating": 70,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Jorge Valdano was an intelligent forward with excellent movement and the ability to score important goals."
+    },
+    {
+      "id": "jose-gimenez",
+      "name": "José Giménez",
+      "position": "CB",
+      "overallRating": 87,
+      "attackRating": 38,
+      "defenceRating": 89,
+      "stamina": 84,
+      "countryId": "uruguay"
     },
     {
       "id": "jose-luis-brown",
@@ -1357,7 +2769,8 @@
       "overallRating": 86,
       "attackRating": 65,
       "defenceRating": 87,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "José Luis Brown was a solid centre-back who contributed important defensive work during Argentina's World Cup success."
     },
     {
       "id": "jose-luis-cuciuffo",
@@ -1370,6 +2783,67 @@
       "stamina": 85
     },
     {
+      "id": "jose-sa",
+      "name": "José Sá",
+      "position": "GK",
+      "overallRating": 81,
+      "attackRating": 32,
+      "defenceRating": 80,
+      "stamina": 80,
+      "countryId": "portugal"
+    },
+    {
+      "id": "jozsef-bozsik",
+      "name": "József Bozsik",
+      "countryId": "hungary",
+      "position": "MF",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 75,
+      "stamina": 85,
+      "bio": "József Bozsik was a solid midfielder who provided important work rate and ball distribution for Hungary."
+    },
+    {
+      "id": "juan-fernando-quintero",
+      "name": "Juan Fernando Quintero",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 79,
+      "defenceRating": 64,
+      "stamina": 81,
+      "countryId": "colombia"
+    },
+    {
+      "id": "juan-mata",
+      "name": "Juan Mata",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 66,
+      "stamina": 81,
+      "countryId": "spain"
+    },
+    {
+      "id": "jude-bellingham",
+      "name": "Jude Bellingham",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 76,
+      "defenceRating": 74,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "julian-alvarez",
+      "name": "Julián Álvarez",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
       "id": "jurgen-klinsmann",
       "name": "Jurgen Klinsmann",
       "countryId": "germany",
@@ -1377,7 +2851,70 @@
       "overallRating": 84,
       "attackRating": 85,
       "defenceRating": 70,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Jürgen Klinsmann was a dynamic forward with pace, movement, and goal-scoring ability crucial to Germany's attack."
+    },
+    {
+      "id": "kalvin-phillips",
+      "name": "Kalvin Phillips",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 65,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "england"
+    },
+    {
+      "id": "karim-benzema",
+      "name": "Karim Benzema",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "france",
+      "bio": "Karim Benzema was a intelligent and versatile striker with excellent hold-up play and finishing ability."
+    },
+    {
+      "id": "kasper-schmeichel",
+      "name": "Kasper Schmeichel",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 32,
+      "defenceRating": 83,
+      "stamina": 80,
+      "countryId": "denmark"
+    },
+    {
+      "id": "kenny-dalglish",
+      "name": "Kenny Dalglish",
+      "position": "ST",
+      "overallRating": 90,
+      "attackRating": 91,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "scotland",
+      "bio": "Kenny Dalglish was one of football's greatest forwards - a complete player with skill, strength, intelligence, and lethal finishing."
+    },
+    {
+      "id": "keylor-navas",
+      "name": "Keylor Navas",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 34,
+      "defenceRating": 84,
+      "stamina": 81,
+      "countryId": "costa-rica"
+    },
+    {
+      "id": "ki-sung-yueng",
+      "name": "Ki Sung-yueng",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 72,
+      "defenceRating": 74,
+      "stamina": 82,
+      "countryId": "south-korea"
     },
     {
       "id": "klaus-augenthaler",
@@ -1400,6 +2937,67 @@
       "stamina": 85
     },
     {
+      "id": "kostas-mitroglou",
+      "name": "Kostas Mitroglou",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 52,
+      "stamina": 77,
+      "countryId": "greece"
+    },
+    {
+      "id": "kyle-walker",
+      "name": "Kyle Walker",
+      "position": "RB",
+      "overallRating": 87,
+      "attackRating": 48,
+      "defenceRating": 88,
+      "stamina": 87,
+      "countryId": "england"
+    },
+    {
+      "id": "kylian-mbappe",
+      "name": "Kylian Mbappé",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 60,
+      "stamina": 88,
+      "countryId": "france"
+    },
+    {
+      "id": "lajos-kordics",
+      "name": "Lajos Kordics",
+      "countryId": "hungary",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 35,
+      "defenceRating": 84,
+      "stamina": 83,
+      "bio": "Lajos Kordics was a centre-back who contributed defensive work to Hungary's backline during their World Cup run."
+    },
+    {
+      "id": "leonardo-nascimento",
+      "name": "Leonardo Nascimento",
+      "position": "LB",
+      "overallRating": 84,
+      "attackRating": 48,
+      "defenceRating": 85,
+      "stamina": 83,
+      "countryId": "brazil"
+    },
+    {
+      "id": "leônidas-da-silva",
+      "name": "Leônidas da Silva",
+      "position": "ST",
+      "overallRating": 87,
+      "attackRating": 88,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
       "id": "leopoldo-luque",
       "name": "Leopoldo Luque",
       "countryId": "argentina",
@@ -1410,6 +3008,16 @@
       "stamina": 84
     },
     {
+      "id": "leroy-sane",
+      "name": "Leroy Sané",
+      "position": "LW",
+      "overallRating": 85,
+      "attackRating": 87,
+      "defenceRating": 58,
+      "stamina": 85,
+      "countryId": "germany"
+    },
+    {
       "id": "lilian-thuram",
       "name": "Lilian Thuram",
       "countryId": "france",
@@ -1417,7 +3025,43 @@
       "overallRating": 87,
       "attackRating": 72,
       "defenceRating": 88,
-      "stamina": 88
+      "stamina": 88,
+      "bio": "Lilian Thuram was a powerful and athletic defender known for his pace, strength, and aerial ability."
+    },
+    {
+      "id": "lionel-messi",
+      "name": "Lionel Messi",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 94,
+      "attackRating": 93,
+      "defenceRating": 55,
+      "stamina": 85,
+      "bio": "Lionel Messi was in his absolute prime during this period - perhaps the greatest player of all time with unmatched dribbling, speed, and goal-scoring."
+    },
+    {
+      "id": "lisandro-martinez",
+      "name": "Lisandro Martínez",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 42,
+      "defenceRating": 86,
+      "stamina": 84,
+      "countryId": "argentina"
+    },
+    {
+      "id": "logging-test",
+      "name": "Logging Test",
+      "position": "MF",
+      "overallRating": 75,
+      "attackRating": 75,
+      "defenceRating": 75,
+      "stamina": 85,
+      "countryId": "",
+      "clubs": [
+        "barcelona"
+      ],
+      "classicTeams": []
     },
     {
       "id": "lothar-matthaus",
@@ -1430,6 +3074,17 @@
       "stamina": 87
     },
     {
+      "id": "lothar-matthäus",
+      "name": "Lothar Matthäus",
+      "position": "CM",
+      "overallRating": 90,
+      "attackRating": 76,
+      "defenceRating": 82,
+      "stamina": 86,
+      "countryId": "germany",
+      "bio": "Lothar Matthäus was Germany's midfield captain - a complete midfielder with excellent range and leadership."
+    },
+    {
       "id": "luca-toni",
       "name": "Luca Toni",
       "countryId": "italy",
@@ -1438,6 +3093,16 @@
       "attackRating": 83,
       "defenceRating": 68,
       "stamina": 84
+    },
+    {
+      "id": "lucas-hernandez",
+      "name": "Lucas Hernández",
+      "position": "LB",
+      "overallRating": 86,
+      "attackRating": 48,
+      "defenceRating": 87,
+      "stamina": 85,
+      "countryId": "france"
     },
     {
       "id": "lucio",
@@ -1470,6 +3135,57 @@
       "stamina": 84
     },
     {
+      "id": "luis-suarez",
+      "name": "Luis Suárez",
+      "position": "LW",
+      "overallRating": 90,
+      "attackRating": 92,
+      "defenceRating": 65,
+      "stamina": 86,
+      "countryId": "uruguay"
+    },
+    {
+      "id": "luiz-gustavo",
+      "name": "Luiz Gustavo",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 68,
+      "defenceRating": 76,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "luka-modrić",
+      "name": "Luka Modrić",
+      "position": "CM",
+      "overallRating": 90,
+      "attackRating": 78,
+      "defenceRating": 76,
+      "stamina": 86,
+      "countryId": "croatia",
+      "bio": "Luka Modric was a supreme midfielder - nimble, technical, and capable of controlling the game with excellent vision."
+    },
+    {
+      "id": "lukas-podolski",
+      "name": "Lukas Podolski",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 85,
+      "defenceRating": 58,
+      "stamina": 83,
+      "countryId": "germany"
+    },
+    {
+      "id": "magnus-wolff-eikeng",
+      "name": "Magnus Wolff Eikeng",
+      "position": "ST",
+      "overallRating": 74,
+      "attackRating": 75,
+      "defenceRating": 50,
+      "stamina": 74,
+      "countryId": "norway"
+    },
+    {
       "id": "manuel-neuer",
       "name": "Manuel Neuer",
       "countryId": "germany",
@@ -1480,6 +3196,17 @@
       "stamina": 87
     },
     {
+      "id": "marcelo",
+      "name": "Marcelo",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 65,
+      "defenceRating": 87,
+      "stamina": 90,
+      "bio": "Gerard Pique was a ball-playing centre-back at the height of his powers, combining defensive ability with technical quality."
+    },
+    {
       "id": "marco-tardelli",
       "name": "Marco Tardelli",
       "countryId": "italy",
@@ -1488,6 +3215,17 @@
       "attackRating": 79,
       "defenceRating": 83,
       "stamina": 87
+    },
+    {
+      "id": "marco-van-basten",
+      "name": "Marco van Basten",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 62,
+      "stamina": 83,
+      "countryId": "netherlands",
+      "bio": "Marco Van Basten was one of the greatest strikers ever - a complete forward with brilliant technique, positioning, and finishing."
     },
     {
       "id": "marcos-brazil",
@@ -1540,6 +3278,47 @@
       "stamina": 83
     },
     {
+      "id": "mark-lawrenson",
+      "name": "Mark Lawrenson",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 45,
+      "defenceRating": 89,
+      "stamina": 88,
+      "bio": "Mark Lawrenson was an elegant centre-back with excellent ball-playing ability, crucial to Liverpool's tiki-taka style of play."
+    },
+    {
+      "id": "marouane-fellaini",
+      "name": "Marouane Fellaini",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 74,
+      "defenceRating": 74,
+      "stamina": 82,
+      "countryId": "belgium"
+    },
+    {
+      "id": "mason-mount",
+      "name": "Mason Mount",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 78,
+      "defenceRating": 68,
+      "stamina": 83,
+      "countryId": "england"
+    },
+    {
+      "id": "mathieu-valbuena",
+      "name": "Mathieu Valbuena",
+      "position": "CM",
+      "overallRating": 80,
+      "attackRating": 78,
+      "defenceRating": 64,
+      "stamina": 80,
+      "countryId": "france"
+    },
+    {
       "id": "mats-hummels",
       "name": "Mats Hummels",
       "countryId": "germany",
@@ -1560,6 +3339,27 @@
       "stamina": 86
     },
     {
+      "id": "mauro-tassotti",
+      "name": "Mauro Tassotti",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 35,
+      "defenceRating": 87,
+      "stamina": 86,
+      "bio": "Mauro Tassotti was a solid right-back who provided important defensive cover for Milan during their successful period."
+    },
+    {
+      "id": "messi",
+      "name": "Messi",
+      "position": "LW",
+      "overallRating": 93,
+      "attackRating": 94,
+      "defenceRating": 65,
+      "stamina": 85,
+      "countryId": "argentina"
+    },
+    {
       "id": "mesut-ozil",
       "name": "Mesut Ozil",
       "countryId": "germany",
@@ -1568,6 +3368,26 @@
       "attackRating": 88,
       "defenceRating": 76,
       "stamina": 84
+    },
+    {
+      "id": "michel-salgado",
+      "name": "Michel Salgado",
+      "position": "RB",
+      "overallRating": 85,
+      "attackRating": 48,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "spain"
+    },
+    {
+      "id": "michu",
+      "name": "Michu",
+      "position": "ST",
+      "overallRating": 81,
+      "attackRating": 83,
+      "defenceRating": 56,
+      "stamina": 80,
+      "countryId": "spain"
     },
     {
       "id": "miguel-onega",
@@ -1580,6 +3400,78 @@
       "stamina": 83
     },
     {
+      "id": "miodrag-belodedici",
+      "name": "Miodrag Belodedici",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 87,
+      "stamina": 85,
+      "bio": "Miodrag Belodedici was a solid centre-back who provided defensive stability for Red Star Belgrade during the 1990s."
+    },
+    {
+      "id": "mohamed-salah",
+      "name": "Mohamed Salah",
+      "position": "RW",
+      "overallRating": 89,
+      "attackRating": 92,
+      "defenceRating": 60,
+      "stamina": 86,
+      "countryId": "egypt"
+    },
+    {
+      "id": "n'golo-kante",
+      "name": "N'Golo Kanté",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 68,
+      "defenceRating": 84,
+      "stamina": 88,
+      "countryId": "france"
+    },
+    {
+      "id": "nacho-fernandez",
+      "name": "Nacho Fernández",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "spain"
+    },
+    {
+      "id": "naldo",
+      "name": "Naldo",
+      "position": "CB",
+      "overallRating": 82,
+      "attackRating": 40,
+      "defenceRating": 83,
+      "stamina": 81,
+      "countryId": "brazil"
+    },
+    {
+      "id": "nandor-hidegkuti",
+      "name": "Nándor Hidegkuti",
+      "countryId": "hungary",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 84,
+      "bio": "Nándor Hidegkuti was an intelligent midfielder with excellent ball skills and the ability to control the tempo."
+    },
+    {
+      "id": "nemanja-matić",
+      "name": "Nemanja Matić",
+      "position": "CM",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 82,
+      "stamina": 83,
+      "countryId": "serbia"
+    },
+    {
       "id": "nemanja-vidic",
       "name": "Nemanja Vidic",
       "countryId": "serbia",
@@ -1590,6 +3482,16 @@
       "stamina": 87
     },
     {
+      "id": "nemanja-vidić",
+      "name": "Nemanja Vidić",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 42,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "serbia"
+    },
+    {
       "id": "nery-pumpido",
       "name": "Nery Pumpido",
       "countryId": "argentina",
@@ -1597,7 +3499,38 @@
       "overallRating": 86,
       "attackRating": 45,
       "defenceRating": 88,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Nery Pumpido was Argentina's goalkeeper during the 1986 World Cup, providing important saves in crucial moments."
+    },
+    {
+      "id": "neymar",
+      "name": "Neymar",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 91,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "neymar-junior",
+      "name": "Neymar Junior",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 91,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "brazil"
+    },
+    {
+      "id": "niklas-sule",
+      "name": "Niklas Süle",
+      "position": "CB",
+      "overallRating": 83,
+      "attackRating": 40,
+      "defenceRating": 84,
+      "stamina": 82,
+      "countryId": "germany"
     },
     {
       "id": "nobby-stiles",
@@ -1607,7 +3540,38 @@
       "overallRating": 80,
       "attackRating": 65,
       "defenceRating": 82,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Nobby Stiles was the combative midfielder who anchored Manchester United's midfield, known for his tenacity and leadership."
+    },
+    {
+      "id": "oliver-kahn",
+      "name": "Oliver Kahn",
+      "position": "GK",
+      "overallRating": 90,
+      "attackRating": 38,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "olivier-giroud",
+      "name": "Olivier Giroud",
+      "position": "ST",
+      "overallRating": 84,
+      "attackRating": 85,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "france"
+    },
+    {
+      "id": "oscar",
+      "name": "Oscar",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 81,
+      "countryId": "brazil"
     },
     {
       "id": "oscar-ruggeri",
@@ -1617,7 +3581,8 @@
       "overallRating": 87,
       "attackRating": 68,
       "defenceRating": 88,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Oscar Ruggeri was a tough and commanding centre-back who provided defensive solidity for Argentina's defence."
     },
     {
       "id": "osvaldo-ardiles",
@@ -1630,6 +3595,48 @@
       "stamina": 86
     },
     {
+      "id": "ousmane-dembele",
+      "name": "Ousmane Dembélé",
+      "position": "RW",
+      "overallRating": 84,
+      "attackRating": 86,
+      "defenceRating": 56,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "pal-szide",
+      "name": "Pál Szide",
+      "countryId": "hungary",
+      "position": "DF",
+      "overallRating": 79,
+      "attackRating": 25,
+      "defenceRating": 81,
+      "stamina": 81,
+      "bio": "Pál Szide was a left-back who provided defensive support for Hungary during their successful World Cup campaign."
+    },
+    {
+      "id": "panagiotis-kone",
+      "name": "Panagiotis Kone",
+      "position": "CM",
+      "overallRating": 75,
+      "attackRating": 66,
+      "defenceRating": 68,
+      "stamina": 76,
+      "countryId": "greece"
+    },
+    {
+      "id": "paolo-maldini",
+      "name": "Paolo Maldini",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 91,
+      "attackRating": 50,
+      "defenceRating": 92,
+      "stamina": 90,
+      "bio": "Paolo Maldini was arguably the greatest left-back ever - combining defensive excellence with exceptional longevity and style."
+    },
+    {
       "id": "paolo-rossi",
       "name": "Paolo Rossi",
       "countryId": "italy",
@@ -1638,6 +3645,26 @@
       "attackRating": 89,
       "defenceRating": 70,
       "stamina": 85
+    },
+    {
+      "id": "papa-bouba-diop",
+      "name": "Papa Bouba Diop",
+      "position": "CM",
+      "overallRating": 77,
+      "attackRating": 68,
+      "defenceRating": 72,
+      "stamina": 78,
+      "countryId": "senegal"
+    },
+    {
+      "id": "papiss-cisse",
+      "name": "Papiss Cissé",
+      "position": "ST",
+      "overallRating": 78,
+      "attackRating": 80,
+      "defenceRating": 52,
+      "stamina": 77,
+      "countryId": "senegal"
     },
     {
       "id": "pat-crerand",
@@ -1677,7 +3704,28 @@
       "overallRating": 88,
       "attackRating": 78,
       "defenceRating": 87,
-      "stamina": 87
+      "stamina": 87,
+      "bio": "Patrick Vieira was a dominant midfielder and captain with physical presence, leadership, and technical ability."
+    },
+    {
+      "id": "patrik-berger",
+      "name": "Patrik Berger",
+      "position": "CM",
+      "overallRating": 81,
+      "attackRating": 76,
+      "defenceRating": 72,
+      "stamina": 80,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "paul-pogba",
+      "name": "Paul Pogba",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 76,
+      "stamina": 85,
+      "countryId": "france"
     },
     {
       "id": "paul-scholes",
@@ -1690,6 +3738,37 @@
       "stamina": 86
     },
     {
+      "id": "pavel-nedved",
+      "name": "Pavel Nedved",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 80,
+      "defenceRating": 72,
+      "stamina": 83,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "pedri",
+      "name": "Pedri",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 82,
+      "countryId": "spain"
+    },
+    {
+      "id": "pedro",
+      "name": "Pedro",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 86,
+      "attackRating": 85,
+      "defenceRating": 50,
+      "stamina": 87,
+      "bio": "Pedro was a versatile forward with excellent movement and finishing, crucial to Barcelona's attacking efficiency."
+    },
+    {
       "id": "pele",
       "name": "Pelé",
       "countryId": "brazil",
@@ -1697,7 +3776,30 @@
       "overallRating": 94,
       "attackRating": 95,
       "defenceRating": 70,
-      "stamina": 88
+      "stamina": 88,
+      "bio": "Pelé was arguably the greatest footballer of all time - a complete player with exceptional skill, goal-scoring ability, and football intelligence."
+    },
+    {
+      "id": "pepe",
+      "name": "Pepe",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 46,
+      "defenceRating": 87,
+      "stamina": 84,
+      "countryId": "portugal",
+      "bio": "Pepe was a no-nonsense centre-back who provided tough, physical defending to Real Madrid's back line."
+    },
+    {
+      "id": "peter-palotas",
+      "name": "Péter Palotás",
+      "countryId": "hungary",
+      "position": "FW",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 35,
+      "stamina": 80,
+      "bio": "Péter Palotás was a forward who provided important attacking contributions to Hungary during the 1954 World Cup."
     },
     {
       "id": "peter-schmeichel",
@@ -1710,6 +3812,37 @@
       "stamina": 87
     },
     {
+      "id": "petr-čech",
+      "name": "Petr Čech",
+      "position": "GK",
+      "overallRating": 89,
+      "attackRating": 35,
+      "defenceRating": 86,
+      "stamina": 83,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "phil-foden",
+      "name": "Phil Foden",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 61,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "phil-neal",
+      "name": "Phil Neal",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 87,
+      "attackRating": 40,
+      "defenceRating": 88,
+      "stamina": 90,
+      "bio": "Phil Neal was a reliable right-back who was a cornerstone of Liverpool's defence throughout the 1980s, known for his consistency."
+    },
+    {
       "id": "philipp-lahm",
       "name": "Philipp Lahm",
       "countryId": "germany",
@@ -1720,6 +3853,26 @@
       "stamina": 88
     },
     {
+      "id": "philippe-coutinho",
+      "name": "Philippe Coutinho",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
+      "id": "pierre-kalulu",
+      "name": "Pierre Kalulu",
+      "position": "CB",
+      "overallRating": 81,
+      "attackRating": 38,
+      "defenceRating": 82,
+      "stamina": 81,
+      "countryId": "cameroon"
+    },
+    {
       "id": "pierre-littbarski",
       "name": "Pierre Littbarski",
       "countryId": "germany",
@@ -1727,7 +3880,81 @@
       "overallRating": 85,
       "attackRating": 86,
       "defenceRating": 74,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Pierre Littbarski was a dynamic midfielder with energy, attacking prowess, and the ability to score goals."
+    },
+    {
+      "id": "piet-schrijvers",
+      "name": "Piet Schrijvers",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 85,
+      "attackRating": 20,
+      "defenceRating": 87,
+      "stamina": 85,
+      "bio": "Piet Schrijvers was Ajax's goalkeeper during their European domination, providing confident shot-stopping and distribution."
+    },
+    {
+      "id": "radamel-falcao",
+      "name": "Radamel Falcao",
+      "position": "ST",
+      "overallRating": 85,
+      "attackRating": 87,
+      "defenceRating": 60,
+      "stamina": 82,
+      "countryId": "colombia"
+    },
+    {
+      "id": "raheem-sterling",
+      "name": "Raheem Sterling",
+      "position": "RW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 59,
+      "stamina": 86,
+      "countryId": "england"
+    },
+    {
+      "id": "raphaël-varane",
+      "name": "Raphaël Varane",
+      "position": "CB",
+      "overallRating": 89,
+      "attackRating": 40,
+      "defenceRating": 91,
+      "stamina": 85,
+      "countryId": "france"
+    },
+    {
+      "id": "raul-gonzalez",
+      "name": "Raúl González",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 60,
+      "stamina": 84,
+      "countryId": "spain"
+    },
+    {
+      "id": "ray-clemence",
+      "name": "Ray Clemence",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 90,
+      "attackRating": 25,
+      "defenceRating": 92,
+      "stamina": 92,
+      "bio": "Ray Clemence was one of the greatest goalkeepers of all time, with impeccable positioning and distribution during Liverpool's golden era."
+    },
+    {
+      "id": "ray-kennedy",
+      "name": "Ray Kennedy",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 75,
+      "defenceRating": 70,
+      "stamina": 88,
+      "bio": "Ray Kennedy was a versatile midfielder who provided important creativity and work rate for Liverpool's midfield."
     },
     {
       "id": "ray-wilson",
@@ -1767,7 +3994,40 @@
       "overallRating": 85,
       "attackRating": 86,
       "defenceRating": 72,
-      "stamina": 85
+      "stamina": 85,
+      "bio": "Rivellino was a creative winger with superb ball control and the ability to score spectacular goals."
+    },
+    {
+      "id": "robert-lewandowski",
+      "name": "Robert Lewandowski",
+      "position": "ST",
+      "overallRating": 91,
+      "attackRating": 93,
+      "defenceRating": 58,
+      "stamina": 85,
+      "countryId": "poland"
+    },
+    {
+      "id": "robert-pires",
+      "name": "Robert Pires",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 62,
+      "stamina": 84,
+      "countryId": "france",
+      "bio": "Robert Pires was a dangerous winger with excellent speed, dribbling ability, and goal-scoring instinct."
+    },
+    {
+      "id": "robert-prosinecski",
+      "name": "Robert Prosinečski",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 85,
+      "bio": "Robert Prosinečski was an accomplished midfielder with excellent technical ability and creative passing."
     },
     {
       "id": "roberto-carlos",
@@ -1780,6 +4040,37 @@
       "stamina": 88
     },
     {
+      "id": "roberto-donadoni",
+      "name": "Roberto Donadoni",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 86,
+      "attackRating": 78,
+      "defenceRating": 70,
+      "stamina": 86,
+      "bio": "Roberto Donadoni was a creative midfielder who contributed significantly to Milan's attacking play during the 1990s."
+    },
+    {
+      "id": "rodri",
+      "name": "Rodri",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 74,
+      "defenceRating": 82,
+      "stamina": 86,
+      "countryId": "spain"
+    },
+    {
+      "id": "rodrygo-goes",
+      "name": "Rodrygo Goes",
+      "position": "RW",
+      "overallRating": 83,
+      "attackRating": 85,
+      "defenceRating": 57,
+      "stamina": 84,
+      "countryId": "brazil"
+    },
+    {
       "id": "roger-hunt",
       "name": "Roger Hunt",
       "countryId": "england",
@@ -1788,6 +4079,26 @@
       "attackRating": 84,
       "defenceRating": 65,
       "stamina": 84
+    },
+    {
+      "id": "rogerio-ceni",
+      "name": "Rogério Ceni",
+      "position": "GK",
+      "overallRating": 81,
+      "attackRating": 55,
+      "defenceRating": 79,
+      "stamina": 80,
+      "countryId": "brazil"
+    },
+    {
+      "id": "romario",
+      "name": "Romário",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 60,
+      "stamina": 83,
+      "countryId": "brazil"
     },
     {
       "id": "ronaldinho",
@@ -1800,6 +4111,16 @@
       "stamina": 87
     },
     {
+      "id": "ronaldinho-gaucho",
+      "name": "Ronaldinho Gaúcho",
+      "position": "LW",
+      "overallRating": 91,
+      "attackRating": 88,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "brazil"
+    },
+    {
       "id": "ronaldo",
       "name": "Ronaldo",
       "countryId": "brazil",
@@ -1808,6 +4129,16 @@
       "attackRating": 92,
       "defenceRating": 68,
       "stamina": 82
+    },
+    {
+      "id": "ronaldo-fenômeno",
+      "name": "Ronaldo Fenômeno",
+      "position": "ST",
+      "overallRating": 92,
+      "attackRating": 94,
+      "defenceRating": 58,
+      "stamina": 82,
+      "countryId": "brazil"
     },
     {
       "id": "roque-junior",
@@ -1830,6 +4161,37 @@
       "stamina": 89
     },
     {
+      "id": "ruben-neves",
+      "name": "Ruben Neves",
+      "position": "CM",
+      "overallRating": 82,
+      "attackRating": 72,
+      "defenceRating": 76,
+      "stamina": 83,
+      "countryId": "portugal"
+    },
+    {
+      "id": "ruben-semedo",
+      "name": "Rúben Semedo",
+      "position": "CB",
+      "overallRating": 80,
+      "attackRating": 35,
+      "defenceRating": 81,
+      "stamina": 79,
+      "countryId": "portugal"
+    },
+    {
+      "id": "ruud-krol",
+      "name": "Ruud Krol",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 88,
+      "attackRating": 55,
+      "defenceRating": 88,
+      "stamina": 87,
+      "bio": "Ruud Krol was an elegant full-back with excellent ball skills, capable of starting attacks from the back."
+    },
+    {
       "id": "ryan-giggs",
       "name": "Ryan Giggs",
       "countryId": "wales",
@@ -1840,6 +4202,120 @@
       "stamina": 89
     },
     {
+      "id": "sadio-mane",
+      "name": "Sadio Mané",
+      "position": "LW",
+      "overallRating": 88,
+      "attackRating": 89,
+      "defenceRating": 64,
+      "stamina": 86,
+      "countryId": "senegal"
+    },
+    {
+      "id": "salvatore-bagni",
+      "name": "Salvatore Bagni",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 85,
+      "attackRating": 72,
+      "defenceRating": 75,
+      "stamina": 89,
+      "bio": "Salvatore Bagni was a hard-working midfielder who provided energy, work rate, and creativity for Napoli's system."
+    },
+    {
+      "id": "sami-hyypiä",
+      "name": "Sami Hyypiä",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 43,
+      "defenceRating": 86,
+      "stamina": 82,
+      "countryId": "finland"
+    },
+    {
+      "id": "sami-khedira",
+      "name": "Sami Khedira",
+      "position": "CM",
+      "overallRating": 84,
+      "attackRating": 72,
+      "defenceRating": 76,
+      "stamina": 84,
+      "countryId": "germany"
+    },
+    {
+      "id": "samir-handanović",
+      "name": "Samir Handanović",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 33,
+      "defenceRating": 84,
+      "stamina": 81,
+      "countryId": "slovenia"
+    },
+    {
+      "id": "samir-nasri",
+      "name": "Samir Nasri",
+      "position": "CM",
+      "overallRating": 83,
+      "attackRating": 80,
+      "defenceRating": 68,
+      "stamina": 82,
+      "countryId": "france"
+    },
+    {
+      "id": "samuel-eto'o",
+      "name": "Samuel Eto'o",
+      "position": "ST",
+      "overallRating": 88,
+      "attackRating": 90,
+      "defenceRating": 62,
+      "stamina": 85,
+      "countryId": "cameroon"
+    },
+    {
+      "id": "sandor-kocsis",
+      "name": "Sándor Kocsis",
+      "countryId": "hungary",
+      "position": "FW",
+      "overallRating": 87,
+      "attackRating": 88,
+      "defenceRating": 40,
+      "stamina": 81,
+      "bio": "Sándor Kocsis was a powerful and clinical striker with exceptional goal-scoring ability during Hungary's campaigns."
+    },
+    {
+      "id": "savio",
+      "name": "Sávio",
+      "position": "ST",
+      "overallRating": 80,
+      "attackRating": 82,
+      "defenceRating": 54,
+      "stamina": 79,
+      "countryId": "brazil"
+    },
+    {
+      "id": "savo-milosevic",
+      "name": "Savo Milošević",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 65,
+      "defenceRating": 82,
+      "stamina": 85,
+      "bio": "Savo Milošević was a versatile defender who provided important cover for Red Star Belgrade's backline."
+    },
+    {
+      "id": "sebastiano-rossi",
+      "name": "Sebastiano Rossi",
+      "countryId": "",
+      "position": "GK",
+      "overallRating": 86,
+      "attackRating": 20,
+      "defenceRating": 88,
+      "stamina": 86,
+      "bio": "Sebastiano Rossi was Milan's dependable goalkeeper during their 1990s success, known for his shot-stopping ability."
+    },
+    {
       "id": "sepp-maier",
       "name": "Sepp Maier",
       "countryId": "germany",
@@ -1848,6 +4324,16 @@
       "attackRating": 45,
       "defenceRating": 89,
       "stamina": 85
+    },
+    {
+      "id": "sergio-aguero",
+      "name": "Sergio Agüero",
+      "position": "ST",
+      "overallRating": 89,
+      "attackRating": 91,
+      "defenceRating": 64,
+      "stamina": 86,
+      "countryId": "argentina"
     },
     {
       "id": "sergio-batista",
@@ -1867,7 +4353,8 @@
       "overallRating": 85,
       "attackRating": 72,
       "defenceRating": 83,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Sergio Busquets was the metronome of Barcelona's midfield, with sublime positioning and passing to control the tempo."
     },
     {
       "id": "sergio-ramos",
@@ -1877,7 +4364,8 @@
       "overallRating": 85,
       "attackRating": 72,
       "defenceRating": 85,
-      "stamina": 86
+      "stamina": 86,
+      "bio": "Sergio Ramos was a powerful and commanding centre-back who brought both defensive solidity and attacking threat."
     },
     {
       "id": "shay-brennan",
@@ -1887,17 +4375,72 @@
       "overallRating": 81,
       "attackRating": 60,
       "defenceRating": 83,
-      "stamina": 84
+      "stamina": 84,
+      "bio": "Shay Brennan was a steady right-back who contributed to Manchester United's 1968 European Cup success with solid defending."
     },
     {
-      "id": "bertrand-effenberg",
-      "name": "Stefan Effenberg",
-      "countryId": "germany",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 76,
-      "defenceRating": 83,
-      "stamina": 86
+      "id": "sinisa-mihajlovic",
+      "name": "Sinisa Mihajlovic",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 86,
+      "attackRating": 55,
+      "defenceRating": 87,
+      "stamina": 86,
+      "bio": "Sinisa Mihajlovic was a tough and commanding defender known for his physical presence and no-nonsense approach."
+    },
+    {
+      "id": "sjaak-swart",
+      "name": "Sjaak Swart",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 83,
+      "attackRating": 82,
+      "defenceRating": 45,
+      "stamina": 84,
+      "bio": "Sjaak Swart was a reliable winger who provided consistency and skill during Ajax's European campaigns."
+    },
+    {
+      "id": "slavisa-jokanovic",
+      "name": "Slavisa Jokanovic",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 82,
+      "attackRating": 45,
+      "defenceRating": 84,
+      "stamina": 84,
+      "bio": "Slavisa Jokanovic was a midfielder/defender with important work rate and commitment to Red Star Belgrade's cause."
+    },
+    {
+      "id": "sol-campbell",
+      "name": "Sol Campbell",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 89,
+      "attackRating": 50,
+      "defenceRating": 90,
+      "stamina": 88,
+      "bio": "Sol Campbell was a commanding centre-back with excellent positioning and the ability to contribute in the air."
+    },
+    {
+      "id": "son-heung-min",
+      "name": "Son Heung-min",
+      "position": "LW",
+      "overallRating": 83,
+      "attackRating": 84,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "south-korea"
+    },
+    {
+      "id": "soren-larsen",
+      "name": "Soren Larsen",
+      "position": "ST",
+      "overallRating": 77,
+      "attackRating": 78,
+      "defenceRating": 52,
+      "stamina": 76,
+      "countryId": "denmark"
     },
     {
       "id": "stephane-guivarc-h",
@@ -1920,454 +4463,15 @@
       "stamina": 85
     },
     {
-      "id": "sylvain-wiltord",
-      "name": "Sylvain Wiltord",
-      "countryId": "france",
-      "position": "ST",
-      "overallRating": 81,
+      "id": "steve-heighway",
+      "name": "Steve Heighway",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 83,
       "attackRating": 82,
-      "defenceRating": 70,
-      "stamina": 84
-    },
-    {
-      "id": "thierry-henry",
-      "name": "Thierry Henry",
-      "countryId": "france",
-      "position": "RW",
-      "overallRating": 84,
-      "attackRating": 86,
-      "defenceRating": 72,
-      "stamina": 87
-    },
-    {
-      "id": "thomas-hassler",
-      "name": "Thomas Häßler",
-      "countryId": "germany",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 82,
-      "defenceRating": 80,
-      "stamina": 88
-    },
-    {
-      "id": "thomas-muller",
-      "name": "Thomas Müller",
-      "countryId": "germany",
-      "position": "RW",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 76,
-      "stamina": 87
-    },
-    {
-      "id": "toni-kroos",
-      "name": "Toni Kroos",
-      "countryId": "germany",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 84,
-      "defenceRating": 82,
-      "stamina": 86
-    },
-    {
-      "id": "tony-dunne",
-      "name": "Tony Dunne",
-      "countryId": "ireland",
-      "position": "LB",
-      "overallRating": 84,
-      "attackRating": 65,
-      "defenceRating": 86,
-      "stamina": 88
-    },
-    {
-      "id": "tostao",
-      "name": "Tostão",
-      "countryId": "brazil",
-      "position": "ST",
-      "overallRating": 87,
-      "attackRating": 88,
-      "defenceRating": 72,
-      "stamina": 84
-    },
-    {
-      "id": "ubaldo-fillol",
-      "name": "Ubaldo Fillol",
-      "countryId": "argentina",
-      "position": "GK",
-      "overallRating": 87,
-      "attackRating": 45,
-      "defenceRating": 89,
-      "stamina": 85
-    },
-    {
-      "id": "wayne-rooney",
-      "name": "Wayne Rooney",
-      "countryId": "england",
-      "position": "ST",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 72,
-      "stamina": 87
-    },
-    {
-      "id": "william-gallas",
-      "name": "William Gallas",
-      "countryId": "france",
-      "position": "CB",
-      "overallRating": 86,
-      "attackRating": 70,
-      "defenceRating": 87,
-      "stamina": 86
-    },
-    {
-      "id": "xavi-hernandez",
-      "name": "Xavi Hernández",
-      "countryId": "spain",
-      "position": "CM",
-      "overallRating": 89,
-      "attackRating": 85,
-      "defenceRating": 80,
-      "stamina": 85
-    },
-    {
-      "id": "zinedine-zidane",
-      "name": "Zinedine Zidane",
-      "countryId": "france",
-      "position": "CM",
-      "overallRating": 90,
-      "attackRating": 88,
-      "defenceRating": 78,
-      "stamina": 86
-    },
-    {
-      "id": "oliver-kahn",
-      "name": "Oliver Kahn",
-      "position": "GK",
-      "overallRating": 90,
-      "attackRating": 38,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "germany"
-    },
-    {
-      "id": "petr-čech",
-      "name": "Petr Čech",
-      "position": "GK",
-      "overallRating": 89,
-      "attackRating": 35,
-      "defenceRating": 86,
-      "stamina": 83,
-      "countryId": "czech-republic"
-    },
-    {
-      "id": "victor-valdes",
-      "name": "Víctor Valdés",
-      "position": "GK",
-      "overallRating": 88,
-      "attackRating": 32,
-      "defenceRating": 85,
-      "stamina": 82,
-      "countryId": "spain"
-    },
-    {
-      "id": "ederson",
-      "name": "Ederson",
-      "position": "GK",
-      "overallRating": 86,
-      "attackRating": 45,
-      "defenceRating": 84,
-      "stamina": 85,
-      "countryId": "brazil"
-    },
-    {
-      "id": "alisson",
-      "name": "Alisson",
-      "position": "GK",
-      "overallRating": 89,
-      "attackRating": 40,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "brazil"
-    },
-    {
-      "id": "hugo-lloris",
-      "name": "Hugo Lloris",
-      "position": "GK",
-      "overallRating": 88,
-      "attackRating": 38,
-      "defenceRating": 86,
-      "stamina": 83,
-      "countryId": "france"
-    },
-    {
-      "id": "gigi-donnarumma",
-      "name": "Gigi Donnarumma",
-      "position": "GK",
-      "overallRating": 87,
-      "attackRating": 35,
-      "defenceRating": 85,
-      "stamina": 82,
-      "countryId": "italy"
-    },
-    {
-      "id": "samir-handanović",
-      "name": "Samir Handanović",
-      "position": "GK",
-      "overallRating": 86,
-      "attackRating": 33,
-      "defenceRating": 84,
-      "stamina": 81,
-      "countryId": "slovenia"
-    },
-    {
-      "id": "thibaut-courtois",
-      "name": "Thibaut Courtois",
-      "position": "GK",
-      "overallRating": 88,
-      "attackRating": 36,
-      "defenceRating": 86,
-      "stamina": 83,
-      "countryId": "belgium"
-    },
-    {
-      "id": "jan-oblak",
-      "name": "Jan Oblak",
-      "position": "GK",
-      "overallRating": 89,
-      "attackRating": 37,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "slovenia"
-    },
-    {
-      "id": "david-de-gea",
-      "name": "David de Gea",
-      "position": "GK",
-      "overallRating": 87,
-      "attackRating": 35,
-      "defenceRating": 85,
-      "stamina": 82,
-      "countryId": "spain"
-    },
-    {
-      "id": "keylor-navas",
-      "name": "Keylor Navas",
-      "position": "GK",
-      "overallRating": 86,
-      "attackRating": 34,
-      "defenceRating": 84,
-      "stamina": 81,
-      "countryId": "costa-rica"
-    },
-    {
-      "id": "kasper-schmeichel",
-      "name": "Kasper Schmeichel",
-      "position": "GK",
-      "overallRating": 85,
-      "attackRating": 32,
-      "defenceRating": 83,
-      "stamina": 80,
-      "countryId": "denmark"
-    },
-    {
-      "id": "john-terry",
-      "name": "John Terry",
-      "position": "CB",
-      "overallRating": 89,
-      "attackRating": 42,
-      "defenceRating": 91,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "vincent-kompany",
-      "name": "Vincent Kompany",
-      "position": "CB",
-      "overallRating": 90,
-      "attackRating": 38,
-      "defenceRating": 92,
-      "stamina": 86,
-      "countryId": "belgium"
-    },
-    {
-      "id": "thiago-silva",
-      "name": "Thiago Silva",
-      "position": "CB",
-      "overallRating": 90,
-      "attackRating": 40,
-      "defenceRating": 91,
-      "stamina": 85,
-      "countryId": "brazil"
-    },
-    {
-      "id": "jose-gimenez",
-      "name": "José Giménez",
-      "position": "CB",
-      "overallRating": 87,
-      "attackRating": 38,
-      "defenceRating": 89,
-      "stamina": 84,
-      "countryId": "uruguay"
-    },
-    {
-      "id": "virgil-van-dijk",
-      "name": "Virgil van Dijk",
-      "position": "CB",
-      "overallRating": 91,
-      "attackRating": 45,
-      "defenceRating": 92,
-      "stamina": 86,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "raphaël-varane",
-      "name": "Raphaël Varane",
-      "position": "CB",
-      "overallRating": 89,
-      "attackRating": 40,
-      "defenceRating": 91,
-      "stamina": 85,
-      "countryId": "france"
-    },
-    {
-      "id": "kyle-walker",
-      "name": "Kyle Walker",
-      "position": "RB",
-      "overallRating": 87,
-      "attackRating": 48,
-      "defenceRating": 88,
+      "defenceRating": 45,
       "stamina": 87,
-      "countryId": "england"
-    },
-    {
-      "id": "trent-alexander-arnold",
-      "name": "Trent Alexander-Arnold",
-      "position": "RB",
-      "overallRating": 87,
-      "attackRating": 52,
-      "defenceRating": 86,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "joão-cancelo",
-      "name": "João Cancelo",
-      "position": "RB",
-      "overallRating": 88,
-      "attackRating": 54,
-      "defenceRating": 87,
-      "stamina": 86,
-      "countryId": "portugal"
-    },
-    {
-      "id": "andrew-robertson",
-      "name": "Andrew Robertson",
-      "position": "LB",
-      "overallRating": 87,
-      "attackRating": 50,
-      "defenceRating": 88,
-      "stamina": 86,
-      "countryId": "scotland"
-    },
-    {
-      "id": "alphonso-davies",
-      "name": "Alphonso Davies",
-      "position": "LB",
-      "overallRating": 86,
-      "attackRating": 52,
-      "defenceRating": 87,
-      "stamina": 88,
-      "countryId": "canada"
-    },
-    {
-      "id": "lucas-hernandez",
-      "name": "Lucas Hernández",
-      "position": "LB",
-      "overallRating": 86,
-      "attackRating": 48,
-      "defenceRating": 87,
-      "stamina": 85,
-      "countryId": "france"
-    },
-    {
-      "id": "ashley-cole",
-      "name": "Ashley Cole",
-      "position": "LB",
-      "overallRating": 88,
-      "attackRating": 45,
-      "defenceRating": 90,
-      "stamina": 84,
-      "countryId": "england"
-    },
-    {
-      "id": "michel-salgado",
-      "name": "Michel Salgado",
-      "position": "RB",
-      "overallRating": 85,
-      "attackRating": 48,
-      "defenceRating": 86,
-      "stamina": 83,
-      "countryId": "spain"
-    },
-    {
-      "id": "franz-beckenbauer",
-      "name": "Franz Beckenbauer",
-      "position": "CB",
-      "overallRating": 92,
-      "attackRating": 58,
-      "defenceRating": 91,
-      "stamina": 84,
-      "countryId": "germany"
-    },
-    {
-      "id": "jaap-stam",
-      "name": "Jaap Stam",
-      "position": "CB",
-      "overallRating": 88,
-      "attackRating": 46,
-      "defenceRating": 90,
-      "stamina": 84,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "tony-adams",
-      "name": "Tony Adams",
-      "position": "CB",
-      "overallRating": 87,
-      "attackRating": 48,
-      "defenceRating": 89,
-      "stamina": 84,
-      "countryId": "england"
-    },
-    {
-      "id": "walter-samuel",
-      "name": "Walter Samuel",
-      "position": "CB",
-      "overallRating": 85,
-      "attackRating": 45,
-      "defenceRating": 87,
-      "stamina": 83,
-      "countryId": "argentina"
-    },
-    {
-      "id": "wes-brown",
-      "name": "Wes Brown",
-      "position": "CB",
-      "overallRating": 84,
-      "attackRating": 42,
-      "defenceRating": 85,
-      "stamina": 82,
-      "countryId": "england"
-    },
-    {
-      "id": "sami-hyypiä",
-      "name": "Sami Hyypiä",
-      "position": "CB",
-      "overallRating": 85,
-      "attackRating": 43,
-      "defenceRating": 86,
-      "stamina": 82,
-      "countryId": "finland"
+      "bio": "Steve Heighway was a quick and tricky winger who provided width and creativity for Liverpool's attacks."
     },
     {
       "id": "steven-gerrard",
@@ -2380,219 +4484,9 @@
       "countryId": "england"
     },
     {
-      "id": "clarence-seedorf",
-      "name": "Clarence Seedorf",
-      "position": "CM",
-      "overallRating": 88,
-      "attackRating": 82,
-      "defenceRating": 74,
-      "stamina": 84,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "luka-modrić",
-      "name": "Luka Modrić",
-      "position": "CM",
-      "overallRating": 90,
-      "attackRating": 78,
-      "defenceRating": 76,
-      "stamina": 86,
-      "countryId": "croatia"
-    },
-    {
-      "id": "arturo-vidal",
-      "name": "Arturo Vidal",
-      "position": "CM",
-      "overallRating": 88,
-      "attackRating": 80,
-      "defenceRating": 80,
-      "stamina": 87,
-      "countryId": "chile"
-    },
-    {
-      "id": "n'golo-kante",
-      "name": "N'Golo Kanté",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 68,
-      "defenceRating": 84,
-      "stamina": 88,
-      "countryId": "france"
-    },
-    {
-      "id": "bruno-fernandes",
-      "name": "Bruno Fernandes",
-      "position": "CM",
-      "overallRating": 88,
-      "attackRating": 82,
-      "defenceRating": 72,
-      "stamina": 85,
-      "countryId": "portugal"
-    },
-    {
-      "id": "rodri",
-      "name": "Rodri",
-      "position": "CM",
-      "overallRating": 89,
-      "attackRating": 74,
-      "defenceRating": 82,
-      "stamina": 86,
-      "countryId": "spain"
-    },
-    {
-      "id": "paul-pogba",
-      "name": "Paul Pogba",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 80,
-      "defenceRating": 76,
-      "stamina": 85,
-      "countryId": "france"
-    },
-    {
-      "id": "nemanja-matić",
-      "name": "Nemanja Matić",
-      "position": "CM",
-      "overallRating": 85,
-      "attackRating": 65,
-      "defenceRating": 82,
-      "stamina": 83,
-      "countryId": "serbia"
-    },
-    {
-      "id": "claude-makelele",
-      "name": "Claude Makélélé",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 58,
-      "defenceRating": 85,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "lothar-matthäus",
-      "name": "Lothar Matthäus",
-      "position": "CM",
-      "overallRating": 90,
-      "attackRating": 76,
-      "defenceRating": 82,
-      "stamina": 86,
-      "countryId": "germany"
-    },
-    {
-      "id": "gunter-netzer",
-      "name": "Günter Netzer",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 80,
-      "defenceRating": 70,
-      "stamina": 83,
-      "countryId": "germany"
-    },
-    {
-      "id": "gascoigne",
-      "name": "Gascoigne",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 82,
-      "defenceRating": 72,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "youri-djorkaeff",
-      "name": "Youri Djorkaeff",
-      "position": "CM",
-      "overallRating": 85,
-      "attackRating": 80,
-      "defenceRating": 68,
-      "stamina": 82,
-      "countryId": "france"
-    },
-    {
-      "id": "jaap-robben",
-      "name": "Jaap Robben",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 78,
-      "defenceRating": 74,
-      "stamina": 83,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "dragan-stojković",
-      "name": "Dragan Stojković",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 82,
-      "defenceRating": 70,
-      "stamina": 84,
-      "countryId": "serbia"
-    },
-    {
-      "id": "gheorghe-hagi",
-      "name": "Gheorghe Hagi",
-      "position": "CM",
-      "overallRating": 87,
-      "attackRating": 84,
-      "defenceRating": 70,
-      "stamina": 84,
-      "countryId": "romania"
-    },
-    {
-      "id": "diego-simeone",
-      "name": "Diego Simeone",
-      "position": "CM",
-      "overallRating": 85,
-      "attackRating": 75,
-      "defenceRating": 84,
-      "stamina": 86,
-      "countryId": "argentina"
-    },
-    {
-      "id": "johan-cruyff",
-      "name": "Johan Cruyff",
-      "position": "LW",
-      "overallRating": 93,
-      "attackRating": 92,
-      "defenceRating": 64,
-      "stamina": 85,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "robert-pires",
-      "name": "Robert Pires",
-      "position": "LW",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 62,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "eden-hazard",
-      "name": "Eden Hazard",
-      "position": "LW",
-      "overallRating": 89,
-      "attackRating": 90,
-      "defenceRating": 62,
-      "stamina": 85,
-      "countryId": "belgium"
-    },
-    {
-      "id": "sadio-mane",
-      "name": "Sadio Mané",
-      "position": "LW",
-      "overallRating": 88,
-      "attackRating": 89,
-      "defenceRating": 64,
-      "stamina": 86,
-      "countryId": "senegal"
-    },
-    {
-      "id": "luis-suarez",
-      "name": "Luis Suárez",
-      "position": "LW",
+      "id": "suarez",
+      "name": "Suárez",
+      "position": "ST",
       "overallRating": 90,
       "attackRating": 92,
       "defenceRating": 65,
@@ -2600,254 +4494,14 @@
       "countryId": "uruguay"
     },
     {
-      "id": "gareth-bale",
-      "name": "Gareth Bale",
-      "position": "RW",
-      "overallRating": 89,
-      "attackRating": 90,
-      "defenceRating": 63,
-      "stamina": 86,
-      "countryId": "wales"
-    },
-    {
-      "id": "neymar",
-      "name": "Neymar",
-      "position": "LW",
-      "overallRating": 88,
-      "attackRating": 91,
-      "defenceRating": 61,
-      "stamina": 85,
-      "countryId": "brazil"
-    },
-    {
-      "id": "wilfried-zaha",
-      "name": "Wilfried Zaha",
-      "position": "LW",
-      "overallRating": 84,
-      "attackRating": 85,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "ivory-coast"
-    },
-    {
-      "id": "mohamed-salah",
-      "name": "Mohamed Salah",
-      "position": "RW",
-      "overallRating": 89,
-      "attackRating": 92,
-      "defenceRating": 60,
-      "stamina": 86,
-      "countryId": "egypt"
-    },
-    {
-      "id": "raheem-sterling",
-      "name": "Raheem Sterling",
-      "position": "RW",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 59,
-      "stamina": 86,
-      "countryId": "england"
-    },
-    {
-      "id": "bukayo-saka",
-      "name": "Bukayo Saka",
-      "position": "LW",
-      "overallRating": 85,
-      "attackRating": 86,
-      "defenceRating": 60,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "jadon-sancho",
-      "name": "Jadon Sancho",
-      "position": "RW",
-      "overallRating": 85,
-      "attackRating": 86,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "england"
-    },
-    {
-      "id": "vinicius-junior",
-      "name": "Vinicius Junior",
-      "position": "LW",
-      "overallRating": 86,
-      "attackRating": 88,
-      "defenceRating": 59,
-      "stamina": 86,
-      "countryId": "brazil"
-    },
-    {
-      "id": "phil-foden",
-      "name": "Phil Foden",
-      "position": "LW",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 61,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "leroy-sane",
-      "name": "Leroy Sané",
-      "position": "LW",
-      "overallRating": 85,
-      "attackRating": 87,
-      "defenceRating": 58,
-      "stamina": 85,
-      "countryId": "germany"
-    },
-    {
-      "id": "gerd-muller",
-      "name": "Gerd Müller",
+      "id": "sylvain-wiltord",
+      "name": "Sylvain Wiltord",
+      "countryId": "france",
       "position": "ST",
-      "overallRating": 91,
-      "attackRating": 94,
-      "defenceRating": 55,
-      "stamina": 84,
-      "countryId": "germany"
-    },
-    {
-      "id": "kenny-dalglish",
-      "name": "Kenny Dalglish",
-      "position": "ST",
-      "overallRating": 90,
-      "attackRating": 91,
-      "defenceRating": 62,
-      "stamina": 85,
-      "countryId": "scotland"
-    },
-    {
-      "id": "sergio-aguero",
-      "name": "Sergio Agüero",
-      "position": "ST",
-      "overallRating": 89,
-      "attackRating": 91,
-      "defenceRating": 64,
-      "stamina": 86,
-      "countryId": "argentina"
-    },
-    {
-      "id": "erling-haaland",
-      "name": "Erling Haaland",
-      "position": "ST",
-      "overallRating": 88,
-      "attackRating": 92,
-      "defenceRating": 60,
-      "stamina": 85,
-      "countryId": "norway"
-    },
-    {
-      "id": "harry-kane",
-      "name": "Harry Kane",
-      "position": "ST",
-      "overallRating": 89,
-      "attackRating": 91,
-      "defenceRating": 62,
-      "stamina": 84,
-      "countryId": "england"
-    },
-    {
-      "id": "karim-benzema",
-      "name": "Karim Benzema",
-      "position": "ST",
-      "overallRating": 90,
-      "attackRating": 92,
-      "defenceRating": 60,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "marco-van-basten",
-      "name": "Marco van Basten",
-      "position": "ST",
-      "overallRating": 91,
-      "attackRating": 93,
-      "defenceRating": 62,
-      "stamina": 83,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "davor-suker",
-      "name": "Davor Šuker",
-      "position": "ST",
-      "overallRating": 85,
-      "attackRating": 88,
-      "defenceRating": 58,
-      "stamina": 82,
-      "countryId": "croatia"
-    },
-    {
-      "id": "hristo-stoichkov",
-      "name": "Hristo Stoichkov",
-      "position": "ST",
-      "overallRating": 87,
-      "attackRating": 89,
-      "defenceRating": 60,
-      "stamina": 84,
-      "countryId": "bulgaria"
-    },
-    {
-      "id": "hakan-şukur",
-      "name": "Hakan Şükür",
-      "position": "ST",
-      "overallRating": 83,
-      "attackRating": 86,
-      "defenceRating": 55,
-      "stamina": 81,
-      "countryId": "turkey"
-    },
-    {
-      "id": "eusebio",
-      "name": "Eusebio",
-      "position": "ST",
-      "overallRating": 90,
-      "attackRating": 92,
-      "defenceRating": 60,
-      "stamina": 85,
-      "countryId": "portugal"
-    },
-    {
-      "id": "romario",
-      "name": "Romário",
-      "position": "ST",
-      "overallRating": 88,
-      "attackRating": 90,
-      "defenceRating": 60,
-      "stamina": 83,
-      "countryId": "brazil"
-    },
-    {
-      "id": "bebeto",
-      "name": "Bebeto",
-      "position": "ST",
-      "overallRating": 84,
-      "attackRating": 86,
-      "defenceRating": 58,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "bebeto-da-silva",
-      "name": "Bebeto da Silva",
-      "position": "ST",
-      "overallRating": 82,
-      "attackRating": 84,
-      "defenceRating": 56,
-      "stamina": 81,
-      "countryId": "brazil"
-    },
-    {
-      "id": "dunga",
-      "name": "Dunga",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 72,
-      "defenceRating": 80,
-      "stamina": 85,
-      "countryId": "brazil"
+      "overallRating": 81,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 84
     },
     {
       "id": "taffarel",
@@ -2857,376 +4511,6 @@
       "attackRating": 36,
       "defenceRating": 84,
       "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "leonardo-nascimento",
-      "name": "Leonardo Nascimento",
-      "position": "LB",
-      "overallRating": 84,
-      "attackRating": 48,
-      "defenceRating": 85,
-      "stamina": 83,
-      "countryId": "brazil"
-    },
-    {
-      "id": "rogerio-ceni",
-      "name": "Rogério Ceni",
-      "position": "GK",
-      "overallRating": 81,
-      "attackRating": 55,
-      "defenceRating": 79,
-      "stamina": 80,
-      "countryId": "brazil"
-    },
-    {
-      "id": "lisandro-martinez",
-      "name": "Lisandro Martínez",
-      "position": "CB",
-      "overallRating": 85,
-      "attackRating": 42,
-      "defenceRating": 86,
-      "stamina": 84,
-      "countryId": "argentina"
-    },
-    {
-      "id": "alejandro-garnacho",
-      "name": "Alejandro Garnacho",
-      "position": "LW",
-      "overallRating": 82,
-      "attackRating": 83,
-      "defenceRating": 55,
-      "stamina": 83,
-      "countryId": "argentina"
-    },
-    {
-      "id": "alejandro-balde",
-      "name": "Alejandro Balde",
-      "position": "LB",
-      "overallRating": 81,
-      "attackRating": 46,
-      "defenceRating": 82,
-      "stamina": 85,
-      "countryId": "spain"
-    },
-    {
-      "id": "julian-alvarez",
-      "name": "Julián Álvarez",
-      "position": "ST",
-      "overallRating": 84,
-      "attackRating": 86,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "argentina"
-    },
-    {
-      "id": "gavi",
-      "name": "Gavi",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 76,
-      "defenceRating": 72,
-      "stamina": 83,
-      "countryId": "spain"
-    },
-    {
-      "id": "pedri",
-      "name": "Pedri",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 78,
-      "defenceRating": 70,
-      "stamina": 82,
-      "countryId": "spain"
-    },
-    {
-      "id": "robert-lewandowski",
-      "name": "Robert Lewandowski",
-      "position": "ST",
-      "overallRating": 91,
-      "attackRating": 93,
-      "defenceRating": 58,
-      "stamina": 85,
-      "countryId": "poland"
-    },
-    {
-      "id": "kylian-mbappe",
-      "name": "Kylian Mbappé",
-      "position": "ST",
-      "overallRating": 91,
-      "attackRating": 93,
-      "defenceRating": 60,
-      "stamina": 88,
-      "countryId": "france"
-    },
-    {
-      "id": "jude-bellingham",
-      "name": "Jude Bellingham",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 76,
-      "defenceRating": 74,
-      "stamina": 85,
-      "countryId": "england"
-    },
-    {
-      "id": "mason-mount",
-      "name": "Mason Mount",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 78,
-      "defenceRating": 68,
-      "stamina": 83,
-      "countryId": "england"
-    },
-    {
-      "id": "messi",
-      "name": "Messi",
-      "position": "LW",
-      "overallRating": 93,
-      "attackRating": 94,
-      "defenceRating": 65,
-      "stamina": 85,
-      "countryId": "argentina"
-    },
-    {
-      "id": "naldo",
-      "name": "Naldo",
-      "position": "CB",
-      "overallRating": 82,
-      "attackRating": 40,
-      "defenceRating": 83,
-      "stamina": 81,
-      "countryId": "brazil"
-    },
-    {
-      "id": "carlos-puyol",
-      "name": "Carlos Puyol",
-      "position": "CB",
-      "overallRating": 88,
-      "attackRating": 45,
-      "defenceRating": 90,
-      "stamina": 85,
-      "countryId": "spain"
-    },
-    {
-      "id": "rodrygo-goes",
-      "name": "Rodrygo Goes",
-      "position": "RW",
-      "overallRating": 83,
-      "attackRating": 85,
-      "defenceRating": 57,
-      "stamina": 84,
-      "countryId": "brazil"
-    },
-    {
-      "id": "antony",
-      "name": "Antony",
-      "position": "RW",
-      "overallRating": 82,
-      "attackRating": 83,
-      "defenceRating": 56,
-      "stamina": 83,
-      "countryId": "brazil"
-    },
-    {
-      "id": "goncalo-ramos",
-      "name": "Gonçalo Ramos",
-      "position": "ST",
-      "overallRating": 81,
-      "attackRating": 82,
-      "defenceRating": 56,
-      "stamina": 82,
-      "countryId": "portugal"
-    },
-    {
-      "id": "ousmane-dembele",
-      "name": "Ousmane Dembélé",
-      "position": "RW",
-      "overallRating": 84,
-      "attackRating": 86,
-      "defenceRating": 56,
-      "stamina": 85,
-      "countryId": "france"
-    },
-    {
-      "id": "griezmann",
-      "name": "Griezmann",
-      "position": "LW",
-      "overallRating": 86,
-      "attackRating": 87,
-      "defenceRating": 60,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "nacho-fernandez",
-      "name": "Nacho Fernández",
-      "position": "CB",
-      "overallRating": 82,
-      "attackRating": 40,
-      "defenceRating": 83,
-      "stamina": 81,
-      "countryId": "spain"
-    },
-    {
-      "id": "james-rodriguez",
-      "name": "James Rodríguez",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 82,
-      "defenceRating": 68,
-      "stamina": 83,
-      "countryId": "colombia"
-    },
-    {
-      "id": "radamel-falcao",
-      "name": "Radamel Falcao",
-      "position": "ST",
-      "overallRating": 85,
-      "attackRating": 87,
-      "defenceRating": 60,
-      "stamina": 82,
-      "countryId": "colombia"
-    },
-    {
-      "id": "carlos-valderrama",
-      "name": "Carlos Valderrama",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 78,
-      "defenceRating": 65,
-      "stamina": 80,
-      "countryId": "colombia"
-    },
-    {
-      "id": "juan-fernando-quintero",
-      "name": "Juan Fernando Quintero",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 79,
-      "defenceRating": 64,
-      "stamina": 81,
-      "countryId": "colombia"
-    },
-    {
-      "id": "george-weah",
-      "name": "George Weah",
-      "position": "ST",
-      "overallRating": 85,
-      "attackRating": 86,
-      "defenceRating": 60,
-      "stamina": 83,
-      "countryId": "liberia"
-    },
-    {
-      "id": "samuel-eto'o",
-      "name": "Samuel Eto'o",
-      "position": "ST",
-      "overallRating": 88,
-      "attackRating": 90,
-      "defenceRating": 62,
-      "stamina": 85,
-      "countryId": "cameroon"
-    },
-    {
-      "id": "yaya-toure",
-      "name": "Yaya Touré",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 76,
-      "defenceRating": 78,
-      "stamina": 84,
-      "countryId": "ivory-coast"
-    },
-    {
-      "id": "pierre-kalulu",
-      "name": "Pierre Kalulu",
-      "position": "CB",
-      "overallRating": 81,
-      "attackRating": 38,
-      "defenceRating": 82,
-      "stamina": 81,
-      "countryId": "cameroon"
-    },
-    {
-      "id": "son-heung-min",
-      "name": "Son Heung-min",
-      "position": "LW",
-      "overallRating": 83,
-      "attackRating": 84,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "south-korea"
-    },
-    {
-      "id": "ki-sung-yueng",
-      "name": "Ki Sung-yueng",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 72,
-      "defenceRating": 74,
-      "stamina": 82,
-      "countryId": "south-korea"
-    },
-    {
-      "id": "javier-mascherano",
-      "name": "Javier Mascherano",
-      "position": "CM",
-      "overallRating": 85,
-      "attackRating": 65,
-      "defenceRating": 84,
-      "stamina": 85,
-      "countryId": "argentina"
-    },
-    {
-      "id": "javier-zanetti",
-      "name": "Javier Zanetti",
-      "position": "RB",
-      "overallRating": 86,
-      "attackRating": 48,
-      "defenceRating": 85,
-      "stamina": 84,
-      "countryId": "argentina"
-    },
-    {
-      "id": "declan-rice",
-      "name": "Declan Rice",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 68,
-      "defenceRating": 80,
-      "stamina": 84,
-      "countryId": "england"
-    },
-    {
-      "id": "kalvin-phillips",
-      "name": "Kalvin Phillips",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 65,
-      "defenceRating": 78,
-      "stamina": 83,
-      "countryId": "england"
-    },
-    {
-      "id": "fred",
-      "name": "Fred",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 70,
-      "defenceRating": 76,
-      "stamina": 85,
-      "countryId": "brazil"
-    },
-    {
-      "id": "fabinho",
-      "name": "Fabinho",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 68,
-      "defenceRating": 81,
-      "stamina": 83,
       "countryId": "brazil"
     },
     {
@@ -3240,334 +4524,35 @@
       "countryId": "spain"
     },
     {
-      "id": "coutinho",
-      "name": "Coutinho",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 80,
-      "defenceRating": 68,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "igor-akinfeev",
-      "name": "Igor Akinfeev",
-      "position": "CM",
-      "overallRating": 82,
-      "attackRating": 78,
-      "defenceRating": 70,
-      "stamina": 82,
-      "countryId": "russia"
-    },
-    {
-      "id": "alan-dzagoev",
-      "name": "Alan Dzagoev",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 77,
-      "defenceRating": 68,
-      "stamina": 81,
-      "countryId": "russia"
-    },
-    {
-      "id": "raul-gonzalez",
-      "name": "Raúl González",
-      "position": "ST",
-      "overallRating": 88,
-      "attackRating": 89,
-      "defenceRating": 60,
-      "stamina": 84,
-      "countryId": "spain"
-    },
-    {
-      "id": "olivier-giroud",
-      "name": "Olivier Giroud",
-      "position": "ST",
-      "overallRating": 84,
-      "attackRating": 85,
-      "defenceRating": 60,
-      "stamina": 83,
-      "countryId": "france"
-    },
-    {
-      "id": "pepe",
-      "name": "Pepe",
+      "id": "thiago-silva",
+      "name": "Thiago Silva",
       "position": "CB",
-      "overallRating": 86,
-      "attackRating": 46,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "portugal"
-    },
-    {
-      "id": "jerôme-boateng",
-      "name": "Jérôme Boateng",
-      "position": "CB",
-      "overallRating": 86,
-      "attackRating": 44,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "germany"
-    },
-    {
-      "id": "sami-khedira",
-      "name": "Sami Khedira",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 72,
-      "defenceRating": 76,
-      "stamina": 84,
-      "countryId": "germany"
-    },
-    {
-      "id": "arjen-robben",
-      "name": "Arjen Robben",
-      "position": "RW",
-      "overallRating": 88,
-      "attackRating": 90,
-      "defenceRating": 62,
-      "stamina": 85,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "wesley-sneijder",
-      "name": "Wesley Sneijder",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 82,
-      "defenceRating": 70,
-      "stamina": 83,
-      "countryId": "netherlands"
-    },
-    {
-      "id": "ronaldinho-gaucho",
-      "name": "Ronaldinho Gaúcho",
-      "position": "LW",
-      "overallRating": 91,
-      "attackRating": 88,
-      "defenceRating": 68,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "ronaldo-fenômeno",
-      "name": "Ronaldo Fenômeno",
-      "position": "ST",
-      "overallRating": 92,
-      "attackRating": 94,
-      "defenceRating": 58,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "zinedin-zidane",
-      "name": "Zinedin Zidane",
-      "position": "CM",
-      "overallRating": 92,
-      "attackRating": 85,
-      "defenceRating": 75,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "arkadiusz-milik",
-      "name": "Arkadiusz Milik",
-      "position": "ST",
-      "overallRating": 81,
-      "attackRating": 83,
-      "defenceRating": 56,
-      "stamina": 82,
-      "countryId": "poland"
-    },
-    {
-      "id": "aymeric-laporte",
-      "name": "Aymeric Laporte",
-      "position": "CB",
-      "overallRating": 86,
-      "attackRating": 42,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "france"
-    },
-    {
-      "id": "garrincha",
-      "name": "Garrincha",
-      "position": "RW",
       "overallRating": 90,
-      "attackRating": 91,
-      "defenceRating": 60,
-      "stamina": 84,
+      "attackRating": 40,
+      "defenceRating": 91,
+      "stamina": 85,
       "countryId": "brazil"
     },
     {
-      "id": "leônidas-da-silva",
-      "name": "Leônidas da Silva",
-      "position": "ST",
-      "overallRating": 87,
-      "attackRating": 88,
-      "defenceRating": 58,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "de-bruyne",
-      "name": "De Bruyne",
-      "position": "CM",
-      "overallRating": 89,
-      "attackRating": 84,
-      "defenceRating": 72,
-      "stamina": 86,
+      "id": "thibaut-courtois",
+      "name": "Thibaut Courtois",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 36,
+      "defenceRating": 86,
+      "stamina": 83,
       "countryId": "belgium"
     },
     {
-      "id": "juan-mata",
-      "name": "Juan Mata",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 80,
-      "defenceRating": 66,
-      "stamina": 81,
-      "countryId": "spain"
-    },
-    {
-      "id": "isco",
-      "name": "Isco",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 79,
-      "defenceRating": 67,
-      "stamina": 82,
-      "countryId": "spain"
-    },
-    {
-      "id": "niklas-sule",
-      "name": "Niklas Süle",
-      "position": "CB",
-      "overallRating": 83,
-      "attackRating": 40,
-      "defenceRating": 84,
-      "stamina": 82,
-      "countryId": "germany"
-    },
-    {
-      "id": "joel-matip",
-      "name": "Joël Matip",
-      "position": "CB",
-      "overallRating": 82,
-      "attackRating": 38,
-      "defenceRating": 83,
-      "stamina": 81,
-      "countryId": "cameroon"
-    },
-    {
-      "id": "suarez",
-      "name": "Suárez",
-      "position": "ST",
-      "overallRating": 90,
-      "attackRating": 92,
-      "defenceRating": 65,
-      "stamina": 86,
-      "countryId": "uruguay"
-    },
-    {
-      "id": "cavani",
-      "name": "Cavani",
-      "position": "ST",
-      "overallRating": 86,
-      "attackRating": 88,
-      "defenceRating": 62,
-      "stamina": 84,
-      "countryId": "uruguay"
-    },
-    {
-      "id": "alexis-sanchez",
-      "name": "Alexis Sánchez",
-      "position": "LW",
+      "id": "thierry-henry",
+      "name": "Thierry Henry",
+      "countryId": "france",
+      "position": "RW",
       "overallRating": 84,
       "attackRating": 86,
-      "defenceRating": 60,
-      "stamina": 84,
-      "countryId": "chile"
-    },
-    {
-      "id": "diogo-jota",
-      "name": "Diogo Jota",
-      "position": "LW",
-      "overallRating": 83,
-      "attackRating": 84,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "portugal"
-    },
-    {
-      "id": "ruben-neves",
-      "name": "Ruben Neves",
-      "position": "CM",
-      "overallRating": 82,
-      "attackRating": 72,
-      "defenceRating": 76,
-      "stamina": 83,
-      "countryId": "portugal"
-    },
-    {
-      "id": "jose-sa",
-      "name": "José Sá",
-      "position": "GK",
-      "overallRating": 81,
-      "attackRating": 32,
-      "defenceRating": 80,
-      "stamina": 80,
-      "countryId": "portugal"
-    },
-    {
-      "id": "ruben-semedo",
-      "name": "Rúben Semedo",
-      "position": "CB",
-      "overallRating": 80,
-      "attackRating": 35,
-      "defenceRating": 81,
-      "stamina": 79,
-      "countryId": "portugal"
-    },
-    {
-      "id": "giorgos-kyriakidis",
-      "name": "Giorgos Kyriakidis",
-      "position": "CM",
-      "overallRating": 76,
-      "attackRating": 68,
-      "defenceRating": 70,
-      "stamina": 78,
-      "countryId": "greece"
-    },
-    {
-      "id": "kostas-mitroglou",
-      "name": "Kostas Mitroglou",
-      "position": "ST",
-      "overallRating": 78,
-      "attackRating": 80,
-      "defenceRating": 52,
-      "stamina": 77,
-      "countryId": "greece"
-    },
-    {
-      "id": "panagiotis-kone",
-      "name": "Panagiotis Kone",
-      "position": "CM",
-      "overallRating": 75,
-      "attackRating": 66,
-      "defenceRating": 68,
-      "stamina": 76,
-      "countryId": "greece"
-    },
-    {
-      "id": "christian-poulsen",
-      "name": "Christian Poulsen",
-      "position": "CM",
-      "overallRating": 80,
-      "attackRating": 68,
-      "defenceRating": 78,
-      "stamina": 81,
-      "countryId": "denmark"
+      "defenceRating": 72,
+      "stamina": 87,
+      "bio": "Thierry Henry was in his absolute prime - perhaps the best forward in the world with pace, skill, strength, and goal-scoring."
     },
     {
       "id": "thomas-gravesen",
@@ -3580,64 +4565,25 @@
       "countryId": "denmark"
     },
     {
-      "id": "soren-larsen",
-      "name": "Soren Larsen",
-      "position": "ST",
-      "overallRating": 77,
-      "attackRating": 78,
-      "defenceRating": 52,
-      "stamina": 76,
-      "countryId": "denmark"
-    },
-    {
-      "id": "magnus-wolff-eikeng",
-      "name": "Magnus Wolff Eikeng",
-      "position": "ST",
-      "overallRating": 74,
-      "attackRating": 75,
-      "defenceRating": 50,
-      "stamina": 74,
-      "countryId": "norway"
-    },
-    {
-      "id": "andreas-cornelius",
-      "name": "Andreas Cornelius",
-      "position": "ST",
-      "overallRating": 78,
-      "attackRating": 80,
-      "defenceRating": 54,
-      "stamina": 77,
-      "countryId": "denmark"
-    },
-    {
-      "id": "patrik-berger",
-      "name": "Patrik Berger",
+      "id": "thomas-hassler",
+      "name": "Thomas Häßler",
+      "countryId": "germany",
       "position": "CM",
-      "overallRating": 81,
-      "attackRating": 76,
-      "defenceRating": 72,
-      "stamina": 80,
-      "countryId": "czech-republic"
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 80,
+      "stamina": 88,
+      "bio": "Thomas Häßler was a tireless midfielder who provided important work rate and ball distribution for Germany."
     },
     {
-      "id": "tomas-rosický",
-      "name": "Tomáš Rosický",
-      "position": "CM",
-      "overallRating": 82,
-      "attackRating": 78,
-      "defenceRating": 70,
-      "stamina": 81,
-      "countryId": "czech-republic"
-    },
-    {
-      "id": "pavel-nedved",
-      "name": "Pavel Nedved",
-      "position": "CM",
-      "overallRating": 84,
-      "attackRating": 80,
-      "defenceRating": 72,
-      "stamina": 83,
-      "countryId": "czech-republic"
+      "id": "thomas-muller",
+      "name": "Thomas Müller",
+      "countryId": "germany",
+      "position": "RW",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 76,
+      "stamina": 87
     },
     {
       "id": "toby-alderweireld",
@@ -3650,214 +4596,201 @@
       "countryId": "belgium"
     },
     {
-      "id": "jan-vertonghen",
-      "name": "Jan Vertonghen",
-      "position": "CB",
-      "overallRating": 86,
-      "attackRating": 42,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "belgium"
-    },
-    {
-      "id": "axel-witsel",
-      "name": "Axel Witsel",
+      "id": "tomas-rosický",
+      "name": "Tomáš Rosický",
       "position": "CM",
-      "overallRating": 84,
-      "attackRating": 70,
-      "defenceRating": 78,
-      "stamina": 83,
-      "countryId": "belgium"
-    },
-    {
-      "id": "marouane-fellaini",
-      "name": "Marouane Fellaini",
-      "position": "CM",
-      "overallRating": 81,
-      "attackRating": 74,
-      "defenceRating": 74,
-      "stamina": 82,
-      "countryId": "belgium"
-    },
-    {
-      "id": "demba-ba",
-      "name": "Demba Ba",
-      "position": "ST",
-      "overallRating": 80,
-      "attackRating": 82,
-      "defenceRating": 54,
-      "stamina": 79,
-      "countryId": "senegal"
-    },
-    {
-      "id": "papa-bouba-diop",
-      "name": "Papa Bouba Diop",
-      "position": "CM",
-      "overallRating": 77,
-      "attackRating": 68,
-      "defenceRating": 72,
-      "stamina": 78,
-      "countryId": "senegal"
-    },
-    {
-      "id": "el-hadji-diouf",
-      "name": "El Hadji Diouf",
-      "position": "LW",
-      "overallRating": 79,
-      "attackRating": 80,
-      "defenceRating": 56,
-      "stamina": 78,
-      "countryId": "senegal"
-    },
-    {
-      "id": "alou-diarra",
-      "name": "Alou Diarra",
-      "position": "CM",
-      "overallRating": 76,
-      "attackRating": 65,
-      "defenceRating": 70,
-      "stamina": 76,
-      "countryId": "senegal"
-    },
-    {
-      "id": "papiss-cisse",
-      "name": "Papiss Cissé",
-      "position": "ST",
-      "overallRating": 78,
-      "attackRating": 80,
-      "defenceRating": 52,
-      "stamina": 77,
-      "countryId": "senegal"
-    },
-    {
-      "id": "fabrice-muamba",
-      "name": "Fabrice Muamba",
-      "position": "CM",
-      "overallRating": 76,
-      "attackRating": 65,
-      "defenceRating": 72,
-      "stamina": 77,
-      "countryId": "congo"
-    },
-    {
-      "id": "michu",
-      "name": "Michu",
-      "position": "ST",
-      "overallRating": 81,
-      "attackRating": 83,
-      "defenceRating": 56,
-      "stamina": 80,
-      "countryId": "spain"
-    },
-    {
-      "id": "alvaro-arbeloa",
-      "name": "Álvaro Arbeloa",
-      "position": "RB",
       "overallRating": 82,
-      "attackRating": 44,
-      "defenceRating": 83,
-      "stamina": 81,
-      "countryId": "spain"
-    },
-    {
-      "id": "xabi-alonso",
-      "name": "Xabi Alonso",
-      "position": "CM",
-      "overallRating": 86,
-      "attackRating": 74,
-      "defenceRating": 78,
-      "stamina": 83,
-      "countryId": "spain"
-    },
-    {
-      "id": "savio",
-      "name": "Sávio",
-      "position": "ST",
-      "overallRating": 80,
-      "attackRating": 82,
-      "defenceRating": 54,
-      "stamina": 79,
-      "countryId": "brazil"
-    },
-    {
-      "id": "neymar-junior",
-      "name": "Neymar Junior",
-      "position": "LW",
-      "overallRating": 88,
-      "attackRating": 91,
-      "defenceRating": 61,
-      "stamina": 85,
-      "countryId": "brazil"
-    },
-    {
-      "id": "luiz-gustavo",
-      "name": "Luiz Gustavo",
-      "position": "CM",
-      "overallRating": 80,
-      "attackRating": 68,
-      "defenceRating": 76,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "hulk",
-      "name": "Hulk",
-      "position": "RW",
-      "overallRating": 81,
-      "attackRating": 84,
-      "defenceRating": 56,
-      "stamina": 83,
-      "countryId": "brazil"
-    },
-    {
-      "id": "philippe-coutinho",
-      "name": "Philippe Coutinho",
-      "position": "CM",
-      "overallRating": 83,
-      "attackRating": 80,
-      "defenceRating": 68,
-      "stamina": 82,
-      "countryId": "brazil"
-    },
-    {
-      "id": "gerson-martins",
-      "name": "Gerson Martins",
-      "position": "CM",
-      "overallRating": 75,
-      "attackRating": 70,
-      "defenceRating": 68,
-      "stamina": 76,
-      "countryId": "brazil"
-    },
-    {
-      "id": "jorge",
-      "name": "Jorge",
-      "position": "CM",
-      "overallRating": 76,
-      "attackRating": 67,
-      "defenceRating": 71,
-      "stamina": 76,
-      "countryId": "brazil"
-    },
-    {
-      "id": "douglas-costa",
-      "name": "Douglas Costa",
-      "position": "RW",
-      "overallRating": 82,
-      "attackRating": 84,
-      "defenceRating": 58,
-      "stamina": 84,
-      "countryId": "brazil"
-    },
-    {
-      "id": "oscar",
-      "name": "Oscar",
-      "position": "CM",
-      "overallRating": 81,
       "attackRating": 78,
       "defenceRating": 70,
       "stamina": 81,
+      "countryId": "czech-republic"
+    },
+    {
+      "id": "toni-kroos",
+      "name": "Toni Kroos",
+      "countryId": "germany",
+      "position": "CM",
+      "overallRating": 87,
+      "attackRating": 84,
+      "defenceRating": 82,
+      "stamina": 86,
+      "bio": "Toni Kroos was an excellent all-round midfielder with great passing range, energy, and technical ability."
+    },
+    {
+      "id": "tony-adams",
+      "name": "Tony Adams",
+      "position": "CB",
+      "overallRating": 87,
+      "attackRating": 48,
+      "defenceRating": 89,
+      "stamina": 84,
+      "countryId": "england"
+    },
+    {
+      "id": "tony-dunne",
+      "name": "Tony Dunne",
+      "countryId": "ireland",
+      "position": "LB",
+      "overallRating": 84,
+      "attackRating": 65,
+      "defenceRating": 86,
+      "stamina": 88,
+      "bio": "Tony Dunne was a dependable left-back for Manchester United, playing a key role in their 1968 European Cup triumph with his defensive solidity."
+    },
+    {
+      "id": "tostao",
+      "name": "Tostão",
+      "countryId": "brazil",
+      "position": "ST",
+      "overallRating": 87,
+      "attackRating": 88,
+      "defenceRating": 72,
+      "stamina": 84,
+      "bio": "Tostão was a technically gifted forward with excellent dribbling ability and finishing, a key player in Brazil's attacking system."
+    },
+    {
+      "id": "trent-alexander-arnold",
+      "name": "Trent Alexander-Arnold",
+      "position": "RB",
+      "overallRating": 87,
+      "attackRating": 52,
+      "defenceRating": 86,
+      "stamina": 85,
+      "countryId": "england"
+    },
+    {
+      "id": "ubaldo-fillol",
+      "name": "Ubaldo Fillol",
+      "countryId": "argentina",
+      "position": "GK",
+      "overallRating": 87,
+      "attackRating": 45,
+      "defenceRating": 89,
+      "stamina": 85
+    },
+    {
+      "id": "victor-valdes",
+      "name": "Víctor Valdés",
+      "position": "GK",
+      "overallRating": 88,
+      "attackRating": 32,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "spain",
+      "bio": "Victor Valdes was Barcelona's consistent goalkeeper, providing excellent distribution to initiate their possession-based attacks."
+    },
+    {
+      "id": "vincent-kompany",
+      "name": "Vincent Kompany",
+      "position": "CB",
+      "overallRating": 90,
+      "attackRating": 38,
+      "defenceRating": 92,
+      "stamina": 86,
+      "countryId": "belgium"
+    },
+    {
+      "id": "vinicius-junior",
+      "name": "Vinicius Junior",
+      "position": "LW",
+      "overallRating": 86,
+      "attackRating": 88,
+      "defenceRating": 59,
+      "stamina": 86,
       "countryId": "brazil"
+    },
+    {
+      "id": "vinije-komatinovic",
+      "name": "Vinije Komatinović",
+      "countryId": "",
+      "position": "FW",
+      "overallRating": 80,
+      "attackRating": 81,
+      "defenceRating": 35,
+      "stamina": 80,
+      "bio": "Vinije Komatinović was a forward who provided important attacking contributions for Red Star Belgrade."
+    },
+    {
+      "id": "virgil-van-dijk",
+      "name": "Virgil van Dijk",
+      "position": "CB",
+      "overallRating": 91,
+      "attackRating": 45,
+      "defenceRating": 92,
+      "stamina": 86,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "vladimir-matic",
+      "name": "Vladimir Matić",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 82,
+      "attackRating": 70,
+      "defenceRating": 70,
+      "stamina": 85,
+      "bio": "Vladimir Matić was a midfielder who contributed to Red Star Belgrade's midfield control during the 1990s."
+    },
+    {
+      "id": "walter-samuel",
+      "name": "Walter Samuel",
+      "position": "CB",
+      "overallRating": 85,
+      "attackRating": 45,
+      "defenceRating": 87,
+      "stamina": 83,
+      "countryId": "argentina"
+    },
+    {
+      "id": "wayne-rooney",
+      "name": "Wayne Rooney",
+      "countryId": "england",
+      "position": "ST",
+      "overallRating": 86,
+      "attackRating": 87,
+      "defenceRating": 72,
+      "stamina": 87
+    },
+    {
+      "id": "wes-brown",
+      "name": "Wes Brown",
+      "position": "CB",
+      "overallRating": 84,
+      "attackRating": 42,
+      "defenceRating": 85,
+      "stamina": 82,
+      "countryId": "england"
+    },
+    {
+      "id": "wesley-sneijder",
+      "name": "Wesley Sneijder",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 82,
+      "defenceRating": 70,
+      "stamina": 83,
+      "countryId": "netherlands"
+    },
+    {
+      "id": "wilfried-zaha",
+      "name": "Wilfried Zaha",
+      "position": "LW",
+      "overallRating": 84,
+      "attackRating": 85,
+      "defenceRating": 58,
+      "stamina": 84,
+      "countryId": "ivory-coast"
+    },
+    {
+      "id": "william-gallas",
+      "name": "William Gallas",
+      "countryId": "france",
+      "position": "CB",
+      "overallRating": 86,
+      "attackRating": 70,
+      "defenceRating": 87,
+      "stamina": 86,
+      "bio": "William Gallas was a strong and athletic centre-back who provided physical presence and defensive solidity."
     },
     {
       "id": "willian-borges-da-silva",
@@ -3870,392 +4803,229 @@
       "countryId": "brazil"
     },
     {
-      "id": "lukas-podolski",
-      "name": "Lukas Podolski",
-      "position": "LW",
-      "overallRating": 83,
-      "attackRating": 85,
-      "defenceRating": 58,
-      "stamina": 83,
-      "countryId": "germany"
+      "id": "wim-jansen",
+      "name": "Wim Jansen",
+      "countryId": "",
+      "position": "DF",
+      "overallRating": 85,
+      "attackRating": 40,
+      "defenceRating": 86,
+      "stamina": 85,
+      "bio": "Wim Jansen was a midfielder with excellent ball-playing ability and the capacity to control the game."
     },
     {
-      "id": "samir-nasri",
-      "name": "Samir Nasri",
+      "id": "xabi-alonso",
+      "name": "Xabi Alonso",
       "position": "CM",
-      "overallRating": 83,
+      "overallRating": 86,
+      "attackRating": 74,
+      "defenceRating": 78,
+      "stamina": 83,
+      "countryId": "spain",
+      "bio": "Xabi Alonso was a midfield maestro with sublime passing ability and the vision to create goalscoring opportunities."
+    },
+    {
+      "id": "xavi",
+      "name": "Xavi",
+      "countryId": "",
+      "position": "MF",
+      "overallRating": 91,
+      "attackRating": 80,
+      "defenceRating": 70,
+      "stamina": 86,
+      "bio": "Xavi was arguably the greatest midfielder of his era - a magician with the ball with exceptional vision and technique."
+    },
+    {
+      "id": "xavi-hernandez",
+      "name": "Xavi Hernández",
+      "countryId": "spain",
+      "position": "CM",
+      "overallRating": 89,
+      "attackRating": 85,
+      "defenceRating": 80,
+      "stamina": 85
+    },
+    {
+      "id": "yaya-toure",
+      "name": "Yaya Touré",
+      "position": "CM",
+      "overallRating": 86,
+      "attackRating": 76,
+      "defenceRating": 78,
+      "stamina": 84,
+      "countryId": "ivory-coast"
+    },
+    {
+      "id": "youri-djorkaeff",
+      "name": "Youri Djorkaeff",
+      "position": "CM",
+      "overallRating": 85,
       "attackRating": 80,
       "defenceRating": 68,
       "stamina": 82,
-      "countryId": "france"
+      "countryId": "france",
+      "bio": "Youri Djorkaeff was a creative midfielder with excellent technical ability and the capacity to create goalscoring opportunities."
     },
     {
-      "id": "mathieu-valbuena",
-      "name": "Mathieu Valbuena",
+      "id": "zinedin-zidane",
+      "name": "Zinedin Zidane",
       "position": "CM",
-      "overallRating": 80,
-      "attackRating": 78,
-      "defenceRating": 64,
-      "stamina": 80,
+      "overallRating": 92,
+      "attackRating": 85,
+      "defenceRating": 75,
+      "stamina": 84,
       "countryId": "france"
     },
     {
-      "id": "nemanja-vidić",
-      "name": "Nemanja Vidić",
-      "position": "CB",
-      "overallRating": 86,
-      "attackRating": 42,
-      "defenceRating": 87,
-      "stamina": 84,
-      "countryId": "serbia"
+      "id": "zinedine-zidane",
+      "name": "Zinedine Zidane",
+      "countryId": "france",
+      "position": "CM",
+      "overallRating": 90,
+      "attackRating": 88,
+      "defenceRating": 78,
+      "stamina": 86,
+      "bio": "Zinedine Zidane was France's talismanic midfielder - a genius with the ball who delivered in crucial moments."
     },
     {
-      "id": "debug-test",
-      "name": "Debug Test",
-      "position": "MF",
-      "overallRating": 75,
-      "attackRating": 75,
-      "defenceRating": 75,
-      "stamina": 85,
-      "countryId": ""
-    },
-    {
-      "id": "logging-test",
-      "name": "Logging Test",
-      "position": "MF",
-      "overallRating": 75,
-      "attackRating": 75,
-      "defenceRating": 75,
-      "stamina": 85,
+      "id": "zvonimir-boban",
+      "name": "Zvonimir Boban",
       "countryId": "",
-      "clubs": [
-        "barcelona"
-      ],
-      "classicTeams": []
+      "position": "MF",
+      "overallRating": 87,
+      "attackRating": 80,
+      "defenceRating": 72,
+      "stamina": 86,
+      "bio": "Zvonimir Boban was a creative midfielder with excellent technical ability and the capacity to control the game."
     }
   ],
   "classicTeams": [
     {
-      "id": "man-utd-1968",
-      "name": "Manchester United 1968",
-      "countryId": "man-utd",
-      "year": 1968,
-      "season": "1967-68",
-      "description": "European Cup Winners",
-      "players": [
-        {
-          "playerId": "alex-stepney",
-          "position": "GK",
-          "number": null
-        },
-        {
-          "playerId": "tony-dunne",
-          "position": "LB",
-          "number": null
-        },
-        {
-          "playerId": "bill-foulkes",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "bobby-charlton",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "george-best",
-          "position": "RW",
-          "number": null
-        },
-        {
-          "playerId": "denis-law",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "john-aston",
-          "position": "LW",
-          "number": null
-        },
-        {
-          "playerId": "shay-brennan",
-          "position": "RB",
-          "number": null
-        },
-        {
-          "playerId": "nobby-stiles",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "pat-crerand",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "brian-kidd",
-          "position": "ST",
-          "number": null
-        }
-      ]
-    },
-    {
-      "id": "man-utd-1994",
-      "name": "Manchester United 1994",
-      "countryId": "man-utd",
+      "id": "ac-milan-1994",
+      "name": "AC Milan 1994",
+      "countryId": "ac-milan",
       "year": 1994,
       "season": "1993-94",
-      "description": "Ferguson's First Premier League Title",
+      "description": "AC Milan 1994",
       "players": [
         {
-          "playerId": "peter-schmeichel",
+          "playerId": "sebastiano-rossi",
           "position": "GK",
           "number": null
         },
         {
-          "playerId": "gary-neville",
-          "position": "RB",
+          "playerId": "paolo-maldini",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "steve-bruce",
-          "position": "CB",
+          "playerId": "franco-baresi",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "gary-pallister",
-          "position": "CB",
+          "playerId": "alessandro-costacurta",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "denis-irwin",
-          "position": "LB",
+          "playerId": "mauro-tassotti",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "roy-keane",
-          "position": "CM",
+          "playerId": "zvonimir-boban",
+          "position": "MF",
           "number": null
         },
         {
-          "playerId": "paul-scholes",
-          "position": "CM",
+          "playerId": "demetrio-albertini",
+          "position": "MF",
           "number": null
         },
         {
-          "playerId": "david-beckham",
-          "position": "RM",
+          "playerId": "roberto-donadoni",
+          "position": "MF",
           "number": null
         },
         {
-          "playerId": "ryan-giggs",
-          "position": "LW",
+          "playerId": "marco-van-basten",
+          "position": "FW",
           "number": null
         },
         {
-          "playerId": "eric-cantona",
-          "position": "ST",
+          "playerId": "daniele-massaro",
+          "position": "FW",
           "number": null
         },
         {
-          "playerId": "mark-hughes",
-          "position": "ST",
+          "playerId": "filippo-inzaghi",
+          "position": "FW",
           "number": null
         }
       ]
     },
     {
-      "id": "man-utd-2008",
-      "name": "Manchester United 2008",
-      "countryId": "man-utd",
-      "year": 2008,
-      "season": "2007-08",
-      "description": "Champions League & Premier League Winners",
+      "id": "ajax-1974",
+      "name": "Ajax 1974",
+      "countryId": "ajax",
+      "year": 1974,
+      "season": "1973-74",
+      "description": "Ajax 1974",
       "players": [
         {
-          "playerId": "edwin-van-der-sar",
+          "playerId": "piet-schrijvers",
           "position": "GK",
           "number": null
         },
         {
-          "playerId": "gary-neville",
-          "position": "RB",
+          "playerId": "ruud-krol",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "rio-ferdinand",
-          "position": "CB",
+          "playerId": "danny-blind",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "nemanja-vidic",
-          "position": "CB",
+          "playerId": "barry-hulshoff",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "patrice-evra",
-          "position": "LB",
+          "playerId": "wim-jansen",
+          "position": "DF",
           "number": null
         },
         {
-          "playerId": "roy-keane",
-          "position": "CM",
+          "playerId": "johan-neeskens",
+          "position": "MF",
           "number": null
         },
         {
-          "playerId": "paul-scholes",
-          "position": "CM",
+          "playerId": "arie-haan",
+          "position": "MF",
           "number": null
         },
         {
-          "playerId": "cristiano-ronaldo",
-          "position": "RW",
+          "playerId": "sjaak-swart",
+          "position": "FW",
           "number": null
         },
         {
-          "playerId": "ryan-giggs",
-          "position": "LW",
+          "playerId": "johan-cruyff",
+          "position": "FW",
           "number": null
         },
         {
-          "playerId": "carlos-tevez",
-          "position": "ST",
+          "playerId": "johnny-rep",
+          "position": "FW",
           "number": null
         },
         {
-          "playerId": "wayne-rooney",
-          "position": "ST",
-          "number": null
-        }
-      ]
-    },
-    {
-      "id": "brazil-1970",
-      "name": "Brazil 1970",
-      "countryId": "brazil",
-      "year": 1970,
-      "season": "1970 World Cup",
-      "description": "1970 World Cup Champions - Greatest Team Ever",
-      "players": [
-        {
-          "playerId": "felix-brazil",
-          "position": "GK",
-          "number": null
-        },
-        {
-          "playerId": "carlos-alberto",
-          "position": "RB",
-          "number": null
-        },
-        {
-          "playerId": "brito-brazil",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "luis-carlos",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "everaldo-brazil",
-          "position": "LB",
-          "number": null
-        },
-        {
-          "playerId": "pele",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "gerson",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "tostao",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "jairzinho",
-          "position": "RW",
-          "number": null
-        },
-        {
-          "playerId": "rivelino",
-          "position": "LW",
-          "number": null
-        },
-        {
-          "playerId": "clodoaldo",
-          "position": "CM",
-          "number": null
-        }
-      ]
-    },
-    {
-      "id": "brazil-2002",
-      "name": "Brazil 2002",
-      "countryId": "brazil",
-      "year": 2002,
-      "season": "2002 World Cup",
-      "description": "2002 World Cup Champions",
-      "players": [
-        {
-          "playerId": "marcos-brazil",
-          "position": "GK",
-          "number": null
-        },
-        {
-          "playerId": "cafu",
-          "position": "RB",
-          "number": null
-        },
-        {
-          "playerId": "roque-junior",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "lucio",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "roberto-carlos",
-          "position": "LB",
-          "number": null
-        },
-        {
-          "playerId": "ronaldinho",
-          "position": "LW",
-          "number": null
-        },
-        {
-          "playerId": "gilberto-silva",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "kleberson",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "rivaldo",
-          "position": "RW",
-          "number": null
-        },
-        {
-          "playerId": "ronaldo",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "rivelino",
-          "position": "CAM",
+          "playerId": "heinz-stuy",
+          "position": "DF",
           "number": null
         }
       ]
@@ -4386,6 +5156,266 @@
         {
           "playerId": "gabriel-batistuta",
           "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "arsenal-2004",
+      "name": "Arsenal 2004",
+      "countryId": "arsenal",
+      "year": 2004,
+      "season": "2003-04",
+      "description": "Arsenal 2004",
+      "players": [
+        {
+          "playerId": "jens-lehmann",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "ashley-cole",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "sol-campbell",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "william-gallas",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "bacary-sagna",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "gilberto-silva",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "patrick-vieira",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "robert-pires",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "dennis-bergkamp",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "thierry-henry",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "fredrik-ljungberg",
+          "position": "MF",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "barcelona-2011",
+      "name": "Barcelona 2011",
+      "countryId": "barcelona",
+      "year": 2011,
+      "season": "2010-11",
+      "description": "Barcelona 2011",
+      "players": [
+        {
+          "playerId": "victor-valdes",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "eric-abidal",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "carles-puyol",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "gerard-pique",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "dani-alves",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "sergio-busquets",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "xavi",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "andres-iniesta",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "david-villa",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "lionel-messi",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "pedro",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "brazil-1970",
+      "name": "Brazil 1970",
+      "countryId": "brazil",
+      "year": 1970,
+      "season": "1970 World Cup",
+      "description": "1970 World Cup Champions - Greatest Team Ever",
+      "players": [
+        {
+          "playerId": "felix-brazil",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "carlos-alberto",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "brito-brazil",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "luis-carlos",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "everaldo-brazil",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "pele",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "gerson",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "tostao",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "jairzinho",
+          "position": "RW",
+          "number": null
+        },
+        {
+          "playerId": "rivelino",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "clodoaldo",
+          "position": "CM",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "brazil-2002",
+      "name": "Brazil 2002",
+      "countryId": "brazil",
+      "year": 2002,
+      "season": "2002 World Cup",
+      "description": "2002 World Cup Champions",
+      "players": [
+        {
+          "playerId": "marcos-brazil",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "cafu",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "roque-junior",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "lucio",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "roberto-carlos",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "ronaldinho",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "gilberto-silva",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "kleberson",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "rivaldo",
+          "position": "RW",
+          "number": null
+        },
+        {
+          "playerId": "ronaldo",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "rivelino",
+          "position": "CAM",
           "number": null
         }
       ]
@@ -4586,136 +5616,6 @@
       ]
     },
     {
-      "id": "italy-1982",
-      "name": "Italy 1982",
-      "countryId": "italy",
-      "year": 1982,
-      "season": "1982 World Cup",
-      "description": "1982 World Cup Champions",
-      "players": [
-        {
-          "playerId": "dino-zoff",
-          "position": "GK",
-          "number": null
-        },
-        {
-          "playerId": "antonio-cabrini",
-          "position": "LB",
-          "number": null
-        },
-        {
-          "playerId": "claudio-gentile",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "fulvio-collovati",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "giuseppe-bergomi",
-          "position": "RB",
-          "number": null
-        },
-        {
-          "playerId": "giancarlo-antognoni",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "marco-tardelli",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "paolo-rossi",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "angelo-juliano",
-          "position": "RW",
-          "number": null
-        },
-        {
-          "playerId": "graziano-gabanini",
-          "position": "LW",
-          "number": null
-        },
-        {
-          "playerId": "antonio-altobelli",
-          "position": "ST",
-          "number": null
-        }
-      ]
-    },
-    {
-      "id": "italy-2006",
-      "name": "Italy 2006",
-      "countryId": "italy",
-      "year": 2006,
-      "season": "2006 World Cup",
-      "description": "2006 World Cup Champions",
-      "players": [
-        {
-          "playerId": "gianluigi-buffon",
-          "position": "GK",
-          "number": null
-        },
-        {
-          "playerId": "fabio-cannavaro",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "alessandro-nesta",
-          "position": "CB",
-          "number": null
-        },
-        {
-          "playerId": "gianluca-zambrotta",
-          "position": "RB",
-          "number": null
-        },
-        {
-          "playerId": "mauro-camoranesi",
-          "position": "LB",
-          "number": null
-        },
-        {
-          "playerId": "andrea-pirlo",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "gennaro-gattuso",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "daniele-de-rossi",
-          "position": "CM",
-          "number": null
-        },
-        {
-          "playerId": "luca-toni",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "filippo-inzaghi",
-          "position": "ST",
-          "number": null
-        },
-        {
-          "playerId": "gianluca-giuli",
-          "position": "RW",
-          "number": null
-        }
-      ]
-    },
-    {
       "id": "germany-1990",
       "name": "Germany 1990",
       "countryId": "germany",
@@ -4846,6 +5746,656 @@
       ]
     },
     {
+      "id": "hungary-1954",
+      "name": "Hungary 1954",
+      "countryId": "hungary",
+      "year": 1954,
+      "season": "1953-54",
+      "description": "Hungary 1954",
+      "players": [
+        {
+          "playerId": "gyula-grosics",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "jeno-buzanszky",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "lajos-kordics",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "bela-giczi",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "pal-szide",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "nandor-hidegkuti",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "jozsef-bozsik",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "bojan-joksimovic",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "ferenc-puskas",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "sandor-kocsis",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "peter-palotas",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "italy-1982",
+      "name": "Italy 1982",
+      "countryId": "italy",
+      "year": 1982,
+      "season": "1982 World Cup",
+      "description": "1982 World Cup Champions",
+      "players": [
+        {
+          "playerId": "dino-zoff",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "antonio-cabrini",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "claudio-gentile",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "fulvio-collovati",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "giuseppe-bergomi",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "giancarlo-antognoni",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "marco-tardelli",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "paolo-rossi",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "angelo-juliano",
+          "position": "RW",
+          "number": null
+        },
+        {
+          "playerId": "graziano-gabanini",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "antonio-altobelli",
+          "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "italy-2006",
+      "name": "Italy 2006",
+      "countryId": "italy",
+      "year": 2006,
+      "season": "2006 World Cup",
+      "description": "2006 World Cup Champions",
+      "players": [
+        {
+          "playerId": "gianluigi-buffon",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "fabio-cannavaro",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "alessandro-nesta",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "gianluca-zambrotta",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "mauro-camoranesi",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "andrea-pirlo",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "gennaro-gattuso",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "daniele-de-rossi",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "luca-toni",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "filippo-inzaghi",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "gianluca-giuli",
+          "position": "RW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "liverpool-1984",
+      "name": "Liverpool 1984",
+      "countryId": "liverpool",
+      "year": 1984,
+      "season": "1983-84",
+      "description": "Liverpool 1984",
+      "players": [
+        {
+          "playerId": "ray-clemence",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "phil-neal",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "mark-lawrenson",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "alan-hansen",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "graeme-souness",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "ray-kennedy",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "kenny-dalglish",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "ian-callaghan",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "john-wark",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "steve-heighway",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "john-toshack",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "man-utd-1968",
+      "name": "Manchester United 1968",
+      "countryId": "man-utd",
+      "year": 1968,
+      "season": "1967-68",
+      "description": "European Cup Winners",
+      "players": [
+        {
+          "playerId": "alex-stepney",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "tony-dunne",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "bill-foulkes",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "bobby-charlton",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "george-best",
+          "position": "RW",
+          "number": null
+        },
+        {
+          "playerId": "denis-law",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "john-aston",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "shay-brennan",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "nobby-stiles",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "pat-crerand",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "brian-kidd",
+          "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "man-utd-1994",
+      "name": "Manchester United 1994",
+      "countryId": "man-utd",
+      "year": 1994,
+      "season": "1993-94",
+      "description": "Ferguson's First Premier League Title",
+      "players": [
+        {
+          "playerId": "peter-schmeichel",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "gary-neville",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "steve-bruce",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "gary-pallister",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "denis-irwin",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "roy-keane",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "paul-scholes",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "david-beckham",
+          "position": "RM",
+          "number": null
+        },
+        {
+          "playerId": "ryan-giggs",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "eric-cantona",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "mark-hughes",
+          "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "man-utd-2008",
+      "name": "Manchester United 2008",
+      "countryId": "man-utd",
+      "year": 2008,
+      "season": "2007-08",
+      "description": "Champions League & Premier League Winners",
+      "players": [
+        {
+          "playerId": "edwin-van-der-sar",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "gary-neville",
+          "position": "RB",
+          "number": null
+        },
+        {
+          "playerId": "rio-ferdinand",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "nemanja-vidic",
+          "position": "CB",
+          "number": null
+        },
+        {
+          "playerId": "patrice-evra",
+          "position": "LB",
+          "number": null
+        },
+        {
+          "playerId": "roy-keane",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "paul-scholes",
+          "position": "CM",
+          "number": null
+        },
+        {
+          "playerId": "cristiano-ronaldo",
+          "position": "RW",
+          "number": null
+        },
+        {
+          "playerId": "ryan-giggs",
+          "position": "LW",
+          "number": null
+        },
+        {
+          "playerId": "carlos-tevez",
+          "position": "ST",
+          "number": null
+        },
+        {
+          "playerId": "wayne-rooney",
+          "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "napoli-1990",
+      "name": "Napoli 1990",
+      "countryId": "napoli",
+      "year": 1990,
+      "season": "1989-90",
+      "description": "Napoli 1990",
+      "players": [
+        {
+          "playerId": "alessandro-reuta",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "ciro-ferrara",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "jorge-da-silva",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "fernando-de-napoli",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "ivo-udal",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "salvatore-bagni",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "gianfranco-zola",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "antonio-giordano",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "diego-maradona",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "careca",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "gianluca-vialli",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "real-madrid-2014",
+      "name": "Real Madrid 2014",
+      "countryId": "real-madrid",
+      "year": 2014,
+      "season": "2013-14",
+      "description": "Real Madrid 2014",
+      "players": [
+        {
+          "playerId": "iker-casillas",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "sergio-ramos",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "pepe",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "marcelo",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "alvaro-arbeloa",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "xabi-alonso",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "toni-kroos",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "luka-modrić",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "cristiano-ronaldo",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "karim-benzema",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "gareth-bale",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "red-star-belgrade-1991",
+      "name": "Red Star Belgrade 1991",
+      "countryId": "red-star-belgrade",
+      "year": 1991,
+      "season": "1990-91",
+      "description": "Red Star Belgrade 1991",
+      "players": [
+        {
+          "playerId": "dragoslav-jevric",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "savo-milosevic",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "sinisa-mihajlovic",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "miodrag-belodedici",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "slavisa-jokanovic",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "robert-prosinecski",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "darko-micanovic",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "vladimir-matic",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "dejan-savicevic",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "vinije-komatinovic",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "branko-crvenkovic",
+          "position": "FW",
+          "number": null
+        }
+      ]
+    },
+    {
       "id": "spain-2008",
       "name": "Spain 2008",
       "countryId": "spain",
@@ -4906,6 +6456,71 @@
         {
           "playerId": "fernando-torres",
           "position": "ST",
+          "number": null
+        }
+      ]
+    },
+    {
+      "id": "spain-2010",
+      "name": "Spain 2010",
+      "countryId": "spain",
+      "year": 2010,
+      "season": "2009-10",
+      "description": "Spain 2010",
+      "players": [
+        {
+          "playerId": "iker-casillas",
+          "position": "GK",
+          "number": null
+        },
+        {
+          "playerId": "carles-puyol",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "gerard-pique",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "sergio-ramos",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "alvaro-arbeloa",
+          "position": "DF",
+          "number": null
+        },
+        {
+          "playerId": "sergio-busquets",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "xavi",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "andres-iniesta",
+          "position": "MF",
+          "number": null
+        },
+        {
+          "playerId": "david-villa",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "fernando-torres",
+          "position": "FW",
+          "number": null
+        },
+        {
+          "playerId": "xabi-alonso",
+          "position": "MF",
           "number": null
         }
       ]

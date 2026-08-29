@@ -15,6 +15,7 @@ interface NormalizedPlayer {
   attackRating: number;
   defenceRating: number;
   stamina: number;
+  bio?: string;
 }
 
 interface NormalizedClassicTeam {
@@ -91,6 +92,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
             attackRating: player.attackRating,
             defenceRating: player.defenceRating,
             stamina: player.stamina,
+            bio: player.bio,
             eraAppearances: []
           } : null;
         })
@@ -108,6 +110,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
           attackRating: p.attackRating,
           defenceRating: p.defenceRating,
           stamina: p.stamina,
+          bio: p.bio,
           eraAppearances: []
         }))
         .sort((a: Player, b: Player) => a.name.localeCompare(b.name));
@@ -165,6 +168,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
         attackRating: player?.attackRating || 0,
         defenceRating: player?.defenceRating || 0,
         stamina: player?.stamina || 0,
+        bio: player?.bio,
         eraAppearances: []
       } as Player;
     });

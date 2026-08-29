@@ -1,95 +1,88 @@
 import { Team, TeamSummary, MatchResult } from '../types';
-import { simulateRealisticMatch } from './matchEngine';
+import { loadTeamsData } from '../utils/dataProcessor';
+import { defaultEngine, randomSeed, type EngineTeam } from '@fm/match-engine';
 
-const API_BASE = 'http://localhost:7071/api';
+/**
+ * Data access for the app.
+ *
+ * Everything is served from public/teams-data-normalized.json — the single
+ * source of truth — and simulated in-process by @fm/match-engine. There is no
+ * backend: the Azure Functions app that used to serve /api/teams was removed
+ * once its data was merged into the normalized file.
+ *
+ * The admin editor is the one exception; it talks to the local Express server
+ * in api/ (see services/adminApi.ts) because it needs to write to disk.
+ */
 
-// Simple in-memory cache so we don't re-fetch the same team repeatedly
-const teamCache = new Map<string, Team>();
+let cache: Promise<{ teams: Team[] }> | null = null;
+
+function store() {
+  cache ??= loadTeamsData().then(({ teams }) => ({ teams }));
+  return cache;
+}
+
+/** Drops the in-memory cache; used by the admin editor after it saves. */
+export function invalidateTeamsCache() {
+  cache = null;
+}
+
+/** Adapt the app's Team to the engine's input shape. */
+function toEngineTeam(team: Team): EngineTeam {
+  return {
+    id: team.id,
+    name: team.name,
+    players: team.players.map((p) => ({
+      id: p.id,
+      name: p.name,
+      position: p.position,
+      overallRating: p.overallRating,
+      attackRating: p.attackRating,
+      defenceRating: p.defenceRating,
+      stamina: p.stamina,
+    })),
+  };
+}
 
 export const api = {
   async getTeams(): Promise<TeamSummary[]> {
-    const response = await fetch(`${API_BASE}/teams`);
-    if (!response.ok) throw new Error(`Failed to load teams: ${response.status}`);
-    const data: Array<{ id: string; name: string; year: number; playerCount: number }> = await response.json();
-    return data.map(t => ({
-      id: t.id,
-      name: t.name,
-      clubId: '',   // backend doesn't expose clubId — only needed by CustomXI which uses dataProcessor.ts
-      year: t.year,
-      playerCount: t.playerCount
-    }));
+    const { teams } = await store();
+    return teams
+      .map((t) => ({
+        id: t.id,
+        name: t.name,
+        clubId: t.clubId,
+        year: t.year,
+        playerCount: t.players.length,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   },
 
   async getTeam(id: string): Promise<Team> {
-    if (teamCache.has(id)) return teamCache.get(id)!;
-
-    const response = await fetch(`${API_BASE}/teams/${id}`);
-    if (!response.ok) throw new Error(`Team ${id} not found`);
-    const data = await response.json();
-
-    const team: Team = {
-      id: data.id,
-      name: data.name,
-      clubId: data.clubId || '',
-      year: data.year,
-      season: data.season,
-      description: data.description,
-      players: (data.players ?? []).map((p: any) => ({
-        id: p.id,
-        name: p.name,
-        position: p.position,
-        overallRating: p.overallRating,
-        attackRating: p.attackRating,
-        defenceRating: p.defenceRating,
-        stamina: p.stamina,
-        bio: p.bio,
-        nationality: p.nationality,
-        eraAppearances: p.eraAppearances
-      }))
-    };
-
-    teamCache.set(id, team);
+    const { teams } = await store();
+    const team = teams.find((t) => t.id === id);
+    if (!team) throw new Error(`Team ${id} not found`);
     return team;
   },
 
+  /**
+   * Simulate a match. `seed` is optional — pass one to reproduce a previous
+   * result exactly, omit it for a fresh match.
+   */
   async simulateMatch(
     teamAId: string,
     teamBId: string,
-    normaliseEra: boolean = false,
+    _normaliseEra: boolean = false,
     customTeamA?: Team,
-    customTeamB?: Team
+    customTeamB?: Team,
+    seed: number = randomSeed()
   ): Promise<MatchResult> {
-    let teamA: Team;
-    let teamB: Team;
+    const teamA = customTeamA ?? (await this.getTeam(teamAId));
+    const teamB = customTeamB ?? (await this.getTeam(teamBId));
 
-    if (customTeamA && customTeamB) {
-      teamA = customTeamA;
-      teamB = customTeamB;
-    } else {
-      [teamA, teamB] = await Promise.all([
-        this.getTeam(teamAId),
-        this.getTeam(teamBId)
-      ]);
-    }
-
-    return simulateRealisticMatch(teamAId, teamBId, teamA, teamB);
-  },
-
-  async simulateMatchWithAI(
-    teamAId: string,
-    teamBId: string
-  ): Promise<MatchResult> {
-    const response = await fetch(`${API_BASE}/simulateAi`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ teamAId, teamBId })
+    return defaultEngine.simulate({
+      teamA: toEngineTeam(teamA),
+      teamB: toEngineTeam(teamB),
+      seed,
     });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || 'AI simulation failed');
-    }
-
-    return response.json();
-  }
+  },
 };

@@ -1,11 +1,11 @@
 {
   "name": "football-simulator-admin-api",
   "version": "1.0.0",
-  "description": "Admin API for managing football simulator data",
+  "description": "Local admin server for editing teams-data-normalized.json. Dev-only; the deployed app is static.",
   "main": "server.js",
   "scripts": {
-    "start": "tsx server.js",
-    "dev": "tsx watch server.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js"
   },
   "keywords": [
     "admin",
@@ -17,10 +17,5 @@
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^4.22.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
   }
 }

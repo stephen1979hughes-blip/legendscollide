@@ -60,13 +60,9 @@ export const Pitch: React.FC<PitchProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-8">
-      <h3 className="text-lg font-bold text-primary mb-6 text-center">
-        {formation.name} - {formation.description}
-      </h3>
-
+    <div>
       {/* Pitch visualization */}
-      <div className="bg-gradient-to-b from-green-700 to-green-600 rounded-lg p-8 flex flex-col justify-between border-4 border-white min-h-96">
+      <div className="bg-gradient-to-b from-green-700 to-green-600 px-0 md:px-8 py-2 md:py-8 flex flex-col justify-between min-h-80 md:min-h-96">
         {formation.rows.map((row, rowIndex) => {
           // Determine spacing based on row type and number of players
           let justifyClass = 'justify-start'; // Default: left-align
@@ -76,7 +72,7 @@ export const Pitch: React.FC<PitchProps> = ({
           } else if (row.positionIndices.length === 1) {
             justifyClass = 'justify-center'; // Single player centered
           } else if (row.positionIndices.length === 2) {
-            justifyClass = 'justify-between'; // 2 players spread apart
+            justifyClass = 'justify-center'; // 2 players centered
           } else if (row.positionIndices.length === 3) {
             const rowAbove = rowIndex > 0 ? formation.rows[rowIndex - 1] : null;
             const numAbove = rowAbove ? rowAbove.positionIndices.length : 0;
@@ -93,7 +89,7 @@ export const Pitch: React.FC<PitchProps> = ({
             justifyClass = 'justify-start'; // 5 players left-aligned
           }
 
-          const gapClass = 'gap-4';
+          const gapClass = row.positionIndices.length >= 4 ? 'gap-0.5 md:gap-2' : 'gap-2 md:gap-4';
           const rowAboveWidth = rowIndex > 0 ? formation.rows[rowIndex - 1].positionIndices.length : 0;
           const shouldAddSpacers = (row.positionIndices.length === 2 && rowAboveWidth >= 3) ||
                                    (row.positionIndices.length === 3 && rowAboveWidth === 5);
@@ -103,21 +99,23 @@ export const Pitch: React.FC<PitchProps> = ({
             if (row.positionIndices.length === 2 && rowAboveWidth === 4) {
               return (
                 <div key={rowIndex} className={`flex items-center ${gapClass}`}>
-                  <div style={{ flex: 1.5 }} /> {/* Spacer to align with center CMs */}
+                  <div style={{ flex: 1 }} /> {/* Spacer to align with RM */}
                   {row.positionIndices.map((slotIndex) => (
-                    <PositionSlot
-                      key={`slot-${slotIndex}`}
-                      slotIndex={slotIndex}
-                      position={formation.positions[slotIndex]}
-                      player={getPlayerAtSlot(slotIndex)}
-                      compatiblePlayers={getCompatiblePlayers(slotIndex)}
-                      onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
-                      onRemove={() => onPlayerRemove(slotIndex)}
-                      isOpen={openDropdownSlot === slotIndex}
-                      onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
-                    />
+                    <div key={`slot-${slotIndex}`} style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                      <PositionSlot
+                        slotIndex={slotIndex}
+                        position={formation.positions[slotIndex]}
+                        player={getPlayerAtSlot(slotIndex)}
+                        compatiblePlayers={getCompatiblePlayers(slotIndex)}
+                        onSelect={(playerId) => onPlayerSelect(playerId, slotIndex)}
+                        onRemove={() => onPlayerRemove(slotIndex)}
+                        isOpen={openDropdownSlot === slotIndex}
+                        onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
+                        rowSize={row.positionIndices.length}
+                      />
+                    </div>
                   ))}
-                  <div style={{ flex: 1.5 }} /> {/* Right spacer to align with center CMs */}
+                  <div style={{ flex: 1 }} /> {/* Right spacer to align with LM */}
                 </div>
               );
             }
@@ -138,6 +136,7 @@ export const Pitch: React.FC<PitchProps> = ({
                       onRemove={() => onPlayerRemove(slotIndex)}
                       isOpen={openDropdownSlot === slotIndex}
                       onOpenChange={(isOpen) => setOpenDropdownSlot(isOpen ? slotIndex : null)}
+                      rowSize={row.positionIndices.length}
                     />
                   ))}
                   <div style={{ flex: 1 }} /> {/* Right spacer */}
@@ -166,7 +165,7 @@ export const Pitch: React.FC<PitchProps> = ({
           }
 
           return (
-            <div key={rowIndex} className={`flex ${justifyClass} items-center px-4 ${gapClass}`}>
+            <div key={rowIndex} className={`flex ${justifyClass} items-center px-0.5 md:px-4 ${gapClass}`}>
               {row.positionIndices.map((slotIndex) => (
                 <PositionSlot
                   key={`slot-${slotIndex}`}
@@ -184,14 +183,6 @@ export const Pitch: React.FC<PitchProps> = ({
           );
         })}
       </div>
-
-      {/* Formation info */}
-      <div className="mt-6 text-center text-sm text-muted">
-        <p>Click on any position card to select or change a player</p>
-        <p className="mt-2 font-semibold text-primary">
-          {players.length}/{formation.positions.length} players selected
-        </p>
-      </div>
     </div>
   );
 };
@@ -207,6 +198,18 @@ interface PositionSlotProps {
   onOpenChange: (isOpen: boolean) => void;
 }
 
+interface PositionSlotProps {
+  slotIndex: number;
+  position: string;
+  player?: CustomXIPlayer;
+  compatiblePlayers: any[];
+  onSelect: (playerId: string) => void;
+  onRemove: () => void;
+  isOpen: boolean;
+  onOpenChange: (isOpen: boolean) => void;
+  rowSize?: number; // Number of players in this row
+}
+
 const PositionSlot: React.FC<PositionSlotProps> = ({
   slotIndex,
   position,
@@ -215,21 +218,24 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
   onSelect,
   onRemove,
   isOpen,
-  onOpenChange
+  onOpenChange,
+  rowSize = 1
 }) => {
+  // Use flexible width for rows with 4+ players, fixed width otherwise
+  const widthClass = rowSize >= 4 ? 'flex-1 min-w-12 md:min-w-24' : 'w-20 md:w-28';
 
   if (player) {
     const fullName = player.playerName.replace(/\s*\(\d+\)$/, '');
     const surname = getSurname(fullName);
 
     return (
-      <div className="relative">
+      <div className="relative flex-shrink-0" style={rowSize >= 4 ? { flex: 1 } : {}}>
         <button
           onClick={() => onOpenChange(!isOpen)}
-          className="bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer w-28 p-2 text-left"
+          className={`bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer ${widthClass} p-1 md:p-2 text-left text-xs md:text-sm`}
           title={fullName}
         >
-          <div className="text-sm font-bold text-primary truncate">
+          <div className="font-bold text-primary truncate">
             {surname}
           </div>
           <div className="text-xs text-muted">{player.playerPosition}</div>
@@ -275,13 +281,13 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
 
   // Empty slot
   return (
-    <div className="relative">
+    <div className="relative flex-shrink-0" style={rowSize >= 4 ? { flex: 1 } : {}}>
       <button
         onClick={() => onOpenChange(!isOpen)}
-        className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer w-28 p-2 text-center text-gray-500"
+        className={`bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer ${widthClass} p-1 md:p-2 text-center text-gray-500 text-xs md:text-sm`}
       >
-        <div className="text-sm font-bold">{position}</div>
-        <div className="text-xs opacity-75">+ Add Player</div>
+        <div className="font-bold">{position}</div>
+        <div className="text-xs opacity-75">+ Add</div>
       </button>
 
       {/* Dropdown Menu */}

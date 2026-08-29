@@ -1,14 +1,3 @@
-# C# / Azure Functions
-bin/
-obj/
-.vs/
-.vscode/
-*.user
-*.suo
-appsettings*.json
-local.settings.json
-!local.settings.json.example
-
 # Node
 node_modules/
 dist/

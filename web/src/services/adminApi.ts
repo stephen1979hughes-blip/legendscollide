@@ -1,3 +1,5 @@
+// The local Express admin server (api/server.js) — the only writer of
+// teams-data-normalized.json. Not used by the deployed app.
 const ADMIN_BASE_URL = 'http://localhost:3000/api/admin';
 
 export const adminApi = {

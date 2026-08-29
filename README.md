@@ -1,100 +1,90 @@
-# Football Match Simulator MVP
+# Football Match Simulator
 
-A simple web app to simulate classic football matches. Pick two legendary teams, click "Simulate," and watch the action unfold.
+Pick two legendary teams, simulate the match, watch it unfold as a live broadcast.
 
 ## Tech Stack
 
-- **Backend:** C# Azure Functions (.NET 8)
-- **Frontend:** React + TypeScript + Vite
-- **Data:** JSON (embedded in function app)
+- **Frontend:** React + TypeScript + Vite + Tailwind
+- **Match engine:** `@fm/match-engine` — a standalone, deterministic TypeScript package
+- **Data:** a single normalized JSON file, `web/public/teams-data-normalized.json`
+- **Admin server:** a small Express app, local development only
+
+There is no deployed backend. The app is a static site: it loads the data file
+and simulates matches in the browser.
 
 ## Quick Start
 
-### Prerequisites
-- .NET 8 SDK
-- Node 18+
-- Azure Functions Core Tools (`func` CLI)
-
-### Run Locally
-
-**Terminal 1 - Backend:**
 ```bash
-cd api
-func start
+cd web && npm install && npm run dev
 ```
-Functions will run on `http://localhost:7071`
 
-**Terminal 2 - Frontend:**
+That is the whole app, on `http://localhost:5173`.
+
+To edit the dataset through the `/admin` UI, also run the local admin server —
+it is the only thing that writes to the data file:
+
 ```bash
-cd web
-npm install
-npm run dev
+cd api && npm install && npm run dev
 ```
-React will open on `http://localhost:5173`
 
-The frontend automatically points to `localhost:7071/api` in development.
-
-## Project Structure
+## Layout
 
 ```
 fm/
-├── api/MatchSimulator.Function/     # C# Azure Functions
-│   ├── Models/                      # Data models
-│   ├── Services/                    # SimulationEngine, TeamDataLoader, CommentaryGenerator
-│   ├── Functions/                   # HTTP triggers (GetTeams, SimulateMatch)
-│   └── Data/teams-players.json      # Team & player data
-├── web/                             # React frontend
-│   ├── src/
-│   │   ├── components/              # TeamSelector, Lineup, MatchResult
-│   │   ├── services/api.ts          # API client
-│   │   ├── types/index.ts           # TypeScript interfaces
-│   │   └── App.tsx                  # Main app
-│   └── vite.config.ts
+├── packages/match-engine/     # the simulation, isolated from the app
+│   ├── src/engine.ts          # rating-based match model
+│   ├── src/rng.ts             # seeded PRNG (mulberry32)
+│   ├── src/types.ts           # the engine's own contract
+│   └── test/                  # determinism + behaviour tests
+├── web/                       # React app
+│   ├── public/teams-data-normalized.json   # single source of truth
+│   ├── src/services/api.ts    # data access + engine invocation
+│   ├── src/utils/dataProcessor.ts          # normalized JSON -> app types
+│   └── scripts/               # data migration + normalization scripts
+└── api/server.js              # local-only admin CRUD server
 ```
 
-## Features
+## The match engine
 
-- **4 Classic Teams:** Man Utd 1968, Liverpool 1984, Brazil 1970, Barcelona 2011
-- **Match Simulation:** Chances, goals, possession, shots on target
-- **Commentary:** Dynamic match events
-- **Stadium & Kick-off:** Randomized for atmosphere
-- **Era Flavour:** Period-specific match descriptions
-- **Lineup Display:** All 11 players with ratings
+The engine is a separate package so it can be replaced by a Rust/WASM build
+without touching the app. The web app depends on it only through the
+`MatchEngine` interface:
 
-## API Endpoints
+```ts
+interface MatchEngine {
+  readonly name: string;
+  simulate(input: { teamA: EngineTeam; teamB: EngineTeam; seed: number }): MatchResult;
+}
+```
 
-- `GET /api/teams` - List all teams
-- `GET /api/teams/{id}` - Get team + players
-- `POST /api/simulate` - Simulate match
-  ```json
-  {
-    "teamAId": "man-utd-1968",
-    "teamBId": "brazil-1970",
-    "normaliseEra": false
-  }
-  ```
-
-## Deployment to Azure
+Matches are **deterministic**: the same teams and seed always produce the same
+result. That is what allows a second implementation to be diffed against this
+one for parity.
 
 ```bash
-# Create resource group & function app
-az group create --name fg-rg --location eastus
-az functionapp create --resource-group fg-rg --consumption-plan-id <plan> --runtime dotnet --name <app-name>
-
-# Deploy backend
-cd api
-func azure functionapp publish <app-name>
-
-# Deploy frontend
-cd web
-npm run build
-# Upload web/dist/ to Azure Static Web App or use Vercel
+cd packages/match-engine && npm test
 ```
 
-## Next Steps
+Vite resolves `@fm/match-engine` through an alias in `web/vite.config.ts`.
+Repoint that alias to swap engines.
 
-- Add more teams to `teams-players.json`
-- Custom XI builder (pick any 11 players)
-- Rematch button
-- Formation impact on simulation
-- More detailed injury/card logic
+## Data
+
+`web/public/teams-data-normalized.json` holds `countries`, `clubs`,
+`nationalTeams`, `players` and `classicTeams` — 26 classic teams and 416
+players. Teams reference players by id; players carry ratings and bios.
+
+Scripts in `web/scripts/`:
+
+- `migrate-legacy-teams.mjs` — one-off merge of the retired .NET dataset into
+  the normalized file (already applied; inputs kept in `scripts/legacy/`)
+- `normalize-teams-data.mjs` — regenerates the normalized file from the older
+  `teams-data.json` shape
+
+## Deployment
+
+```bash
+cd web && npm run build     # -> web/dist, a static bundle
+```
+
+Serve `web/dist` from any static host. The admin server is not deployed.

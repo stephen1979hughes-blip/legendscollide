@@ -13,19 +13,19 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ stats }) => {
   ];
 
   return (
-    <div className="card">
-      <h3 className="text-lg font-bold text-primary mb-4">Match Stats</h3>
+    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
+      <h3 className="text-lg font-bold text-white mb-4">Match Stats</h3>
       <div className="space-y-3">
         {statRows.map((row) => (
           <div key={row.label} className="flex items-center justify-between">
             <div className="flex-1">
-              <p className="text-sm font-semibold text-text">{row.a}</p>
+              <p className="text-sm font-semibold text-white">{row.a}</p>
             </div>
             <div className="flex-1 text-center">
-              <p className="text-xs text-muted font-bold">{row.label}</p>
+              <p className="text-xs text-white/70 font-bold">{row.label}</p>
             </div>
             <div className="flex-1 text-right">
-              <p className="text-sm font-semibold text-text">{row.b}</p>
+              <p className="text-sm font-semibold text-white">{row.b}</p>
             </div>
           </div>
         ))}

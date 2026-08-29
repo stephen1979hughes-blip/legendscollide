@@ -1,4 +1,23 @@
-import { Team, MatchResult, MatchEvent, PlayerStats } from '../types';
+/**
+ * The TypeScript match engine.
+ *
+ * Ported from web/src/services/matchEngine.ts. The simulation logic is
+ * unchanged; the differences are structural:
+ *   - every Math.random() now draws from a seeded Rng, so a match is
+ *     reproducible from (teamA, teamB, seed)
+ *   - it depends on the engine's own types rather than the web app's
+ */
+import { Rng } from './rng.ts';
+import type {
+  EnginePlayer,
+  EngineTeam,
+  Goal,
+  MatchEvent,
+  MatchInput,
+  MatchResult,
+  PlayerStats,
+  PositionCategory,
+} from './types.ts';
 
 interface PlayerCardState {
   yellowCards: number;
@@ -18,32 +37,10 @@ interface MatchSimulationState {
 }
 
 const SKILL_EVENT_WEIGHTS = {
-  GK: {
-    save: 0.40,
-    punch: 0.15,
-    clearance: 0.20,
-  },
-  DF: {
-    tackle: 0.35,
-    block: 0.30,
-    clearance: 0.25,
-  },
-  MF: {
-    tackle: 0.20,
-    pass: 0.40,
-    dribble: 0.25,
-  },
-  FW: {
-    dribble: 0.35,
-    pass: 0.30,
-  },
-};
-
-const FOUL_PROBABILITIES = {
-  GK: 0.02,
-  DF: 0.08,
-  MF: 0.06,
-  FW: 0.04,
+  GK: { save: 0.4, punch: 0.15, clearance: 0.2 },
+  DF: { tackle: 0.35, block: 0.3, clearance: 0.25 },
+  MF: { tackle: 0.2, pass: 0.4, dribble: 0.25 },
+  FW: { dribble: 0.35, pass: 0.3 },
 };
 
 const CARD_ESCALATION = {
@@ -52,7 +49,7 @@ const CARD_ESCALATION = {
   thirdWithYellow: 0.99, // 99% red card if has yellow + fouls again
 };
 
-function getPositionCategory(pos: string): 'FW' | 'MF' | 'DF' | 'GK' {
+function getPositionCategory(pos: string): PositionCategory {
   const position = pos.toUpperCase();
   if (['GK'].includes(position)) return 'GK';
   if (['DF', 'CB', 'RB', 'LB', 'RWB', 'LWB'].includes(position)) return 'DF';
@@ -61,25 +58,19 @@ function getPositionCategory(pos: string): 'FW' | 'MF' | 'DF' | 'GK' {
   return 'MF';
 }
 
-function selectRandomPlayer(team: Team): string {
-  return team.players[Math.floor(Math.random() * team.players.length)].name;
+function selectRandomPlayer(rng: Rng, team: EngineTeam): string {
+  return rng.pick(team.players).name;
 }
 
-function selectPlayerByPosition(
-  team: Team,
-  position: 'GK' | 'DF' | 'MF' | 'FW'
-): string {
-  const candidates = team.players.filter(p => {
-    const cat = getPositionCategory(p.position);
-    return cat === position;
-  });
-  if (candidates.length === 0) return selectRandomPlayer(team);
-  return candidates[Math.floor(Math.random() * candidates.length)].name;
+function selectPlayerByPosition(rng: Rng, team: EngineTeam, position: PositionCategory): string {
+  const candidates = team.players.filter((p) => getPositionCategory(p.position) === position);
+  if (candidates.length === 0) return selectRandomPlayer(rng, team);
+  return rng.pick(candidates).name;
 }
 
-function initializePlayerStats(team: Team): Map<string, PlayerStats> {
+function initializePlayerStats(team: EngineTeam): Map<string, PlayerStats> {
   const stats = new Map<string, PlayerStats>();
-  team.players.forEach(player => {
+  team.players.forEach((player) => {
     stats.set(player.name, {
       tackles: 0,
       clearances: 0,
@@ -95,42 +86,39 @@ function initializePlayerStats(team: Team): Map<string, PlayerStats> {
   return stats;
 }
 
-function initializeCardState(team: Team): Map<string, PlayerCardState> {
+function initializeCardState(team: EngineTeam): Map<string, PlayerCardState> {
   const cards = new Map<string, PlayerCardState>();
-  team.players.forEach(player => {
-    cards.set(player.name, {
-      yellowCards: 0,
-      redCards: 0,
-      ejected: false,
-    });
+  team.players.forEach((player) => {
+    cards.set(player.name, { yellowCards: 0, redCards: 0, ejected: false });
   });
   return cards;
 }
 
 function generateSkillEvent(
-  team: Team,
+  rng: Rng,
+  team: EngineTeam,
   state: MatchSimulationState,
   isTeamA: boolean
 ): MatchEvent | null {
-  const positionCategories: Array<'GK' | 'DF' | 'MF' | 'FW'> = ['GK', 'DF', 'MF', 'FW'];
-  const position = positionCategories[Math.floor(Math.random() * positionCategories.length)];
+  const positionCategories: PositionCategory[] = ['GK', 'DF', 'MF', 'FW'];
+  const position = rng.pick(positionCategories);
 
-  const playerName = selectPlayerByPosition(team, position);
+  const playerName = selectPlayerByPosition(rng, team, position);
   const stats = isTeamA ? state.playerStatsA : state.playerStatsB;
   const playerStats = stats.get(playerName);
   if (!playerStats) return null;
 
   const weights = SKILL_EVENT_WEIGHTS[position] as Record<string, number>;
   const totalWeight = Object.values(weights).reduce((a, b) => a + b, 0);
-  const rand = Math.random() * totalWeight;
+  const rand = rng.next() * totalWeight;
 
   let cumulative = 0;
-  let skillType: 'tackle' | 'block' | 'clearance' | 'dribble' | 'pass' | 'save' | 'punch' | 'block' = 'pass';
+  let skillType: NonNullable<MatchEvent['skillType']> = 'pass';
 
   for (const [skill, weight] of Object.entries(weights)) {
     cumulative += weight;
     if (rand <= cumulative) {
-      skillType = skill as any;
+      skillType = skill as NonNullable<MatchEvent['skillType']>;
       break;
     }
   }
@@ -182,8 +170,7 @@ function generateSkillEvent(
     ],
   };
 
-  const descriptions = skillDescriptions[skillType];
-  const text = descriptions[Math.floor(Math.random() * descriptions.length)];
+  const text = rng.pick(skillDescriptions[skillType]);
 
   return {
     minute: 0, // Will be set by caller
@@ -197,22 +184,28 @@ function generateSkillEvent(
   };
 }
 
-function generateFoulEvent(
-  team: Team,
+/**
+ * NOTE: this is currently unreachable — nothing calls it, so no simulated match
+ * ever produces a booking, and PlayerStats.yellowCards/redCards are always 0.
+ * Carried over from the original engine as-is rather than silently dropped.
+ * Wiring it into the event loop is a behaviour change, not a refactor.
+ */
+export function generateFoulEvent(
+  rng: Rng,
+  team: EngineTeam,
   state: MatchSimulationState,
   isTeamA: boolean,
   minute: number
 ): MatchEvent | null {
-  const candidates = team.players.filter(p => {
-    const cards = isTeamA ? state.playerCardsA : state.playerCardsB;
+  const cards = isTeamA ? state.playerCardsA : state.playerCardsB;
+  const candidates = team.players.filter((p) => {
     const cardState = cards.get(p.name);
     return cardState && !cardState.ejected;
   });
 
   if (candidates.length === 0) return null;
 
-  const playerName = candidates[Math.floor(Math.random() * candidates.length)].name;
-  const cards = isTeamA ? state.playerCardsA : state.playerCardsB;
+  const playerName = rng.pick(candidates).name;
   const cardState = cards.get(playerName)!;
   const stats = isTeamA ? state.playerStatsA : state.playerStatsB;
   const playerStats = stats.get(playerName);
@@ -226,18 +219,18 @@ function generateFoulEvent(
   }
 
   if (cardState.yellowCards === 0) {
-    if (Math.random() < CARD_ESCALATION.first) {
+    if (rng.next() < CARD_ESCALATION.first) {
       cardType = 'yellow';
       cardState.yellowCards++;
       playerStats.yellowCards++;
     }
   } else if (cardState.yellowCards === 1 && cardState.redCards === 0) {
-    if (Math.random() < CARD_ESCALATION.thirdWithYellow) {
+    if (rng.next() < CARD_ESCALATION.thirdWithYellow) {
       cardType = 'red';
       cardState.redCards++;
       cardState.ejected = true;
       playerStats.redCards++;
-    } else if (Math.random() < CARD_ESCALATION.second) {
+    } else if (rng.next() < CARD_ESCALATION.second) {
       cardType = 'yellow';
       cardState.yellowCards++;
       playerStats.yellowCards++;
@@ -265,59 +258,79 @@ function generateFoulEvent(
 
 // ============= MATCH SIMULATION =============
 
-function calcTeamAttack(team: Team): number {
-  const fwd = team.players.filter(p => getPositionCategory(p.position) === 'FW');
-  const mid = team.players.filter(p => getPositionCategory(p.position) === 'MF');
+function calcTeamAttack(team: EngineTeam): number {
+  const fwd = team.players.filter((p) => getPositionCategory(p.position) === 'FW');
+  const mid = team.players.filter((p) => getPositionCategory(p.position) === 'MF');
   const pool = fwd.length > 0 ? [...fwd, ...mid] : mid;
   if (pool.length === 0) return 70;
   return pool.reduce((s, p) => s + p.attackRating, 0) / pool.length;
 }
 
-function calcTeamDefence(team: Team): number {
-  const def = team.players.filter(p => getPositionCategory(p.position) === 'DF');
-  const mid = team.players.filter(p => getPositionCategory(p.position) === 'MF');
+function calcTeamDefence(team: EngineTeam): number {
+  const def = team.players.filter((p) => getPositionCategory(p.position) === 'DF');
+  const mid = team.players.filter((p) => getPositionCategory(p.position) === 'MF');
   const pool = def.length > 0 ? [...def, ...mid] : mid;
   if (pool.length === 0) return 70;
   return pool.reduce((s, p) => s + p.defenceRating, 0) / pool.length;
 }
 
-function calcChances(attack: number, defence: number): number {
+function calcChances(rng: Rng, attack: number, defence: number): number {
   const base = 8;
   const diff = attack - defence;
-  const raw = base + diff * 0.05 + (Math.random() * 4 - 2);
+  const raw = base + diff * 0.05 + (rng.next() * 4 - 2);
   return Math.max(2, Math.min(15, Math.round(raw)));
 }
 
 function simulateGoalsFromChances(
+  rng: Rng,
   chances: number,
   conversionRate: number,
-  team: Team,
+  team: EngineTeam,
   teamId: string
-): Array<{ minute: number; playerName: string; teamId: string; assist?: string; isPenalty?: boolean }> {
+): Goal[] {
   // Build a weighted scorer pool:
   //   FW  → full attackRating weight  (primary scorers)
   //   MF  → 30% of attackRating       (midfield contributions)
   //   DF  → 5%  of attackRating       (rare set-piece headers)
   //   GK  → 0 (never scores in normal play)
-  interface WeightedPlayer { name: string; weight: number }
+  interface WeightedPlayer {
+    name: string;
+    weight: number;
+  }
   const weightedPool: WeightedPlayer[] = [];
 
   for (const p of team.players) {
     const cat = getPositionCategory(p.position);
     const mult = cat === 'FW' ? 1.0 : cat === 'MF' ? 0.3 : cat === 'DF' ? 0.05 : 0;
-    if (mult > 0) {
-      weightedPool.push({ name: p.name, weight: p.attackRating * mult });
+    if (mult > 0 && p.name) {
+      weightedPool.push({ name: p.name, weight: (p.attackRating || 75) * mult });
+    }
+  }
+
+  // Fallback: if no weighted pool, use all outfield players
+  if (weightedPool.length === 0) {
+    const outfieldPlayers = team.players.filter((p) => getPositionCategory(p.position) !== 'GK');
+    for (const p of outfieldPlayers) {
+      if (p.name) weightedPool.push({ name: p.name, weight: p.attackRating || 75 });
+    }
+  }
+
+  // If still empty, use any player
+  if (weightedPool.length === 0 && team.players.length > 0) {
+    for (const p of team.players) {
+      if (p.name) weightedPool.push({ name: p.name, weight: 50 });
     }
   }
 
   const totalWeight = weightedPool.reduce((s, wp) => s + wp.weight, 0) || 1;
 
   // Assist pool: midfielders, fallback to full squad
-  const midPool = team.players.filter(p => getPositionCategory(p.position) === 'MF');
+  const midPool = team.players.filter((p) => getPositionCategory(p.position) === 'MF');
   const assistPool = midPool.length > 0 ? midPool : team.players;
 
   const pickScorer = (): string => {
-    let rand = Math.random() * totalWeight;
+    if (weightedPool.length === 0) return team.players[0]?.name || 'Unknown';
+    let rand = rng.next() * totalWeight;
     for (const wp of weightedPool) {
       rand -= wp.weight;
       if (rand <= 0) return wp.name;
@@ -325,17 +338,16 @@ function simulateGoalsFromChances(
     return weightedPool[weightedPool.length - 1].name;
   };
 
-  const goals: Array<{ minute: number; playerName: string; teamId: string; assist?: string; isPenalty?: boolean }> = [];
+  const goals: Goal[] = [];
   for (let i = 0; i < chances; i++) {
-    if (Math.random() < conversionRate) {
+    if (rng.next() < conversionRate) {
       const scorerName = pickScorer();
-      const isPenalty = Math.random() > 0.92;
-      const hasAssist = !isPenalty && Math.random() > 0.35;
-      const assister = hasAssist
-        ? assistPool.filter(p => p.name !== scorerName)[Math.floor(Math.random() * assistPool.length)]?.name
-        : undefined;
+      const isPenalty = rng.next() > 0.92;
+      const hasAssist = !isPenalty && rng.next() > 0.35;
+      const candidates = assistPool.filter((p) => p.name !== scorerName);
+      const assister = hasAssist && candidates.length > 0 ? rng.pick(candidates).name : undefined;
       goals.push({
-        minute: 10 + Math.floor(Math.random() * 80),
+        minute: 10 + rng.int(80),
         playerName: scorerName,
         teamId,
         assist: assister,
@@ -346,26 +358,25 @@ function simulateGoalsFromChances(
   return goals.sort((a, b) => a.minute - b.minute);
 }
 
-export function simulateRealisticMatch(
-  teamAId: string,
-  teamBId: string,
-  teamA: Team,
-  teamB: Team
-): MatchResult {
+export function simulateMatch({ teamA, teamB, seed }: MatchInput): MatchResult {
+  const rng = new Rng(seed);
+  const teamAId = teamA.id;
+  const teamBId = teamB.id;
+
   // Rating-based simulation
   const attackA = calcTeamAttack(teamA);
   const defenceA = calcTeamDefence(teamA);
   const attackB = calcTeamAttack(teamB);
   const defenceB = calcTeamDefence(teamB);
 
-  const chancesA = calcChances(attackA, defenceB);
-  const chancesB = calcChances(attackB, defenceA);
+  const chancesA = calcChances(rng, attackA, defenceB);
+  const chancesB = calcChances(rng, attackB, defenceA);
 
-  let convRateA = Math.max(0.10, Math.min(0.30, 0.20 + (attackA - defenceB) / 1000));
-  let convRateB = Math.max(0.10, Math.min(0.30, 0.20 + (attackB - defenceA) / 1000));
+  const convRateA = Math.max(0.1, Math.min(0.3, 0.2 + (attackA - defenceB) / 1000));
+  const convRateB = Math.max(0.1, Math.min(0.3, 0.2 + (attackB - defenceA) / 1000));
 
-  const goalsA = simulateGoalsFromChances(chancesA, convRateA, teamA, teamAId);
-  const goalsB = simulateGoalsFromChances(chancesB, convRateB, teamB, teamBId);
+  const goalsA = simulateGoalsFromChances(rng, chancesA, convRateA, teamA, teamAId);
+  const goalsB = simulateGoalsFromChances(rng, chancesB, convRateB, teamB, teamBId);
 
   const scoreA = goalsA.length;
   const scoreB = goalsB.length;
@@ -391,10 +402,15 @@ export function simulateRealisticMatch(
   const shotsB = chancesB;
 
   // Goal text generators using actual player names and team names
-  const goalTemplates = (scorer: string, assist: string | undefined, teamName: string, isPenalty: boolean) => {
+  const goalTemplates = (
+    scorer: string,
+    assist: string | undefined,
+    teamName: string,
+    isPenalty: boolean
+  ) => {
     if (isPenalty) return `GOAL! ${scorer} steps up and converts the penalty for ${teamName}!`;
     const assistStr = assist ? ` ${assist} plays it through and ` : ' ';
-    const opts = [
+    return rng.pick([
       `GOAL! ${teamName}!${assistStr}${scorer} slots it home into the bottom corner!`,
       `GOAL! What a strike from ${scorer}! A powerful effort leaves the keeper with no chance!`,
       `GOAL! ${scorer} is unmarked at the far post!${assistStr}He heads it firmly into the net!`,
@@ -402,12 +418,17 @@ export function simulateRealisticMatch(
       `GOAL! A brilliant individual effort from ${scorer} — he beats two defenders and fires home!`,
       `GOAL! ${scorer} cuts inside and unleashes a curling shot into the top corner!`,
       `GOAL! ${scorer} taps in from close range after a flowing ${teamName} move!`,
-    ];
-    return opts[Math.floor(Math.random() * opts.length)];
+    ]);
   };
 
-  const chanceTemplates = (attackerName: string, midName: string, keeperName: string, teamName: string, oppName: string) => {
-    const opts = [
+  const chanceTemplates = (
+    attackerName: string,
+    midName: string,
+    keeperName: string,
+    teamName: string,
+    oppName: string
+  ) =>
+    rng.pick([
       `${attackerName} drives into the box but ${keeperName} stands firm to smother the shot!`,
       `Great move from ${teamName}! ${midName} slips in ${attackerName} but the shot goes just wide.`,
       `A stunning save! ${attackerName} looked certain to score before ${keeperName} tipped it over the bar.`,
@@ -415,12 +436,16 @@ export function simulateRealisticMatch(
       `${attackerName} is clean through on goal but ${keeperName} makes himself big and blocks!`,
       `Corner for ${teamName}. ${midName} whips it in but the ${oppName} defence clears.`,
       `Free kick on the edge of the box. ${midName} curls it over the wall but it's saved!`,
-    ];
-    return opts[Math.floor(Math.random() * opts.length)];
-  };
+    ]);
 
-  const generalTemplates = (midName: string, attackerName: string, defName: string, teamName: string, oppName: string) => {
-    const opts = [
+  const generalTemplates = (
+    midName: string,
+    attackerName: string,
+    defName: string,
+    teamName: string,
+    oppName: string
+  ) =>
+    rng.pick([
       `${midName} drives forward from midfield, linking up with ${attackerName} in a promising position.`,
       `Good pressing from ${teamName} — ${midName} wins the ball back in their own half.`,
       `${attackerName} holds up the ball well, bringing ${midName} into play.`,
@@ -428,33 +453,35 @@ export function simulateRealisticMatch(
       `A creative ball from ${midName} almost breaks through the ${oppName} defence.`,
       `${teamName} winning the midfield battle through hard work from ${midName}.`,
       `Excellent defensive work from ${defName}, clearing the danger with a well-timed tackle.`,
-    ];
-    return opts[Math.floor(Math.random() * opts.length)];
+    ]);
+
+  const pickPlayer = (team: EngineTeam, pos: PositionCategory): string => {
+    const pool = team.players.filter((p) => getPositionCategory(p.position) === pos);
+    const fallback = team.players.filter((p) => getPositionCategory(p.position) === 'MF');
+    const src = pool.length > 0 ? pool : fallback.length > 0 ? fallback : team.players;
+    return rng.pick(src).name;
   };
 
-  const pickPlayer = (team: Team, pos: string): string => {
-    const pool = team.players.filter(p => getPositionCategory(p.position) === pos);
-    const fallback = team.players.filter(p => getPositionCategory(p.position) === 'MF');
-    const src = pool.length > 0 ? pool : (fallback.length > 0 ? fallback : team.players);
-    return src[Math.floor(Math.random() * src.length)].name;
-  };
-
-  const getKeeper = (team: Team) => {
-    const gk = team.players.find(p => p.position === 'GK');
+  const getKeeper = (team: EngineTeam) => {
+    const gk = team.players.find((p) => p.position === 'GK');
     return gk?.name ?? 'the keeper';
   };
 
   // All goals sorted chronologically
   const allGoals = [
-    ...goalsA.map(g => ({ ...g, team: 'A' as const })),
-    ...goalsB.map(g => ({ ...g, team: 'B' as const })),
+    ...goalsA.map((g) => ({ ...g, team: 'A' as const })),
+    ...goalsB.map((g) => ({ ...g, team: 'B' as const })),
   ].sort((a, b) => a.minute - b.minute);
 
   // Helper: get the running score just AFTER all goals up to and including `minute`
   const scoreAt = (minute: number) => {
-    let sA = 0, sB = 0;
+    let sA = 0;
+    let sB = 0;
     for (const g of allGoals) {
-      if (g.minute <= minute) { if (g.team === 'A') sA++; else sB++; }
+      if (g.minute <= minute) {
+        if (g.team === 'A') sA++;
+        else sB++;
+      }
     }
     return { sA, sB };
   };
@@ -462,7 +489,7 @@ export function simulateRealisticMatch(
   // ── Step 1: Emit ALL goal events in chronological order with correct scores ──
   let runningA = 0;
   let runningB = 0;
-  const goalMinutes = new Set(allGoals.map(g => g.minute));
+  const goalMinutes = new Set(allGoals.map((g) => g.minute));
 
   // Kickoff (before any goals)
   state.events.push({
@@ -474,11 +501,17 @@ export function simulateRealisticMatch(
   });
 
   for (const goal of allGoals) {
-    if (goal.team === 'A') runningA++; else runningB++;
+    if (goal.team === 'A') runningA++;
+    else runningB++;
     state.events.push({
       minute: goal.minute,
       type: 'goal',
-      text: goalTemplates(goal.playerName, goal.assist, goal.team === 'A' ? teamA.name : teamB.name, !!goal.isPenalty),
+      text: goalTemplates(
+        goal.playerName,
+        goal.assist,
+        goal.team === 'A' ? teamA.name : teamB.name,
+        !!goal.isPenalty
+      ),
       scoreA: runningA,
       scoreB: runningB,
       goalScorerName: goal.playerName,
@@ -487,23 +520,26 @@ export function simulateRealisticMatch(
 
   // ── Step 2: Generate general event slots, skipping minutes too close to goals ──
   const eventSlots: number[] = [];
-  const slots = [[3, 20], [21, 44], [46, 65], [66, 89]];
+  const slots = [
+    [3, 20],
+    [21, 44],
+    [46, 65],
+    [66, 89],
+  ];
   for (const [start, end] of slots) {
-    const available = Array.from({ length: end - start + 1 }, (_, i) => i + start)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 3 + Math.floor(Math.random() * 3));
-    eventSlots.push(...available);
+    const minutes = Array.from({ length: end - start + 1 }, (_, i) => i + start);
+    eventSlots.push(...rng.shuffle(minutes).slice(0, 3 + rng.int(3)));
   }
 
   for (const minute of eventSlots.sort((a, b) => a - b)) {
     // Skip this slot if a goal happened within ±2 minutes
-    if ([...goalMinutes].some(gm => Math.abs(gm - minute) <= 2)) continue;
+    if ([...goalMinutes].some((gm) => Math.abs(gm - minute) <= 2)) continue;
 
     const { sA, sB } = scoreAt(minute);
-    const isForA = Math.random() > 0.5;
+    const isForA = rng.next() > 0.5;
     const attTeam = isForA ? teamA : teamB;
     const defTeam = isForA ? teamB : teamA;
-    const rand = Math.random();
+    const rand = rng.next();
 
     let text: string;
     if (rand < 0.35) {
@@ -514,8 +550,8 @@ export function simulateRealisticMatch(
         attTeam.name,
         defTeam.name
       );
-    } else if (rand < 0.60) {
-      const skillEvent = generateSkillEvent(isForA ? teamA : teamB, state, isForA);
+    } else if (rand < 0.6) {
+      const skillEvent = generateSkillEvent(rng, isForA ? teamA : teamB, state, isForA);
       if (skillEvent) {
         skillEvent.minute = minute;
         skillEvent.scoreA = sA;
@@ -523,7 +559,13 @@ export function simulateRealisticMatch(
         state.events.push(skillEvent);
         continue;
       }
-      text = generalTemplates(pickPlayer(attTeam, 'MF'), pickPlayer(attTeam, 'FW'), pickPlayer(defTeam, 'DF'), attTeam.name, defTeam.name);
+      text = generalTemplates(
+        pickPlayer(attTeam, 'MF'),
+        pickPlayer(attTeam, 'FW'),
+        pickPlayer(defTeam, 'DF'),
+        attTeam.name,
+        defTeam.name
+      );
     } else {
       text = generalTemplates(
         pickPlayer(attTeam, 'MF'),
@@ -539,7 +581,8 @@ export function simulateRealisticMatch(
 
   // ── Step 3: Half time & Full time ──
   const htScore = scoreAt(45);
-  const htLeader = htScore.sA > htScore.sB ? teamA.name : htScore.sB > htScore.sA ? teamB.name : null;
+  const htLeader =
+    htScore.sA > htScore.sB ? teamA.name : htScore.sB > htScore.sA ? teamB.name : null;
   const htComment = htLeader
     ? `${htLeader} have done well to take the lead. Their opponents need to respond.`
     : 'Both teams level — plenty to play for in the second half.';
@@ -556,10 +599,10 @@ export function simulateRealisticMatch(
   const ftComment = !winner
     ? 'A hard-fought draw — both teams can take credit from this.'
     : margin === 1
-    ? `A narrow victory for ${winner} — a real battle from start to finish.`
-    : margin === 2
-    ? `${winner} were the better side today. A deserved victory.`
-    : `${winner} were dominant today — a convincing win!`;
+      ? `A narrow victory for ${winner} — a real battle from start to finish.`
+      : margin === 2
+        ? `${winner} were the better side today. A deserved victory.`
+        : `${winner} were dominant today — a convincing win!`;
   state.events.push({
     minute: 90,
     type: 'normal',
@@ -569,13 +612,14 @@ export function simulateRealisticMatch(
   });
 
   // Man of the match: scorer with most goals, else highest involvement
-  let manOfMatch = goalsA.length > 0
-    ? goalsA[goalsA.length - 1].playerName
-    : goalsB.length > 0
-    ? goalsB[goalsB.length - 1].playerName
-    : (scoreA >= scoreB ? teamA : teamB).players
-        .filter(p => p.position !== 'GK')
-        .reduce((best, p) => p.overallRating > best.overallRating ? p : best).name;
+  const manOfMatch =
+    goalsA.length > 0
+      ? goalsA[goalsA.length - 1].playerName
+      : goalsB.length > 0
+        ? goalsB[goalsB.length - 1].playerName
+        : (scoreA >= scoreB ? teamA : teamB).players
+            .filter((p: EnginePlayer) => p.position !== 'GK')
+            .reduce((best, p) => (p.overallRating > best.overallRating ? p : best)).name;
 
   // Summary commentary
   const summaryLines = [
@@ -586,11 +630,24 @@ export function simulateRealisticMatch(
   ];
 
   const playerStatsAObj: { [key: string]: PlayerStats } = {};
-  state.playerStatsA.forEach((s, name) => { playerStatsAObj[name] = s; });
+  state.playerStatsA.forEach((s, name) => {
+    playerStatsAObj[name] = s;
+  });
   const playerStatsBObj: { [key: string]: PlayerStats } = {};
-  state.playerStatsB.forEach((s, name) => { playerStatsBObj[name] = s; });
+  state.playerStatsB.forEach((s, name) => {
+    playerStatsBObj[name] = s;
+  });
 
-  const stadiums = ['Old Trafford', 'Anfield', 'Wembley', 'Camp Nou', 'Maracanã', 'San Siro', 'Santiago Bernabéu', 'Estadio da Luz'];
+  const stadiums = [
+    'Old Trafford',
+    'Anfield',
+    'Wembley',
+    'Camp Nou',
+    'Maracanã',
+    'San Siro',
+    'Santiago Bernabéu',
+    'Estadio da Luz',
+  ];
 
   return {
     scoreA,
@@ -606,8 +663,8 @@ export function simulateRealisticMatch(
       possessionB: 100 - possessionAFinal,
     },
     commentary: summaryLines,
-    stadiumName: stadiums[Math.floor(Math.random() * stadiums.length)],
-    kickOffTime: `${15 + Math.floor(Math.random() * 5)}:${Math.random() > 0.5 ? '00' : '30'}`,
+    stadiumName: rng.pick(stadiums),
+    kickOffTime: `${15 + rng.int(5)}:${rng.next() > 0.5 ? '00' : '30'}`,
     manOfTheMatch: manOfMatch,
     events: state.events.sort((a, b) => a.minute - b.minute || (a.type === 'goal' ? -1 : 1)),
     playerStatsA: playerStatsAObj,

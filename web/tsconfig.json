@@ -20,8 +20,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@fm/match-engine": ["../packages/match-engine/src/index.ts"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "../packages/match-engine/src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

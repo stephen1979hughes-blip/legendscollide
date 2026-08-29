@@ -60,24 +60,13 @@ export const FORMATIONS: FormationConfig[] = [
   {
     name: '3-5-2',
     code: '352',
-    description: 'Wing-back heavy',
-    positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CM', 'CM', 'LM', 'ST', 'ST'],
+    description: 'Attacking midfield support',
+    positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CM', 'LM', 'CAM', 'ST', 'ST'],
     rows: [
       { name: 'GK', positionIndices: [0] },
       { name: 'Defense', positionIndices: [1, 2, 3] },
-      { name: 'Midfield', positionIndices: [4, 5, 6, 7, 8] },
-      { name: 'Attack', positionIndices: [9, 10] }
-    ]
-  },
-  {
-    name: '5-3-2',
-    code: '532',
-    description: 'Defensive five',
-    positions: ['GK', 'RB', 'CB', 'CB', 'CB', 'LB', 'CM', 'CM', 'CM', 'ST', 'ST'],
-    rows: [
-      { name: 'GK', positionIndices: [0] },
-      { name: 'Defense', positionIndices: [1, 2, 3, 4, 5] },
-      { name: 'Midfield', positionIndices: [6, 7, 8] },
+      { name: 'Midfield', positionIndices: [4, 5, 6, 7] },
+      { name: 'Attacking Midfield', positionIndices: [8] },
       { name: 'Attack', positionIndices: [9, 10] }
     ]
   },

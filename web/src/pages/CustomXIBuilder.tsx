@@ -252,27 +252,28 @@ export const CustomXIBuilder: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
       <Header showBack />
 
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8 w-full">
-        <h1 className="text-4xl font-heading font-bold text-primary mb-8">Build Your All-Time XI</h1>
+        <h1 className="text-4xl font-heading font-bold text-white mb-8">Build Your All-Time XI</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left: Club/Formation Selection */}
           <div className="space-y-6">
             {/* Club Selection */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-bold text-primary mb-4">Select Club/Nation</h3>
+            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
+              <h3 className="text-lg font-bold text-white mb-4">Select Club/Nation</h3>
               {!dataLoaded ? (
-                <div className="text-center text-muted py-4">Loading clubs...</div>
+                <div className="text-center text-white/70 py-4">Loading clubs...</div>
               ) : clubs.length === 0 ? (
-                <div className="text-center text-red-500 py-4">Failed to load clubs. Please refresh the page.</div>
+                <div className="text-center text-red-400 py-4">Failed to load clubs. Please refresh the page.</div>
               ) : (
                 <select
                   onChange={(e) => handleClubSelect(e.target.value)}
                   value={selectedClub?.id || ''}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-3 py-2 border border-white/20 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                  style={{ colorScheme: 'dark', backgroundColor: '#1a1a1a', color: '#ffffff' }}
                 >
                   <option value="">Choose a club/nation...</option>
                   {clubs.map((club) => (
@@ -286,8 +287,8 @@ export const CustomXIBuilder: React.FC = () => {
 
             {/* Formation Selection */}
             {selectedClub && (
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-bold text-primary mb-4">Select Formation</h3>
+              <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
+                <h3 className="text-lg font-bold text-white mb-4">Select Formation</h3>
                 <div className="space-y-2">
                   {FORMATIONS.map((formation) => (
                     <button
@@ -295,12 +296,12 @@ export const CustomXIBuilder: React.FC = () => {
                       onClick={() => handleFormationSelect(formation)}
                       className={`w-full text-left px-4 py-3 rounded-lg border-2 transition ${
                         selectedFormation.code === formation.code
-                          ? 'border-primary bg-blue-50'
-                          : 'border-gray-200 hover:border-primary'
+                          ? 'border-primary bg-white/20'
+                          : 'border-white/10 hover:border-primary'
                       }`}
                     >
-                      <p className="font-semibold text-primary">{formation.name}</p>
-                      <p className="text-sm text-muted">{formation.description}</p>
+                      <p className="font-semibold text-white">{formation.name}</p>
+                      <p className="text-sm text-white/60">{formation.description}</p>
                     </button>
                   ))}
                 </div>
@@ -309,7 +310,7 @@ export const CustomXIBuilder: React.FC = () => {
 
             {/* Save XI */}
             {selectedClub && players.length === selectedFormation.positions.length && (
-              <div className="bg-white rounded-lg shadow p-6 space-y-3">
+              <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md space-y-3">
                 <button
                   onClick={handleSaveXI}
                   className="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition"
@@ -318,202 +319,11 @@ export const CustomXIBuilder: React.FC = () => {
                 </button>
               </div>
             )}
-
-            {/* XI Summary */}
-            {savedXI && (
-              <div className="bg-primary bg-opacity-5 rounded-lg border-2 border-primary p-6 space-y-2">
-                <h4 className="font-bold text-primary">Your XI</h4>
-                <p className="text-sm text-muted">{savedXI.clubName}</p>
-                <p className="text-sm text-muted">Formation: {savedXI.formation}</p>
-                <p className="text-sm font-semibold text-primary mt-2">Players ({savedXI.players.length}):</p>
-                <div className="text-xs text-muted space-y-1">
-                  {savedXI.players.sort((a, b) => a.slotIndex - b.slotIndex).map((p) => (
-                    <div key={p.slotIndex} className="flex justify-between">
-                      <span>{p.playerName}</span>
-                      <span className="text-primary">⭐ {p.overallRating}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Saved XIs List */}
-            {savedXIs.length > 0 && (
-              <div className="bg-white rounded-lg shadow p-6 space-y-3">
-                <h4 className="font-bold text-primary mb-3">Saved Custom XIs ({savedXIs.length})</h4>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {savedXIs.map((xi) => (
-                    <div
-                      key={xi.id}
-                      className={`p-3 rounded-lg border-2 transition cursor-pointer ${
-                        savedXI?.id === xi.id
-                          ? 'border-primary bg-blue-50'
-                          : 'border-gray-200 hover:border-primary hover:bg-gray-50'
-                      }`}
-                    >
-                      <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                          <p className="font-semibold text-sm text-primary">{xi.clubName}</p>
-                          <p className="text-xs text-muted">Formation: {xi.formation}</p>
-                          <p className="text-xs text-muted">{xi.players.length} players</p>
-                        </div>
-                        {savedXI?.id === xi.id && (
-                          <span className="text-xs bg-primary text-white px-2 py-1 rounded">Active</span>
-                        )}
-                      </div>
-                      {savedXI?.id !== xi.id && (
-                        <button
-                          onClick={() => {
-                            setSavedXI(xi);
-                            setPlayers(xi.players);
-                            const club = clubs.find(c => c.id === xi.clubId);
-                            if (club) setSelectedClub(club);
-                            const formation = FORMATIONS.find(f => f.code === xi.formation);
-                            if (formation) setSelectedFormation(formation);
-                          }}
-                          className="mt-2 w-full text-xs bg-primary text-white py-1 rounded hover:opacity-90 transition"
-                        >
-                          Load XI
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Requirements Checklist */}
-            <div className="bg-blue-50 rounded-lg p-6 space-y-3">
-              <h3 className="font-bold text-primary mb-3">Ready to Simulate?</h3>
-              <div className="space-y-2 text-sm">
-                <div className={`flex items-center ${selectedClub ? 'text-green-600' : 'text-red-600'}`}>
-                  <span className="mr-2">{selectedClub ? '✓' : '✗'}</span>
-                  <span>{selectedClub ? `Club Selected: ${selectedClub.name}` : 'Select a club/team'}</span>
-                </div>
-                <div className={`flex items-center ${players.length === selectedFormation.positions.length ? 'text-green-600' : 'text-red-600'}`}>
-                  <span className="mr-2">{players.length === selectedFormation.positions.length ? '✓' : '✗'}</span>
-                  <span>All {selectedFormation.positions.length} positions filled ({players.length}/{selectedFormation.positions.length})</span>
-                </div>
-                <div className={`flex items-center ${savedXI ? 'text-green-600' : 'text-red-600'}`}>
-                  <span className="mr-2">{savedXI ? '✓' : '✗'}</span>
-                  <span>{savedXI ? 'Custom XI saved' : 'Save your custom XI first'}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Simulate Options */}
-            {selectedClub && players.length === selectedFormation.positions.length && savedXI && (
-              <div className="bg-white rounded-lg shadow p-6 space-y-4">
-                {/* Opponent Type Selection */}
-                <div>
-                  <label className="text-sm font-semibold text-primary mb-3 block">Choose Opponent Type</label>
-                  <div className="space-y-2">
-                    <label className="flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="opponentType"
-                        value="existing"
-                        checked={opponentType === 'existing'}
-                        onChange={(e) => {
-                          setOpponentType('existing');
-                          setOpponentId('');
-                        }}
-                        className="mr-2"
-                      />
-                      <span className="text-sm">Historic Team</span>
-                    </label>
-                    <label className="flex items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        name="opponentType"
-                        value="custom"
-                        checked={opponentType === 'custom'}
-                        onChange={(e) => {
-                          setOpponentType('custom');
-                          setCustomOpponentId('');
-                        }}
-                        className="mr-2"
-                      />
-                      <span className="text-sm">Custom XI</span>
-                    </label>
-                  </div>
-                </div>
-
-                {/* Opponent Selection */}
-                <div>
-                  <label className="text-sm font-semibold text-primary mb-2 block">
-                    Select Opponent
-                  </label>
-                  {opponentType === 'existing' ? (
-                    <>
-                      <select
-                        value={opponentId}
-                        onChange={(e) => setOpponentId(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                      >
-                        <option value="">Choose a historic team...</option>
-                        {availableTeams.map((team) => (
-                          <option key={team.id} value={team.id}>
-                            {team.name} ({team.year})
-                          </option>
-                        ))}
-                      </select>
-                      {!opponentId && <p className="text-red-500 text-xs mt-1">Please select an opponent</p>}
-                    </>
-                  ) : (
-                    <>
-                      {savedXIs.length > 1 ? (
-                        <>
-                          <select
-                            value={customOpponentId}
-                            onChange={(e) => setCustomOpponentId(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                          >
-                            <option value="">Choose a custom XI...</option>
-                            {savedXIs
-                              .filter((xi) => xi.id !== savedXI?.id) // Don't allow selecting your own XI
-                              .map((xi) => (
-                                <option key={xi.id} value={xi.id}>
-                                  {xi.clubName} ({xi.formation})
-                                </option>
-                              ))}
-                          </select>
-                          {!customOpponentId && <p className="text-red-500 text-xs mt-1">Please select an opponent</p>}
-                        </>
-                      ) : (
-                        <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
-                          You need to save at least 2 custom XIs to simulate them against each other.
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-
-                {/* Simulate Button */}
-                <button
-                  onClick={handleSimulate}
-                  disabled={
-                    loading ||
-                    (opponentType === 'existing' && !opponentId) ||
-                    (opponentType === 'custom' && (!customOpponentId || savedXIs.length <= 1))
-                  }
-                  className={`w-full font-semibold py-3 rounded-lg transition ${
-                    loading ||
-                    (opponentType === 'existing' && !opponentId) ||
-                    (opponentType === 'custom' && (!customOpponentId || savedXIs.length <= 1))
-                      ? 'bg-gray-400 text-white opacity-50 cursor-not-allowed'
-                      : 'bg-secondary text-white hover:opacity-90'
-                  }`}
-                >
-                  {loading ? '⏳ Simulating...' : '▶️ Simulate Match'}
-                </button>
-              </div>
-            )}
           </div>
 
           {/* Right: Pitch */}
           {selectedClub && (
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 space-y-6">
               <Pitch
                 formation={selectedFormation}
                 players={players}
@@ -521,6 +331,133 @@ export const CustomXIBuilder: React.FC = () => {
                 onPlayerRemove={handlePlayerRemove}
                 availablePlayers={selectedClub.allTimePlayers || []}
               />
+
+              {/* Combined Simulate Card */}
+              {players.length === selectedFormation.positions.length && savedXI && (
+                <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md space-y-4">
+                  {/* Requirements Checklist */}
+                  <div className="space-y-3 pb-4 border-b border-white/10">
+                    <h3 className="font-bold text-white">Ready to Simulate?</h3>
+                    <div className="space-y-2 text-sm">
+                      <div className={`flex items-center ${selectedClub ? 'text-green-400' : 'text-red-400'}`}>
+                        <span className="mr-2">{selectedClub ? '✓' : '✗'}</span>
+                        <span>{selectedClub ? `Club Selected: ${selectedClub.name}` : 'Select a club/team'}</span>
+                      </div>
+                      <div className={`flex items-center ${players.length === selectedFormation.positions.length ? 'text-green-400' : 'text-red-400'}`}>
+                        <span className="mr-2">{players.length === selectedFormation.positions.length ? '✓' : '✗'}</span>
+                        <span>All {selectedFormation.positions.length} positions filled ({players.length}/{selectedFormation.positions.length})</span>
+                      </div>
+                      <div className={`flex items-center ${savedXI ? 'text-green-400' : 'text-red-400'}`}>
+                        <span className="mr-2">{savedXI ? '✓' : '✗'}</span>
+                        <span>{savedXI ? 'Custom XI saved' : 'Save your custom XI first'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Choose Opponent Type */}
+                  <div>
+                    <label className="text-sm font-semibold text-white mb-3 block">Choose Opponent Type</label>
+                    <div className="space-y-2">
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="opponentType"
+                          value="existing"
+                          checked={opponentType === 'existing'}
+                          onChange={(e) => {
+                            setOpponentType('existing');
+                            setOpponentId('');
+                          }}
+                          className="mr-2"
+                        />
+                        <span className="text-sm text-white">Historic Team</span>
+                      </label>
+                      <label className="flex items-center cursor-pointer">
+                        <input
+                          type="radio"
+                          name="opponentType"
+                          value="custom"
+                          checked={opponentType === 'custom'}
+                          onChange={(e) => {
+                            setOpponentType('custom');
+                            setCustomOpponentId('');
+                          }}
+                          className="mr-2"
+                        />
+                        <span className="text-sm text-white">Custom XI</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Opponent Selection */}
+                  <div>
+                    {opponentType === 'existing' ? (
+                      <>
+                        <select
+                          value={opponentId}
+                          onChange={(e) => setOpponentId(e.target.value)}
+                          className="w-full px-3 py-2 border border-white/20 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                          style={{ colorScheme: 'dark', backgroundColor: '#1a1a1a', color: '#ffffff' }}
+                        >
+                          <option value="">Choose a historic team...</option>
+                          {availableTeams.map((team) => (
+                            <option key={team.id} value={team.id}>
+                              {team.name} ({team.year})
+                            </option>
+                          ))}
+                        </select>
+                        {!opponentId && <p className="text-red-500 text-xs mt-1">Please select an opponent</p>}
+                      </>
+                    ) : (
+                      <>
+                        {savedXIs.length > 1 ? (
+                          <>
+                            <select
+                              value={customOpponentId}
+                              onChange={(e) => setCustomOpponentId(e.target.value)}
+                              className="w-full px-3 py-2 border border-white/20 rounded-lg bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                              style={{ colorScheme: 'dark', backgroundColor: '#1a1a1a', color: '#ffffff' }}
+                            >
+                              <option value="">Choose a custom XI...</option>
+                              {savedXIs
+                                .filter((xi) => xi.id !== savedXI?.id)
+                                .map((xi) => (
+                                  <option key={xi.id} value={xi.id}>
+                                    {xi.clubName} ({xi.formation})
+                                  </option>
+                                ))}
+                            </select>
+                            {!customOpponentId && <p className="text-red-500 text-xs mt-1">Please select an opponent</p>}
+                          </>
+                        ) : (
+                          <div className="p-3 bg-yellow-50/10 border border-yellow-500/30 rounded-lg text-sm text-yellow-400">
+                            You need to save at least 2 custom XIs to simulate them against each other.
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Simulate Button */}
+                  <button
+                    onClick={handleSimulate}
+                    disabled={
+                      loading ||
+                      (opponentType === 'existing' && !opponentId) ||
+                      (opponentType === 'custom' && (!customOpponentId || savedXIs.length <= 1))
+                    }
+                    className={`w-full font-semibold py-3 rounded-lg transition ${
+                      loading ||
+                      (opponentType === 'existing' && !opponentId) ||
+                      (opponentType === 'custom' && (!customOpponentId || savedXIs.length <= 1))
+                        ? 'bg-gray-400 text-white opacity-50 cursor-not-allowed'
+                        : 'bg-secondary text-white hover:opacity-90'
+                    }`}
+                  >
+                    {loading ? '⏳ Simulating...' : '▶️ Simulate Match'}
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </div>

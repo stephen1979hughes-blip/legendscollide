@@ -520,61 +520,6 @@ app.delete('/api/admin/classic-teams/:id', (req, res) => {
   res.status(204).send();
 });
 
-// ========== MATCH SIMULATION ==========
-
-let simulateMatchWithAgent = null;
-
-// Lazy-load the agent to avoid TypeScript loading issues
-async function getAgent() {
-  if (!simulateMatchWithAgent) {
-    const agentModule = await import('../web/src/services/matchEngineAgent.ts');
-    simulateMatchWithAgent = agentModule.simulateMatchWithAgent;
-  }
-  return simulateMatchWithAgent;
-}
-
-// POST /api/simulateAi - Simulate match using Groq agent
-app.post('/api/simulateAi', async (req, res) => {
-  try {
-    const { homeTeamId, awayTeamId } = req.body;
-
-    if (!homeTeamId || !awayTeamId) {
-      return res.status(400).json({ error: 'Missing homeTeamId or awayTeamId' });
-    }
-
-    const data = loadData();
-    if (!data) {
-      return res.status(500).json({ error: 'Failed to load data' });
-    }
-
-    // Find the classic teams
-    const homeTeam = data.classicTeams.find(t => t.id === homeTeamId);
-    const awayTeam = data.classicTeams.find(t => t.id === awayTeamId);
-
-    if (!homeTeam || !awayTeam) {
-      return res.status(404).json({ error: 'One or both teams not found' });
-    }
-
-    const agent = await getAgent();
-
-    console.log(`[POST /api/simulateAi] Starting AI match simulation: ${homeTeam.name} vs ${awayTeam.name}`);
-
-    const matchState = await agent(
-      homeTeamId,
-      awayTeamId,
-      homeTeam,
-      awayTeam
-    );
-
-    console.log(`[POST /api/simulateAi] Match complete: ${matchState.score.home} - ${matchState.score.away}`);
-
-    res.json(matchState);
-  } catch (error) {
-    console.error('[POST /api/simulateAi] Error:', error);
-    res.status(500).json({ error: error.message || 'Match simulation failed' });
-  }
-});
-
 // ========== VALIDATION & EXPORT ==========
 
 // POST /api/admin/validate - Validate data integrity

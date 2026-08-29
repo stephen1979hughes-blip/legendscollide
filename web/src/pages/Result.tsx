@@ -37,17 +37,17 @@ export const Result: React.FC = () => {
 
   if (!result || !teamA || !teamB) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
         <Header />
         <main className="flex-1 flex items-center justify-center">
-          <p className="text-muted">Loading result...</p>
+          <p className="text-white/70">Loading result...</p>
         </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
       <Header
         showBack
         rightButton={{
@@ -58,38 +58,38 @@ export const Result: React.FC = () => {
 
       <main className="flex-1 max-w-5xl mx-auto px-6 py-12 w-full">
         {/* Scoreline */}
-        <div className="card mb-8">
+        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8">
           <div className="flex items-center justify-center gap-8">
             <div className="text-center flex-1">
-              <h2 className="text-2xl font-bold text-primary">{teamA.name}</h2>
-              <p className="text-sm text-muted">{teamA.year}</p>
+              <h2 className="text-2xl font-bold text-white">{teamA.name}</h2>
+              <p className="text-sm text-white/70">{teamA.year}</p>
             </div>
             <div className="text-center">
-              <div className="text-6xl font-heading font-bold text-secondary">
+              <div className="text-6xl font-heading font-bold text-white">
                 {result.scoreA} — {result.scoreB}
               </div>
-              <p className="text-sm text-muted mt-2">{result.stadiumName}</p>
+              <p className="text-sm text-white/70 mt-2">{result.stadiumName}</p>
             </div>
             <div className="text-center flex-1">
-              <h2 className="text-2xl font-bold text-primary">{teamB.name}</h2>
-              <p className="text-sm text-muted">{teamB.year}</p>
+              <h2 className="text-2xl font-bold text-white">{teamB.name}</h2>
+              <p className="text-sm text-white/70">{teamB.year}</p>
             </div>
           </div>
         </div>
 
         {/* Goals */}
         {((result.goalsA || []).length > 0 || (result.goalsB || []).length > 0) && (
-          <div className="card mb-8">
-            <h3 className="text-lg font-bold text-primary mb-4">Goals</h3>
+          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8">
+            <h3 className="text-lg font-bold text-white mb-4">Goals</h3>
             <div className="space-y-2">
               {(result.goalsA || []).map((goal: any, idx: number) => (
-                <div key={idx} className="flex justify-between">
+                <div key={idx} className="flex justify-between text-white/90">
                   <span className="font-semibold">⚽ {goal.minute}' {goal.playerName}</span>
                   <span className="text-primary font-bold">{teamA.name}</span>
                 </div>
               ))}
               {(result.goalsB || []).map((goal: any, idx: number) => (
-                <div key={idx} className="flex justify-between">
+                <div key={idx} className="flex justify-between text-white/90">
                   <span className="text-primary font-bold">{teamB.name}</span>
                   <span className="font-semibold">{goal.playerName} {goal.minute}' ⚽</span>
                 </div>
@@ -105,15 +105,15 @@ export const Result: React.FC = () => {
 
         {/* Era Flavour */}
         {result.eraFlavour && (
-          <div className="card mb-8 border-l-4 border-secondary bg-gray-50">
-            <p className="italic text-text">{result.eraFlavour}</p>
+          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8 border-l-4 border-secondary">
+            <p className="italic text-white/90">{result.eraFlavour}</p>
           </div>
         )}
 
         {/* Man of the Match */}
-        <div className="card mb-8 text-center bg-gradient-to-r from-primary to-primary">
+        <div className="rounded-xl border border-white/10 mb-8 text-center bg-gradient-to-r from-primary to-primary/80 p-6 shadow-md">
           <p className="text-white text-sm font-bold mb-2">MAN OF THE MATCH</p>
-          <p className="text-secondary text-2xl font-heading font-bold">
+          <p className="text-red-300 text-2xl font-heading font-bold">
             {result.manOfTheMatch}
           </p>
         </div>
