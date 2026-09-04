@@ -7,6 +7,12 @@ dist/
 # Cloudflare Pages / Wrangler local dev cache
 .wrangler/
 
+# Claude Code worktrees for parallel sessions — local checkouts, never
+# committed. One had previously been added as a broken gitlink (a git repo
+# nested in a git repo, with no .gitmodules) which broke Cloudflare Pages'
+# submodule-init step on clone; see the commit that removed it.
+.claude/worktrees/
+
 # IDE
 .idea/
 *.swp
