@@ -120,7 +120,7 @@ export const onRequest: PagesFunction = async (context) => {
       : `${a.name} ${result.scoreA} – ${result.scoreB} ${b.name}. Watch it play out.`;
     const canonicalUrl = new URL(context.request.url).origin + new URL(context.request.url).pathname;
 
-    return new HTMLRewriter()
+    const rewritten = new HTMLRewriter()
       .on('title', new SetTextContent(title))
       .on('meta[property="og:title"]', new SetAttribute('content', title))
       .on('meta[name="twitter:title"]', new SetAttribute('content', title))
@@ -129,6 +129,12 @@ export const onRequest: PagesFunction = async (context) => {
       .on('meta[property="og:url"]', new SetAttribute('content', canonicalUrl))
       .on('link[rel="canonical"]', new SetAttribute('href', canonicalUrl))
       .transform(response);
+
+    // The shell arrives via Cloudflare Pages' 404.html SPA fallback (this
+    // path isn't a real static file), so it carries a 404 status by default.
+    // A valid match with real teams and a real scoreline deserves a 200 —
+    // crawlers generally won't build a link preview from a non-2xx response.
+    return new Response(rewritten.body, { status: 200, statusText: 'OK', headers: rewritten.headers });
   } catch (err) {
     console.error('OG rewrite failed for', matchup, seedParam, err);
     return response;

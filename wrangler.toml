@@ -2,14 +2,20 @@ name = "legendscollide"
 compatibility_date = "2024-09-23"
 pages_build_output_dir = "web/dist"
 
-# SPA fallback for the newer Workers-based Pages runtime. A committed
-# `_redirects` catch-all ("/* / 200") was tried first and shipped broken on
-# this project: it took priority over every existing static file, so
-# assets/*.js and *.css (and everything else) came back as the index.html
-# shell with the wrong Content-Type, blanking the app. That's the legacy
-# Pages contract (existing files win over `_redirects`) not holding here.
-# This is the documented mechanism for the newer runtime instead, and it
-# doesn't have that failure mode: a real file is always served as itself,
-# and only a genuine miss falls back to the SPA shell.
-[assets]
-not_found_handling = "single-page-application"
+# SPA fallback: see web/package.json's build script, which copies the built
+# index.html to 404.html. Two things were tried and ruled out first, both on
+# the live deployment (not just locally):
+#   - `_redirects` with "/* / 200": took priority over every existing static
+#     file on this project, so assets/*.js and *.css came back as the
+#     index.html shell with the wrong Content-Type — the whole app rendered
+#     blank. The "existing files win over _redirects" guarantee didn't hold
+#     here for a blanket "/*" pattern, for reasons that weren't reproducible
+#     locally with `wrangler pages dev`.
+#   - `[assets] not_found_handling` (this file): rejected outright at build
+#     time — "Configuration file for Pages projects does not support
+#     assets". That option is Workers-only; this is a classic Pages project.
+# 404.html is Cloudflare Pages' own long-documented fallback: unmatched
+# paths get it back with a 404 status (React Router still mounts and routes
+# correctly), while a real file is never at risk of being overridden. The
+# one route that cares about its status code, /m/*, corrects it back to 200
+# itself in functions/m/[matchup]/[seed].ts once it's rewritten the OG tags.
