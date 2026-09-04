@@ -2,6 +2,8 @@
 
 Pick two legendary teams, simulate the match, watch it unfold as a live broadcast.
 
+Where this goes next, and in what order: [ROADMAP.md](ROADMAP.md).
+
 ## Tech Stack
 
 - **Frontend:** React + TypeScript + Vite + Tailwind
