@@ -8,6 +8,8 @@ import { CommentaryFeed } from '../components/CommentaryFeed';
 import { MatchResult, Team } from '../types';
 import { api } from '../services/api';
 import { useState, useEffect } from 'react';
+import { buildMatchPermalinkPath, isPermalinkEligible } from '../utils/matchPermalink';
+import { SITE_URL } from '../config';
 
 export const Result: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +17,8 @@ export const Result: React.FC = () => {
   const { result, teamAId, teamBId, teamA: preloadedTeamA, teamB: preloadedTeamB } = location.state || {};
   const [teamA, setTeamA] = useState<Team | null>(preloadedTeamA || null);
   const [teamB, setTeamB] = useState<Team | null>(preloadedTeamB || null);
+  const [copied, setCopied] = useState(false);
+  const [shareFallback, setShareFallback] = useState<string | null>(null);
 
   useEffect(() => {
     if (!result || !teamAId || !teamBId) {
@@ -34,6 +38,37 @@ export const Result: React.FC = () => {
 
     loadTeams();
   }, [result, teamAId, teamBId, navigate, preloadedTeamA, preloadedTeamB]);
+
+  const handleShare = async () => {
+    if (!result || !teamA || !teamB) return;
+
+    // Custom XIs aren't derivable from an id, so they don't get a permalink —
+    // fall back to the old plain-text summary rather than sharing a link
+    // that can never resolve.
+    const eligible = isPermalinkEligible(teamA.id, teamB.id);
+    const permalink = eligible ? `${SITE_URL}${buildMatchPermalinkPath(teamA.id, teamB.id, result.seed)}` : null;
+    const text = permalink
+      ? `${teamA.name} ${result.scoreA} – ${result.scoreB} ${teamB.name} — watch it: ${permalink}`
+      : `${teamA.name} ${result.scoreA} – ${result.scoreB} ${teamB.name} | Man of the Match: ${result.manOfTheMatch} | Legends Collide`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Legends Collide', text, url: permalink ?? undefined });
+        return;
+      } catch {
+        // fall through to clipboard
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard access can be blocked (permissions, insecure context) —
+      // fall back to showing the text so it can still be copied by hand.
+      setShareFallback(text);
+    }
+  };
 
   if (!result || !teamA || !teamB) {
     return (
@@ -138,24 +173,23 @@ export const Result: React.FC = () => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 justify-center">
-          <button onClick={() => navigate('/')} className="btn-primary">
-            ▶ New Match
-          </button>
-          <button
-            onClick={() => {
-              const text = `${teamA.name} ${result.scoreA} – ${result.scoreB} ${teamB.name} | Man of the Match: ${result.manOfTheMatch} | Legends Collide`;
-              if (navigator.share) {
-                navigator.share({ title: 'Legends Collide Result', text });
-              } else {
-                navigator.clipboard.writeText(text);
-                alert('Result copied to clipboard!');
-              }
-            }}
-            className="btn-secondary"
-          >
-            📤 Share Result
-          </button>
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex gap-4 justify-center">
+            <button onClick={() => navigate('/')} className="btn-primary">
+              ▶ New Match
+            </button>
+            <button onClick={handleShare} className="btn-secondary">
+              {copied ? '✅ Copied!' : '📤 Share Result'}
+            </button>
+          </div>
+          {shareFallback && (
+            <textarea
+              readOnly
+              value={shareFallback}
+              onFocus={(e) => e.currentTarget.select()}
+              className="w-full max-w-md h-20 px-3 py-2 rounded-lg border border-white/20 bg-white/10 text-white text-xs font-mono resize-none"
+            />
+          )}
         </div>
       </main>
 

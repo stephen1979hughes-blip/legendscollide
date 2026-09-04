@@ -2,9 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo-retro.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football Match Simulator</title>
+
+    <title>Legends Collide — Football's Greatest Teams, One Pitch</title>
+    <meta
+      name="description"
+      content="Pick two classic football teams from any era, simulate the match, and watch it play out as a live broadcast."
+    />
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+
+    <!--
+      Baseline, site-wide link-preview tags. A per-match page (/m/<a>-v-<b>/<seed>)
+      gets its title/description/url rewritten with the real scoreline by the
+      Cloudflare Pages Function at functions/m/[matchup]/[seed].ts — crawlers
+      don't run JS, so that rewrite has to happen in the served HTML, not here
+      in the client. og:image stays this one static asset everywhere; a
+      per-match generated image is a nice-to-have, not required for this phase.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Legends Collide" />
+    <meta property="og:title" content="Legends Collide — Football's Greatest Teams, One Pitch" />
+    <meta
+      property="og:description"
+      content="Pick two classic football teams from any era, simulate the match, and watch it play out as a live broadcast."
+    />
+    <meta property="og:image" content="%VITE_SITE_URL%/images/logo.png" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Legends Collide — Football's Greatest Teams, One Pitch" />
+    <meta
+      name="twitter:description"
+      content="Pick two classic football teams from any era, simulate the match, and watch it play out as a live broadcast."
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/images/logo.png" />
+
+    <script>
+      // Cloudflare Web Analytics: cookieless, no personal data, no consent
+      // banner needed. Only loads once VITE_CF_BEACON_TOKEN is set at build
+      // time (Cloudflare Pages dashboard) — silently skipped until then.
+      (function () {
+        var token = '%VITE_CF_BEACON_TOKEN%';
+        if (!token || token.charAt(0) === '%') return;
+        var s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', JSON.stringify({ token: token }));
+        document.head.appendChild(s);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

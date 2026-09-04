@@ -83,6 +83,8 @@ export interface PlayerStats {
 }
 
 export interface MatchResult {
+  /** The engine seed that produced this result — see services/api.ts. */
+  seed: number;
   scoreA: number;
   scoreB: number;
   goalsA: Goal[];

@@ -1,0 +1,15 @@
+{
+  "name": "fm",
+  "private": true,
+  "description": "Repo-root tooling for deployment only. The app itself lives in web/, the engine in packages/match-engine/ — see CLAUDE.md.",
+  "scripts": {
+    "pages:dev": "wrangler pages dev web/dist --compatibility-date=2024-09-23",
+    "pages:deploy": "wrangler pages deploy web/dist --project-name=legendscollide",
+    "typecheck:functions": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260903.1",
+    "typescript": "^5.3.3",
+    "wrangler": "^4.129.0"
+  }
+}

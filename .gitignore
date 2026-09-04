@@ -4,6 +4,9 @@ dist/
 .env
 .env.local
 
+# Cloudflare Pages / Wrangler local dev cache
+.wrangler/
+
 # IDE
 .idea/
 *.swp

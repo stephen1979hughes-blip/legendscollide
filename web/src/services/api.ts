@@ -67,6 +67,15 @@ export const api = {
   /**
    * Simulate a match. `seed` is optional — pass one to reproduce a previous
    * result exactly, omit it for a fresh match.
+   *
+   * The engine's own MatchResult has no seed field (it's the swap point for
+   * a future Rust/WASM implementation, and the seed is an input the engine
+   * receives rather than something it needs to report back). The resolved
+   * seed — whatever was passed in, or freshly drawn by the default above —
+   * is known right here at the call site, so it's attached to the result
+   * here rather than threading a new field through the engine's contract.
+   * This is what makes a match permalink possible: /m/<a>-v-<b>/<seed>
+   * reconstructs the exact result by replaying this same call.
    */
   async simulateMatch(
     teamAId: string,
@@ -79,10 +88,12 @@ export const api = {
     const teamA = customTeamA ?? (await this.getTeam(teamAId));
     const teamB = customTeamB ?? (await this.getTeam(teamBId));
 
-    return defaultEngine.simulate({
+    const result = defaultEngine.simulate({
       teamA: toEngineTeam(teamA),
       teamB: toEngineTeam(teamB),
       seed,
     });
+
+    return { ...result, seed };
   },
 };

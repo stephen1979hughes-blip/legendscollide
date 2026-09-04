@@ -13,6 +13,9 @@ import { PlayerBio } from './pages/PlayerBio';
 import { Admin } from './pages/Admin';
 import { DailyChallenge } from './pages/DailyChallenge';
 import { DailyResult } from './pages/DailyResult';
+import { MatchPermalink } from './pages/MatchPermalink';
+import { About } from './pages/About';
+import { Privacy } from './pages/Privacy';
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/daily" element={<DailyChallenge />} />
         <Route path="/daily/result" element={<DailyResult />} />
+        <Route path="/m/:matchup/:seed" element={<MatchPermalink />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
@@ -18,11 +19,18 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} Legends Collide. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-white/60">
-            <a href="#" className="hover:text-white transition-colors duration-200">About</a>
+            <Link to="/about" className="hover:text-white transition-colors duration-200">About</Link>
             <span className="text-white/20">•</span>
-            <a href="#" className="hover:text-white transition-colors duration-200">Contact</a>
+            <a
+              href="https://github.com/stephen1979hughes-blip/legendscollide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors duration-200"
+            >
+              Contact
+            </a>
             <span className="text-white/20">•</span>
-            <a href="#" className="hover:text-white transition-colors duration-200">Privacy</a>
+            <Link to="/privacy" className="hover:text-white transition-colors duration-200">Privacy</Link>
           </div>
         </div>
       </div>
