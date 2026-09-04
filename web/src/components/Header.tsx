@@ -12,6 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ showBack, rightButton }) => {
 
   const menuItems = [
     { label: 'HOME', path: '/' },
+    { label: 'DAILY', path: '/daily' },
     { label: 'TEAMS', path: '/teams' },
     { label: 'RANKINGS', path: '/rankings' },
     { label: 'CUSTOM XI', path: '/custom-xi' },

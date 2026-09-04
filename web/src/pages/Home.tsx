@@ -66,6 +66,25 @@ export const Home: React.FC = () => {
       <Header />
 
       <main className="flex-1 max-w-screen-lg mx-auto px-4 py-12 w-full space-y-12">
+        {/* Daily Challenge CTA */}
+        <div className="rounded-xl bg-gradient-to-r from-primary to-secondary p-[1px] shadow-lg">
+          <div className="rounded-xl bg-black/90 backdrop-blur p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <p className="text-secondary text-xs font-bold uppercase tracking-widest mb-1">New: Daily Fixture</p>
+              <h3 className="text-2xl font-bold text-white mb-1">One Match. Every Day. Everyone.</h3>
+              <p className="text-white/60 text-sm max-w-md">
+                Predict today's scoreline and scorer before kickoff, then watch it play out. Same fixture for the whole world.
+              </p>
+            </div>
+            <button
+              onClick={() => navigate('/daily')}
+              className="flex-shrink-0 px-8 py-3 rounded-lg bg-white text-black font-bold transition-all duration-200 hover:-translate-y-0.5 shadow-lg hover:shadow-xl whitespace-nowrap"
+            >
+              ⚡ Play Today's Fixture
+            </button>
+          </div>
+        </div>
+
         {/* Section: Team Selection */}
         <div className="text-center space-y-4">
           <h2 className="text-white text-4xl md:text-5xl font-black tracking-tight">Select Your Teams</h2>

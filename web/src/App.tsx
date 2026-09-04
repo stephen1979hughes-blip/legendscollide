@@ -11,6 +11,8 @@ import { TeamDetail } from './pages/TeamDetail';
 import { Rankings } from './pages/Rankings';
 import { PlayerBio } from './pages/PlayerBio';
 import { Admin } from './pages/Admin';
+import { DailyChallenge } from './pages/DailyChallenge';
+import { DailyResult } from './pages/DailyResult';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/rankings" element={<Rankings />} />
         <Route path="/player/:playerId" element={<PlayerBio />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/daily" element={<DailyChallenge />} />
+        <Route path="/daily/result" element={<DailyResult />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

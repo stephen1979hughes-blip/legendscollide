@@ -8,6 +8,10 @@ interface BroadcastState {
   matchResult: MatchResult;
   teamA: Team;
   teamB: Team;
+  /** Where "full time" should lead. Defaults to the generic /result flow. */
+  completeRoute?: string;
+  completeState?: unknown;
+  completeLabel?: string;
 }
 
 const getPositionOrder = (position: string): number => {
@@ -83,7 +87,7 @@ export const Broadcast: React.FC = () => {
     );
   }
 
-  const { matchResult, teamA, teamB } = state;
+  const { matchResult, teamA, teamB, completeRoute, completeState, completeLabel } = state;
 
   // Memoize processed events and goals so they don't change on every render
   const { processedEvents, processedGoalsA, processedGoalsB, events } = useMemo(() => {
@@ -393,18 +397,20 @@ export const Broadcast: React.FC = () => {
                   <div className="text-center mb-3">
                     <p className="text-xs font-bold text-white/70 uppercase tracking-wide mb-2">Match Over</p>
                     <button
-                      onClick={() => navigate('/result', {
-                        state: {
-                          result: matchResult,
-                          teamAId: teamA.id,
-                          teamBId: teamB.id,
-                          teamA,
-                          teamB
-                        }
+                      onClick={() => navigate(completeRoute ?? '/result', {
+                        state: completeRoute
+                          ? completeState
+                          : {
+                              result: matchResult,
+                              teamAId: teamA.id,
+                              teamBId: teamB.id,
+                              teamA,
+                              teamB
+                            }
                       })}
                       className="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:opacity-90 transition"
                     >
-                      📋 View Match Report
+                      {completeLabel ?? '📋 View Match Report'}
                     </button>
                   </div>
                 )}
