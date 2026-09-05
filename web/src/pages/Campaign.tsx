@@ -144,10 +144,11 @@ export const Campaign: React.FC = () => {
                     className={isNext ? 'btn-accent btn-sm' : 'btn-quiet btn-sm'}
                   >
                     {won ? 'Replay' : 'Play'}
-                    <span className="num flex items-center gap-1 opacity-70">
+                    <span className="num flex items-center gap-1 text-[11px] opacity-70">
+                      Win
                       <Icon name="token" size={11} />
                       {tokensForMatch(tier.tier, true)}
-                      {!won && '+pack'}
+                      {!won && ' + pack'}
                     </span>
                   </button>
                 )}

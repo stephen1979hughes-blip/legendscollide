@@ -12,17 +12,28 @@
  * whatever the Pitch was displaying (which shows the *current* effective
  * rating, per the roadmap's "always show ceiling alongside current"
  * requirement) — otherwise effectiveRating() would be applied twice.
+ *
+ * Returns two Team objects, not one. `team` carries true (ceiling) ratings
+ * and is paired with `cardLevels` for `api.simulateMatch` — the engine needs
+ * the true rating so it can apply `effectiveRating` itself. `displayTeam`
+ * carries the already-resolved *current* rating and is what should be shown
+ * anywhere a human reads a number off it (Broadcast, the match report, the
+ * persisted campaign squad) — passing `team` there was a bug: it showed a
+ * level-1 card's 90-rated ceiling in the lineup while the engine simulated
+ * it at 75.
  */
 import { Player, Team } from '../types';
 import { CustomXIPlayer } from '../types/customXI';
 import { cardCollectionStorage } from './cardCollectionStorage';
 import { computeChemistryBonuses } from './chemistry';
+import { effectiveRating } from './cardProgression';
 
 /** The synthetic "club" id used for the collection-sourced entry in the club/nation picker. */
 export const COLLECTION_CLUB_ID = '__collection__';
 
 export interface CollectionEngineTeam {
   team: Team;
+  displayTeam: Team;
   cardLevels: Record<string, number>;
   chemistryBonus: Record<string, number>;
 }
@@ -54,6 +65,16 @@ export function buildCollectionEngineTeam(
     cardLevels[p.id] = collection[p.id]?.level ?? 1;
   });
 
+  const displayPlayers: Player[] = squadPlayers.map((p) => {
+    const level = cardLevels[p.id];
+    return {
+      ...p,
+      overallRating: effectiveRating(p.overallRating, level),
+      attackRating: effectiveRating(p.attackRating, level),
+      defenceRating: effectiveRating(p.defenceRating, level),
+    };
+  });
+
   return {
     team: {
       id,
@@ -62,6 +83,14 @@ export function buildCollectionEngineTeam(
       year: new Date().getFullYear(),
       description: 'Collection XI',
       players: squadPlayers,
+    },
+    displayTeam: {
+      id,
+      name,
+      clubId: COLLECTION_CLUB_ID,
+      year: new Date().getFullYear(),
+      description: 'Collection XI',
+      players: displayPlayers,
     },
     cardLevels,
     chemistryBonus: computeChemistryBonuses(squadPlayers),
