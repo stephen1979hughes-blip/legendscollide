@@ -8,6 +8,25 @@ interface TeamPitchProps {
 }
 
 /**
+ * Left-to-right order within a row, keyed by granular position. Needed
+ * because `coarsePosition` deliberately lumps RB/CB/LB (or RW/ST/LW) into
+ * one group for the engine's attack/defence maths — which is exactly why a
+ * row can't just render in whatever order the data happens to list them:
+ * doing that put both wingers next to each other and both strikers next to
+ * each other instead of wingers flanking the strikers, e.g. Man Utd 2008's
+ * front four coming out "Ronaldo(RW) Giggs(LW) Tevez(ST) Rooney(ST)" instead
+ * of "Ronaldo(RW) Tevez(ST) Rooney(ST) Giggs(LW)". Central positions (and
+ * anything unrecognised) sort to the middle; ties keep their original
+ * relative order (Array#sort is stable) since it doesn't matter which of
+ * two centre-backs is drawn left of the other.
+ */
+const LATERAL_ORDER: Record<string, number> = {
+  RB: 0, RWB: 0, RM: 0, RW: 0,
+  LB: 2, LWB: 2, LM: 2, LW: 2,
+};
+const lateralPosition = (position: string): number => LATERAL_ORDER[position.toUpperCase()] ?? 1;
+
+/**
  * Group the XI into pitch rows.
  *
  * These filters used to compare `p.position` directly against 'DF' / 'MF' /
@@ -16,7 +35,9 @@ interface TeamPitchProps {
  */
 const buildFormation = (players: Player[]) => {
   const group = (g: 'GK' | 'DF' | 'MF' | 'FW') =>
-    players.filter((p) => coarsePosition(p.position) === g);
+    players
+      .filter((p) => coarsePosition(p.position) === g)
+      .sort((a, b) => lateralPosition(a.position) - lateralPosition(b.position));
 
   const rows = { GK: group('GK'), DF: group('DF'), MF: group('MF'), FW: group('FW') };
 
