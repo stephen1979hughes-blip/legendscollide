@@ -1,15 +1,16 @@
 /**
  * Pack economy (Phase 2b of the roadmap).
  *
- * Packs are how tokens (see tokenStorage.ts) turn into cards. Rarity is
- * layered on top of the dataset's own rating distribution rather than
- * reproducing it: a pack's odds are deliberately more top-heavy-averse than
- * the population share of each tier, so pulling a 90+ rated legend still
- * feels rare even though ~9% of the 414-player pool sits at 90+.
+ * Packs are how XP (see xpWallet.ts — earned from matches, trivia, and
+ * sacrificing cards) turns into cards. Rarity is layered on top of the
+ * dataset's own rating distribution rather than reproducing it: a pack's
+ * odds are deliberately more top-heavy-averse than the population share of
+ * each tier, so pulling a 90+ rated legend still feels rare even though ~9%
+ * of the 414-player pool sits at 90+.
  *
- * See ROADMAP.md's Phase 2 section and the token/pack arithmetic in the
- * Phase 2b PR description for how PACK_COST and PACK_SIZE were chosen against
- * the ~150-match climb cardProgression.ts documents.
+ * See ROADMAP.md's Phase 2 section and the pack arithmetic in the Phase 2b
+ * PR description for how PACK_COST and PACK_SIZE were chosen against the
+ * level-climb cardProgression.ts documents.
  */
 import { Rng, randomSeed } from '@fm/match-engine';
 import { Player } from '../types';

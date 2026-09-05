@@ -7,10 +7,13 @@ import { Player } from '../types';
 import { Collection as CollectionMap } from '../types/collection';
 import { cardCollectionStorage } from '../utils/cardCollectionStorage';
 import { effectiveRating, MAX_CARD_LEVEL, xpToNextLevel } from '../utils/cardProgression';
-import { tokenStorage } from '../utils/tokenStorage';
+import { xpWallet } from '../utils/xpWallet';
 import { PACK_COST, PACK_SIZE, RARITY_TIERS, RarityTier, PackPull, openPack } from '../utils/packs';
 import { ensureStarterSquad } from '../utils/onboarding';
 import { coarsePosition, CoarsePosition } from '../utils/position';
+import { CAMPAIGN_XI_ID } from '../utils/collectionSquad';
+import { customXIStorage } from '../utils/customXIStorage';
+import { SacrificeResult, rollSacrifice } from '../utils/sacrifice';
 
 /**
  * Rarity is one of the few places multiple hues earn their keep — the tier is
@@ -37,12 +40,18 @@ export const Collection: React.FC = () => {
   const navigate = useNavigate();
   const [pool, setPool] = useState<Player[]>([]);
   const [collection, setCollection] = useState<CollectionMap>({});
-  const [tokenBalance, setTokenBalance] = useState(0);
+  const [xpBalance, setXpBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [opening, setOpening] = useState(false);
   const [lastPull, setLastPull] = useState<PackPull[] | null>(null);
   const [filter, setFilter] = useState<CoarsePosition | 'ALL'>('ALL');
   const [starterGrantCount, setStarterGrantCount] = useState<number | null>(null);
+  const [fieldedIds, setFieldedIds] = useState<Set<string>>(new Set());
+
+  const [investingId, setInvestingId] = useState<string | null>(null);
+  const [investAmount, setInvestAmount] = useState(0);
+  const [confirmingSacrificeId, setConfirmingSacrificeId] = useState<string | null>(null);
+  const [lastSacrifice, setLastSacrifice] = useState<{ playerName: string; result: SacrificeResult } | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -54,7 +63,10 @@ export const Collection: React.FC = () => {
         if (starterPack) setStarterGrantCount(starterPack.length);
 
         setCollection(cardCollectionStorage.loadAll());
-        setTokenBalance(tokenStorage.getBalance());
+        setXpBalance(xpWallet.getBalance());
+
+        const campaignXI = customXIStorage.loadById(CAMPAIGN_XI_ID);
+        if (campaignXI) setFieldedIds(new Set(campaignXI.players.map((p) => p.playerId)));
       } catch (error) {
         console.error('Failed to load collection:', error);
       } finally {
@@ -66,13 +78,47 @@ export const Collection: React.FC = () => {
   const poolById = useMemo(() => new Map(pool.map((p) => [p.id, p])), [pool]);
 
   const handleOpenPack = () => {
-    if (!tokenStorage.spend(PACK_COST)) return;
+    if (!xpWallet.spend(PACK_COST)) return;
     setOpening(true);
-    setTokenBalance(tokenStorage.getBalance());
+    setXpBalance(xpWallet.getBalance());
     const pulls = openPack(pool);
     setLastPull(pulls);
     setCollection(cardCollectionStorage.loadAll());
     setOpening(false);
+  };
+
+  const openInvestRow = (playerId: string, level: number, xp: number) => {
+    setLastSacrifice(null);
+    setConfirmingSacrificeId(null);
+    setInvestingId(playerId);
+    const toNextLevel = Math.max(0, xpToNextLevel(level) - xp);
+    setInvestAmount(Math.max(1, Math.min(xpBalance, toNextLevel || xpBalance)));
+  };
+
+  const confirmInvest = (playerId: string) => {
+    const amount = Math.max(1, Math.min(investAmount, xpBalance));
+    if (amount <= 0 || !xpWallet.spend(amount)) return;
+    cardCollectionStorage.grantXp(playerId, amount);
+    setCollection(cardCollectionStorage.loadAll());
+    setXpBalance(xpWallet.getBalance());
+    setInvestingId(null);
+  };
+
+  const requestSacrifice = (playerId: string) => {
+    if (fieldedIds.has(playerId)) return;
+    setInvestingId(null);
+    setConfirmingSacrificeId(playerId);
+  };
+
+  const confirmSacrifice = (playerId: string, playerName: string, trueRating: number) => {
+    const result = rollSacrifice(trueRating);
+    cardCollectionStorage.remove(playerId);
+    const newBalance = xpWallet.earn(result.xp);
+    setXpBalance(newBalance);
+    setCollection(cardCollectionStorage.loadAll());
+    setLastPull(null);
+    setConfirmingSacrificeId(null);
+    setLastSacrifice({ playerName, result });
   };
 
   const ownedCards = useMemo(() => {
@@ -92,7 +138,7 @@ export const Collection: React.FC = () => {
       .sort((a, b) => b.current - a.current);
   }, [collection, poolById, filter]);
 
-  const canAfford = tokenBalance >= PACK_COST;
+  const canAfford = xpBalance >= PACK_COST;
 
   return (
     <PageShell showBack>
@@ -107,8 +153,12 @@ export const Collection: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="chip-accent num">
               <Icon name="token" size={13} />
-              {tokenBalance.toLocaleString()}
+              {xpBalance.toLocaleString()}
             </span>
+            <button onClick={() => navigate('/trivia')} className="btn-quiet btn-sm">
+              <Icon name="bolt" />
+              Trivia
+            </button>
             <button onClick={() => navigate('/campaign')} className="btn-quiet btn-sm">
               <Icon name="map" />
               Campaign
@@ -160,8 +210,8 @@ export const Collection: React.FC = () => {
 
           {!canAfford && (
             <p className="text-xs text-ink-3">
-              Need <span className="num text-ink">{PACK_COST - tokenBalance}</span> more tokens — play
-              a campaign match to earn more.
+              Need <span className="num text-ink">{PACK_COST - xpBalance}</span> more XP — play a
+              campaign match, answer a trivia round, or sacrifice a card below.
             </p>
           )}
 
@@ -198,6 +248,14 @@ export const Collection: React.FC = () => {
           )}
         </section>
 
+        {lastSacrifice && (
+          <div className="card border-accent/40 text-center">
+            <p className="eyebrow text-accent">{lastSacrifice.result.tier.label} roll</p>
+            <p className="display mt-1 text-xl">Sacrificed {lastSacrifice.playerName}</p>
+            <p className="num mt-1 text-2xl font-semibold text-accent">+{lastSacrifice.result.xp} XP</p>
+          </div>
+        )}
+
         {/* Position filter */}
         <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Filter by position">
           {POSITION_FILTERS.map((f) => (
@@ -226,6 +284,10 @@ export const Collection: React.FC = () => {
               const maxed = card.level >= MAX_CARD_LEVEL;
               const need = xpToNextLevel(card.level);
               const progressPct = maxed ? 100 : Math.min(100, Math.round((card.xp / need) * 100));
+              const fielded = fieldedIds.has(card.playerId);
+              const investingHere = investingId === card.playerId;
+              const confirmingSacrificeHere = confirmingSacrificeId === card.playerId;
+
               return (
                 <div key={card.playerId} className="card space-y-2 p-4">
                   <div className="flex items-center justify-between gap-2">
@@ -252,6 +314,69 @@ export const Collection: React.FC = () => {
                       <p className="num text-[10px] text-ink-3">
                         {card.xp}/{need} XP to Lv {card.level + 1}
                       </p>
+                    </div>
+                  )}
+
+                  {fielded && (
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-3">In campaign squad</p>
+                  )}
+
+                  {investingHere ? (
+                    <div className="space-y-1.5 border-t border-line pt-2">
+                      <input
+                        type="number"
+                        min={1}
+                        max={xpBalance}
+                        value={investAmount}
+                        onChange={(e) => setInvestAmount(Math.max(1, Math.min(xpBalance, Number(e.target.value) || 0)))}
+                        className="field num w-full py-1 text-sm"
+                      />
+                      <div className="flex gap-1.5">
+                        <button onClick={() => confirmInvest(card.playerId)} className="btn-accent btn-sm flex-1">
+                          Invest
+                        </button>
+                        <button onClick={() => setInvestingId(null)} className="btn-ghost btn-sm">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : confirmingSacrificeHere ? (
+                    <div className="space-y-1.5 border-t border-line pt-2">
+                      <p className="text-[11px] text-ink-2">
+                        Delete {player.name} for XP? Only a future pack gets them back.
+                      </p>
+                      <div className="flex gap-1.5">
+                        <button
+                          onClick={() => confirmSacrifice(card.playerId, player.name, player.overallRating)}
+                          className="btn-accent btn-sm flex-1"
+                        >
+                          Confirm
+                        </button>
+                        <button onClick={() => setConfirmingSacrificeId(null)} className="btn-ghost btn-sm">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex gap-1.5 border-t border-line pt-2">
+                      {!maxed && (
+                        <button
+                          onClick={() => openInvestRow(card.playerId, card.level, card.xp)}
+                          disabled={xpBalance <= 0}
+                          className="btn-ghost btn-sm flex-1 border border-line disabled:opacity-40"
+                        >
+                          Invest XP
+                        </button>
+                      )}
+                      <button
+                        onClick={() => requestSacrifice(card.playerId)}
+                        disabled={fielded}
+                        title={fielded ? 'Remove it from your campaign squad first' : 'Sacrifice for XP'}
+                        className={`btn-ghost btn-sm border border-line disabled:opacity-40 ${maxed ? 'flex-1' : ''}`}
+                      >
+                        <Icon name="bolt" size={12} />
+                        {maxed && ' Sacrifice'}
+                      </button>
                     </div>
                   )}
                 </div>

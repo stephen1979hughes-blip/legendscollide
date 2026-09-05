@@ -55,7 +55,12 @@ interface NormalizedData {
  * Creates Club objects for actual clubs and each country with all unique players (no year suffixes)
  * Creates Team objects for each classic team
  */
-export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[], players: Player[] } {
+export interface CountryRef {
+  id: string;
+  name: string;
+}
+
+export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[], players: Player[], countries: CountryRef[] } {
   // Create a map of players by ID for quick lookup
   const playersById = new Map<string, NormalizedPlayer>();
   rawData.players.forEach(p => {
@@ -204,13 +209,21 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  return { clubs, teams, players: allPlayers };
+  // Real nations only (a player's `nationality` field always resolves here) —
+  // as opposed to `clubs`, which also contains one pseudo-entry per actual
+  // club so a classic team's `clubId` always resolves to *something*. Trivia
+  // is what actually needs this distinction: "what's this player's
+  // nationality" must answer with a country, but "which club or nation
+  // fielded this team" can legitimately answer with either.
+  const countryRefs: CountryRef[] = countries.map((c) => ({ id: c.id, name: c.name }));
+
+  return { clubs, teams, players: allPlayers, countries: countryRefs };
 }
 
 /**
  * Loads teams data from normalized JSON file (no year suffixes in player names)
  */
-export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[], players: Player[] }> {
+export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[], players: Player[], countries: CountryRef[] }> {
   try {
     const response = await fetch('/teams-data-normalized.json');
     if (!response.ok) {
@@ -220,6 +233,6 @@ export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[], p
     return processTeamsData(rawData);
   } catch (error) {
     console.error('Failed to load teams data:', error);
-    return { clubs: [], teams: [], players: [] };
+    return { clubs: [], teams: [], players: [], countries: [] };
   }
 }

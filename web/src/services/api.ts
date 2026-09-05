@@ -1,5 +1,5 @@
-import { Team, TeamSummary, MatchResult, Player } from '../types';
-import { loadTeamsData } from '../utils/dataProcessor';
+import { Team, TeamSummary, MatchResult, Player, Club } from '../types';
+import { loadTeamsData, CountryRef } from '../utils/dataProcessor';
 import { defaultEngine, randomSeed, type EngineTeam } from '@fm/match-engine';
 import { effectiveRating, MAX_CARD_LEVEL } from '../utils/cardProgression';
 
@@ -15,10 +15,10 @@ import { effectiveRating, MAX_CARD_LEVEL } from '../utils/cardProgression';
  * in api/ (see services/adminApi.ts) because it needs to write to disk.
  */
 
-let cache: Promise<{ teams: Team[]; players: Player[] }> | null = null;
+let cache: Promise<{ teams: Team[]; players: Player[]; clubs: Club[]; countries: CountryRef[] }> | null = null;
 
 function store() {
-  cache ??= loadTeamsData().then(({ teams, players }) => ({ teams, players }));
+  cache ??= loadTeamsData().then(({ teams, players, clubs, countries }) => ({ teams, players, clubs, countries }));
   return cache;
 }
 
@@ -99,6 +99,18 @@ export const api = {
   async getAllPlayers(): Promise<Player[]> {
     const { players } = await store();
     return players;
+  },
+
+  /** Every club and country-as-a-squad entry — trivia's source for "which club or nation fielded this team". */
+  async getClubs(): Promise<Club[]> {
+    const { clubs } = await store();
+    return clubs;
+  },
+
+  /** Real nations only — trivia's source for "what's this player's nationality". */
+  async getCountries(): Promise<CountryRef[]> {
+    const { countries } = await store();
+    return countries;
   },
 
   /**

@@ -20,16 +20,23 @@ export interface CampaignRewardCard {
   isDuplicate: boolean;
 }
 
-/** Passed from CustomXIBuilder -> Broadcast -> CampaignResult via location.state. */
+export type MatchOutcome = 'win' | 'draw' | 'loss';
+
+/**
+ * Passed from CustomXIBuilder -> Broadcast -> CampaignResult via
+ * location.state. Phase 2c: XP from a match lands in the shared wallet
+ * (xpWallet.ts) rather than auto-crediting whichever 11 cards were fielded —
+ * there is no more per-card XP breakdown to show here, just the total earned
+ * and a nudge toward Collection to spend it.
+ */
 export interface CampaignCompletionState {
   matchResult: import('./index').MatchResult;
   teamA: import('./index').Team;
   teamB: import('./index').Team;
   tier: CampaignTier;
-  won: boolean;
-  tokensEarned: number;
+  outcome: MatchOutcome;
+  xpEarned: number;
   newBalance: number;
-  xpGained: Array<{ playerId: string; playerName: string; before: { level: number; xp: number }; after: { level: number; xp: number } }>;
   unlockedNextTier: boolean;
   nextTier: CampaignTier | null;
   themedPack: CampaignRewardCard | null;

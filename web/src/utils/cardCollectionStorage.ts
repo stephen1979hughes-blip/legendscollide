@@ -56,6 +56,13 @@ export const cardCollectionStorage = {
     return card;
   },
 
+  /** Removes a card entirely (Phase 2c sacrifice) — it can be pulled fresh from a pack again later. */
+  remove: (playerId: string): void => {
+    const collection = load();
+    delete collection[playerId];
+    persist(collection);
+  },
+
   clear: (): void => {
     try {
       localStorage.removeItem(STORAGE_KEY);

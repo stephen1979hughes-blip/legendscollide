@@ -61,23 +61,31 @@ export function buildLadder(teams: Team[]): CampaignTier[] {
     }));
 }
 
-// ============= Token yield =============
+// ============= Match XP =============
 //
-// See the Phase 2b PR description for the full arithmetic. In short:
-// average win ≈ 20 + 20 + 13.5(avg tier) * 2 ≈ 67 tokens, average loss = 20,
-// so at a rough 60% win rate a campaign run earns ~48 tokens/match. Over the
-// ~50-80-match horizon cardProgression.ts documents for maxing an XI, that's
-// roughly one pack every 5 matches — enough to build and rotate a real
-// roster without the pack economy outrunning the level climb.
+// Phase 2c unifies what used to be two separate rewards (tokens for packs,
+// automatic per-card XP for playing) into one wallet (see xpWallet.ts) that
+// the player then chooses how to spend. "Doing well gives a lot": a win pays
+// roughly 2-3x a loss rather than a flat participation amount, so the reward
+// actually tracks how the match went, not just that a match happened.
+//
+// A win still pays more against a harder (higher-tier) opponent on top of
+// that, same as the old token formula: average win ≈ 70 + 13.5(avg tier)*2 ≈
+// 97 XP, draw 35, loss 20.
 
-/** Tokens for simply playing a campaign match, win or lose. */
-export const TOKENS_PER_MATCH = 20;
-/** Flat bonus for winning. */
-export const TOKENS_WIN_BONUS = 20;
-/** Extra tokens per ladder tier (1-26) of the opponent beaten — harder fixtures pay more. */
-export const TOKENS_PER_LADDER_TIER = 2;
+export type MatchOutcome = 'win' | 'draw' | 'loss';
 
-export function tokensForMatch(tier: number, won: boolean): number {
-  if (!won) return TOKENS_PER_MATCH;
-  return TOKENS_PER_MATCH + TOKENS_WIN_BONUS + tier * TOKENS_PER_LADDER_TIER;
+/** XP for a loss — still worth playing for, just clearly the worst outcome. */
+export const XP_LOSS = 20;
+/** XP for a draw. */
+export const XP_DRAW = 35;
+/** Base XP for a win, before the ladder-tier bonus. */
+export const XP_WIN_BASE = 70;
+/** Extra XP per ladder tier (1-26) of the opponent beaten — win only, harder fixtures pay more. */
+export const XP_PER_LADDER_TIER = 2;
+
+export function xpForMatch(tier: number, outcome: MatchOutcome): number {
+  if (outcome === 'loss') return XP_LOSS;
+  if (outcome === 'draw') return XP_DRAW;
+  return XP_WIN_BASE + tier * XP_PER_LADDER_TIER;
 }

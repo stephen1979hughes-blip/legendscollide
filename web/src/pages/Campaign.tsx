@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Icon } from '../components/Icon';
 import { api } from '../services/api';
-import { buildLadder, tokensForMatch } from '../utils/campaignLadder';
+import { buildLadder, xpForMatch } from '../utils/campaignLadder';
 import { campaignStorage } from '../utils/campaignStorage';
 import { ensureStarterSquad } from '../utils/onboarding';
 import { CampaignTier } from '../types/campaign';
-import { tokenStorage } from '../utils/tokenStorage';
+import { xpWallet } from '../utils/xpWallet';
 
 export const Campaign: React.FC = () => {
   const navigate = useNavigate();
   const [ladder, setLadder] = useState<CampaignTier[]>([]);
   const [defeated, setDefeated] = useState<Set<string>>(new Set());
-  const [tokenBalance, setTokenBalance] = useState(0);
+  const [xpBalance, setXpBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const [starterGrantCount, setStarterGrantCount] = useState<number | null>(null);
 
@@ -30,7 +30,7 @@ export const Campaign: React.FC = () => {
         const starterPack = ensureStarterSquad(pool);
         if (starterPack) setStarterGrantCount(starterPack.length);
 
-        setTokenBalance(tokenStorage.getBalance());
+        setXpBalance(xpWallet.getBalance());
       } catch (error) {
         console.error('Failed to load campaign ladder:', error);
       } finally {
@@ -54,17 +54,23 @@ export const Campaign: React.FC = () => {
           <p className="eyebrow">Campaign ladder</p>
           <h1 className="text-3xl font-bold tracking-tight md:text-4xl">26 legends. One climb.</h1>
           <p className="max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
-            Beat a team with your collection XI to unlock the next one. Every match pays tokens;
-            every first win pays a themed pack pulled from the squad you just beat.
+            Beat a team with your collection XI to unlock the next one. Every match pays XP —
+            more for winning, more again for a harder opponent — and every first win pays a
+            themed pack pulled from the squad you just beat. Answer trivia rounds for XP too,
+            then spend it on packs or on levelling whichever card you choose.
           </p>
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <span className="chip-accent num">
               <Icon name="token" size={13} />
-              {tokenBalance.toLocaleString()} tokens
+              {xpBalance.toLocaleString()} XP
             </span>
             <button onClick={() => navigate('/collection')} className="btn-quiet btn-sm">
               <Icon name="gift" />
               Open packs
+            </button>
+            <button onClick={() => navigate('/trivia')} className="btn-quiet btn-sm">
+              <Icon name="bolt" />
+              Play trivia
             </button>
           </div>
         </div>
@@ -147,7 +153,7 @@ export const Campaign: React.FC = () => {
                     <span className="num flex items-center gap-1 text-[11px] opacity-70">
                       Win
                       <Icon name="token" size={11} />
-                      {tokensForMatch(tier.tier, true)}
+                      {xpForMatch(tier.tier, 'win')}
                       {!won && ' + pack'}
                     </span>
                   </button>

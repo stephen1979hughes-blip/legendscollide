@@ -10,16 +10,13 @@ import { TeamSummary, Team, Club, Player } from '../types';
 import { loadTeamsData } from '../utils/dataProcessor';
 import { cardCollectionStorage } from '../utils/cardCollectionStorage';
 import { Collection } from '../types/collection';
-import { effectiveRating, XP_PER_APPEARANCE, XP_WIN_BONUS } from '../utils/cardProgression';
-import { COLLECTION_CLUB_ID, buildCollectionEngineTeam } from '../utils/collectionSquad';
-import { tokenStorage } from '../utils/tokenStorage';
+import { effectiveRating } from '../utils/cardProgression';
+import { COLLECTION_CLUB_ID, CAMPAIGN_XI_ID, buildCollectionEngineTeam } from '../utils/collectionSquad';
+import { xpWallet } from '../utils/xpWallet';
 import { campaignStorage } from '../utils/campaignStorage';
-import { buildLadder, tokensForMatch } from '../utils/campaignLadder';
+import { buildLadder, xpForMatch, MatchOutcome } from '../utils/campaignLadder';
 import { CampaignTier, CampaignMatchRequest, CampaignCompletionState, CampaignRewardCard } from '../types/campaign';
 import { Rng, randomSeed } from '@fm/match-engine';
-
-/** Persistent id for the campaign squad, so it's there again on the next campaign visit. */
-const CAMPAIGN_XI_ID = 'campaign-squad';
 
 
 export const CustomXIBuilder: React.FC = () => {
@@ -40,7 +37,7 @@ export const CustomXIBuilder: React.FC = () => {
   const [savedXIs, setSavedXIs] = useState<CustomXI[]>([]);
   const [availableTeams, setAvailableTeams] = useState<TeamSummary[]>([]);
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [tokenBalance, setTokenBalance] = useState(0);
+  const [xpBalance, setXpBalance] = useState(0);
   const [ladder, setLadder] = useState<CampaignTier[]>([]);
   const allPlayersById = useRef<Map<string, Player>>(new Map());
 
@@ -58,7 +55,7 @@ export const CustomXIBuilder: React.FC = () => {
         ]);
 
         allPlayersById.current = new Map(allPlayers.map((p) => [p.id, p]));
-        setTokenBalance(tokenStorage.getBalance());
+        setXpBalance(xpWallet.getBalance());
         if (teams && teams.length > 0) setLadder(buildLadder(teams));
 
         // "My Collection" — a synthetic club sourced from owned cards rather
@@ -372,9 +369,11 @@ export const CustomXIBuilder: React.FC = () => {
 
   /**
    * The campaign match flow: always the collection squad vs. the pinned
-   * ladder opponent. Awards tokens, XP for every fielded card, and — on a
-   * first-time win — unlocks the next tier and grants a themed pack pulled
-   * from the beaten squad's own roster (see the Phase 2b PR description).
+   * ladder opponent. Pays XP into the shared wallet (xpWallet.ts) — how much
+   * depends on the outcome, not just on having played — and, on a
+   * first-time win, unlocks the next tier and grants a themed pack pulled
+   * from the beaten squad's own roster. Nothing auto-applies to a specific
+   * card anymore: leveling is a deliberate spend, made later on Collection.
    */
   const handleCampaignSimulate = async () => {
     if (!campaignTeamId || !campaignTier || players.length !== selectedFormation.positions.length) return;
@@ -382,7 +381,6 @@ export const CustomXIBuilder: React.FC = () => {
     setLoading(true);
     try {
       const opponentTeam = await api.getTeam(campaignTeamId);
-      const collectionBefore = cardCollectionStorage.loadAll();
 
       const { team: campaignTeam, displayTeam: campaignDisplayTeam, cardLevels, chemistryBonus } =
         buildCollectionEngineTeam(players, allPlayersById.current, CAMPAIGN_XI_ID, 'My Collection XI');
@@ -398,27 +396,16 @@ export const CustomXIBuilder: React.FC = () => {
         chemistryBonus
       );
 
-      const won = matchResult.scoreA > matchResult.scoreB;
-      const tokensEarned = tokensForMatch(campaignTier.tier, won);
-      const newBalance = tokenStorage.earn(tokensEarned);
-
-      const xpGained = campaignTeam.players.map((p) => {
-        const before = collectionBefore[p.id] ?? { level: 1, xp: 0 };
-        const gained = XP_PER_APPEARANCE + (won ? XP_WIN_BONUS : 0);
-        const after = cardCollectionStorage.grantXp(p.id, gained);
-        return {
-          playerId: p.id,
-          playerName: p.name,
-          before: { level: before.level, xp: before.xp },
-          after: after ? { level: after.level, xp: after.xp } : { level: before.level, xp: before.xp },
-        };
-      });
+      const outcome: MatchOutcome =
+        matchResult.scoreA > matchResult.scoreB ? 'win' : matchResult.scoreA === matchResult.scoreB ? 'draw' : 'loss';
+      const xpEarned = xpForMatch(campaignTier.tier, outcome);
+      const newBalance = xpWallet.earn(xpEarned);
 
       let unlockedNextTier = false;
       let nextTier: CampaignTier | null = null;
       let themedPack: CampaignRewardCard | null = null;
 
-      if (won) {
+      if (outcome === 'win') {
         const alreadyDefeated = campaignStorage.isDefeated(campaignTeamId);
         campaignStorage.recordWin(campaignTeamId);
         if (!alreadyDefeated) {
@@ -449,10 +436,9 @@ export const CustomXIBuilder: React.FC = () => {
         teamA: campaignDisplayTeam,
         teamB: opponentTeam,
         tier: campaignTier,
-        won,
-        tokensEarned,
+        outcome,
+        xpEarned,
         newBalance,
-        xpGained,
         unlockedNextTier,
         nextTier,
         themedPack,
@@ -487,7 +473,7 @@ export const CustomXIBuilder: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="chip-accent num">
               <Icon name="token" size={13} />
-              {tokenBalance.toLocaleString()}
+              {xpBalance.toLocaleString()}
             </span>
             <a href="/collection" className="btn-quiet btn-sm">
               <Icon name="cards" />
@@ -510,11 +496,11 @@ export const CustomXIBuilder: React.FC = () => {
               </p>
             </div>
             <div className="text-right">
-              <p className="eyebrow">Reward for a first win</p>
+              <p className="eyebrow">XP for a win</p>
               <p className="num mt-1 flex items-center justify-end gap-1.5 text-lg font-semibold text-accent">
                 <Icon name="token" size={16} />
-                {tokensForMatch(campaignTier.tier, true)}
-                <span className="text-sm font-normal text-ink-2">+ a themed pack</span>
+                {xpForMatch(campaignTier.tier, 'win')}
+                <span className="text-sm font-normal text-ink-2">+ a themed pack (first win only)</span>
               </p>
             </div>
           </div>

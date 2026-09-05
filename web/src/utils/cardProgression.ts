@@ -47,10 +47,13 @@ export function effectiveRating(trueRating: number, level: number): number {
 // XP required to advance from `level` to `level + 1` grows geometrically —
 // early levels come quickly (a new pull already feels like it's improving),
 // later ones are a real commitment. The full climb from level 1 to 10 is
-// ~3,970 XP; at 50 XP per appearance plus a 30 XP win bonus, that's roughly
-// 50 matches winning consistently, up to ~80 on a losing run — fast enough
-// to feel like real progress inside a single play session, without making
-// the climb instant.
+// ~3,970 XP.
+//
+// Phase 2c: this is no longer XP that's automatically credited to whichever
+// cards were fielded — it's paid out of the shared wallet (xpWallet.ts),
+// earned from match outcomes (campaignLadder.ts's xpForMatch), trivia rounds
+// (triviaGenerator.ts) and card sacrifice (sacrifice.ts), and spent by the
+// player choosing which card to invest it in (Collection.tsx).
 
 const XP_LEVEL_BASE = 100;
 const XP_LEVEL_GROWTH = 1.35;
@@ -61,10 +64,6 @@ export function xpToNextLevel(level: number): number {
   return Math.round(XP_LEVEL_BASE * XP_LEVEL_GROWTH ** (level - 1));
 }
 
-/** XP earned just for fielding a card in a match. */
-export const XP_PER_APPEARANCE = 50;
-/** Extra XP if the match was won. */
-export const XP_WIN_BONUS = 30;
 /**
  * XP a duplicate pull converts into for the card already owned. Worth a
  * few games' XP at level 1 — where it can jump a fresh card several
