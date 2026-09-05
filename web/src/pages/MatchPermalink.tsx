@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell } from '../components/PageShell';
 import { api } from '../services/api';
 import { parseMatchup, decodeSeed } from '../utils/matchPermalink';
 
@@ -63,29 +62,26 @@ export const MatchPermalink: React.FC = () => {
   }, [matchup, seedParam, navigate]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header showBack />
-      <main className="flex-1 flex items-center justify-center px-6">
-        <div className="text-center max-w-md">
-          {error ? (
-            <>
-              <h1 className="text-3xl font-heading font-bold text-red-400 mb-4">Match Not Found</h1>
-              <p className="text-white/60 mb-6">{error}</p>
-              <Link to="/" className="btn-primary">
-                Back to Home
-              </Link>
-            </>
-          ) : (
-            <>
-              <div className="mb-8 flex justify-center">
-                <div className="w-16 h-16 rounded-full border-4 border-primary border-t-secondary animate-spin"></div>
-              </div>
-              <h1 className="text-2xl font-heading font-bold text-white">Replaying Match...</h1>
-            </>
-          )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <PageShell showBack centered hideFooter>
+      <div className="max-w-md text-center">
+        {error ? (
+          <div className="space-y-4">
+            <h1 className="text-2xl font-semibold">Match not found</h1>
+            <p className="text-sm leading-relaxed text-ink-2">{error}</p>
+            <Link to="/" className="btn-accent">Pick two teams</Link>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <span className="h-12 w-12 animate-spin rounded-full border-2 border-line border-t-accent" />
+            </div>
+            <div className="space-y-1">
+              <p className="eyebrow">Permalink</p>
+              <h1 className="text-2xl font-semibold">Replaying match</h1>
+            </div>
+          </div>
+        )}
+      </div>
+    </PageShell>
   );
 };

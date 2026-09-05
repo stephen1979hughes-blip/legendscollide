@@ -1,58 +1,68 @@
 import React from 'react';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell, PageHeading } from '../components/PageShell';
 
-export const Privacy: React.FC = () => {
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header showBack />
-      <main className="flex-1 max-w-screen-md mx-auto px-4 py-12 w-full space-y-6 text-white/80">
-        <h1 className="text-white text-4xl font-black tracking-tight">Privacy</h1>
+const SECTIONS = [
+  {
+    heading: 'No accounts, no server-side storage',
+    body: (
+      <>
+        There's no login and no backend. The app is a static site — team data ships with it, and
+        every match is simulated in your browser. Nothing you do here is sent to or stored on a
+        server.
+      </>
+    ),
+  },
+  {
+    heading: "What's stored locally",
+    body: (
+      <>
+        Custom XIs you build, and (once the daily fixture ships) your prediction streak, are saved in
+        your browser's{' '}
+        <code className="rounded bg-raised px-1.5 py-0.5 text-[13px] text-ink">localStorage</code>.
+        That data stays on your device — it's never transmitted anywhere, and clearing your browser
+        data clears it.
+      </>
+    ),
+  },
+  {
+    heading: 'Analytics',
+    body: (
+      <>
+        This site uses Cloudflare Web Analytics, which is cookieless and doesn't track you across
+        sites or build a profile of you. It reports aggregate page-view counts only — that's why
+        there's no cookie-consent banner here.
+      </>
+    ),
+  },
+];
 
-        <section className="space-y-2">
-          <h2 className="text-white text-xl font-bold">No accounts, no server-side storage</h2>
-          <p>
-            There's no login and no backend. The app is a static site — team data ships with it, and
-            every match is simulated in your browser. Nothing you do here is sent to or stored on a
-            server.
-          </p>
+export const Privacy: React.FC = () => (
+  <PageShell width="narrow" showBack>
+    <PageHeading eyebrow="Legends Collide" title="Privacy" />
+
+    <div className="space-y-section">
+      {SECTIONS.map((section) => (
+        <section key={section.heading} className="space-y-2">
+          <h2 className="text-lg font-semibold md:text-xl">{section.heading}</h2>
+          <p className="text-[15px] leading-relaxed text-ink-2">{section.body}</p>
         </section>
+      ))}
 
-        <section className="space-y-2">
-          <h2 className="text-white text-xl font-bold">What's stored locally</h2>
-          <p>
-            Custom XIs you build, and (once the daily fixture ships) your prediction streak, are saved
-            in your browser's <code className="text-white/60">localStorage</code>. That data stays on
-            your device — it's never transmitted anywhere, and clearing your browser data clears it.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-white text-xl font-bold">Analytics</h2>
-          <p>
-            This site uses Cloudflare Web Analytics, which is cookieless and doesn't track you across
-            sites or build a profile of you. It reports aggregate page-view counts only — that's why
-            there's no cookie-consent banner here.
-          </p>
-        </section>
-
-        <section className="space-y-2">
-          <h2 className="text-white text-xl font-bold">Questions</h2>
-          <p>
-            Open an issue on{' '}
-            <a
-              href="https://github.com/stephen1979hughes-blip/legendscollide"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline"
-            >
-              GitHub
-            </a>
-            .
-          </p>
-        </section>
-      </main>
-      <Footer />
+      <section className="space-y-2">
+        <h2 className="text-lg font-semibold md:text-xl">Questions</h2>
+        <p className="text-[15px] leading-relaxed text-ink-2">
+          Open an issue on{' '}
+          <a
+            href="https://github.com/stephen1979hughes-blip/legendscollide"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+          >
+            GitHub
+          </a>
+          .
+        </p>
+      </section>
     </div>
-  );
-};
+  </PageShell>
+);

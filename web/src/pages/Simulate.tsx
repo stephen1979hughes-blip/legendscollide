@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Header } from '../components/Header';
+import { PageShell } from '../components/PageShell';
+import { Icon } from '../components/Icon';
 import { api } from '../services/api';
-import { MatchResult } from '../types';
+
+const STEPS = ['Generating chances', 'Calculating possession', 'Resolving key events'];
 
 export const Simulate: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { teamAId, teamBId } = location.state || {};
   const [step, setStep] = useState(0);
-  const [result, setResult] = useState<MatchResult | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  const steps = [
-    'Generating chances...',
-    'Calculating possession...',
-    'Resolving key events...',
-  ];
 
   useEffect(() => {
     if (!teamAId || !teamBId) {
@@ -26,81 +21,78 @@ export const Simulate: React.FC = () => {
 
     const runSimulation = async () => {
       try {
-        for (let i = 0; i < steps.length; i++) {
+        for (let i = 0; i < STEPS.length; i++) {
           setStep(i);
           await new Promise((resolve) => setTimeout(resolve, 1000));
         }
+        setStep(STEPS.length);
 
         const matchResult = await api.simulateMatch(teamAId, teamBId, false);
-
-        // Fetch full team data for broadcast
         const teamA = await api.getTeam(teamAId);
         const teamB = await api.getTeam(teamBId);
 
-        setResult(matchResult);
         setTimeout(() => {
-          navigate('/broadcast', {
-            state: {
-              matchResult,
-              teamA,
-              teamB
-            }
-          });
-        }, 500);
-      } catch (error) {
-        console.error('Simulation failed:', error);
-        setError(`Simulation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+          navigate('/broadcast', { state: { matchResult, teamA, teamB } });
+        }, 400);
+      } catch (err) {
+        console.error('Simulation failed:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error');
       }
     };
 
     runSimulation();
   }, [teamAId, teamBId, navigate]);
 
-  return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
-
-      <main className="flex-1 flex items-center justify-center px-6">
-        <div className="text-center">
-          {error ? (
-            <div>
-              <h1 className="text-3xl font-heading font-bold text-red-600 mb-4">
-                Simulation Error
-              </h1>
-              <p className="text-text mb-6">{error}</p>
-              <button
-                onClick={() => navigate('/')}
-                className="btn-primary"
-              >
-                Back to Home
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="mb-8 flex justify-center">
-                <div className="w-16 h-16 rounded-full border-4 border-primary border-t-secondary animate-spin"></div>
-              </div>
-
-              <h1 className="text-4xl font-heading font-bold text-primary mb-6">
-                Simulating Match...
-              </h1>
-
-              <div className="space-y-3">
-                {steps.map((s, idx) => (
-                  <div
-                    key={idx}
-                    className={`text-lg transition ${
-                      step >= idx ? 'text-primary font-semibold' : 'text-muted'
-                    }`}
-                  >
-                    {step > idx ? '✓' : '○'} {s}
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+  if (error) {
+    return (
+      <PageShell showBack centered hideFooter>
+        <div className="max-w-md space-y-4 text-center">
+          <h1 className="text-2xl font-semibold">The match didn't run</h1>
+          <p className="text-sm leading-relaxed text-ink-2">{error}</p>
+          <button onClick={() => navigate('/')} className="btn-accent">
+            Pick two teams again
+          </button>
         </div>
-      </main>
-    </div>
+      </PageShell>
+    );
+  }
+
+  return (
+    <PageShell centered hideFooter>
+      <div className="w-full max-w-xs space-y-8">
+        <div className="flex justify-center">
+          <span className="h-12 w-12 animate-spin rounded-full border-2 border-line border-t-accent" />
+        </div>
+
+        <div className="space-y-1 text-center">
+          <p className="eyebrow">Kick-off</p>
+          <h1 className="text-2xl font-semibold">Simulating match</h1>
+        </div>
+
+        <ol className="space-y-1">
+          {STEPS.map((label, idx) => {
+            const done = step > idx;
+            const active = step === idx;
+            return (
+              <li
+                key={label}
+                className={`flex items-center gap-3 rounded-ctl px-3 py-2.5 text-sm transition-colors duration-200 ${
+                  active ? 'bg-raised text-ink' : done ? 'text-ink-2' : 'text-ink-3'
+                }`}
+              >
+                <span className={done ? 'text-accent' : 'text-ink-3'}>
+                  {done ? (
+                    <Icon name="check" size={15} />
+                  ) : (
+                    <span className="block h-[15px] w-[15px] rounded-full border border-current" />
+                  )}
+                </span>
+                {label}
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </PageShell>
   );
 };

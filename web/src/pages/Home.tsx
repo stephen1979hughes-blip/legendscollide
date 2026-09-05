@@ -1,10 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell } from '../components/PageShell';
 import { TeamSelectCard } from '../components/TeamSelectCard';
+import { Icon, IconName } from '../components/Icon';
 import { api } from '../services/api';
 import { TeamSummary, Team } from '../types';
+
+/**
+ * The two secondary modes. They used to be two separately hand-built gradient
+ * banners with the same content shape but different markup; they're one
+ * component rendered twice now, which is why they line up.
+ */
+const MODES: { icon: IconName; eyebrow: string; title: string; blurb: string; cta: string; path: string }[] = [
+  {
+    icon: 'bolt',
+    eyebrow: 'Daily fixture',
+    title: 'One match. Every day. Everyone.',
+    blurb: "Predict today's scoreline and scorer before kickoff, then watch it play out. Same fixture for the whole world.",
+    cta: "Play today's fixture",
+    path: '/daily',
+  },
+  {
+    icon: 'map',
+    eyebrow: 'Campaign',
+    title: 'Build a collection. Climb the ladder.',
+    blurb: 'Earn tokens, open packs, level up your cards, and work your way up all 26 classic teams.',
+    cta: 'Start campaign',
+    path: '/campaign',
+  },
+];
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -14,147 +38,132 @@ export const Home: React.FC = () => {
   const [teamA, setTeamA] = useState<Team | null>(null);
   const [teamB, setTeamB] = useState<Team | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadTeams = async () => {
       try {
-        const teamsData = await api.getTeams();
-        setTeams(teamsData);
-      } catch (error) {
-        console.error('Failed to load teams:', error);
+        setTeams(await api.getTeams());
+      } catch (err) {
+        console.error('Failed to load teams:', err);
         setTeams([]);
+        setError('Could not load the team list. Refresh to try again.');
       }
     };
     loadTeams();
   }, []);
 
-  const handleTeamASelect = async (team: TeamSummary) => {
+  const selectTeam = async (side: 'a' | 'b', team: TeamSummary) => {
     try {
-      setTeamAId(team.id);
-      const fullTeam = await api.getTeam(team.id);
-      setTeamA(fullTeam);
-    } catch (error) {
-      console.error('Failed to load Team A:', error);
-      alert(`Failed to load Team A: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setError(null);
+      if (side === 'a') setTeamAId(team.id);
+      else setTeamBId(team.id);
+      const full = await api.getTeam(team.id);
+      if (side === 'a') setTeamA(full);
+      else setTeamB(full);
+    } catch (err) {
+      console.error(`Failed to load team ${team.id}:`, err);
+      setError(`Could not load ${team.name}. Pick it again, or choose another side.`);
     }
   };
 
-  const handleTeamBSelect = async (team: TeamSummary) => {
-    try {
-      setTeamBId(team.id);
-      const fullTeam = await api.getTeam(team.id);
-      setTeamB(fullTeam);
-    } catch (error) {
-      console.error('Failed to load Team B:', error);
-      alert(`Failed to load Team B: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
-  };
+  const ready = Boolean(teamAId && teamBId && teamA && teamB);
 
   const handleSimulate = () => {
-    if (!teamAId || !teamBId || !teamA || !teamB) return;
+    if (!ready) return;
     setLoading(true);
-    navigate('/simulate', {
-      state: {
-        teamAId,
-        teamBId
-      }
-    });
+    navigate('/simulate', { state: { teamAId, teamBId } });
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header />
-
-      <main className="flex-1 max-w-screen-lg mx-auto px-4 py-12 w-full space-y-12">
-        {/* Daily Challenge CTA */}
-        <div className="rounded-xl bg-gradient-to-r from-primary to-secondary p-[1px] shadow-lg">
-          <div className="rounded-xl bg-black/90 backdrop-blur p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-secondary text-xs font-bold uppercase tracking-widest mb-1">New: Daily Fixture</p>
-              <h3 className="text-2xl font-bold text-white mb-1">One Match. Every Day. Everyone.</h3>
-              <p className="text-white/60 text-sm max-w-md">
-                Predict today's scoreline and scorer before kickoff, then watch it play out. Same fixture for the whole world.
-              </p>
+    <PageShell>
+      <div className="space-y-section">
+        {/* Secondary modes */}
+        <div className="grid gap-block sm:grid-cols-2">
+          {MODES.map((mode) => (
+            <div key={mode.path} className="card flex flex-col gap-3">
+              <div className="flex items-center gap-2 text-accent">
+                <Icon name={mode.icon} size={15} />
+                <span className="eyebrow text-accent">{mode.eyebrow}</span>
+              </div>
+              <div className="flex-1 space-y-1.5">
+                <h2 className="text-lg font-semibold leading-snug md:text-xl">{mode.title}</h2>
+                <p className="text-sm leading-relaxed text-ink-2">{mode.blurb}</p>
+              </div>
+              <button onClick={() => navigate(mode.path)} className="btn-quiet btn-sm self-start">
+                {mode.cta}
+                <Icon name="right" />
+              </button>
             </div>
+          ))}
+        </div>
+
+        {/* The main event */}
+        <section className="space-y-block">
+          <div className="space-y-1.5 border-b border-line pb-5">
+            <p className="eyebrow">Exhibition match</p>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Select your teams</h1>
+            <p className="max-w-[60ch] text-[15px] leading-relaxed text-ink-2">
+              Two legendary squads, ninety simulated minutes, and full commentary. Brazil 1970
+              against Germany 2014, or any of the other 26 sides.
+            </p>
+          </div>
+
+          {error && (
+            <p className="rounded-ctl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger">
+              {error}
+            </p>
+          )}
+
+          <div className="grid gap-block md:grid-cols-2">
+            <TeamSelectCard
+              label="Home"
+              teams={teams}
+              selectedTeam={teams.find((t) => t.id === teamAId) || null}
+              onSelect={(team) => selectTeam('a', team)}
+            />
+            <TeamSelectCard
+              label="Away"
+              teams={teams}
+              selectedTeam={teams.find((t) => t.id === teamBId) || null}
+              onSelect={(team) => selectTeam('b', team)}
+            />
+          </div>
+
+          <div className="flex flex-col items-center gap-3 pt-2">
             <button
-              onClick={() => navigate('/daily')}
-              className="flex-shrink-0 px-8 py-3 rounded-lg bg-white text-black font-bold transition-all duration-200 hover:-translate-y-0.5 shadow-lg hover:shadow-xl whitespace-nowrap"
+              onClick={handleSimulate}
+              disabled={!ready || loading}
+              className="btn-accent btn-lg w-full md:w-auto md:min-w-[280px]"
             >
-              ⚡ Play Today's Fixture
+              <Icon name="ball" size={17} />
+              {loading ? 'Starting…' : 'Simulate match'}
             </button>
+            <p className="text-sm text-ink-3">
+              {ready ? 'Watch it unfold minute by minute' : 'Pick both sides to begin'}
+            </p>
           </div>
-        </div>
+        </section>
 
-        {/* Section: Team Selection */}
-        <div className="text-center space-y-4">
-          <h2 className="text-white text-4xl md:text-5xl font-black tracking-tight">Select Your Teams</h2>
-          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto">
-            Choose two legendary squads to do battle. Will it be the invincible 1970 Brazil vs the tactical genius of 2014 Germany? The choice is yours!
-          </p>
-          <div className="flex justify-center">
-            <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+        {/* Custom XI */}
+        <section className="panel flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1.5">
+            <p className="eyebrow">Create your fantasy</p>
+            <h2 className="text-lg font-semibold md:text-xl">Build your all-time XI</h2>
+            <p className="max-w-[52ch] text-sm leading-relaxed text-ink-2">
+              Hand-pick players from across history to create your perfect squad and test their
+              mettle against any classic side.
+            </p>
           </div>
-        </div>
-
-        {/* Team Selector Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          <TeamSelectCard
-            label="Team A"
-            teams={teams}
-            selectedTeam={teams.find((t) => t.id === teamAId) || null}
-            onSelect={handleTeamASelect}
-          />
-          <TeamSelectCard
-            label="Team B"
-            teams={teams}
-            selectedTeam={teams.find((t) => t.id === teamBId) || null}
-            onSelect={handleTeamBSelect}
-          />
-        </div>
-
-        {/* Primary CTA: Simulate Match */}
-        <div className="flex flex-col items-center gap-4">
           <button
-            onClick={handleSimulate}
-            disabled={!teamAId || !teamBId || loading}
-            className={`w-full md:w-auto px-8 md:px-16 py-4 rounded-xl font-semibold text-lg tracking-wide transition-all duration-200 flex items-center justify-center gap-2 ${
-              !teamAId || !teamBId
-                ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                : 'bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5'
-            }`}
+            onClick={() => navigate('/custom-xi')}
+            className="btn-quiet flex-shrink-0"
           >
-            <span className="text-xl">⚽</span>
-            {loading ? '⏳ Starting...' : 'Simulate Match'}
+            <Icon name="sparkle" />
+            Build custom XI
           </button>
-          <p className="text-white/50 text-sm text-center max-w-xs">
-            {!teamAId || !teamBId
-              ? 'Select both teams to begin'
-              : 'Watch the match unfold with real-time commentary'}
-          </p>
-        </div>
-
-        {/* Secondary CTA: Build Custom XI */}
-        <div className="border-t border-white/10 pt-12">
-          <div className="rounded-xl bg-white/5 border border-white/10 backdrop-blur p-8 md:p-12 text-center space-y-6">
-            <div className="space-y-2">
-              <p className="text-white/60 text-sm uppercase tracking-widest font-semibold">Create your fantasy</p>
-              <h3 className="text-2xl md:text-3xl font-bold text-white">Build Your All-Time XI</h3>
-              <p className="text-white/60 text-base max-w-lg mx-auto">
-                Hand-pick players from across history to create your perfect squad and test their mettle
-              </p>
-            </div>
-            <button
-              onClick={() => navigate('/custom-xi')}
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-secondary hover:bg-secondary/90 text-white font-semibold transition-all duration-200 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
-            >
-              <span>✨</span>
-              Build Custom XI
-            </button>
-          </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        </section>
+      </div>
+    </PageShell>
   );
 };

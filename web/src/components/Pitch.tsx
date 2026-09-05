@@ -232,18 +232,26 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
       <div className="relative flex-shrink-0" style={rowSize >= 4 ? { flex: 1 } : {}}>
         <button
           onClick={() => onOpenChange(!isOpen)}
-          className={`bg-white border-2 border-primary rounded-lg shadow hover:shadow-md transition-shadow cursor-pointer ${widthClass} p-1 md:p-2 text-left text-xs md:text-sm`}
+          className={`rounded-ctl border border-line bg-raised transition-colors hover:border-accent cursor-pointer ${widthClass} p-1 md:p-2 text-left text-xs md:text-sm`}
           title={fullName}
         >
-          <div className="font-bold text-primary truncate">
+          <div className="display truncate text-sm text-ink">
             {surname}
           </div>
-          <div className="text-xs text-muted">{player.playerPosition}</div>
-          <div className="text-xs font-semibold text-primary mt-1">⭐ {player.overallRating}</div>
+          <div className="text-xs text-ink-3">{player.playerPosition}</div>
+          <div className="num mt-1 text-xs font-semibold text-accent">
+            {player.overallRating}
+            {player.ceiling !== undefined && player.ceiling !== player.overallRating && (
+              <span className="text-ink-3 font-normal"> → {player.ceiling}</span>
+            )}
+          </div>
+          {player.level !== undefined && (
+            <div className="text-[10px] text-ink-3">Lv {player.level}</div>
+          )}
         </button>
         <button
           onClick={onRemove}
-          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-600 shadow"
+          className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full border border-line bg-surface text-xs font-semibold text-ink-3 transition-colors hover:border-danger hover:text-danger"
           title="Remove player"
         >
           ×
@@ -251,7 +259,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute top-32 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-56">
+          <div className="absolute top-32 left-1/2 transform -translate-x-1/2 z-50 max-h-48 min-w-56 overflow-y-auto rounded-card border border-line bg-surface shadow-pop">
             {compatiblePlayers.length > 0 ? (
               <div className="py-2">
                 {compatiblePlayers.map((p) => (
@@ -261,17 +269,22 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
                       onSelect(p.id);
                       onOpenChange(false);
                     }}
-                    className={`w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0 ${
-                      player?.playerId === p.id ? 'bg-blue-100 font-semibold' : ''
+                    className={`w-full border-b border-line px-4 py-2 text-left transition-colors last:border-b-0 hover:bg-raised ${
+                      player?.playerId === p.id ? 'bg-raised' : ''
                     }`}
                   >
-                    <div className="font-semibold text-primary">{p.name}</div>
-                    <div className="text-xs text-muted">⭐ {p.overallRating} • {p.position}</div>
+                    <div className="display text-sm text-ink">{p.name}</div>
+                    <div className="text-xs text-ink-3">
+                      {p.overallRating}
+                      {p.ceiling !== undefined && p.ceiling !== p.overallRating && ` → ${p.ceiling}`}
+                      {' • '}{p.position}
+                      {p.level !== undefined && ` • Lv ${p.level}`}
+                    </div>
                   </button>
                 ))}
               </div>
             ) : (
-              <div className="px-4 py-2 text-sm text-muted">No compatible players</div>
+              <div className="px-4 py-2 text-sm text-ink-3">No compatible players</div>
             )}
           </div>
         )}
@@ -284,7 +297,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
     <div className="relative flex-shrink-0" style={rowSize >= 4 ? { flex: 1 } : {}}>
       <button
         onClick={() => onOpenChange(!isOpen)}
-        className={`bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer ${widthClass} p-1 md:p-2 text-center text-gray-500 text-xs md:text-sm`}
+        className={`rounded-ctl border border-dashed border-line-strong bg-surface/60 transition-colors hover:border-accent hover:bg-raised cursor-pointer ${widthClass} p-1 md:p-2 text-center text-ink-3 text-xs md:text-sm`}
       >
         <div className="font-bold">{position}</div>
         <div className="text-xs opacity-75">+ Add</div>
@@ -292,7 +305,7 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-28 left-1/2 transform -translate-x-1/2 bg-white border-2 border-gray-300 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto min-w-56">
+        <div className="absolute top-28 left-1/2 transform -translate-x-1/2 z-50 max-h-48 min-w-56 overflow-y-auto rounded-card border border-line bg-surface shadow-pop">
           {compatiblePlayers.length > 0 ? (
             <div className="py-2">
               {compatiblePlayers.map((p) => (
@@ -302,15 +315,20 @@ const PositionSlot: React.FC<PositionSlotProps> = ({
                     onSelect(p.id);
                     onOpenChange(false);
                   }}
-                  className="w-full text-left px-4 py-2 hover:bg-blue-50 border-b border-gray-100 last:border-b-0"
+                  className="w-full border-b border-line px-4 py-2 text-left transition-colors last:border-b-0 hover:bg-raised"
                 >
-                  <div className="font-semibold text-primary">{p.name}</div>
-                  <div className="text-xs text-muted">⭐ {p.overallRating} • {p.position}</div>
+                  <div className="display text-sm text-ink">{p.name}</div>
+                  <div className="text-xs text-ink-3">
+                    {p.overallRating}
+                    {p.ceiling !== undefined && p.ceiling !== p.overallRating && ` → ${p.ceiling}`}
+                    {' • '}{p.position}
+                    {p.level !== undefined && ` • Lv ${p.level}`}
+                  </div>
                 </button>
               ))}
             </div>
           ) : (
-            <div className="px-4 py-2 text-sm text-muted">No compatible players</div>
+            <div className="px-4 py-2 text-sm text-ink-3">No compatible players</div>
           )}
         </div>
       )}

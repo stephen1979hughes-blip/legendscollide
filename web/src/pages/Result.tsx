@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell } from '../components/PageShell';
+import { Scoreline } from '../components/Scoreline';
 import { LineupCard } from '../components/LineupCard';
 import { StatsPanel } from '../components/StatsPanel';
 import { CommentaryFeed } from '../components/CommentaryFeed';
-import { MatchResult, Team } from '../types';
+import { Icon } from '../components/Icon';
+import { Team } from '../types';
 import { api } from '../services/api';
-import { useState, useEffect } from 'react';
 import { buildMatchPermalinkPath, isPermalinkEligible } from '../utils/matchPermalink';
 import { SITE_URL } from '../config';
 
@@ -72,114 +72,86 @@ export const Result: React.FC = () => {
 
   if (!result || !teamA || !teamB) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Loading result...</p>
-        </main>
-      </div>
+      <PageShell centered>
+        <p className="text-sm text-ink-3">Loading result…</p>
+      </PageShell>
     );
   }
 
+  const goalsA = result.goalsA || [];
+  const goalsB = result.goalsB || [];
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header
-        showBack
-        rightButton={{
-          label: 'New Match',
-          onClick: () => navigate('/'),
-        }}
-      />
+    <PageShell showBack rightButton={{ label: 'New match', onClick: () => navigate('/') }}>
+      <div className="space-y-section">
+        <Scoreline
+          status="Full time"
+          teamAName={teamA.name}
+          teamAYear={teamA.year}
+          scoreA={result.scoreA}
+          teamBName={teamB.name}
+          teamBYear={teamB.year}
+          scoreB={result.scoreB}
+          meta={result.stadiumName}
+        />
 
-      <main className="flex-1 max-w-5xl mx-auto px-6 py-12 w-full">
-        {/* Scoreline */}
-        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8">
-          <div className="flex items-center justify-center gap-8">
-            <div className="text-center flex-1">
-              <h2 className="text-2xl font-bold text-white">{teamA.name}</h2>
-              <p className="text-sm text-white/70">{teamA.year}</p>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl font-heading font-bold text-white">
-                {result.scoreA} — {result.scoreB}
+        {(goalsA.length > 0 || goalsB.length > 0) && (
+          <section className="panel p-5">
+            <h2 className="rule-heading mb-3">Goals</h2>
+            <div className="grid gap-x-8 sm:grid-cols-2">
+              <div>
+                {goalsA.map((goal: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-2.5 border-b border-line py-2 text-sm last:border-b-0">
+                    <span className="text-accent"><Icon name="ball" size={13} /></span>
+                    <span className="num w-8 flex-shrink-0 text-ink-3">{goal.minute}'</span>
+                    <span className="truncate text-ink">{goal.playerName}</span>
+                  </div>
+                ))}
               </div>
-              <p className="text-sm text-white/70 mt-2">{result.stadiumName}</p>
+              <div>
+                {goalsB.map((goal: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-2.5 border-b border-line py-2 text-sm last:border-b-0">
+                    <span className="text-accent"><Icon name="ball" size={13} /></span>
+                    <span className="num w-8 flex-shrink-0 text-ink-3">{goal.minute}'</span>
+                    <span className="truncate text-ink">{goal.playerName}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="text-center flex-1">
-              <h2 className="text-2xl font-bold text-white">{teamB.name}</h2>
-              <p className="text-sm text-white/70">{teamB.year}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Goals */}
-        {((result.goalsA || []).length > 0 || (result.goalsB || []).length > 0) && (
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8">
-            <h3 className="text-lg font-bold text-white mb-4">Goals</h3>
-            <div className="space-y-2">
-              {(result.goalsA || []).map((goal: any, idx: number) => (
-                <div key={idx} className="flex justify-between text-white/90">
-                  <span className="font-semibold">⚽ {goal.minute}' {goal.playerName}</span>
-                  <span className="text-primary font-bold">{teamA.name}</span>
-                </div>
-              ))}
-              {(result.goalsB || []).map((goal: any, idx: number) => (
-                <div key={idx} className="flex justify-between text-white/90">
-                  <span className="text-primary font-bold">{teamB.name}</span>
-                  <span className="font-semibold">{goal.playerName} {goal.minute}' ⚽</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </section>
         )}
 
-        {/* Stats */}
-        <div className="mb-8">
+        <div className="grid gap-block md:grid-cols-2">
           <StatsPanel stats={result.stats} />
+
+          <div className="card flex flex-col justify-center gap-1.5 text-center">
+            <p className="eyebrow">Man of the match</p>
+            <p className="display text-2xl text-accent md:text-3xl">{result.manOfTheMatch}</p>
+          </div>
         </div>
 
-        {/* Era Flavour */}
         {result.eraFlavour && (
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md mb-8 border-l-4 border-secondary">
-            <p className="italic text-white/90">{result.eraFlavour}</p>
-          </div>
+          <p className="border-l-2 border-accent pl-5 text-[15px] italic leading-relaxed text-ink-2">
+            {result.eraFlavour}
+          </p>
         )}
 
-        {/* Man of the Match */}
-        <div className="rounded-xl border border-white/10 mb-8 text-center bg-gradient-to-r from-primary to-primary/80 p-6 shadow-md">
-          <p className="text-white text-sm font-bold mb-2">MAN OF THE MATCH</p>
-          <p className="text-red-300 text-2xl font-heading font-bold">
-            {result.manOfTheMatch}
-          </p>
+        <CommentaryFeed commentary={result.commentary} />
+
+        <div className="grid gap-block md:grid-cols-2">
+          <LineupCard teamName={teamA.name} teamYear={teamA.year} players={teamA.players} />
+          <LineupCard teamName={teamB.name} teamYear={teamB.year} players={teamB.players} />
         </div>
 
-        {/* Commentary */}
-        <div className="mb-8">
-          <CommentaryFeed commentary={result.commentary} />
-        </div>
-
-        {/* Lineups */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <LineupCard
-            teamName={teamA.name}
-            teamYear={teamA.year}
-            players={teamA.players}
-          />
-          <LineupCard
-            teamName={teamB.name}
-            teamYear={teamB.year}
-            players={teamB.players}
-          />
-        </div>
-
-        {/* Buttons */}
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex gap-4 justify-center">
-            <button onClick={() => navigate('/')} className="btn-primary">
-              ▶ New Match
+        <div className="flex flex-col items-center gap-4 border-t border-line pt-8">
+          <div className="flex flex-wrap justify-center gap-2">
+            <button onClick={() => navigate('/')} className="btn-accent">
+              <Icon name="ball" />
+              New match
             </button>
-            <button onClick={handleShare} className="btn-secondary">
-              {copied ? '✅ Copied!' : '📤 Share Result'}
+            <button onClick={handleShare} className="btn-quiet">
+              <Icon name={copied ? 'check' : 'share'} />
+              {copied ? 'Copied' : 'Share result'}
             </button>
           </div>
           {shareFallback && (
@@ -187,13 +159,11 @@ export const Result: React.FC = () => {
               readOnly
               value={shareFallback}
               onFocus={(e) => e.currentTarget.select()}
-              className="w-full max-w-md h-20 px-3 py-2 rounded-lg border border-white/20 bg-white/10 text-white text-xs font-mono resize-none"
+              className="field h-20 max-w-md resize-none text-xs"
             />
           )}
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </PageShell>
   );
 };

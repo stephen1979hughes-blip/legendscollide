@@ -1,84 +1,122 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Icon } from './Icon';
+import { SHELL_WIDTH, ShellWidth } from './PageShell';
 
 interface HeaderProps {
   showBack?: boolean;
   rightButton?: { label: string; onClick: () => void };
+  /** Handed down by PageShell so the logo lines up with the page content. */
+  width?: ShellWidth;
 }
 
-export const Header: React.FC<HeaderProps> = ({ showBack, rightButton }) => {
+const MENU_ITEMS = [
+  { label: 'Home', path: '/' },
+  { label: 'Daily', path: '/daily' },
+  { label: 'Campaign', path: '/campaign' },
+  { label: 'My collection', path: '/collection' },
+  { label: 'Teams', path: '/teams' },
+  { label: 'Rankings', path: '/rankings' },
+  { label: 'Custom XI', path: '/custom-xi' },
+  { label: 'Saved XIs', path: '/saved-xis' },
+];
+
+export const Header: React.FC<HeaderProps> = ({ showBack, rightButton, width = 'default' }) => {
   const navigate = useNavigate();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const menuItems = [
-    { label: 'HOME', path: '/' },
-    { label: 'DAILY', path: '/daily' },
-    { label: 'TEAMS', path: '/teams' },
-    { label: 'RANKINGS', path: '/rankings' },
-    { label: 'CUSTOM XI', path: '/custom-xi' },
-    { label: 'SAVED XIS', path: '/saved-xis' }
-  ];
+  // Close on outside click and on Escape — the old dropdown did neither, so it
+  // stayed open behind whatever you clicked next.
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
 
-  const handleMenuClick = (path: string) => {
+  const go = (path: string) => {
     navigate(path);
-    setDropdownOpen(false);
+    setOpen(false);
   };
 
   return (
-    <header className="bg-black/80 backdrop-blur text-white border-b border-white/10 sticky top-0 z-40">
-      <div className="max-w-screen-lg mx-auto flex items-center justify-between px-4 py-3">
-        {/* Logo */}
-        <Link to="/" className="hover:opacity-80 transition-opacity duration-200 flex-shrink-0">
+    <header className="sticky top-0 z-40 border-b border-line bg-ground/85 backdrop-blur">
+      <div className={`${SHELL_WIDTH[width]} flex items-center justify-between gap-4 py-3`}>
+        <Link
+          to="/"
+          className="flex-shrink-0 rounded-ctl transition-opacity duration-150 hover:opacity-75"
+        >
+          {/*
+            The shield PNG is matted on solid black, which shows as a visible
+            box against the #0B0D10 ground. `screen` drops pure black to the
+            backdrop and leaves everything lighter untouched, so the mark sits
+            on the bar instead of in a rectangle.
+          */}
           <img
             src="/images/logo-shield.png"
             alt="Legends Collide"
-            className="h-12 md:h-14 w-auto"
+            className="h-10 w-auto mix-blend-screen md:h-11"
           />
         </Link>
 
-        {/* Navigation */}
-        <nav className="flex items-center gap-2 md:gap-6">
+        <nav className="flex items-center gap-1">
           {showBack && (
-            <button
-              onClick={() => navigate(-1)}
-              className="text-white/70 hover:text-white transition-colors duration-200 font-semibold text-xs md:text-sm uppercase tracking-wide whitespace-nowrap"
-            >
-              ← Back
+            <button onClick={() => navigate(-1)} className="btn-ghost btn-sm">
+              <Icon name="left" />
+              Back
             </button>
           )}
 
-          {/* Menu Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="text-white/70 hover:text-white transition-colors duration-200 font-semibold text-xs md:text-sm uppercase tracking-wide px-3 py-2"
-            >
-              ☰ MENU
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-black/95 border border-white/20 rounded-lg shadow-lg z-50">
-                {menuItems.map((item) => (
-                  <button
-                    key={item.path}
-                    onClick={() => handleMenuClick(item.path)}
-                    className="w-full text-left px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-colors duration-200 font-semibold text-sm uppercase tracking-wide border-b border-white/10 last:border-b-0"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
           {rightButton && (
-            <button
-              onClick={rightButton.onClick}
-              className="text-white/70 hover:text-white transition-colors duration-200 font-semibold text-xs md:text-sm uppercase tracking-wide whitespace-nowrap"
-            >
+            <button onClick={rightButton.onClick} className="btn-ghost btn-sm">
               {rightButton.label}
             </button>
           )}
+
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setOpen(!open)}
+              className="btn-ghost btn-sm"
+              aria-expanded={open}
+              aria-haspopup="menu"
+            >
+              <Icon name={open ? 'close' : 'menu'} />
+              Menu
+            </button>
+
+            {open && (
+              <div
+                role="menu"
+                className="absolute right-0 z-50 mt-2 w-52 animate-fadeIn overflow-hidden rounded-card border border-line bg-surface p-1 shadow-pop"
+              >
+                {MENU_ITEMS.map((item) => {
+                  const active = pathname === item.path;
+                  return (
+                    <button
+                      key={item.path}
+                      role="menuitem"
+                      onClick={() => go(item.path)}
+                      className={`flex w-full items-center justify-between rounded-ctl px-3 py-2 text-left font-heading text-sm font-medium transition-colors duration-150 ${
+                        active ? 'bg-raised text-accent' : 'text-ink-2 hover:bg-raised hover:text-ink'
+                      }`}
+                    >
+                      {item.label}
+                      {active && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </nav>
       </div>
     </header>
