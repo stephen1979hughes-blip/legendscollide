@@ -949,17 +949,32 @@ const ValidationTab: React.FC = () => {
       </button>
 
       {validation && (
-        <div className="mt-6">
-          {validation.valid ? (
+        <div className="mt-6 space-y-4">
+          {validation.valid && validation.warnings.length === 0 && (
             <div className="bg-green-50 border-l-4 border-green-500 p-4">
               <p className="text-green-700 font-semibold">✓ All data is valid!</p>
             </div>
-          ) : (
+          )}
+
+          {!validation.valid && (
             <div className="bg-red-50 border-l-4 border-red-500 p-4 space-y-2">
               <p className="text-red-700 font-semibold">✗ {validation.errors.length} validation error(s) found:</p>
               <ul className="list-disc list-inside space-y-1">
                 {validation.errors.map((error, idx) => (
                   <li key={idx} className="text-red-600 text-sm">{error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {validation.warnings.length > 0 && (
+            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 space-y-2">
+              <p className="text-yellow-700 font-semibold">
+                ⚠ {validation.warnings.length} thing{validation.warnings.length === 1 ? '' : 's'} worth double-checking:
+              </p>
+              <ul className="list-disc list-inside space-y-1">
+                {validation.warnings.map((warning, idx) => (
+                  <li key={idx} className="text-yellow-700 text-sm">{warning}</li>
                 ))}
               </ul>
             </div>

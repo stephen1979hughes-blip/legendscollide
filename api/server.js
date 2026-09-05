@@ -35,6 +35,64 @@ function saveData(data) {
   }
 }
 
+// A classic team's per-slot `position` can override the player's own
+// (see web/src/utils/dataProcessor.ts) — duplicated here rather than
+// imported since api/ is a separate Node app from web/src, the same
+// intentional-duplication call CLAUDE.md makes for the engine's own copy
+// of this categorisation.
+function coarsePosition(position) {
+  const p = (position || '').toUpperCase();
+  if (p === 'GK') return 'GK';
+  if (['DF', 'CB', 'RB', 'LB', 'RWB', 'LWB'].includes(p)) return 'DF';
+  if (['MF', 'CM', 'RM', 'LM', 'CDM', 'CAM'].includes(p)) return 'MF';
+  if (['FW', 'ST', 'CF', 'LW', 'RW'].includes(p)) return 'FW';
+  return 'MF';
+}
+
+const LATERAL_SIDE = { LB: 'left', LWB: 'left', LM: 'left', LW: 'left', RB: 'right', RWB: 'right', RM: 'right', RW: 'right' };
+
+/**
+ * Flags a classic team whose defence, midfield or attack line tags two or
+ * more players to the same flank (e.g. two RWs) with nobody at all on the
+ * other — found twice already (Germany 2014's front line, France 2006's
+ * back three) and easy to reproduce by hand-typing a new team's roster.
+ * web/src/components/TeamPitch.tsx's orderRow() already keeps this from
+ * rendering broken by splitting the surplus across both flanks, but that's
+ * a display-only fallback — it can't tell a genuine "one-sided" tactical
+ * setup from a mistagged position, so this surfaces it as something to
+ * double-check rather than silently accepting it into the dataset.
+ */
+function checkLopsidedFlanks(data) {
+  const warnings = [];
+  const playersById = new Map(data.players.map((p) => [p.id, p]));
+
+  data.classicTeams.forEach((team) => {
+    const rows = { GK: [], DF: [], MF: [], FW: [] };
+    team.players.forEach((tp) => {
+      const base = playersById.get(tp.playerId);
+      const position = tp.position || (base && base.position) || 'MF';
+      rows[coarsePosition(position)].push({ position, name: base ? base.name : tp.playerId });
+    });
+
+    Object.entries(rows).forEach(([group, row]) => {
+      const left = row.filter((p) => LATERAL_SIDE[p.position.toUpperCase()] === 'left');
+      const right = row.filter((p) => LATERAL_SIDE[p.position.toUpperCase()] === 'right');
+      const describe = (side) => side.map((p) => `${p.position} ${p.name}`).join(', ');
+      if (left.length === 0 && right.length > 1) {
+        warnings.push(
+          `${team.name}: ${group} line has ${right.length} right-sided players (${describe(right)}) and none on the left — check for a mistagged position.`
+        );
+      } else if (right.length === 0 && left.length > 1) {
+        warnings.push(
+          `${team.name}: ${group} line has ${left.length} left-sided players (${describe(left)}) and none on the right — check for a mistagged position.`
+        );
+      }
+    });
+  });
+
+  return warnings;
+}
+
 // Utility: Validate data integrity
 function validateData(data) {
   const errors = [];
@@ -93,7 +151,10 @@ function validateData(data) {
 
   return {
     valid: errors.length === 0,
-    errors
+    errors,
+    // Non-blocking: these describe things worth a second look, not broken
+    // references. `valid` deliberately doesn't factor these in.
+    warnings: checkLopsidedFlanks(data)
   };
 }
 

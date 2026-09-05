@@ -41,6 +41,8 @@ export interface AdminClassicTeamForm {
 export interface ValidationResult {
   valid: boolean;
   errors: string[];
+  /** Non-blocking — things worth a second look (e.g. a lopsided formation flank) rather than broken references. */
+  warnings: string[];
 }
 
 export interface NormalizedData {
