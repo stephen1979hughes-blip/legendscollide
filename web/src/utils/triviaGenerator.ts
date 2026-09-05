@@ -192,14 +192,25 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
     }
 
     case 'team-fielder': {
+      // Every classic team's name is literally "{club or nation} {year}"
+      // (dataProcessor.ts builds it that way), so naming the team in the
+      // prompt gives the answer away outright — "Which club or nation
+      // fielded Spain 2012?" answers itself. Identifying the team by one of
+      // its actual players instead asks something a name can't leak.
       const team = rng.pick(ctx.teams);
+      if (team.players.length === 0) return generateQuestion(ctx, rng);
       const correct = ctx.fielderNameByClubId.get(team.clubId);
       if (!correct) return generateQuestion(ctx, rng);
+      const identifyingPlayer = rng.pick(team.players);
       const allFielderNames = [...ctx.fielderNameByClubId.entries()];
       const distractors = pickDistinct(rng, allFielderNames, 3, ([id]) => id, team.clubId).map(([, name]) => name);
       if (distractors.length < 3) return generateQuestion(ctx, rng);
       const { options, correctIndex } = shuffleOptions(rng, correct, distractors);
-      return { prompt: `Which club or nation fielded ${team.name}?`, options, correctIndex };
+      return {
+        prompt: `Which club or nation fielded a team including ${identifyingPlayer.name} in ${team.year}?`,
+        options,
+        correctIndex,
+      };
     }
   }
 }
