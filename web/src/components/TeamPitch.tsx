@@ -33,6 +33,32 @@ const LATERAL_ORDER: Record<string, number> = {
 const lateralPosition = (position: string): number => LATERAL_ORDER[position.toUpperCase()] ?? 1;
 
 /**
+ * Orders one row left-to-right, splitting a lopsided flank across both
+ * sides rather than leaving it bunched. Real squads in this dataset are
+ * occasionally tagged that way — Germany 2014's forward line is ST + RW +
+ * RW with no LW at all, France 2006's back three is CB + LB + LB with no
+ * RB — and rendering that literally (both wide players stacked on one
+ * side) reads as broken even though the tags are just what the data says.
+ * When one flank is completely empty and the other has more than one
+ * player, half of the surplus fills the empty side instead: the tag stays
+ * whatever it was (still "RW", not silently relabelled "LW") — only where
+ * it's drawn changes, so the row still reads as a team shape.
+ */
+function orderRow(row: Player[]): Player[] {
+  const left = row.filter((p) => lateralPosition(p.position) === 0);
+  const center = row.filter((p) => lateralPosition(p.position) === 1);
+  const right = row.filter((p) => lateralPosition(p.position) === 2);
+
+  if (left.length === 0 && right.length > 1) {
+    left.push(...right.splice(0, Math.floor(right.length / 2)));
+  } else if (right.length === 0 && left.length > 1) {
+    right.push(...left.splice(0, Math.floor(left.length / 2)));
+  }
+
+  return [...left, ...center, ...right];
+}
+
+/**
  * Group the XI into pitch rows.
  *
  * These filters used to compare `p.position` directly against 'DF' / 'MF' /
@@ -40,10 +66,7 @@ const lateralPosition = (position: string): number => LATERAL_ORDER[position.toU
  * the goalkeeper ever matched and the pitch rendered one player out of eleven.
  */
 const buildFormation = (players: Player[]) => {
-  const group = (g: 'GK' | 'DF' | 'MF' | 'FW') =>
-    players
-      .filter((p) => coarsePosition(p.position) === g)
-      .sort((a, b) => lateralPosition(a.position) - lateralPosition(b.position));
+  const group = (g: 'GK' | 'DF' | 'MF' | 'FW') => orderRow(players.filter((p) => coarsePosition(p.position) === g));
 
   const rows = { GK: group('GK'), DF: group('DF'), MF: group('MF'), FW: group('FW') };
 
