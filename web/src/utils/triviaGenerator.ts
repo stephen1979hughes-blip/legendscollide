@@ -41,6 +41,20 @@ const POSITION_LABELS: Record<ReturnType<typeof coarsePosition>, string> = {
   FW: 'Forward',
 };
 
+/**
+ * A player named *in* a question (not a distractor option) has to clear this
+ * rating before they're eligible — otherwise "generated from every record"
+ * means questions about genuinely obscure squad depth ("What nationality is
+ * Heinz Stuy?") as often as about anyone recognisable. 84 keeps ~70% of the
+ * 414-player pool (291 players) and still leaves every one of the 26 classic
+ * teams at least one eligible player, so no team quietly stops appearing.
+ */
+const TRIVIA_PLAYER_RATING_FLOOR = 84;
+
+function isNotable(player: { overallRating: number }): boolean {
+  return player.overallRating >= TRIVIA_PLAYER_RATING_FLOOR;
+}
+
 export function buildTriviaContext(players: Player[], teams: Team[], clubs: Club[], countries: CountryRef[]): TriviaContext {
   // `clubs` (from dataProcessor.ts) holds one entry per actual club *and* one
   // per country, both with a clean display name — "Manchester United", not
@@ -60,6 +74,7 @@ export function buildTriviaContext(players: Player[], teams: Team[], clubs: Club
 interface PlayerTeamPair {
   playerId: string;
   playerName: string;
+  overallRating: number;
   teamId: string;
   teamName: string;
 }
@@ -71,6 +86,7 @@ function buildPairs(ctx: TriviaContext): PlayerTeamPair[] {
       pairs.push({
         playerId: p.id,
         playerName: p.name,
+        overallRating: p.overallRating,
         teamId: team.id,
         teamName: team.name,
       });
@@ -146,7 +162,9 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
 
   switch (type) {
     case 'player-team': {
-      const pair = rng.pick(pairs);
+      const notablePairs = pairs.filter(isNotable);
+      if (notablePairs.length === 0) return generateQuestion(ctx, rng);
+      const pair = rng.pick(notablePairs);
       const distractorTeamNames = pickDistinct(rng, ctx.teams, 3, (t) => t.id, pair.teamId).map((t) => t.name);
       if (distractorTeamNames.length < 3) return generateQuestion(ctx, rng);
       const { options, correctIndex } = shuffleOptions(rng, pair.teamName, distractorTeamNames);
@@ -154,7 +172,9 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
     }
 
     case 'player-position': {
-      const player = rng.pick(ctx.players);
+      const notablePlayers = ctx.players.filter(isNotable);
+      if (notablePlayers.length === 0) return generateQuestion(ctx, rng);
+      const player = rng.pick(notablePlayers);
       const correct = POSITION_LABELS[coarsePosition(player.position)];
       const distractors = Object.values(POSITION_LABELS).filter((label) => label !== correct);
       const { options, correctIndex } = shuffleOptions(rng, correct, distractors);
@@ -162,7 +182,9 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
     }
 
     case 'player-nationality': {
-      const withNationality = ctx.players.filter((p) => p.nationality && ctx.countryNameById.has(p.nationality));
+      const withNationality = ctx.players.filter(
+        (p) => p.nationality && ctx.countryNameById.has(p.nationality) && isNotable(p)
+      );
       if (withNationality.length === 0) return generateQuestion(ctx, rng);
       const player = rng.pick(withNationality);
       const correct = ctx.countryNameById.get(player.nationality!)!;
@@ -176,7 +198,8 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
     case 'team-roster': {
       const team = rng.pick(ctx.teams);
       if (team.players.length === 0) return generateQuestion(ctx, rng);
-      const correctPlayer = rng.pick(team.players);
+      const notableOnRoster = team.players.filter(isNotable);
+      const correctPlayer = rng.pick(notableOnRoster.length > 0 ? notableOnRoster : team.players);
       const rosterIds = new Set(team.players.map((p) => p.id));
       const distractorPool = ctx.players.filter((p) => !rosterIds.has(p.id));
       const distractors = pickDistinct(rng, distractorPool, 3, (p) => p.id, correctPlayer.id).map((p) => p.name);
@@ -205,8 +228,13 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
       // dataset is still growing — a player whose own name contains the
       // answer would recreate the exact leak this type was just rewritten
       // to avoid, so rule those out before picking who identifies the team.
+      // Layered fallback (safe+notable -> safe -> anyone) so a thin roster
+      // still produces a question instead of quietly refusing one.
       const safeIdentifiers = team.players.filter((p) => !p.name.toLowerCase().includes(correct.toLowerCase()));
-      const identifyingPlayer = rng.pick(safeIdentifiers.length > 0 ? safeIdentifiers : team.players);
+      const safeAndNotable = safeIdentifiers.filter(isNotable);
+      const identifyingPlayer = rng.pick(
+        safeAndNotable.length > 0 ? safeAndNotable : safeIdentifiers.length > 0 ? safeIdentifiers : team.players
+      );
       const allFielderNames = [...ctx.fielderNameByClubId.entries()];
       const distractors = pickDistinct(rng, allFielderNames, 3, ([id]) => id, team.clubId).map(([, name]) => name);
       if (distractors.length < 3) return generateQuestion(ctx, rng);
