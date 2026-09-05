@@ -201,7 +201,12 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
       if (team.players.length === 0) return generateQuestion(ctx, rng);
       const correct = ctx.fielderNameByClubId.get(team.clubId);
       if (!correct) return generateQuestion(ctx, rng);
-      const identifyingPlayer = rng.pick(team.players);
+      // One real case today (Fernando De Napoli, Napoli 1990) and this
+      // dataset is still growing — a player whose own name contains the
+      // answer would recreate the exact leak this type was just rewritten
+      // to avoid, so rule those out before picking who identifies the team.
+      const safeIdentifiers = team.players.filter((p) => !p.name.toLowerCase().includes(correct.toLowerCase()));
+      const identifyingPlayer = rng.pick(safeIdentifiers.length > 0 ? safeIdentifiers : team.players);
       const allFielderNames = [...ctx.fielderNameByClubId.entries()];
       const distractors = pickDistinct(rng, allFielderNames, 3, ([id]) => id, team.clubId).map(([, name]) => name);
       if (distractors.length < 3) return generateQuestion(ctx, rng);
