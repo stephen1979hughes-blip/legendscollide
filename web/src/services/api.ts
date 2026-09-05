@@ -1,6 +1,7 @@
 import { Team, TeamSummary, MatchResult } from '../types';
 import { loadTeamsData } from '../utils/dataProcessor';
 import { defaultEngine, randomSeed, type EngineTeam } from '@fm/match-engine';
+import { effectiveRating, MAX_CARD_LEVEL } from '../utils/cardProgression';
 
 /**
  * Data access for the app.
@@ -26,20 +27,33 @@ export function invalidateTeamsCache() {
   cache = null;
 }
 
-/** Adapt the app's Team to the engine's input shape. */
-function toEngineTeam(team: Team): EngineTeam {
+/**
+ * Adapt the app's Team to the engine's input shape.
+ *
+ * `cardLevels` is how card progression (see utils/cardProgression.ts) reaches
+ * the engine without the engine ever knowing levels exist: each player's true
+ * rating is resolved to an effective rating right here, at the call site, and
+ * only the plain number crosses into EngineTeam. A player missing from the
+ * map (or the map itself being omitted, as for every classic-team opponent)
+ * plays at full rating — MAX_CARD_LEVEL is just `effectiveRating`'s identity
+ * level, not a special case.
+ */
+function toEngineTeam(team: Team, cardLevels?: Record<string, number>): EngineTeam {
   return {
     id: team.id,
     name: team.name,
-    players: team.players.map((p) => ({
-      id: p.id,
-      name: p.name,
-      position: p.position,
-      overallRating: p.overallRating,
-      attackRating: p.attackRating,
-      defenceRating: p.defenceRating,
-      stamina: p.stamina,
-    })),
+    players: team.players.map((p) => {
+      const level = cardLevels?.[p.id] ?? MAX_CARD_LEVEL;
+      return {
+        id: p.id,
+        name: p.name,
+        position: p.position,
+        overallRating: effectiveRating(p.overallRating, level),
+        attackRating: effectiveRating(p.attackRating, level),
+        defenceRating: effectiveRating(p.defenceRating, level),
+        stamina: p.stamina,
+      };
+    }),
   };
 }
 
@@ -76,6 +90,12 @@ export const api = {
    * here rather than threading a new field through the engine's contract.
    * This is what makes a match permalink possible: /m/<a>-v-<b>/<seed>
    * reconstructs the exact result by replaying this same call.
+   *
+   * `teamACardLevels` resolves team A's collection into effective ratings
+   * (see toEngineTeam above) — a player id missing from the map plays at
+   * full rating, so passing nothing here is the same as everyone being
+   * maxed. Team B has no equivalent parameter: it is always a classic-team
+   * opponent, and those always play at full rating.
    */
   async simulateMatch(
     teamAId: string,
@@ -83,13 +103,14 @@ export const api = {
     _normaliseEra: boolean = false,
     customTeamA?: Team,
     customTeamB?: Team,
-    seed: number = randomSeed()
+    seed: number = randomSeed(),
+    teamACardLevels?: Record<string, number>
   ): Promise<MatchResult> {
     const teamA = customTeamA ?? (await this.getTeam(teamAId));
     const teamB = customTeamB ?? (await this.getTeam(teamBId));
 
     const result = defaultEngine.simulate({
-      teamA: toEngineTeam(teamA),
+      teamA: toEngineTeam(teamA, teamACardLevels),
       teamB: toEngineTeam(teamB),
       seed,
     });

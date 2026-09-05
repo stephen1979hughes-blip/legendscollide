@@ -274,11 +274,83 @@ function calcTeamDefence(team: EngineTeam): number {
   return pool.reduce((s, p) => s + p.defenceRating, 0) / pool.length;
 }
 
-function calcChances(rng: Rng, attack: number, defence: number): number {
-  const base = 8;
+// ============= BALANCE =============
+//
+// Squad ratings are compressed: real classic XIs land between 78 and 87 on both
+// the attack and the defence average, so `attack - defence` only ever spans
+// about ±8.5 and usually sits within ±3. The original model fed that through
+// `8 + diff * 0.05 + U(-2, 2)`, which moved the chance count by at most ±0.43
+// against a ±2.0 noise band — the dice were roughly nine times louder than the
+// teams, and the strongest side in the dataset beat the weakest 39% of the time.
+//
+// The differential now drives an exponential response rather than a linear one,
+// so a few rating points compound instead of vanishing:
+//
+//     xG = XG_BASE * exp(diff / RATING_SCALE)
+//
+// That total is split evenly between the two factors the model already had — a
+// better side takes more chances *and* converts a higher share of them, which is
+// what keeps the shot count believable next to the scoreline:
+//
+//     chances    = CHANCE_BASE * exp(diff / (2 * RATING_SCALE))
+//     conversion = CONV_BASE   * exp(diff / (2 * RATING_SCALE))
+//
+// Phase 2 (card levels, see web/src/utils/cardProgression.ts) widened the
+// range `diff` actually takes on: a level-1 card plays at a common floor well
+// below any classic team's rating, so a fresh squad facing even a mid-table
+// classic side can show a differential in the high teens — more than double
+// the classic band's own ±8.5. Feeding that raw through the single exponential
+// above is a bind-from-both-ends failure: the favourite's chance count and
+// conversion both hit their clamps, so does the underdog's, and the game still
+// produces double-digit scorelines because the clamps were sized for the
+// narrow band.
+//
+// Rather than retune RATING_SCALE itself — which governs the classic band and
+// is what test/calibration.test.mjs's original assertions were pinned
+// against — the response is now piecewise. Below RESPONSE_KNEE (the classic
+// band's own ±8.5 ceiling) nothing changes: `diff / RATING_SCALE` exactly as
+// before, so every classic-vs-classic fixture the original suite covers is
+// computed by an identical formula and needs no re-tuning. Beyond the knee,
+// the *excess* differential runs through RATING_SCALE_WIDE instead — a much
+// larger divisor, so a levelled blowout keeps compounding but far more slowly
+// per rating point than the classic band does. This is what lets a fresh
+// level-1 squad keep a real (if slim) chance against a mid-table side while
+// the strongest classic fixture is still exactly as decisive as it always was.
+const RESPONSE_KNEE = 8.5;
+/** Rating points beyond RESPONSE_KNEE that multiply expected goals by e. Much larger than RATING_SCALE: decisiveness growth almost flattens out past the classic band. */
+const RATING_SCALE_WIDE = 96;
+
+/** Expected goals for a side facing an exactly equal opponent. */
+const XG_BASE = 1.35;
+/** Rating points that multiply a side's expected goals by e, within the classic ±8.5 band. Lower = more decisive. Unchanged from the classic-only rebalance. */
+const RATING_SCALE = 16;
+/** Clear chances created by a side facing an exactly equal opponent. */
+const CHANCE_BASE = 11;
+/** Conversion at parity. Derived so CHANCE_BASE * CONV_BASE === XG_BASE. */
+const CONV_BASE = XG_BASE / CHANCE_BASE;
+/** Uniform ± jitter on the chance count, so an identical fixture still varies. */
+const CHANCE_NOISE = 1.5;
+/** Possession points gained per point of combined-strength advantage. */
+const POSSESSION_PER_POINT = 0.75;
+
+/** Half the exponential response, applied to the chance count and conversion alike. */
+function ratingResponse(attack: number, defence: number): number {
   const diff = attack - defence;
-  const raw = base + diff * 0.05 + (rng.next() * 4 - 2);
-  return Math.max(2, Math.min(15, Math.round(raw)));
+  const mag = Math.min(Math.abs(diff), RESPONSE_KNEE);
+  const excess = Math.abs(diff) - RESPONSE_KNEE;
+  const exponent =
+    Math.sign(diff) *
+    (mag / (2 * RATING_SCALE) + (excess > 0 ? excess / (2 * RATING_SCALE_WIDE) : 0));
+  return Math.exp(exponent);
+}
+
+function calcChances(rng: Rng, attack: number, defence: number): number {
+  const raw = CHANCE_BASE * ratingResponse(attack, defence) + (rng.next() * 2 - 1) * CHANCE_NOISE;
+  return Math.max(3, Math.min(22, Math.round(raw)));
+}
+
+function calcConversion(attack: number, defence: number): number {
+  return Math.max(0.04, Math.min(0.35, CONV_BASE * ratingResponse(attack, defence)));
 }
 
 function simulateGoalsFromChances(
@@ -372,8 +444,8 @@ export function simulateMatch({ teamA, teamB, seed }: MatchInput): MatchResult {
   const chancesA = calcChances(rng, attackA, defenceB);
   const chancesB = calcChances(rng, attackB, defenceA);
 
-  const convRateA = Math.max(0.1, Math.min(0.3, 0.2 + (attackA - defenceB) / 1000));
-  const convRateB = Math.max(0.1, Math.min(0.3, 0.2 + (attackB - defenceA) / 1000));
+  const convRateA = calcConversion(attackA, defenceB);
+  const convRateB = calcConversion(attackB, defenceA);
 
   const goalsA = simulateGoalsFromChances(rng, chancesA, convRateA, teamA, teamAId);
   const goalsB = simulateGoalsFromChances(rng, chancesB, convRateB, teamB, teamBId);
@@ -381,10 +453,13 @@ export function simulateMatch({ teamA, teamB, seed }: MatchInput): MatchResult {
   const scoreA = goalsA.length;
   const scoreB = goalsB.length;
 
+  // Possession had the same problem as the chance count: dividing by the summed
+  // strength of both sides (~330) reduced the widest gap in the dataset to a
+  // single percentage point, so every match finished 49-51. Scaling directly off
+  // the difference lets a dominant side actually hold the ball.
   const teamStrA = attackA + defenceA;
   const teamStrB = attackB + defenceB;
-  const totalStr = teamStrA + teamStrB || 1;
-  const possessionA = Math.round(50 + (teamStrA - teamStrB) / (totalStr * 0.04));
+  const possessionA = Math.round(50 + (teamStrA - teamStrB) * POSSESSION_PER_POINT);
   const possessionAFinal = Math.max(35, Math.min(65, possessionA));
 
   const state: MatchSimulationState = {
@@ -449,7 +524,9 @@ export function simulateMatch({ teamA, teamB, seed }: MatchInput): MatchResult {
       `${midName} drives forward from midfield, linking up with ${attackerName} in a promising position.`,
       `Good pressing from ${teamName} — ${midName} wins the ball back in their own half.`,
       `${attackerName} holds up the ball well, bringing ${midName} into play.`,
-      `${defName} makes a crucial interception to deny ${oppName} a clear opening.`,
+      // defName is drawn from the defending side, so the side being denied is the
+      // attacking one — oppName here would name the defender's own team.
+      `${defName} makes a crucial interception to deny ${teamName} a clear opening.`,
       `A creative ball from ${midName} almost breaks through the ${oppName} defence.`,
       `${teamName} winning the midfield battle through hard work from ${midName}.`,
       `Excellent defensive work from ${defName}, clearing the danger with a well-timed tackle.`,
@@ -611,15 +688,24 @@ export function simulateMatch({ teamA, teamB, seed }: MatchInput): MatchResult {
     scoreB,
   });
 
-  // Man of the match: scorer with most goals, else highest involvement
+  // Man of the match: scorer with most goals, else highest involvement.
+  //
+  // The involvement branch prefers an outfield player, but must not assume one
+  // exists: every classic team has exactly one keeper, so this was unreachable,
+  // while a user-assembled XI can legitimately field none and `reduce` on the
+  // empty filter result throws.
+  const involvementSide = scoreA >= scoreB ? teamA : teamB;
+  const outfield = involvementSide.players.filter((p: EnginePlayer) => p.position !== 'GK');
+  const involvementPool = outfield.length > 0 ? outfield : involvementSide.players;
   const manOfMatch =
     goalsA.length > 0
       ? goalsA[goalsA.length - 1].playerName
       : goalsB.length > 0
         ? goalsB[goalsB.length - 1].playerName
-        : (scoreA >= scoreB ? teamA : teamB).players
-            .filter((p: EnginePlayer) => p.position !== 'GK')
-            .reduce((best, p) => (p.overallRating > best.overallRating ? p : best)).name;
+        : involvementPool.length > 0
+          ? involvementPool.reduce((best, p) => (p.overallRating > best.overallRating ? p : best))
+              .name
+          : 'Unknown';
 
   // Summary commentary
   const summaryLines = [
