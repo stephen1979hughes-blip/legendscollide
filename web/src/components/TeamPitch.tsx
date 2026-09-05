@@ -15,14 +15,20 @@ interface TeamPitchProps {
  * doing that put both wingers next to each other and both strikers next to
  * each other instead of wingers flanking the strikers, e.g. Man Utd 2008's
  * front four coming out "Ronaldo(RW) Giggs(LW) Tevez(ST) Rooney(ST)" instead
- * of "Ronaldo(RW) Tevez(ST) Rooney(ST) Giggs(LW)". Central positions (and
- * anything unrecognised) sort to the middle; ties keep their original
- * relative order (Array#sort is stable) since it doesn't matter which of
- * two centre-backs is drawn left of the other.
+ * of the correct shape. Central positions (and anything unrecognised) sort
+ * to the middle; ties keep their original relative order (Array#sort is
+ * stable) since it doesn't matter which of two centre-backs is drawn left
+ * of the other.
+ *
+ * The pitch is drawn keeper-at-bottom, attack-at-top — i.e. the view from
+ * standing behind this team's own goal, facing the same way they attack.
+ * From there a right-sided player's right is the viewer's right too (no
+ * mirroring, unlike a "team photo" facing the camera), so RB/RW/RM sort to
+ * the right and LB/LW/LM to the left.
  */
 const LATERAL_ORDER: Record<string, number> = {
-  RB: 0, RWB: 0, RM: 0, RW: 0,
-  LB: 2, LWB: 2, LM: 2, LW: 2,
+  LB: 0, LWB: 0, LM: 0, LW: 0,
+  RB: 2, RWB: 2, RM: 2, RW: 2,
 };
 const lateralPosition = (position: string): number => LATERAL_ORDER[position.toUpperCase()] ?? 1;
 
