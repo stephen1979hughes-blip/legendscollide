@@ -8,53 +8,46 @@ interface LineupCardProps {
   players: Player[];
 }
 
-export const LineupCard: React.FC<LineupCardProps> = ({
-  teamName,
-  teamYear,
-  players,
-}) => {
+const Stat: React.FC<{ label: string; value: number }> = ({ label, value }) => (
+  <div className="inset px-2 py-1.5 text-center">
+    <p className="num text-sm font-semibold text-ink">{value}</p>
+    <p className="text-[10px] uppercase tracking-wider text-ink-3">{label}</p>
+  </div>
+);
+
+export const LineupCard: React.FC<LineupCardProps> = ({ teamName, teamYear, players }) => {
   if (!players || players.length === 0) {
-    return <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center text-white/70">Loading lineup...</div>;
+    return <div className="panel p-5 text-center text-sm text-ink-3">Loading lineup…</div>;
   }
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
-      <div className="border-b border-white/10 pb-3 mb-4">
-        <h2 className="text-xl font-bold text-white">{teamName}</h2>
-        <p className="text-sm text-white/70">{teamYear}</p>
+    <div className="panel p-5">
+      <div className="mb-4 border-b border-line pb-3">
+        <h2 className="display text-xl">{teamName}</h2>
+        <p className="num text-sm text-ink-3">{teamYear}</p>
       </div>
 
       <div className="space-y-3">
         {players.map((player) => (
-          <div key={player.id} className="border-b border-white/10 pb-3 last:border-b-0">
-            <div className="flex items-center justify-between mb-2">
-              <div>
+          <div key={player.id} className="space-y-2 border-b border-line pb-3 last:border-b-0 last:pb-0">
+            <div className="flex items-center justify-between gap-3">
+              <div className="min-w-0">
                 <Link
                   to={`/player/${player.id}`}
-                  className="font-semibold text-white hover:text-primary transition"
+                  className="block truncate rounded font-heading text-sm font-medium text-ink transition-colors hover:text-accent"
                 >
                   {player.name}
                 </Link>
-                <p className="text-xs text-white/60">{player.position}</p>
+                <p className="text-xs uppercase tracking-wider text-ink-3">{player.position}</p>
               </div>
-              <div className="text-right">
-                <p className="font-bold text-white text-lg">{player.overallRating}</p>
-                <p className="text-xs text-white/60">Overall</p>
-              </div>
+              <p className="num flex-shrink-0 text-lg font-semibold text-ink">
+                {player.overallRating}
+              </p>
             </div>
-            <div className="grid grid-cols-3 gap-2 text-center text-xs">
-              <div className="bg-white/10 rounded p-2">
-                <p className="font-semibold text-white">{player.attackRating}</p>
-                <p className="text-white/60 text-xs">Attack</p>
-              </div>
-              <div className="bg-white/10 rounded p-2">
-                <p className="font-semibold text-white">{player.defenceRating}</p>
-                <p className="text-white/60 text-xs">Defence</p>
-              </div>
-              <div className="bg-white/10 rounded p-2">
-                <p className="font-semibold text-white">{player.stamina}</p>
-                <p className="text-white/60 text-xs">Stamina</p>
-              </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              <Stat label="Attack" value={player.attackRating} />
+              <Stat label="Defence" value={player.defenceRating} />
+              <Stat label="Stamina" value={player.stamina} />
             </div>
           </div>
         ))}

@@ -17,6 +17,10 @@ export interface CustomXIPlayer {
   playerName: string;
   playerPosition: string;
   overallRating: number;
+  /** Collection-sourced picks only: the card's true (max-level) rating, alongside `overallRating`'s current effective one. */
+  ceiling?: number;
+  /** Collection-sourced picks only: the card's current level. */
+  level?: number;
 }
 
 export interface CustomXI {

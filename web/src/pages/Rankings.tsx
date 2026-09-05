@@ -1,11 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell, PageHeading } from '../components/PageShell';
+import { Icon } from '../components/Icon';
 import { api } from '../services/api';
-import { Team } from '../types';
+import { coarsePosition } from '../utils/position';
+import { Team, Player } from '../types';
 
 type RankingMetric = 'overall' | 'attack' | 'defence' | 'midfield' | 'goalkeeper';
+
+const METRICS: { id: RankingMetric; label: string }[] = [
+  { id: 'overall', label: 'Overall' },
+  { id: 'attack', label: 'Attack' },
+  { id: 'defence', label: 'Defence' },
+  { id: 'midfield', label: 'Midfield' },
+  { id: 'goalkeeper', label: 'Goalkeeper' },
+];
+
+const METRIC_LEDE: Record<RankingMetric, string> = {
+  overall: 'Mean overall rating across the whole squad.',
+  attack: 'Mean rating of the three highest-rated forwards.',
+  defence: 'Mean rating of the five highest-rated defenders.',
+  midfield: 'Mean rating of the five highest-rated midfielders.',
+  goalkeeper: 'Mean rating of the goalkeepers in the squad.',
+};
 
 export const Rankings: React.FC = () => {
   const [teams, setTeams] = useState<Team[]>([]);
@@ -25,7 +42,6 @@ export const Rankings: React.FC = () => {
         setTeams(fullTeams);
       } catch (error) {
         console.error('Failed to load teams:', error);
-        setLoading(false);
       } finally {
         setLoading(false);
       }
@@ -34,135 +50,112 @@ export const Rankings: React.FC = () => {
     loadTeams();
   }, []);
 
+  const mean = (players: Player[]) =>
+    players.length > 0
+      ? players.reduce((sum, p) => sum + p.overallRating, 0) / players.length
+      : 0;
+
+  /**
+   * Take the best `n` of a position group. These used to filter on
+   * `p.position === 'FW'`, but the dataset stores specific positions (ST, RW,
+   * CB…) rather than the coarse groups the `Player` type claims — so every tab
+   * except Overall ranked the entire list at 0.0.
+   */
+  const bestOfGroup = (team: Team, group: 'GK' | 'DF' | 'MF' | 'FW', take: number) =>
+    mean(
+      team.players
+        .filter((p) => coarsePosition(p.position) === group)
+        .sort((a, b) => b.overallRating - a.overallRating)
+        .slice(0, take)
+    );
+
   const getMetricValue = (team: Team, metric: RankingMetric): number => {
     if (!team.players || team.players.length === 0) return 0;
 
-    if (metric === 'overall') {
-      return team.players.reduce((sum, p) => sum + p.overallRating, 0) / team.players.length;
-    } else if (metric === 'attack') {
-      const fwPlayers = team.players.filter((p) => p.position === 'FW').slice(0, 3);
-      return fwPlayers.length > 0
-        ? fwPlayers.reduce((sum, p) => sum + p.overallRating, 0) / fwPlayers.length
-        : 0;
-    } else if (metric === 'defence') {
-      const dfPlayers = team.players.filter((p) => p.position === 'DF').slice(0, 5);
-      return dfPlayers.length > 0
-        ? dfPlayers.reduce((sum, p) => sum + p.overallRating, 0) / dfPlayers.length
-        : 0;
-    } else if (metric === 'midfield') {
-      const mfPlayers = team.players.filter((p) => p.position === 'MF').slice(0, 5);
-      return mfPlayers.length > 0
-        ? mfPlayers.reduce((sum, p) => sum + p.overallRating, 0) / mfPlayers.length
-        : 0;
-    } else {
-      const gkPlayers = team.players.filter((p) => p.position === 'GK');
-      return gkPlayers.length > 0
-        ? gkPlayers.reduce((sum, p) => sum + p.overallRating, 0) / gkPlayers.length
-        : 0;
+    switch (metric) {
+      case 'overall': return mean(team.players);
+      case 'attack': return bestOfGroup(team, 'FW', 3);
+      case 'defence': return bestOfGroup(team, 'DF', 5);
+      case 'midfield': return bestOfGroup(team, 'MF', 5);
+      case 'goalkeeper': return bestOfGroup(team, 'GK', 1);
     }
   };
 
   const rankedTeams = teams
-    .map((team) => ({
-      team,
-      value: getMetricValue(team, metric),
-    }))
+    .map((team) => ({ team, value: getMetricValue(team, metric) }))
     .sort((a, b) => b.value - a.value);
+
+  const top = rankedTeams[0]?.value ?? 0;
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Loading rankings...</p>
-        </main>
-      </div>
+      <PageShell showBack centered>
+        <p className="text-sm text-ink-3">Loading rankings…</p>
+      </PageShell>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header />
+    <PageShell showBack>
+      <PageHeading eyebrow="Squad ratings" title="Rankings" lede={METRIC_LEDE[metric]} />
 
-      <main className="flex-1 max-w-4xl mx-auto px-6 py-12 w-full">
-        <div className="mb-12">
-          <h1 className="text-5xl font-heading font-bold text-white mb-8">Rankings</h1>
+      <div className="mb-block flex flex-wrap gap-1.5" role="tablist" aria-label="Ranking metric">
+        {METRICS.map((m) => (
+          <button
+            key={m.id}
+            role="tab"
+            aria-selected={metric === m.id}
+            onClick={() => setMetric(m.id)}
+            className={
+              metric === m.id
+                ? 'btn-accent btn-sm'
+                : 'btn-ghost btn-sm border border-line'
+            }
+          >
+            {m.label}
+          </button>
+        ))}
+      </div>
 
-          <div className="flex gap-3 flex-wrap mb-8">
-            <button
-              onClick={() => setMetric('overall')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                metric === 'overall'
-                  ? 'bg-white/20 border border-white/40 text-white'
-                  : 'bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Overall
-            </button>
-            <button
-              onClick={() => setMetric('attack')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                metric === 'attack'
-                  ? 'bg-white/20 border border-white/40 text-white'
-                  : 'bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Attack
-            </button>
-            <button
-              onClick={() => setMetric('defence')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                metric === 'defence'
-                  ? 'bg-white/20 border border-white/40 text-white'
-                  : 'bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Defence
-            </button>
-            <button
-              onClick={() => setMetric('midfield')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                metric === 'midfield'
-                  ? 'bg-white/20 border border-white/40 text-white'
-                  : 'bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Midfield
-            </button>
-            <button
-              onClick={() => setMetric('goalkeeper')}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                metric === 'goalkeeper'
-                  ? 'bg-white/20 border border-white/40 text-white'
-                  : 'bg-white/5 border border-white/10 text-white/70 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              Goalkeeper
-            </button>
-          </div>
-        </div>
-
-        <div className="space-y-3">
-          {rankedTeams.map((ranked, index) => (
+      <ol className="space-y-1.5">
+        {rankedTeams.map((ranked, index) => (
+          <li key={ranked.team.id}>
             <Link
-              key={ranked.team.id}
               to={`/team/${ranked.team.id}`}
-              className="flex items-center gap-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 hover:bg-white/10 transition"
+              className="group flex items-center gap-4 rounded-card border border-line bg-surface px-4 py-3.5 transition-colors duration-150 hover:border-line-strong hover:bg-raised"
             >
-              <div className="text-2xl font-bold text-white/50 w-8 text-right">#{index + 1}</div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-white">{ranked.team.name}</h3>
-                <p className="text-white/60">{ranked.team.year}</p>
-              </div>
-              <div className="text-right">
-                <p className="text-3xl font-bold text-white">{ranked.value.toFixed(1)}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </main>
+              <span
+                className={`num w-7 flex-shrink-0 text-right text-sm font-semibold ${
+                  index === 0 ? 'text-accent' : 'text-ink-3'
+                }`}
+              >
+                {index + 1}
+              </span>
 
-      <Footer />
-    </div>
+              <span className="min-w-0 flex-1">
+                <span className="display block truncate text-lg">{ranked.team.name}</span>
+                <span className="num block text-xs text-ink-3">{ranked.team.year}</span>
+              </span>
+
+              {/* Bar makes the gaps between sides visible; the rating confirms it. */}
+              <span className="hidden h-1 w-24 flex-shrink-0 overflow-hidden rounded-full bg-raised sm:block">
+                <span
+                  className={`block h-full ${index === 0 ? 'bg-accent' : 'bg-line-strong'}`}
+                  style={{ width: top > 0 ? `${(ranked.value / top) * 100}%` : '0%' }}
+                />
+              </span>
+
+              <span className="num w-14 flex-shrink-0 text-right text-xl font-semibold text-ink">
+                {ranked.value.toFixed(1)}
+              </span>
+
+              <span className="flex-shrink-0 text-ink-3 transition-colors group-hover:text-accent">
+                <Icon name="right" size={15} />
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ol>
+    </PageShell>
   );
 };

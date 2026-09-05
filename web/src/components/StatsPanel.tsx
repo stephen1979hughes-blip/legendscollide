@@ -5,30 +5,45 @@ interface StatsPanelProps {
   stats: MatchStats;
 }
 
+/**
+ * Each row is a split bar rather than two bare numbers — the shape carries the
+ * comparison at a glance and the figures confirm it, instead of the reader
+ * having to do the arithmetic.
+ */
 export const StatsPanel: React.FC<StatsPanelProps> = ({ stats }) => {
-  const statRows = [
-    { label: 'Shots', a: stats.shotsA, b: stats.shotsB },
-    { label: 'On Target', a: stats.shotsOnTargetA, b: stats.shotsOnTargetB },
-    { label: 'Possession', a: `${stats.possessionA}%`, b: `${stats.possessionB}%` },
+  const rows = [
+    { label: 'Shots', a: stats.shotsA, b: stats.shotsB, suffix: '' },
+    { label: 'On target', a: stats.shotsOnTargetA, b: stats.shotsOnTargetB, suffix: '' },
+    { label: 'Possession', a: stats.possessionA, b: stats.possessionB, suffix: '%' },
   ];
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
-      <h3 className="text-lg font-bold text-white mb-4">Match Stats</h3>
-      <div className="space-y-3">
-        {statRows.map((row) => (
-          <div key={row.label} className="flex items-center justify-between">
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-white">{row.a}</p>
+    <div className="panel p-5">
+      <h3 className="rule-heading mb-4">Match stats</h3>
+      <div className="space-y-4">
+        {rows.map((row) => {
+          const total = row.a + row.b;
+          const share = total > 0 ? (row.a / total) * 100 : 50;
+          return (
+            <div key={row.label} className="space-y-1.5">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="num text-sm font-semibold text-ink">
+                  {row.a}
+                  {row.suffix}
+                </span>
+                <span className="text-xs uppercase tracking-wider text-ink-3">{row.label}</span>
+                <span className="num text-sm font-semibold text-ink">
+                  {row.b}
+                  {row.suffix}
+                </span>
+              </div>
+              <div className="flex h-1.5 overflow-hidden rounded-full bg-raised">
+                <div className="bg-accent" style={{ width: `${share}%` }} />
+                <div className="flex-1 bg-line-strong" />
+              </div>
             </div>
-            <div className="flex-1 text-center">
-              <p className="text-xs text-white/70 font-bold">{row.label}</p>
-            </div>
-            <div className="flex-1 text-right">
-              <p className="text-sm font-semibold text-white">{row.b}</p>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

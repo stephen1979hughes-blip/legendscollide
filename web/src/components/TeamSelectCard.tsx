@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Icon } from './Icon';
 import { TeamSummary } from '../types';
 
 interface TeamSelectCardProps {
@@ -21,33 +22,38 @@ export const TeamSelectCard: React.FC<TeamSelectCardProps> = ({
   );
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md hover:shadow-lg transition-shadow duration-200 animate-fadeIn">
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold text-white mb-2">{label}</h3>
-        <div className="h-0.5 w-12 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-      </div>
+    <div className="card flex flex-col gap-3">
+      <p className="eyebrow">{label}</p>
 
-      <input
-        type="text"
-        placeholder="Search teams or years..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full px-4 py-2.5 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/50 text-sm font-body focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 mb-4"
-      />
-
-      {selectedTeam && (
-        <div className="mb-4 p-4 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-white shadow-md">
-          <p className="font-semibold tracking-wide">{selectedTeam.name}</p>
-          <p className="text-xs text-white/80 mt-1">
-            <span className="inline-block bg-white/20 px-2 py-1 rounded text-xs font-semibold">
-              {selectedTeam.year}
-            </span>
-          </p>
+      {selectedTeam ? (
+        <div className="inset flex items-center justify-between gap-3 border-accent/50 px-3.5 py-3">
+          <span className="display truncate text-lg">{selectedTeam.name}</span>
+          <span className="num flex-shrink-0 text-sm font-semibold text-ink-2">
+            {selectedTeam.year}
+          </span>
+        </div>
+      ) : (
+        <div className="inset flex items-center gap-2 px-3.5 py-3 text-sm text-ink-3">
+          <Icon name="search" size={14} />
+          No side picked yet
         </div>
       )}
 
+      <div className="relative">
+        <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-3">
+          <Icon name="search" size={14} />
+        </span>
+        <input
+          type="text"
+          placeholder={selectedTeam ? 'Search to change…' : 'Search teams or years…'}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="field pl-9"
+        />
+      </div>
+
       {searchTerm && (
-        <div className="max-h-64 overflow-y-auto space-y-2">
+        <div className="-mx-1 max-h-64 space-y-1 overflow-y-auto px-1">
           {filtered.length > 0 ? (
             filtered.map((team) => (
               <button
@@ -56,19 +62,21 @@ export const TeamSelectCard: React.FC<TeamSelectCardProps> = ({
                   onSelect(team);
                   setSearchTerm('');
                 }}
-                className="w-full text-left px-4 py-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-white transition-all duration-150 font-body group"
+                className="group flex w-full items-center justify-between gap-3 rounded-ctl border border-transparent px-3 py-2.5 text-left transition-colors duration-150 hover:border-line hover:bg-raised"
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-sm group-hover:text-primary transition-colors">{team.name}</p>
-                    <p className="text-xs text-white/60 mt-0.5">{team.year}</p>
-                  </div>
-                  <span className="text-white/30 group-hover:text-primary transition-colors">→</span>
-                </div>
+                <span className="min-w-0">
+                  <span className="block truncate font-heading text-sm font-medium text-ink">
+                    {team.name}
+                  </span>
+                  <span className="num block text-xs text-ink-3">{team.year}</span>
+                </span>
+                <span className="flex-shrink-0 text-ink-3 transition-colors group-hover:text-accent">
+                  <Icon name="right" size={14} />
+                </span>
               </button>
             ))
           ) : (
-            <p className="text-center text-white/50 text-sm py-4">No teams found</p>
+            <p className="px-3 py-4 text-center text-sm text-ink-3">No teams match “{searchTerm}”</p>
           )}
         </div>
       )}

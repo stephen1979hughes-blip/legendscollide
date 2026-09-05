@@ -4,17 +4,18 @@ interface CommentaryFeedProps {
   commentary: string[];
 }
 
-export const CommentaryFeed: React.FC<CommentaryFeedProps> = ({ commentary }) => {
-  return (
-    <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
-      <h3 className="text-lg font-bold text-white mb-4">Match Commentary</h3>
-      <div className="max-h-80 overflow-y-auto space-y-3">
-        {commentary.map((line, idx) => (
-          <p key={idx} className="text-sm text-white/90 leading-relaxed">
-            {line}
-          </p>
-        ))}
-      </div>
+export const CommentaryFeed: React.FC<CommentaryFeedProps> = ({ commentary }) => (
+  <div className="panel p-5">
+    <h3 className="rule-heading mb-4">Match commentary</h3>
+    <div className="max-h-80 space-y-0 overflow-y-auto">
+      {commentary.map((line, idx) => (
+        <p
+          key={idx}
+          className="border-b border-line py-2.5 text-sm leading-relaxed text-ink-2 last:border-b-0"
+        >
+          {line}
+        </p>
+      ))}
     </div>
-  );
-};
+  </div>
+);

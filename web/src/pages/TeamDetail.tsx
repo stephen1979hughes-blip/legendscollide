@@ -1,10 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell, PageHeading } from '../components/PageShell';
 import { TeamPitch } from '../components/TeamPitch';
 import { api } from '../services/api';
-import { Team } from '../types';
+import { coarsePosition } from '../utils/position';
+import { Team, Player } from '../types';
+
+const mean = (players: Player[]) =>
+  players.length > 0
+    ? (players.reduce((sum, p) => sum + p.overallRating, 0) / players.length).toFixed(1)
+    : '—';
+
+/**
+ * These used to filter on `p.position === 'FW'`, which never matched: the
+ * dataset stores specific positions (ST, RW, CB…), not the coarse groups the
+ * `Player` type claims. Every average below "Overall" rendered as N/A.
+ */
+const groupMean = (players: Player[], group: 'DF' | 'MF' | 'FW', take: number) =>
+  mean(
+    players
+      .filter((p) => coarsePosition(p.position) === group)
+      .sort((a, b) => b.overallRating - a.overallRating)
+      .slice(0, take)
+  );
 
 export const TeamDetail: React.FC = () => {
   const { teamId } = useParams();
@@ -20,8 +38,7 @@ export const TeamDetail: React.FC = () => {
 
     const loadTeam = async () => {
       try {
-        const teamData = await api.getTeam(teamId);
-        setTeam(teamData);
+        setTeam(await api.getTeam(teamId));
       } catch (error) {
         console.error('Failed to load team:', error);
         navigate('/');
@@ -35,100 +52,42 @@ export const TeamDetail: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header showBack />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Loading team details...</p>
-        </main>
-      </div>
+      <PageShell showBack centered>
+        <p className="text-sm text-ink-3">Loading team details…</p>
+      </PageShell>
     );
   }
 
   if (!team) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header showBack />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Team not found</p>
-        </main>
-      </div>
+      <PageShell showBack centered>
+        <p className="text-sm text-ink-3">Team not found</p>
+      </PageShell>
     );
   }
 
+  const stats = [
+    { label: 'Squad', value: String(team.players.length) },
+    { label: 'Overall', value: mean(team.players) },
+    { label: 'Attack', value: groupMean(team.players, 'FW', 3) },
+    { label: 'Midfield', value: groupMean(team.players, 'MF', 5) },
+    { label: 'Defence', value: groupMean(team.players, 'DF', 5) },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header showBack />
+    <PageShell showBack>
+      <PageHeading eyebrow={String(team.year)} title={team.name} />
 
-      <main className="flex-1 max-w-5xl mx-auto px-6 py-12 w-full">
-        <div className="mb-12">
-          <h1 className="text-5xl font-heading font-bold text-white mb-2">
-            {team.name}
-          </h1>
-          <p className="text-xl text-white/70">{team.year}</p>
-        </div>
+      <TeamPitch players={team.players} />
 
-        <TeamPitch players={team.players} />
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Total Players</p>
-            <p className="text-4xl font-bold text-white">{team.players.length}</p>
+      <dl className="mt-section grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {stats.map((stat) => (
+          <div key={stat.label} className="card p-4">
+            <dt className="eyebrow">{stat.label}</dt>
+            <dd className="num mt-1.5 text-3xl font-semibold text-ink">{stat.value}</dd>
           </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Avg Overall</p>
-            <p className="text-4xl font-bold text-white">
-              {(
-                team.players.reduce((sum, p) => sum + p.overallRating, 0) /
-                team.players.length
-              ).toFixed(1)}
-            </p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Avg Attack</p>
-            <p className="text-4xl font-bold text-white">
-              {(() => {
-                const fwPlayers = team.players.filter((p) => p.position === 'FW').slice(0, 3);
-                return fwPlayers.length > 0
-                  ? (
-                      fwPlayers.reduce((sum, p) => sum + p.overallRating, 0) /
-                      fwPlayers.length
-                    ).toFixed(1)
-                  : 'N/A';
-              })()}
-            </p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Avg Defence</p>
-            <p className="text-4xl font-bold text-white">
-              {(() => {
-                const dfPlayers = team.players.filter((p) => p.position === 'DF').slice(0, 5);
-                return dfPlayers.length > 0
-                  ? (
-                      dfPlayers.reduce((sum, p) => sum + p.overallRating, 0) /
-                      dfPlayers.length
-                    ).toFixed(1)
-                  : 'N/A';
-              })()}
-            </p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Avg Midfield</p>
-            <p className="text-4xl font-bold text-white">
-              {(() => {
-                const mfPlayers = team.players.filter((p) => p.position === 'MF').slice(0, 5);
-                return mfPlayers.length > 0
-                  ? (
-                      mfPlayers.reduce((sum, p) => sum + p.overallRating, 0) /
-                      mfPlayers.length
-                    ).toFixed(1)
-                  : 'N/A';
-              })()}
-            </p>
-          </div>
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        ))}
+      </dl>
+    </PageShell>
   );
 };

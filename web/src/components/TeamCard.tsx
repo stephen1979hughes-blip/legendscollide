@@ -1,21 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from './Icon';
 import { TeamSummary } from '../types';
 
-interface TeamCardProps {
-  team: TeamSummary;
-}
-
-export const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
-  return (
-    <Link
-      to={`/team/${team.id}`}
-      className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md hover:bg-white/10 transition"
-    >
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-white mb-2">{team.name}</h3>
-        <p className="text-white/70">{team.year}</p>
-      </div>
-    </Link>
-  );
-};
+export const TeamCard: React.FC<{ team: TeamSummary }> = ({ team }) => (
+  <Link to={`/team/${team.id}`} className="card-link group flex items-center justify-between gap-4">
+    <span className="min-w-0">
+      <span className="display block truncate text-xl">{team.name}</span>
+      <span className="num mt-0.5 block text-sm text-ink-3">{team.year}</span>
+    </span>
+    <span className="flex-shrink-0 text-ink-3 transition-colors group-hover:text-accent">
+      <Icon name="right" size={16} />
+    </span>
+  </Link>
+);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { PageShell } from '../components/PageShell';
+import { Icon } from '../components/Icon';
 import { api } from '../services/api';
 import { Player, Team } from '../types';
 
@@ -53,93 +53,64 @@ export const PlayerBio: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header showBack />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Loading player profile...</p>
-        </main>
-      </div>
+      <PageShell width="narrow" showBack centered>
+        <p className="text-sm text-ink-3">Loading player profile…</p>
+      </PageShell>
     );
   }
 
   if (!player || !team) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header showBack />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Player not found</p>
-        </main>
-      </div>
+      <PageShell width="narrow" showBack centered>
+        <p className="text-sm text-ink-3">Player not found</p>
+      </PageShell>
     );
   }
 
   const bio = player.bio || 'A talented player in football history.';
 
+  const ratings = [
+    { label: 'Overall', value: player.overallRating, lead: true },
+    { label: 'Attack', value: player.attackRating },
+    { label: 'Defence', value: player.defenceRating },
+    { label: 'Stamina', value: player.stamina },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header showBack />
-
-      <main className="flex-1 max-w-3xl mx-auto px-6 py-12 w-full">
-        {/* Player Header */}
-        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-8 mb-8 shadow-md">
-          <div className="border-b border-white/20 pb-6 mb-6">
-            <h1 className="text-5xl font-bold text-white mb-2">
-              {player.name}
-            </h1>
-            <div className="flex items-center gap-6 mt-4 flex-wrap">
-              <div>
-                <p className="text-sm text-white/70 mb-1">Position</p>
-                <p className="text-xl font-semibold text-white">{player.position}</p>
-              </div>
-              <div>
-                <p className="text-sm text-white/70 mb-1">Team</p>
-                <p className="text-xl font-semibold text-white">{team.name}</p>
-              </div>
-              <div>
-                <p className="text-sm text-white/70 mb-1">Era</p>
-                <p className="text-xl font-semibold text-white">{team.year}</p>
-              </div>
-            </div>
+    <PageShell width="narrow" showBack>
+      <div className="space-y-section">
+        <header className="space-y-4 border-b border-line pb-6">
+          <div className="space-y-1.5">
+            <p className="eyebrow">{player.position}</p>
+            <h1 className="display text-4xl md:text-5xl">{player.name}</h1>
           </div>
-
-          {/* Biography */}
-          <div className="rounded-lg border border-white/10 bg-white/10 backdrop-blur p-6 mb-0">
-            <p className="text-lg text-white/90 leading-relaxed italic">{bio}</p>
-          </div>
-        </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Overall Rating</p>
-            <p className="text-4xl font-bold text-white">{player.overallRating}</p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Attack</p>
-            <p className="text-4xl font-bold text-white">{player.attackRating}</p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Defence</p>
-            <p className="text-4xl font-bold text-white">{player.defenceRating}</p>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md text-center">
-            <p className="text-sm text-white/70 mb-2">Stamina</p>
-            <p className="text-4xl font-bold text-white">{player.stamina}</p>
-          </div>
-        </div>
-
-        {/* Back Button */}
-        <div className="flex justify-center">
-          <button
-            onClick={() => navigate(-1)}
-            className="text-white/70 hover:text-white transition-colors duration-200 font-semibold text-sm uppercase tracking-wide"
+          <Link
+            to={`/team/${team.id}`}
+            className="chip transition-colors hover:border-line-strong hover:text-ink"
           >
-            ← Back to Team
-          </button>
-        </div>
-      </main>
+            {team.name}
+            <span className="num text-ink-3">{team.year}</span>
+            <Icon name="right" size={12} />
+          </Link>
+        </header>
 
-      <Footer />
-    </div>
+        <p className="border-l-2 border-accent pl-5 text-[17px] leading-relaxed text-ink-2">
+          {bio}
+        </p>
+
+        <dl className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          {ratings.map((r) => (
+            <div key={r.label} className={r.lead ? 'card border-accent/40 p-4' : 'card p-4'}>
+              <dt className="eyebrow">{r.label}</dt>
+              <dd
+                className={`num mt-1.5 text-3xl font-semibold ${r.lead ? 'text-accent' : 'text-ink'}`}
+              >
+                {r.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </PageShell>
   );
 };

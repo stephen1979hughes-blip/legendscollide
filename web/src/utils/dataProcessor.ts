@@ -55,7 +55,7 @@ interface NormalizedData {
  * Creates Club objects for actual clubs and each country with all unique players (no year suffixes)
  * Creates Team objects for each classic team
  */
-export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[] } {
+export function processTeamsData(rawData: NormalizedData): { clubs: Club[], teams: Team[], players: Player[] } {
   // Create a map of players by ID for quick lookup
   const playersById = new Map<string, NormalizedPlayer>();
   rawData.players.forEach(p => {
@@ -86,7 +86,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
           return player ? {
             id: player.id,
             name: player.name,
-            countryId: player.countryId,
+            nationality: player.countryId,
             position: player.position as 'GK' | 'DF' | 'MF' | 'FW',
             overallRating: player.overallRating,
             attackRating: player.attackRating,
@@ -104,7 +104,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
         .map(p => ({
           id: p.id,
           name: p.name,
-          countryId: p.countryId,
+          nationality: p.countryId,
           position: p.position as 'GK' | 'DF' | 'MF' | 'FW',
           overallRating: p.overallRating,
           attackRating: p.attackRating,
@@ -133,12 +133,13 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
       .map(p => ({
         id: p.id,
         name: p.name, // No year suffix - these are unique player names!
-        countryId: p.countryId,
+        nationality: p.countryId,
         position: p.position as 'GK' | 'DF' | 'MF' | 'FW',
         overallRating: p.overallRating,
         attackRating: p.attackRating,
         defenceRating: p.defenceRating,
         stamina: p.stamina,
+        bio: p.bio,
         eraAppearances: []
       }))
       .sort((a: Player, b: Player) => a.name.localeCompare(b.name));
@@ -162,7 +163,7 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
       return {
         id: tp.playerId,
         name: player?.name || 'Unknown',
-        countryId: player?.countryId || '',
+        nationality: player?.countryId || '',
         position: (tp.position || player?.position || 'MF') as 'GK' | 'DF' | 'MF' | 'FW',
         overallRating: player?.overallRating || 0,
         attackRating: player?.attackRating || 0,
@@ -184,13 +185,32 @@ export function processTeamsData(rawData: NormalizedData): { clubs: Club[], team
     } as Team;
   });
 
-  return { clubs, teams };
+  // Flat, deduplicated player pool — the 414-player source of truth for
+  // anything that needs every player exactly once (pack odds, the collection
+  // browser), as opposed to `clubs`, which repeats a player once per
+  // club/country grouping they belong to.
+  const allPlayers: Player[] = rawData.players
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      nationality: p.countryId,
+      position: p.position as 'GK' | 'DF' | 'MF' | 'FW',
+      overallRating: p.overallRating,
+      attackRating: p.attackRating,
+      defenceRating: p.defenceRating,
+      stamina: p.stamina,
+      bio: p.bio,
+      eraAppearances: []
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return { clubs, teams, players: allPlayers };
 }
 
 /**
  * Loads teams data from normalized JSON file (no year suffixes in player names)
  */
-export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[] }> {
+export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[], players: Player[] }> {
   try {
     const response = await fetch('/teams-data-normalized.json');
     if (!response.ok) {
@@ -200,6 +220,6 @@ export async function loadTeamsData(): Promise<{ clubs: Club[], teams: Team[] }>
     return processTeamsData(rawData);
   } catch (error) {
     console.error('Failed to load teams data:', error);
-    return { clubs: [], teams: [] };
+    return { clubs: [], teams: [], players: [] };
   }
 }

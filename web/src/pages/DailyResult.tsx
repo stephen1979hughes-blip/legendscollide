@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { PageShell } from '../components/PageShell';
+import { Icon } from '../components/Icon';
 import { getDailyFixture } from '../utils/dailyFixture';
 import { dailyChallengeStorage } from '../utils/dailyChallengeStorage';
 import { buildShareString } from '../utils/shareString';
@@ -107,12 +107,9 @@ export const DailyResult: React.FC = () => {
 
   if (loading || notFound) {
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-        <Header />
-        <main className="flex-1 flex items-center justify-center">
-          <p className="text-white/70">Loading...</p>
-        </main>
-      </div>
+      <PageShell width="narrow" centered>
+        <p className="text-sm text-ink-3">Loading…</p>
+      </PageShell>
     );
   }
 
@@ -122,29 +119,37 @@ export const DailyResult: React.FC = () => {
   const correctCount = [correctness.outcome, correctness.exactScore, correctness.scorer].filter(Boolean).length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-black via-black to-black/95">
-      <Header rightButton={{ label: 'Home', onClick: () => navigate('/') }} />
-
-      <main className="flex-1 max-w-screen-md mx-auto px-4 py-12 w-full space-y-8">
-        <div className="text-center space-y-2">
-          <p className="text-secondary text-sm font-bold uppercase tracking-widest">Day {record.dayNumber}</p>
-          <h2 className="text-white text-4xl font-black tracking-tight">
-            {record.teamAName} {actual.scoreA} — {actual.scoreB} {record.teamBName}
-          </h2>
-          <p className="text-white/60">{correctCount}/3 correct</p>
+    <PageShell width="narrow" rightButton={{ label: 'Home', onClick: () => navigate('/') }}>
+      <div className="space-y-section">
+        <div className="space-y-3 border-b border-line pb-6 text-center">
+          <p className="eyebrow">Day {record.dayNumber}</p>
+          <div className="flex items-center justify-center gap-4">
+            <span className="display flex-1 truncate text-right text-lg md:text-xl">
+              {record.teamAName}
+            </span>
+            <span className="display num flex-shrink-0 text-4xl">
+              {actual.scoreA}–{actual.scoreB}
+            </span>
+            <span className="display flex-1 truncate text-left text-lg md:text-xl">
+              {record.teamBName}
+            </span>
+          </div>
+          <p className="num text-sm text-ink-2">
+            <span className={correctCount > 0 ? 'text-accent' : ''}>{correctCount}</span> of 3 correct
+          </p>
         </div>
 
-        {/* Accuracy breakdown */}
-        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md space-y-3">
+        <div className="space-y-2">
+          <h2 className="rule-heading">Your prediction</h2>
           <AccuracyRow
             label="Outcome"
             correct={correctness.outcome}
             detail={`You predicted ${outcomeLabel(prediction.scoreA, prediction.scoreB, record)}`}
           />
           <AccuracyRow
-            label="Exact Score"
+            label="Exact score"
             correct={correctness.exactScore}
-            detail={`You predicted ${prediction.scoreA} — ${prediction.scoreB}`}
+            detail={`You predicted ${prediction.scoreA}–${prediction.scoreB}`}
           />
           <AccuracyRow
             label="Goalscorer"
@@ -153,29 +158,26 @@ export const DailyResult: React.FC = () => {
           />
         </div>
 
-        {/* Streak */}
-        <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md">
-          <h3 className="text-white font-bold text-lg mb-4 text-center">Your Streak</h3>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <StatTile label="Current" value={streak.currentStreak} />
+        <div className="card space-y-5">
+          <h2 className="rule-heading">Your streak</h2>
+          <dl className="grid grid-cols-3 gap-3">
+            <StatTile label="Current" value={streak.currentStreak} lead />
             <StatTile label="Best" value={streak.bestStreak} />
             <StatTile label="Played" value={streak.gamesPlayed} />
-          </div>
-          <div className="grid grid-cols-3 gap-4 text-center mt-6 pt-6 border-t border-white/10">
+          </dl>
+          <dl className="grid grid-cols-3 gap-3 border-t border-line pt-5">
             <StatTile label="Outcomes" value={streak.outcomeCorrect} small />
-            <StatTile label="Exact Scores" value={streak.exactScoreCorrect} small />
+            <StatTile label="Exact scores" value={streak.exactScoreCorrect} small />
             <StatTile label="Scorers" value={streak.scorerCorrect} small />
-          </div>
+          </dl>
         </div>
 
         <div className="flex flex-col items-center gap-3">
-          <button
-            onClick={handleShare}
-            className="w-full md:w-auto px-8 py-3 rounded-xl font-semibold bg-secondary hover:bg-secondary/90 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            {copied ? '✅ Copied to clipboard!' : '📤 Share Result'}
+          <button onClick={handleShare} className="btn-accent w-full md:w-auto">
+            <Icon name={copied ? 'check' : 'share'} />
+            {copied ? 'Copied to clipboard' : 'Share result'}
           </button>
-          <p className="text-white/40 text-xs text-center max-w-xs">
+          <p className="max-w-xs text-center text-xs text-ink-3">
             The share spoils nothing — no scoreline, no scorer, just how you did.
           </p>
           {shareFallback && (
@@ -183,14 +185,12 @@ export const DailyResult: React.FC = () => {
               readOnly
               value={shareFallback}
               onFocus={(e) => e.currentTarget.select()}
-              className="w-full max-w-xs h-24 px-3 py-2 rounded-lg border border-white/20 bg-white/10 text-white text-xs font-mono resize-none"
+              className="field h-24 max-w-xs resize-none text-xs"
             />
           )}
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </PageShell>
   );
 };
 
@@ -200,19 +200,36 @@ function outcomeLabel(scoreA: number, scoreB: number, record: DailyRecord): stri
   return 'a draw';
 }
 
-const AccuracyRow: React.FC<{ label: string; correct: boolean; detail: string }> = ({ label, correct, detail }) => (
-  <div className={`flex items-center justify-between p-3 rounded-lg ${correct ? 'bg-green-500/10' : 'bg-white/5'}`}>
-    <div>
-      <p className="text-white font-semibold text-sm">{label}</p>
-      <p className="text-white/50 text-xs">{detail}</p>
+const AccuracyRow: React.FC<{ label: string; correct: boolean; detail: string }> = ({
+  label,
+  correct,
+  detail,
+}) => (
+  <div
+    className={`flex items-center justify-between gap-3 rounded-ctl border px-4 py-3 ${
+      correct ? 'border-accent/40 bg-accent/10' : 'border-line bg-surface'
+    }`}
+  >
+    <div className="min-w-0">
+      <p className="font-heading text-sm font-semibold text-ink">{label}</p>
+      <p className="truncate text-xs text-ink-3">{detail}</p>
     </div>
-    <span className="text-2xl">{correct ? '✅' : '❌'}</span>
+    <span className={`flex-shrink-0 ${correct ? 'text-accent' : 'text-ink-3'}`}>
+      <Icon name={correct ? 'check' : 'cross'} size={18} title={correct ? 'Correct' : 'Wrong'} />
+    </span>
   </div>
 );
 
-const StatTile: React.FC<{ label: string; value: number; small?: boolean }> = ({ label, value, small }) => (
-  <div>
-    <p className={`font-bold text-white ${small ? 'text-xl' : 'text-3xl'}`}>{value}</p>
-    <p className="text-white/50 text-xs uppercase tracking-wide">{label}</p>
+const StatTile: React.FC<{ label: string; value: number; small?: boolean; lead?: boolean }> = ({
+  label,
+  value,
+  small,
+  lead,
+}) => (
+  <div className="text-center">
+    <dd className={`num font-semibold ${small ? 'text-xl' : 'text-3xl'} ${lead ? 'text-accent' : 'text-ink'}`}>
+      {value}
+    </dd>
+    <dt className="eyebrow mt-0.5">{label}</dt>
   </div>
 );

@@ -1,74 +1,157 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+/*
+ * Inter carries the interface; Playfair Display is reserved for team names,
+ * scorelines and big numbers. Courier is gone — it was the default body face,
+ * which is what made every label and paragraph read as a wireframe. (The old
+ * import pulled Courier Prime and then never referenced it: `font-body` was
+ * hard-coded to Courier New.)
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply text-text font-body bg-black text-white;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-tight;
-  }
-
-  h1 { @apply text-4xl md:text-5xl; }
-  h2 { @apply text-3xl md:text-4xl; }
-  h3 { @apply text-2xl md:text-3xl; }
-
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
 
-  /* Focus states */
-  button, input, select, textarea {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:ring-primary;
+  body {
+    @apply bg-ground text-ink font-body antialiased;
   }
+
+  /*
+   * Three heading sizes, fixed. Page-level utility classes still win on
+   * specificity where a screen genuinely needs something else.
+   */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight text-ink;
+  }
+
+  h1 { @apply text-3xl md:text-4xl; }
+  h2 { @apply text-2xl md:text-3xl; }
+  h3 { @apply text-lg md:text-xl; }
+
+  /* Amber reads on the dark ground; the old ring-primary (#003D82) did not. */
+  button, input, select, textarea, a, [tabindex] {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-ground;
+  }
+
+  ::selection {
+    @apply bg-accent text-accent-ink;
+  }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { @apply bg-ground; }
+  ::-webkit-scrollbar-thumb { @apply bg-raised rounded-full border-2 border-ground; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-line-strong; }
 }
 
 @layer components {
-  /* Premium button - primary */
-  .btn-primary {
-    @apply px-6 py-3 bg-primary hover:bg-primary/90 text-white font-heading font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  /* ---------------------------------------------------------------
+     Buttons. Every button in the app is one of these — no hand-rolled
+     className strings, which is what made no two of them match.
+     --------------------------------------------------------------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-ctl px-4 py-2.5
+           font-heading text-sm font-semibold whitespace-nowrap
+           transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50;
   }
 
-  .btn-primary:disabled {
-    @apply opacity-50 cursor-not-allowed hover:bg-primary hover:shadow-lg hover:translate-y-0;
+  .btn-lg { @apply px-6 py-3.5 text-base rounded-card; }
+  .btn-sm { @apply px-3 py-1.5 text-xs gap-1.5; }
+
+  /* The one loud control on a screen. Dark ink on amber — never white. */
+  .btn-accent {
+    @apply btn bg-accent text-accent-ink hover:bg-accent-hover
+           disabled:bg-raised disabled:text-ink-3;
   }
 
-  /* Premium button - secondary */
-  .btn-secondary {
-    @apply px-6 py-3 bg-secondary hover:bg-secondary/90 text-white font-heading font-semibold rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5;
+  /* Default control: a raised surface with a hairline. */
+  .btn-quiet {
+    @apply btn bg-raised text-ink border border-line hover:border-line-strong hover:bg-line;
   }
 
-  .btn-secondary:disabled {
-    @apply opacity-50 cursor-not-allowed hover:bg-secondary hover:shadow-lg hover:translate-y-0;
+  .btn-ghost {
+    @apply btn bg-transparent text-ink-2 hover:text-ink hover:bg-raised;
   }
 
-  /* Legacy card support */
+  .btn-danger {
+    @apply btn bg-danger text-white hover:bg-danger/90;
+  }
+
+  /* Aliases so pre-existing call sites keep working and pick up the new look. */
+  .btn-primary { @apply btn-accent; }
+  .btn-secondary { @apply btn-quiet; }
+
+  /* ---------------------------------------------------------------
+     Surfaces. Border + surface step, no shadow — a shadow against
+     #0B0D10 renders nothing.
+     --------------------------------------------------------------- */
   .card {
-    @apply rounded-xl bg-white/5 border border-white/10 backdrop-blur p-6 shadow-md hover:shadow-lg transition-shadow duration-200;
+    @apply rounded-card border border-line bg-surface p-5;
   }
 
-  /* Modern premium card */
-  .premium-card {
-    @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-md hover:shadow-lg transition-all duration-200;
+  /* For a card the user can click through to something. */
+  .card-link {
+    @apply card block transition-colors duration-150 hover:border-line-strong hover:bg-raised;
   }
 
-  /* Decorative divider */
-  .divider {
-    @apply border-t border-white/10;
+  .panel {
+    @apply rounded-card border border-line bg-surface;
   }
 
-  /* Modern badge */
-  .badge {
-    @apply inline-block px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-white border border-white/20;
+  .inset {
+    @apply rounded-ctl border border-line bg-raised;
   }
 
-  /* Section heading */
-  .section-heading {
-    @apply text-white font-heading font-bold tracking-wide;
+  .field {
+    @apply w-full rounded-ctl border border-line bg-raised px-3.5 py-2.5
+           text-sm text-ink placeholder-ink-3
+           transition-colors duration-150 focus:border-accent;
+  }
+
+  /* ---------------------------------------------------------------
+     Type helpers
+     --------------------------------------------------------------- */
+
+  /* Small uppercase label above a heading or beside a rule. */
+  .eyebrow {
+    @apply font-heading text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-3;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-raised
+           px-2.5 py-1 font-heading text-[11px] font-semibold text-ink-2;
+  }
+
+  .chip-accent {
+    @apply chip border-accent/40 bg-accent/10 text-accent;
+  }
+
+  .rule {
+    @apply border-t border-line;
+  }
+
+  /*
+   * A heading with a hairline running off to the right. Replaces the
+   * decorative blue-to-red gradient bars, which encoded nothing.
+   */
+  .rule-heading {
+    @apply eyebrow flex items-center gap-3;
+  }
+  .rule-heading::after {
+    content: "";
+    @apply h-px flex-1 bg-line;
+  }
+
+  /* Team names, scorelines, big numbers — Playfair's ten places. */
+  .display {
+    @apply font-display font-bold tracking-tight text-ink;
+  }
+
+  /* Any figure that lines up in a column with other figures. */
+  .num {
+    @apply tabular-nums;
   }
 }

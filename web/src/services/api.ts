@@ -1,4 +1,4 @@
-import { Team, TeamSummary, MatchResult } from '../types';
+import { Team, TeamSummary, MatchResult, Player } from '../types';
 import { loadTeamsData } from '../utils/dataProcessor';
 import { defaultEngine, randomSeed, type EngineTeam } from '@fm/match-engine';
 import { effectiveRating, MAX_CARD_LEVEL } from '../utils/cardProgression';
@@ -15,10 +15,10 @@ import { effectiveRating, MAX_CARD_LEVEL } from '../utils/cardProgression';
  * in api/ (see services/adminApi.ts) because it needs to write to disk.
  */
 
-let cache: Promise<{ teams: Team[] }> | null = null;
+let cache: Promise<{ teams: Team[]; players: Player[] }> | null = null;
 
 function store() {
-  cache ??= loadTeamsData().then(({ teams }) => ({ teams }));
+  cache ??= loadTeamsData().then(({ teams, players }) => ({ teams, players }));
   return cache;
 }
 
@@ -37,20 +37,33 @@ export function invalidateTeamsCache() {
  * map (or the map itself being omitted, as for every classic-team opponent)
  * plays at full rating — MAX_CARD_LEVEL is just `effectiveRating`'s identity
  * level, not a special case.
+ *
+ * `chemistryBonus` is the Phase 2b nationality-chemistry seam (see
+ * utils/chemistry.ts): a flat rating-point addition per player id, applied
+ * after `effectiveRating` and clamped back into range. Like card levels,
+ * chemistry never crosses into EngineTeam as anything but a plain number —
+ * the engine has no idea a squad shares a nationality.
  */
-function toEngineTeam(team: Team, cardLevels?: Record<string, number>): EngineTeam {
+function toEngineTeam(
+  team: Team,
+  cardLevels?: Record<string, number>,
+  chemistryBonus?: Record<string, number>
+): EngineTeam {
   return {
     id: team.id,
     name: team.name,
     players: team.players.map((p) => {
       const level = cardLevels?.[p.id] ?? MAX_CARD_LEVEL;
+      const bonus = chemistryBonus?.[p.id] ?? 0;
+      const withChemistry = (rating: number) =>
+        Math.max(1, Math.min(99, effectiveRating(rating, level) + bonus));
       return {
         id: p.id,
         name: p.name,
         position: p.position,
-        overallRating: effectiveRating(p.overallRating, level),
-        attackRating: effectiveRating(p.attackRating, level),
-        defenceRating: effectiveRating(p.defenceRating, level),
+        overallRating: withChemistry(p.overallRating),
+        attackRating: withChemistry(p.attackRating),
+        defenceRating: withChemistry(p.defenceRating),
         stamina: p.stamina,
       };
     }),
@@ -79,6 +92,16 @@ export const api = {
   },
 
   /**
+   * The flat, deduplicated 414-player pool — one entry per player regardless
+   * of how many clubs/countries they'd otherwise appear under. This is the
+   * source of truth for pack odds and the collection browser.
+   */
+  async getAllPlayers(): Promise<Player[]> {
+    const { players } = await store();
+    return players;
+  },
+
+  /**
    * Simulate a match. `seed` is optional — pass one to reproduce a previous
    * result exactly, omit it for a fresh match.
    *
@@ -96,6 +119,10 @@ export const api = {
    * full rating, so passing nothing here is the same as everyone being
    * maxed. Team B has no equivalent parameter: it is always a classic-team
    * opponent, and those always play at full rating.
+   *
+   * `teamAChemistryBonus` is the campaign squad's nationality-chemistry
+   * adjustment (utils/chemistry.ts) — again team A only, since it only ever
+   * applies to a collection-sourced XI.
    */
   async simulateMatch(
     teamAId: string,
@@ -104,13 +131,14 @@ export const api = {
     customTeamA?: Team,
     customTeamB?: Team,
     seed: number = randomSeed(),
-    teamACardLevels?: Record<string, number>
+    teamACardLevels?: Record<string, number>,
+    teamAChemistryBonus?: Record<string, number>
   ): Promise<MatchResult> {
     const teamA = customTeamA ?? (await this.getTeam(teamAId));
     const teamB = customTeamB ?? (await this.getTeam(teamBId));
 
     const result = defaultEngine.simulate({
-      teamA: toEngineTeam(teamA, teamACardLevels),
+      teamA: toEngineTeam(teamA, teamACardLevels, teamAChemistryBonus),
       teamB: toEngineTeam(teamB),
       seed,
     });
