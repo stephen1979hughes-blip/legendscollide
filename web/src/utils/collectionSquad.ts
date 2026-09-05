@@ -31,6 +31,9 @@ import { effectiveRating } from './cardProgression';
 /** The synthetic "club" id used for the collection-sourced entry in the club/nation picker. */
 export const COLLECTION_CLUB_ID = '__collection__';
 
+/** Persistent id for the campaign squad, so it's there again on the next campaign visit (and so Collection.tsx can find it to block sacrificing a fielded card). */
+export const CAMPAIGN_XI_ID = 'campaign-squad';
+
 export interface CollectionEngineTeam {
   team: Team;
   displayTeam: Team;

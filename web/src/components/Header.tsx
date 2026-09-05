@@ -15,6 +15,7 @@ const MENU_ITEMS = [
   { label: 'Daily', path: '/daily' },
   { label: 'Campaign', path: '/campaign' },
   { label: 'My collection', path: '/collection' },
+  { label: 'Trivia', path: '/trivia' },
   { label: 'Teams', path: '/teams' },
   { label: 'Rankings', path: '/rankings' },
   { label: 'Custom XI', path: '/custom-xi' },

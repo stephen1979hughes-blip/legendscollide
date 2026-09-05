@@ -19,6 +19,7 @@ import { Privacy } from './pages/Privacy';
 import { Campaign } from './pages/Campaign';
 import { CampaignResult } from './pages/CampaignResult';
 import { Collection } from './pages/Collection';
+import { Trivia } from './pages/Trivia';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/campaign" element={<Campaign />} />
         <Route path="/campaign/result" element={<CampaignResult />} />
         <Route path="/collection" element={<Collection />} />
+        <Route path="/trivia" element={<Trivia />} />
         <Route path="/m/:matchup/:seed" element={<MatchPermalink />} />
         <Route path="/about" element={<About />} />
         <Route path="/privacy" element={<Privacy />} />
