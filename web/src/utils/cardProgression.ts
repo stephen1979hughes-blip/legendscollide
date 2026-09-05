@@ -37,7 +37,9 @@ export function effectiveRating(trueRating: number, level: number): number {
   const clampedLevel = Math.min(MAX_CARD_LEVEL, Math.max(1, Math.round(level)));
   const progress = (clampedLevel - 1) / (MAX_CARD_LEVEL - 1);
   const rating = CARD_RATING_FLOOR + (trueRating - CARD_RATING_FLOOR) * progress;
-  return Math.round(rating * 10) / 10;
+  // Whole numbers only — every rating elsewhere in the dataset (and the
+  // engine's own inputs) is an integer; a ".7" here read as a display bug.
+  return Math.round(rating);
 }
 
 // ============= XP =============
@@ -45,9 +47,10 @@ export function effectiveRating(trueRating: number, level: number): number {
 // XP required to advance from `level` to `level + 1` grows geometrically —
 // early levels come quickly (a new pull already feels like it's improving),
 // later ones are a real commitment. The full climb from level 1 to 10 is
-// ~3,965 XP; at 20 XP per appearance plus a 15 XP win bonus, that's on the
-// order of 150-160 matches for a single card — the "grind for months" the
-// roadmap trades off against a flatter but faster curve.
+// ~3,970 XP; at 50 XP per appearance plus a 30 XP win bonus, that's roughly
+// 50 matches winning consistently, up to ~80 on a losing run — fast enough
+// to feel like real progress inside a single play session, without making
+// the climb instant.
 
 const XP_LEVEL_BASE = 100;
 const XP_LEVEL_GROWTH = 1.35;
@@ -59,12 +62,12 @@ export function xpToNextLevel(level: number): number {
 }
 
 /** XP earned just for fielding a card in a match. */
-export const XP_PER_APPEARANCE = 20;
+export const XP_PER_APPEARANCE = 50;
 /** Extra XP if the match was won. */
-export const XP_WIN_BONUS = 15;
+export const XP_WIN_BONUS = 30;
 /**
  * XP a duplicate pull converts into for the card already owned. Worth a
- * couple of games' XP at level 1 — where it can jump a fresh card several
+ * few games' XP at level 1 — where it can jump a fresh card several
  * levels — but only a sliver of what a near-maxed card still needs, so
  * duplicates matter most exactly when a collection is thinnest.
  */

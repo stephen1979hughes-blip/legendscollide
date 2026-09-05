@@ -242,7 +242,13 @@ export const CustomXIBuilder: React.FC = () => {
         // collection-sourced XI resolves true ratings + card levels + chemistry
         // through the same seam the campaign flow uses (see collectionSquad.ts);
         // a club/nation roster keeps its existing flat-75 attack/defence.
-        const { customXITeam, cardLevels, chemistryBonus } = isCollectionSquad
+        //
+        // `customXITeam` (true/ceiling ratings) is what the engine simulates
+        // against `cardLevels`; `displayXITeam` (current effective ratings) is
+        // what gets shown in the Broadcast lineup and match report — passing
+        // the true-rating team there would show a level-1 card's ceiling
+        // instead of the 75 it actually played at.
+        const { customXITeam, displayXITeam, cardLevels, chemistryBonus } = isCollectionSquad
           ? (() => {
               const built = buildCollectionEngineTeam(
                 savedXI?.players || [],
@@ -250,10 +256,15 @@ export const CustomXIBuilder: React.FC = () => {
                 'custom-xi-' + selectedClub?.id,
                 selectedClub?.name + ' (Custom XI)'
               );
-              return { customXITeam: built.team, cardLevels: built.cardLevels, chemistryBonus: built.chemistryBonus };
+              return {
+                customXITeam: built.team,
+                displayXITeam: built.displayTeam,
+                cardLevels: built.cardLevels,
+                chemistryBonus: built.chemistryBonus,
+              };
             })()
-          : {
-              customXITeam: {
+          : (() => {
+              const team: Team = {
                 id: 'custom-xi-' + selectedClub?.id,
                 name: selectedClub?.name + ' (Custom XI)',
                 clubId: selectedClub?.id || '',
@@ -268,10 +279,9 @@ export const CustomXIBuilder: React.FC = () => {
                   defenceRating: 75,
                   stamina: 85
                 })) || []
-              } as Team,
-              cardLevels: undefined,
-              chemistryBonus: undefined,
-            };
+              };
+              return { customXITeam: team, displayXITeam: team, cardLevels: undefined, chemistryBonus: undefined };
+            })();
 
         // Generate match result, passing custom XI team object
         const matchResult = await api.simulateMatch(
@@ -288,7 +298,7 @@ export const CustomXIBuilder: React.FC = () => {
         navigate('/broadcast', {
           state: {
             matchResult,
-            teamA: customXITeam,
+            teamA: displayXITeam,
             teamB: opponentTeam,
             customXI: savedXI,
             useCustomXIRoster: true
@@ -374,12 +384,8 @@ export const CustomXIBuilder: React.FC = () => {
       const opponentTeam = await api.getTeam(campaignTeamId);
       const collectionBefore = cardCollectionStorage.loadAll();
 
-      const { team: campaignTeam, cardLevels, chemistryBonus } = buildCollectionEngineTeam(
-        players,
-        allPlayersById.current,
-        CAMPAIGN_XI_ID,
-        'My Collection XI'
-      );
+      const { team: campaignTeam, displayTeam: campaignDisplayTeam, cardLevels, chemistryBonus } =
+        buildCollectionEngineTeam(players, allPlayersById.current, CAMPAIGN_XI_ID, 'My Collection XI');
 
       const matchResult = await api.simulateMatch(
         campaignTeam.id,
@@ -440,7 +446,7 @@ export const CustomXIBuilder: React.FC = () => {
 
       const completeState: CampaignCompletionState = {
         matchResult,
-        teamA: campaignTeam,
+        teamA: campaignDisplayTeam,
         teamB: opponentTeam,
         tier: campaignTier,
         won,
@@ -455,7 +461,7 @@ export const CustomXIBuilder: React.FC = () => {
       navigate('/broadcast', {
         state: {
           matchResult,
-          teamA: campaignTeam,
+          teamA: campaignDisplayTeam,
           teamB: opponentTeam,
           completeRoute: '/campaign/result',
           completeLabel: 'Claim Rewards',
