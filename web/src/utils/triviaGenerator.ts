@@ -62,22 +62,17 @@ interface PlayerTeamPair {
   playerName: string;
   teamId: string;
   teamName: string;
-  teamYear: number;
-  fielderName: string;
 }
 
 function buildPairs(ctx: TriviaContext): PlayerTeamPair[] {
   const pairs: PlayerTeamPair[] = [];
   for (const team of ctx.teams) {
-    const fielderName = ctx.fielderNameByClubId.get(team.clubId) ?? team.name;
     for (const p of team.players) {
       pairs.push({
         playerId: p.id,
         playerName: p.name,
         teamId: team.id,
         teamName: team.name,
-        teamYear: team.year,
-        fielderName,
       });
     }
   }
@@ -188,7 +183,9 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
       if (distractors.length < 3) return generateQuestion(ctx, rng);
       const { options, correctIndex } = shuffleOptions(rng, correctPlayer.name, distractors);
       return {
-        prompt: `Which of these players played for ${team.name} (${team.year})?`,
+        // team.name already ends in its year ("Spain 2012") — appending
+        // "(${team.year})" duplicated it into "Spain 2012 (2012)".
+        prompt: `Which of these players played for ${team.name}?`,
         options,
         correctIndex,
       };
@@ -202,7 +199,7 @@ export function generateQuestion(ctx: TriviaContext, rng: Rng = new Rng(randomSe
       const distractors = pickDistinct(rng, allFielderNames, 3, ([id]) => id, team.clubId).map(([, name]) => name);
       if (distractors.length < 3) return generateQuestion(ctx, rng);
       const { options, correctIndex } = shuffleOptions(rng, correct, distractors);
-      return { prompt: `Which club or nation fielded ${team.name} (${team.year})?`, options, correctIndex };
+      return { prompt: `Which club or nation fielded ${team.name}?`, options, correctIndex };
     }
   }
 }
